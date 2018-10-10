@@ -517,7 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52edebbace8f0c74b91d72af1d243a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandSource: 1
+  m_CurrentHand: 0
 --- !u!114 &114100056520836432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52edebbace8f0c74b91d72af1d243a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HandSource: 0
+  m_CurrentHand: 0
 --- !u!114 &114709511478858452
 MonoBehaviour:
   m_ObjectHideFlags: 1

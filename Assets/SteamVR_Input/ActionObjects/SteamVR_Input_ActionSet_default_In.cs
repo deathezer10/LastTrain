@@ -19,11 +19,11 @@ namespace Valve.VR
         
         public Valve.VR.SteamVR_Action_Boolean InteractUI;
         
-        public Valve.VR.SteamVR_Action_Boolean Teleport;
+        public Valve.VR.SteamVR_Action_Boolean Move;
         
         public Valve.VR.SteamVR_Action_Boolean GrabPinch;
         
-        public Valve.VR.SteamVR_Action_Boolean GrabGrip;
+        public Valve.VR.SteamVR_Action_Boolean GrabUse;
         
         public Valve.VR.SteamVR_Action_Pose Pose;
         
@@ -32,5 +32,7 @@ namespace Valve.VR
         public Valve.VR.SteamVR_Action_Skeleton SkeletonRightHand;
         
         public Valve.VR.SteamVR_Action_Single Squeeze;
+        
+        public Valve.VR.SteamVR_Action_Vector2 MoveDirectionPad;
     }
 }
