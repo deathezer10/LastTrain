@@ -9,7 +9,7 @@ public class Lever : StationaryObject
     private Transform HandOffsetStart;
     private Transform LastHandLocation;
 
-    private float MaxHandReach = 25.0f;             //Adjust reach before player lets go of the lever
+    private float MaxHandReach = 0.2f;             //Adjust reach before player lets go of the lever
     private float minZRotation = 0.35f;              //Setting lowest reachable rotation for the lever
     private float maxZRotation = 0.0f;               //Setting the max reachable rotation for the lever
     private float currentZRotation = 0.0f;
@@ -47,9 +47,16 @@ public class Lever : StationaryObject
                 Vector3 targetDir = HandOffsetStart.position - parent.transform.position;
                 Vector3 targetDirAfter = PlayerHand.transform.position - parent.transform.position;
                 float angle = Vector3.Angle(targetDir, targetDirAfter);
+
+                //if (targetDir.z > targetDirAfter.z)
+                  //  angle = -angle;
+         
+            
                 Vector3 cross = Vector3.Cross(targetDir, targetDirAfter);
                 if (cross.z < 0) angle = -angle;
                 
+
+
                 if(angle < 0)
                 if (currentZRotation <= minZRotation)
                     return;
