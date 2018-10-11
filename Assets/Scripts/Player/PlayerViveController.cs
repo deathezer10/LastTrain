@@ -120,6 +120,11 @@ public class PlayerViveController : MonoBehaviour
         return (m_CurrentHand == HandSource.LeftHand) ? HandSource.RightHand : HandSource.LeftHand;
     }
 
+    public HandSource GetCurrentHand()
+    {
+        return m_CurrentHand;
+    }
+
     private GameObject GetCurrentHandObject(bool otherHand = false)
     {
         if (m_CurrentHand == HandSource.LeftHand)
