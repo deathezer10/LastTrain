@@ -28,7 +28,7 @@ MonoBehaviour:
   defaultEasePeriod: 0
   defaultAutoKill: 1
   defaultLoopType: 0
-  storeSettingsLocation: 2
+  storeSettingsLocation: 0
   modules:
     showPanel: 0
     audioEnabled: 1
