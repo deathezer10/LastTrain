@@ -9,12 +9,12 @@ public class Lever : StationaryObject
     public static Transform HandOffsetStart;
     public static Transform LastHandLocation;
 
-    float MaxHandReach = 25.0f;             //Adjust reach before player lets go of the lever
-    float minZRotation = 0.35f;              //Setting lowest reachable rotation for the lever
-    float maxZRotation = 0.0f;               //Setting the max reachable rotation for the lever
-    float currentZRotation = 0.0f;
-    bool bCanGrab = false;
-    PlayerViveController[] foundControllers;
+    private float MaxHandReach = 25.0f;             //Adjust reach before player lets go of the lever
+    private float minZRotation = 0.35f;              //Setting lowest reachable rotation for the lever
+    private float maxZRotation = 0.0f;               //Setting the max reachable rotation for the lever
+    private float currentZRotation = 0.0f;
+    private bool bCanGrab = false;
+    private PlayerViveController[] foundControllers;
     private GameObject parent;
     private BoxCollider LeverTip;
 
@@ -77,14 +77,12 @@ public class Lever : StationaryObject
         return bIsGrabbing;
     }
 
-    public static void OnUngrabbed(GameObject _hand)
-    {
-
-    }
+    
 
 
     public override void OnControllerEnter(PlayerViveController.HandSource handSource)
     {
+        print("Controller entered");
         for (int i = 0; i < foundControllers.Length; i++)
         {
             if(foundControllers[i].GetCurrentHand() == handSource)
@@ -99,6 +97,7 @@ public class Lever : StationaryObject
 
     public override void OnControllerExit()
     {
+        print("Controller exited");
         bCanGrab = false;
     }
 
@@ -109,6 +108,7 @@ public class Lever : StationaryObject
 
     public override void OnUse()
     {
+        print("Controller clicked");
         if (bCanGrab)
             bIsGrabbing = true;
     }
