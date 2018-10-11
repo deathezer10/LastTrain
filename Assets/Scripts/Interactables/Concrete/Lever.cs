@@ -36,6 +36,7 @@ public class Lever : StationaryObject
         {
             if (MaxHandReach < Vector3.Distance(LeverTip.transform.position, PlayerHand.transform.position))
             {
+                Debug.Log("hello world");
                 bIsGrabbing = false;
                 return;
             }
@@ -54,17 +55,22 @@ public class Lever : StationaryObject
             
                 Vector3 cross = Vector3.Cross(targetDir, targetDirAfter);
                 if (cross.z < 0) angle = -angle;
-                
 
 
-                if(angle < 0)
-                if (currentZRotation <= minZRotation)
-                    return;
 
-                if(angle > 0)
-                if (currentZRotation >= maxZRotation)
-                    return;
+                if (angle < 0)
+                    if (currentZRotation <= minZRotation)
+                    {
+                        Debug.Log("Zrotation < minZ");
+                        return;
+                    }
 
+                if (angle > 0)
+                    if (currentZRotation >= maxZRotation)
+                    {
+                        Debug.Log("Zrotation > maxZ ");
+                        return;
+                    }
                 parent.transform.Rotate(0, 0, angle);
                 HandOffsetStart = PlayerHand.transform;
 
@@ -77,20 +83,14 @@ public class Lever : StationaryObject
 
     }
 
-
-    
-
     public static bool IsGrabbing()
     {
         return bIsGrabbing;
     }
-
-    
-
-
+        
     public override void OnControllerEnter(PlayerViveController.HandSource handSource)
     {
-        print("Controller entered");
+        Debug.Log("Controller entered");
         for (int i = 0; i < foundControllers.Length; i++)
         {
             if(foundControllers[i].GetCurrentHand() == handSource)
@@ -105,20 +105,28 @@ public class Lever : StationaryObject
 
     public override void OnControllerExit()
     {
-        print("Controller exited");
-        bCanGrab = false;
     }
 
     public override void OnControllerStay()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnUse()
     {
-        print("Controller clicked");
+    }
+
+    public override void OnGrab()
+    {
+        print("Grabbed");
         if (bCanGrab)
             bIsGrabbing = true;
     }
 
+    public override void OnGrabReleased(bool snapped)
+    {
+        print("Let Go");
+        bCanGrab = false;
+    }
+    
 }

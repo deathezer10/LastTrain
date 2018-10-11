@@ -57,11 +57,14 @@ public class PlayerViveController : MonoBehaviour
 
                         AssignObjectToHand(m_CurrentHand, other.gameObject);
 
-                        Rigidbody rb = other.GetComponent<Rigidbody>();
-                        rb.isKinematic = true;
-                        rb.velocity = Vector3.zero;
+                        if (other.GetComponent<IStationaryGrabbable>() == null)
+                        {
+                            Rigidbody rb = other.GetComponent<Rigidbody>();
+                            rb.isKinematic = true;
+                            rb.velocity = Vector3.zero;
 
-                        other.transform.parent = transform;
+                            other.transform.parent = transform;
+                        }
 
                         Debug.Log(m_CurrentHand.ToString() + " grabbed: " + grabbableObject.ToString());
                     }
@@ -72,16 +75,19 @@ public class PlayerViveController : MonoBehaviour
                 {
                     if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(HandSourceToInputSource()))
                     {
-                        grabbableObject.OnGrabReleased();
+                        grabbableObject.OnGrabReleased(false);
 
                         AssignObjectToHand(m_CurrentHand, null);
 
-                        Rigidbody rb = other.GetComponent<Rigidbody>();
-                        rb.isKinematic = false;
-                        rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
-                        rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
+                        if (other.GetComponent<IStationaryGrabbable>() == null)
+                        {
+                            Rigidbody rb = other.GetComponent<Rigidbody>();
+                            rb.isKinematic = false;
+                            rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
+                            rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
 
-                        other.transform.parent = null;
+                            other.transform.parent = null;
+                        }
 
                         Debug.Log(m_CurrentHand.ToString() + " released: " + grabbableObject.ToString());
                     }
@@ -99,6 +105,14 @@ public class PlayerViveController : MonoBehaviour
         if (iObject != null)
         {
             iObject.OnControllerExit();
+
+            var grabbableObject = other.GetComponent<IGrabbable>();
+
+            if (grabbableObject != null && GetCurrentHandObject() == other.gameObject)
+            {
+                grabbableObject.OnGrabReleased(true);
+                AssignObjectToHand(m_CurrentHand, null);
+            }
         }
     }
 

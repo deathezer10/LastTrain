@@ -26,5 +26,5 @@ public interface IInteractable
     /// Called when the player pressed the grip button WHILE grabbing it
     /// </summary>
     void OnUse();
-    
+        
 }

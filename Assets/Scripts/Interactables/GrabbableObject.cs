@@ -13,7 +13,6 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     public abstract void OnControllerEnter(PlayerViveController.HandSource handSource);
     public abstract void OnControllerStay();
     public abstract void OnGrab();
-    public abstract void OnGrabReleased();
-    public abstract void OnSnap();
+    public abstract void OnGrabReleased(bool snapped);
     public abstract void OnUse();
 }
