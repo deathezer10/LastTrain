@@ -10,7 +10,7 @@ public class PlayerViveMovement : MonoBehaviour
     private CharacterController m_CController;
     private Camera m_CurrentCamera;
 
-    private const float m_PlayerMoveSpeed = 1;
+    private const float m_PlayerMoveSpeed = 1.3f;
 
     private void Start()
     {
@@ -21,8 +21,6 @@ public class PlayerViveMovement : MonoBehaviour
     private void Update()
     {
         Vector3 moveDir = Vector3.zero;
-
-        Vector2 currentAxis = SteamVR_Input._default.inActions.MoveDirectionPad.GetAxis(SteamVR_Input_Sources.Any);
 
         if ( SteamVR_Input._default.inActions.Move.GetState(SteamVR_Input_Sources.Any))
         {
