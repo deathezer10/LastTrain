@@ -5,14 +5,15 @@ using UnityEngine;
 public class Lever : StationaryObject
 {
     public static bool bIsGrabbing = false;
-    public static GameObject PlayerHand;
-    public static Transform HandOffsetStart;
-    public static Transform LastHandLocation;
+    private GameObject PlayerHand;
+    private Transform HandOffsetStart;
+    private Transform LastHandLocation;
 
     private float MaxHandReach = 25.0f;             //Adjust reach before player lets go of the lever
     private float minZRotation = 0.35f;              //Setting lowest reachable rotation for the lever
     private float maxZRotation = 0.0f;               //Setting the max reachable rotation for the lever
     private float currentZRotation = 0.0f;
+
     private bool bCanGrab = false;
     private PlayerViveController[] foundControllers;
     private GameObject parent;
@@ -43,8 +44,8 @@ public class Lever : StationaryObject
             {
 
                
-                Vector3 targetDir = parent.transform.position + HandOffsetStart.position;
-                Vector3 targetDirAfter = parent.transform.position + PlayerHand.transform.position;
+                Vector3 targetDir = HandOffsetStart.position - parent.transform.position;
+                Vector3 targetDirAfter = PlayerHand.transform.position - parent.transform.position;
                 float angle = Vector3.Angle(targetDir, targetDirAfter);
                 Vector3 cross = Vector3.Cross(targetDir, targetDirAfter);
                 if (cross.z < 0) angle = -angle;
