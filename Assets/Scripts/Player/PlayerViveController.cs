@@ -21,6 +21,9 @@ public class PlayerViveController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (PlayerOriginHandler.IsOutsideOrigin)
+            return;
+
         var iObject = other.GetComponent<IInteractable>();
 
         if (iObject != null)
@@ -31,6 +34,9 @@ public class PlayerViveController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (PlayerOriginHandler.IsOutsideOrigin)
+            return;
+
         var iObject = other.GetComponent<IInteractable>();
 
         if (iObject != null)

@@ -6,8 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Useful for e.g. Station Button, Sliding doors, etc.
 /// </summary>
-[RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public abstract class StationaryObject : MonoBehaviour, IInteractable, IStationaryGrabbable
 {
     public abstract void OnControllerEnter(PlayerViveController.HandSource handSource);
