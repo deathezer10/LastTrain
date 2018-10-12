@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Lever : StationaryObject
 {
-    
+
     public static bool bIsGrabbing = false;
     private GameObject PlayerHand;
     private Transform HandOffsetStart;
     private Transform LastHandLocation;
-    private string WhichHand;
-    private int HandIndex = -1;
+
 
     private float MaxHandReach = 10.0f;              //Adjust reach before player lets go of the lever
     private float minZRotation = -0.80f;              //Setting lowest reachable rotation for the lever
@@ -37,7 +36,7 @@ public class Lever : StationaryObject
 
         if (bIsGrabbing)
         {
-            PlayerHand.transform.position = foundControllers[HandIndex].gameObject.transform.position;
+
             if (MaxHandReach < Vector3.Distance(LeverTip.transform.position, PlayerHand.transform.position))
             {
                 Debug.Log("hello world");
@@ -49,15 +48,15 @@ public class Lever : StationaryObject
             else
             {
                 print("Else reached");
-               
+
                 Vector3 targetDir = HandOffsetStart.position - parent.transform.position;
                 Vector3 NewtargetDir = PlayerHand.transform.position - parent.transform.position;
                 float angle = Vector3.Angle(targetDir, NewtargetDir);
 
                 //if (targetDir.z > targetDirAfter.z)
-                  //  angle = -angle;
-         
-            
+                //  angle = -angle;
+
+
                 Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
                 if (cross.z < 0) angle = -angle;
 
@@ -67,7 +66,7 @@ public class Lever : StationaryObject
                     if (currentZRotation <= minZRotation)
                     {
                         Debug.Log("Minimum lever angle reached");
-                        bIsGrabbing = false;                     
+                        bIsGrabbing = false;
                         return;
                     }
 
@@ -83,7 +82,7 @@ public class Lever : StationaryObject
 
             }
 
-            
+
         }
 
 
@@ -94,11 +93,12 @@ public class Lever : StationaryObject
     {
         return bIsGrabbing;
     }
-        
+
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
         bCanGrab = true;
-        WhichHand = handSource.ToString();
+        PlayerHand = currentController.gameObject;
+
     }
 
     public override void OnControllerExit()
@@ -113,7 +113,7 @@ public class Lever : StationaryObject
 
     public override void OnUse()
     {
-       
+
     }
 
     public override void OnGrab()
@@ -121,19 +121,10 @@ public class Lever : StationaryObject
         print("Grabbed");
         if (bCanGrab)
         {
-            for (int i = 0; i < foundControllers.Length; i++)
-            {
-                if (foundControllers[i].GetCurrentHand().ToString() == WhichHand)
-                {
-                    print("Should print once");
-                    PlayerHand = foundControllers[i].gameObject;
-                    HandIndex = i;
-                    HandOffsetStart = PlayerHand.transform;
-                }
-            }
+            HandOffsetStart = PlayerHand.transform;
             bIsGrabbing = true;
         }
-           
+
     }
 
     public override void OnGrabReleased(bool snapped)
@@ -141,5 +132,5 @@ public class Lever : StationaryObject
         print("Let Go");
         bIsGrabbing = false;
     }
-    
+
 }
