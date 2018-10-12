@@ -19,10 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4487773097429530}
-  - component: {fileID: 114903957623065168}
   - component: {fileID: 114521976200572954}
   m_Layer: 0
-  m_Name: Pivot
+  m_Name: Accelerator_BrakeLever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,16 +149,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90a0e496132d434799b4e3acc7e4922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114903957623065168
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1022526632698882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8035bf2033e37564d850560272e99ed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gizmoSize: 0.3
-  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
