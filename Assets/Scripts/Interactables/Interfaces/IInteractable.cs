@@ -10,7 +10,7 @@ public interface IInteractable
     /// Called once when the vive controller touches the collider
     /// </summary>
     /// <param name="handSource">The hand that touched this object</param>
-    void OnControllerEnter(PlayerViveController.HandSource handSource);
+    void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource);
 
     /// <summary>
     /// Called when the vive controller left the collider without grabbing the object

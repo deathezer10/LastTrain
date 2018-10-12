@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ball : GrabbableObject
 {
-    public override void OnControllerEnter(PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
     }
 

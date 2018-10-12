@@ -95,7 +95,7 @@ public class Lever : StationaryObject
         return bIsGrabbing;
     }
         
-    public override void OnControllerEnter(PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
         bCanGrab = true;
         WhichHand = handSource.ToString();

@@ -28,7 +28,7 @@ public class PlayerViveController : MonoBehaviour
 
         if (iObject != null)
         {
-            iObject.OnControllerEnter(m_CurrentHand);
+            iObject.OnControllerEnter(this, m_CurrentHand);
         }
     }
 
