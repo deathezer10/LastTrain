@@ -18,21 +18,20 @@ public class TrainDoorsScript : MonoBehaviour
 
         doorRightOriginalPos = doorRight.transform.position;
         doorRightFinalPos = doorRightOriginalPos + rightDoorOffset;
-
-        opening = true;
     }
     
     void Update()
     {
+        // Testing placeholder
         if (Input.GetKeyDown(KeyCode.O))
         {
-            Debug.Log("Opening Doors");
-            opening = true;
+            OpenTrainDoors();
         }
 
+        // Testing placeholder
         if (Input.GetKeyDown(KeyCode.P))
         {
-            closing = true;
+            CloseTrainDoors();
         }
 
         if (opening && doorLeft.transform.position != doorLeftFinalPos)
@@ -40,10 +39,9 @@ public class TrainDoorsScript : MonoBehaviour
             doorLeft.transform.position = Vector3.MoveTowards(doorLeft.transform.position, doorLeftFinalPos, 0.4f * Time.deltaTime);
             doorRight.transform.position = Vector3.MoveTowards(doorRight.transform.position, doorRightFinalPos, 0.4f * Time.deltaTime);
         }
-        else
+        else if (opening)
         {
             opening = false;
-            closing = true;
         }
 
         if (closing && doorLeft.transform.position != doorLeftOriginalPos)
@@ -51,9 +49,22 @@ public class TrainDoorsScript : MonoBehaviour
             doorLeft.transform.position = Vector3.MoveTowards(doorLeft.transform.position, doorLeftOriginalPos, 0.4f * Time.deltaTime);
             doorRight.transform.position = Vector3.MoveTowards(doorRight.transform.position, doorRightOriginalPos, 0.4f * Time.deltaTime);
         }
-        else
+        else if (closing)
         {
             closing = false;
+            this.enabled = false;
         }
+    }
+
+    public void OpenTrainDoors()
+    {
+        Debug.Log("Opening Doors");
+        opening = true;
+    }
+
+    public void CloseTrainDoors()
+    {
+        Debug.Log("Closing Doors");
+        closing = true;
     }
 }
