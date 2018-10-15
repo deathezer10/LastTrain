@@ -10,7 +10,7 @@ public class LightSwitch : StationaryObject
 {
     private Light[] lights;
     private bool bSwitchIsOn = false;
-    SlidingDoors Traindoors;
+   
     // Use this for initialization
     void Start()
     {
@@ -34,7 +34,7 @@ public class LightSwitch : StationaryObject
         else
             SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 5, 1, SteamVR_Input_Sources.RightHand);
 
-        Traindoors.UseDoors();
+        
          
 
         if (bSwitchIsOn)
