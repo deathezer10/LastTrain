@@ -16,7 +16,7 @@ public class AcceleratorLever : StationaryObject
     private float HandleMaxPosition;
     private float HandleMinPosition = 0.4f;
     private float LastHandPosition;
-
+    private Vector3 currentHandPosition;
 
     // Use this for initialization
     void Start()
@@ -34,9 +34,9 @@ public class AcceleratorLever : StationaryObject
             if (bIsGrabbing)
             {
 
-                if (LastHandPosition < PlayerHand.transform.position.z)
+                if (LastHandPosition < currentHandPosition.z)
                 {
-                    if (PlayerHand.transform.position.z >= HandleMaxPosition)
+                    if (currentHandPosition.z >= HandleMaxPosition)
                     {
                         print("Handle max position reached");
                         bIsGrabbing = false;
@@ -46,9 +46,9 @@ public class AcceleratorLever : StationaryObject
                     }
                 }
 
-                else if (LastHandPosition > PlayerHand.transform.position.z)
+                else if (LastHandPosition > currentHandPosition.z)
                 {
-                    if (PlayerHand.transform.position.z <= HandleMinPosition)
+                    if (currentHandPosition.z <= HandleMinPosition)
                     {
                         print("Handle min position reached, event should be fired");
                         bIsGrabbing = false;
@@ -60,7 +60,7 @@ public class AcceleratorLever : StationaryObject
                     {
                         AcceleratorHandle.transform.SetPositionAndRotation(new Vector3(AcceleratorHandle.transform.position.x, AcceleratorHandle.transform.position.y,
                         PlayerHand.transform.position.z), AcceleratorHandle.transform.rotation);
-                        LastHandPosition = PlayerHand.transform.position.z;
+                        LastHandPosition = currentHandPosition.z;
                         
                     }
                 }
@@ -80,6 +80,7 @@ public class AcceleratorLever : StationaryObject
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
         bCanGrab = true;
+        print("Controller entered");
         PlayerHand = currentController.gameObject;
     }
 
@@ -90,13 +91,17 @@ public class AcceleratorLever : StationaryObject
 
     public override void OnControllerStay()
     {
-
+        if (bIsGrabbing)
+        {
+            currentHandPosition = PlayerHand.transform.position;
+        }
     }
 
     public override void OnGrab()
     {
         if (bCanGrab)
         {
+            print("Controller grabbed");
             bIsGrabbing = true;
             LastHandPosition = PlayerHand.transform.position.z;
         }
