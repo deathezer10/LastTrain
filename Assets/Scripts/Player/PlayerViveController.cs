@@ -89,14 +89,14 @@ public class PlayerViveController : MonoBehaviour
                         grabbableObject.OnGrabReleased(false);
 
                         AssignObjectToHand(m_CurrentHand, null);
+                        
+                        Destroy(GetComponent<FixedJoint>());
 
                         if (other.GetComponent<IStationaryGrabbable>() == null)
                         {
                             Rigidbody rb = other.GetComponent<Rigidbody>();
                             rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
                             rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
-
-                            Destroy(GetComponent<FixedJoint>());
                         }
                     }
                 }
@@ -126,18 +126,7 @@ public class PlayerViveController : MonoBehaviour
 
     private void OnJointBreak(float breakForce)
     {
-        GetCurrentHandObject().GetComponent<IGrabbable>().OnGrabReleased(false);
-
         AssignObjectToHand(m_CurrentHand, null);
-
-        //if (GetCurrentHandObject().GetComponent<IStationaryGrabbable>() == null)
-        //{
-        //    Rigidbody rb = other.GetComponent<Rigidbody>();
-        //    //rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
-        //    //rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
-
-        //    Destroy(GetComponent<FixedJoint>());
-        //}
     }
 
     private SteamVR_Input_Sources HandSourceToInputSource()
