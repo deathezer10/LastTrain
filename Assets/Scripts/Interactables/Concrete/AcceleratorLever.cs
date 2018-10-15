@@ -47,12 +47,11 @@ public class AcceleratorLever : StationaryObject
                 HandMovementDirection.Normalize();
                 if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f))
                 {
-                    if(VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z)
+                    if(VectorEndPoint.transform.position.z <= AcceleratorHandle.transform.position.z)
                     {
                         //TODO: EVENT for Setting ACC. to ZERO
                         bIsGrabbing = false;
                         bDisableLever = true;
-                        print("Lever DISABLED GOOD JOB");
                         return;
                     }
 
@@ -65,9 +64,8 @@ public class AcceleratorLever : StationaryObject
                
                 if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.40015f))
                 {
-                    if(HandleDefaultMaxPosition.z <= AcceleratorHandle.transform.position.z )
+                    if(HandleDefaultMaxPosition.z >= AcceleratorHandle.transform.position.z )
                     {
-                        print("Max reached");
                         return;
                     }
 
