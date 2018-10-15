@@ -6,17 +6,17 @@ public class SlidingDoors : MonoBehaviour
 {
     public static GameObject[] LeftDoors;
     public static GameObject[] RightDoors;
-    public GameObject DoorLeft1;
-    public GameObject DoorRight1;
+    public static GameObject DoorLeft1;
+    public static GameObject DoorRight1;
 
-    public GameObject DoorLeft2;
-    public GameObject DoorRight2;
+    public static GameObject DoorLeft2;
+    public static GameObject DoorRight2;
 
-    public GameObject DoorLeft3;
-    public GameObject DoorRight3;
+    public static GameObject DoorLeft3;
+    public static GameObject DoorRight3;
 
-    public GameObject DoorLeft4;
-    public GameObject DoorRight4;
+    public static GameObject DoorLeft4;
+    public static GameObject DoorRight4;
 
     public static bool bAreDoorsOpen = false;
     public static bool bOpenDoor = false;
@@ -39,14 +39,16 @@ public class SlidingDoors : MonoBehaviour
         DoorLeft4 = transform.gameObject.transform.GetChild(6).gameObject;
         DoorRight4 = transform.gameObject.transform.GetChild(7).gameObject;
 
-        LeftDoors.SetValue(DoorLeft1, 0);
-        LeftDoors.SetValue(DoorLeft2, 1);
-        LeftDoors.SetValue(DoorLeft3, 2);
-        LeftDoors.SetValue(DoorLeft4, 3);
-        RightDoors.SetValue(DoorRight1, 0);
-        RightDoors.SetValue(DoorRight2, 1);
-        RightDoors.SetValue(DoorRight3, 2);
-        RightDoors.SetValue(DoorRight4, 3);
+        LeftDoors[0] = DoorLeft1;
+        LeftDoors[1] = DoorLeft2;
+        LeftDoors[2] = DoorLeft3;
+        LeftDoors[3] = DoorLeft4;
+        RightDoors[0] = DoorRight1;
+        RightDoors[1] = DoorRight2;
+        RightDoors[2] = DoorRight3;
+        RightDoors[3] = DoorRight4;
+
+        
     }
 
     // Update is called once per frame
