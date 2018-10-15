@@ -230,7 +230,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1562744338302200, guid: d41a8c9ce7197ea40ae3b2f84f7cb0f2, type: 2}
       propertyPath: m_Layer
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d41a8c9ce7197ea40ae3b2f84f7cb0f2, type: 2}
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 667657471}
   - component: {fileID: 667657470}
   - component: {fileID: 667657469}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 940797761}
   - component: {fileID: 940797760}
   - component: {fileID: 940797759}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 980144281}
   - component: {fileID: 980144280}
   - component: {fileID: 980144279}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1096,11 +1096,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1022526632698882, guid: 5d93e2649235f6d48b999a4074224ead, type: 2}
       propertyPath: m_Layer
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1519730943442764, guid: 5d93e2649235f6d48b999a4074224ead, type: 2}
       propertyPath: m_Layer
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d93e2649235f6d48b999a4074224ead, type: 2}
@@ -1404,7 +1404,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
       propertyPath: m_LocalRotation.z
@@ -1412,7 +1412,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
       propertyPath: m_RootOrder
@@ -1537,6 +1537,10 @@ Prefab:
       propertyPath: m_fontColor32.rgba
       value: 4279637759
       objectReference: {fileID: 0}
+    - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
   m_IsPrefabAsset: 0
@@ -1593,7 +1597,7 @@ GameObject:
   - component: {fileID: 1795330843}
   - component: {fileID: 1795330842}
   - component: {fileID: 1795330841}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1706,7 +1710,7 @@ GameObject:
   - component: {fileID: 1811217982}
   - component: {fileID: 1811217981}
   - component: {fileID: 1811217980}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1819,7 +1823,7 @@ GameObject:
   - component: {fileID: 1829635692}
   - component: {fileID: 1829635691}
   - component: {fileID: 1829635690}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1978,7 +1982,7 @@ GameObject:
   - component: {fileID: 1852674811}
   - component: {fileID: 1852674810}
   - component: {fileID: 1852674809}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2105,7 +2109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1973476717}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TrainObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2241,11 +2245,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1043826884398264, guid: e8db098ecbd5857459936e223b31101a, type: 2}
       propertyPath: m_Layer
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1046056535610384, guid: e8db098ecbd5857459936e223b31101a, type: 2}
       propertyPath: m_Layer
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8db098ecbd5857459936e223b31101a, type: 2}
