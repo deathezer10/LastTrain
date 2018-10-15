@@ -10,15 +10,18 @@ public class AcceleratorLever : StationaryObject
     private GameObject PlayerHand;
     private GameObject VectorBeginPoint;
     private GameObject VectorEndPoint;
+
     private Vector3 HandleMovementDirection;
     private Vector3 LastHandPosition;
+    private Vector3 currentHandPosition;
+    private Vector3 HandleDefaultMaxPosition;
 
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
 
 
-    private Vector3 currentHandPosition;
+    
 
     // Use this for initialization
     void Start()
@@ -26,6 +29,7 @@ public class AcceleratorLever : StationaryObject
         HandleCollider = GetComponent<BoxCollider>();
         Accelerator = transform.parent.gameObject;
         AcceleratorHandle = HandleCollider.gameObject;
+        HandleDefaultMaxPosition = AcceleratorHandle.transform.position;
         VectorBeginPoint = Accelerator.transform.GetChild(2).gameObject;
         VectorEndPoint = Accelerator.transform.GetChild(1).gameObject;
         HandleMovementDirection = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
@@ -41,18 +45,28 @@ public class AcceleratorLever : StationaryObject
             {
                 Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition;
                 HandMovementDirection.Normalize();
-                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.20015f))
+                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f))
                 {
-                    print("Downwards almost equal");
+                    if(AcceleratorHandle.transform.position.Equals(VectorEndPoint))
+                    {
+                        //TODO: event for accelerator set to ZERO
+                        return;
+                    }
+
+
                     AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition,PlayerHand.transform.position);
                     LastHandPosition = PlayerHand.transform.position;
                     return;
 
                 }
                
-                if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.20015f))
+                if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.40015f))
                 {
-                    print("Upwards almost equal");
+                    if(AcceleratorHandle.transform.position.Equals(HandleDefaultMaxPosition))
+                    {
+                        return;
+                    }
+
                     AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     LastHandPosition = PlayerHand.transform.position;
                     return;
