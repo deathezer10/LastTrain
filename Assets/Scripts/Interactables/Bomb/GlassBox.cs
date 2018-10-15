@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Valve.VR;
 using UnityEngine;
 
 public class GlassBox : MonoBehaviour
@@ -28,7 +29,7 @@ public class GlassBox : MonoBehaviour
             }
             else                        // If the object is held in hand
             {
-                if (controller.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= heldBreakForce)
+                if (controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude >= heldBreakForce)
                 {
                     BreakGlass();
                 }
