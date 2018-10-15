@@ -12,7 +12,7 @@ public class TrainDoorHandler : MonoBehaviour
 
     private enum DoorSide { Left, Right }
 
-    private List<KeyValuePair<DoorSide, Transform>> m_Doors;
+    private List<KeyValuePair<DoorSide, Transform>> m_Doors = new List<KeyValuePair<DoorSide, Transform>>();
 
 
     private void Start()
@@ -37,9 +37,9 @@ public class TrainDoorHandler : MonoBehaviour
         foreach (var door in m_Doors)
         {
             if (door.Key == DoorSide.Left)
-                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 1).SetSpeedBased();
+                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 1).SetRelative();
             else
-                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 1).SetSpeedBased();
+                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 1).SetRelative();
         }
     }
 
