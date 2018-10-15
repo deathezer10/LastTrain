@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class AcceleratorLever : StationaryObject
 {
-
+    private GameObject AcceleratorHandle;
     BoxCollider HandleCollider;
+    private GameObject PlayerHand;
+
+
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
-    private GameObject AcceleratorHandle;
+
     private float HandleMaxPosition;
-    private float HandleMinPosition = 0.5f;
-    private GameObject PlayerHand;
+    private float HandleMinPosition = 0.4f;
+    private float LastHandPosition;
+
+
     // Use this for initialization
     void Start()
     {
@@ -29,26 +34,44 @@ public class AcceleratorLever : StationaryObject
             if (bIsGrabbing)
             {
 
-                if (PlayerHand.transform.position.z > HandleMaxPosition)
+                if (LastHandPosition < PlayerHand.transform.position.z)
                 {
-                    if (AcceleratorHandle.transform.position.z >= HandleMinPosition)
+                    if (PlayerHand.transform.position.z >= HandleMaxPosition)
                     {
-                        //TODO: FUNCTION(s) for pulling Acceleration to zero
-                        bDisableLever = true;
+                        print("Handle max position reached");
                         bIsGrabbing = false;
-                    }
-                    
-                    else
                         AcceleratorHandle.transform.SetPositionAndRotation(new Vector3(AcceleratorHandle.transform.position.x,
-                            AcceleratorHandle.transform.position.y, PlayerHand.transform.position.z), AcceleratorHandle.transform.rotation);
-
-                    //AcceleratorHandle.transform.Translate(0, 0, PlayerHand.transform.position.z);
-                    
+                        AcceleratorHandle.transform.position.y, HandleMaxPosition), AcceleratorHandle.transform.rotation);
+                        return;
+                    }
                 }
 
-                  
+                else if (LastHandPosition > PlayerHand.transform.position.z)
+                {
+                    if (PlayerHand.transform.position.z <= HandleMinPosition)
+                    {
+                        print("Handle min position reached, event should be fired");
+                        bIsGrabbing = false;
+                        bDisableLever = true;
+                        //TODO: Event for accelerator stopped
+                    }
+
+                    else
+                    {
+                        AcceleratorHandle.transform.SetPositionAndRotation(new Vector3(AcceleratorHandle.transform.position.x, AcceleratorHandle.transform.position.y,
+                        PlayerHand.transform.position.z), AcceleratorHandle.transform.rotation);
+                        LastHandPosition = PlayerHand.transform.position.z;
+                        
+                    }
+                }
+
                 
-                   
+                
+
+
+
+
+
             }
         }
     }
@@ -75,6 +98,7 @@ public class AcceleratorLever : StationaryObject
         if (bCanGrab)
         {
             bIsGrabbing = true;
+            LastHandPosition = PlayerHand.transform.position.z;
         }
     }
 

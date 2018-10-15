@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class BrakeLever : StationaryObject
 {
+    private GameObject PlayerHand;
+    private PlayerViveController[] foundControllers;
+    private BoxCollider LeverTip;
 
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
-    private GameObject PlayerHand;
+    private bool bCanGrab = false;
+
     private Vector3 HandOffsetStart;
     private Transform LastHandLocation;
+    Vector3 currentHandPosition;
 
-    private float MaxHandReach = 10.0f;              //Adjust reach before player lets go of the lever
+   // private float MaxHandReach = 10.0f;              //Adjust reach before player lets go of the lever
     private float minZRotation = -0.80f;              //Setting lowest reachable rotation for the lever
     private float maxZRotation = 0.80f;               //Setting the max reachable rotation for the lever
     private float currentZRotation = 0.0f;
 
-    private bool bCanGrab = false;
-    private PlayerViveController[] foundControllers;
-    private BoxCollider LeverTip;
+    
+    
 
-    Vector3 currentHandPosition;
+   
 
     // Use this for initialization
     void Start()

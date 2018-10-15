@@ -31,8 +31,10 @@ public class DoorLever : MonoBehaviour
 
         if(other.gameObject.name == "Umbrella")
         {
-            //TODO activate button animation/add movement
-            //TODO Send to door's script for opening door&Sound&extra=?
+            //TODO: activate button animation/add movement
+
+            DriverCabinDoor.init();
+        
         }
 
     }
