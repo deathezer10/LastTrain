@@ -120,6 +120,7 @@ public class PlayerViveController : MonoBehaviour
             {
                 grabbableObject.OnGrabReleased(true);
                 AssignObjectToHand(m_CurrentHand, null);
+                Destroy(GetComponent<FixedJoint>());
             }
         }
     }
