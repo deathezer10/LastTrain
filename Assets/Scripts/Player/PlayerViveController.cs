@@ -69,8 +69,8 @@ public class PlayerViveController : MonoBehaviour
                             rb.velocity = Vector3.zero;
 
                             FixedJoint joint = gameObject.AddComponent<FixedJoint>();
-                            joint.breakForce = 5000;
-                            joint.breakTorque = 5000;
+                            joint.breakForce = 7500;
+                            joint.breakTorque = Mathf.Infinity;
                             joint.connectedBody = rb;
                         }
                     }
@@ -89,7 +89,7 @@ public class PlayerViveController : MonoBehaviour
                         grabbableObject.OnGrabReleased(false);
 
                         AssignObjectToHand(m_CurrentHand, null);
-                        
+
                         Destroy(GetComponent<FixedJoint>());
 
                         if (other.GetComponent<IStationaryGrabbable>() == null)
