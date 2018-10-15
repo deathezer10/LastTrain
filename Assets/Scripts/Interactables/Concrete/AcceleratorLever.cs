@@ -29,6 +29,7 @@ public class AcceleratorLever : StationaryObject
         VectorBeginPoint = Accelerator.transform.GetChild(2).gameObject;
         VectorEndPoint = Accelerator.transform.GetChild(1).gameObject;
         HandleMovementDirection = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
+        HandleMovementDirection.Normalize();
     }
 
     // Update is called once per frame
@@ -39,8 +40,8 @@ public class AcceleratorLever : StationaryObject
             if (bIsGrabbing)
             {
                 Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition;
-                
-                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.00005f))
+                HandMovementDirection.Normalize();
+                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.00015f))
                 {
                     print("Downwards almost equal");
                     AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition,PlayerHand.transform.position);
@@ -49,7 +50,7 @@ public class AcceleratorLever : StationaryObject
 
                 }
                
-                if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.00005f))
+                if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.00015f))
                 {
                     print("Upwards almost equal");
                     AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
