@@ -16,7 +16,7 @@ public class DriverCabinDoor : MonoBehaviour {
 
     public static void init()
     {
-        //TODO: Animation? or transform position of door to open?
+        //TODO: Animation? or using transform.position to open?
         //Sounds? 
     }
 
