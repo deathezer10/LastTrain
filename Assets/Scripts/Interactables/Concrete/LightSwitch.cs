@@ -1,49 +1,84 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
+using Valve.VR;
+using Valve.VR.Extras;
 
-public class LightSwitch : StationaryObject {
 
+public class LightSwitch : StationaryObject
+{
+    private Light[] lights;
     private bool bSwitchIsOn = false;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+        lights = FindObjectsOfType(typeof(Light)) as Light[];
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
+        print(handSource.ToString());
+        print(SteamVR_Input_Sources.LeftHand.ToString());
+        if (handSource.ToString() == SteamVR_Input_Sources.LeftHand.ToString())
+            SteamVR_Input.actionsVibration[0].Execute(0, 2, 30, 1, SteamVR_Input_Sources.LeftHand);
+
+        else
+            SteamVR_Input.actionsVibration[0].Execute(0, 2, 30, 1, SteamVR_Input_Sources.RightHand);
+
         
+           
+
+        if (bSwitchIsOn)
+        {
+            bSwitchIsOn = false;
+            foreach (Light light in lights)
+            {
+                light.intensity = 0;
+            }
+        }
+       
+        else
+        {
+            bSwitchIsOn = true;
+            foreach (Light light in lights)
+            {
+                light.intensity = 50;
+            }
+        }
+       
     }
 
     public override void OnControllerExit()
     {
-       
+
     }
 
     public override void OnControllerStay()
     {
-       
+
     }
 
     public override void OnGrab()
     {
-        
+
     }
 
     public override void OnGrabReleased(bool snapped)
     {
-      
+
     }
 
     public override void OnUse()
     {
-        
+
     }
 }
