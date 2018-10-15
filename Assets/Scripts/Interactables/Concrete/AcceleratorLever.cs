@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class AcceleratorLever : StationaryObject
 {
+    private GameObject Accelerator;
     private GameObject AcceleratorHandle;
     BoxCollider HandleCollider;
     private GameObject PlayerHand;
-
+    private GameObject VectorBeginPoint;
+    private GameObject VectorEndPoint;
+    private Vector3 HandleMovementVector;
 
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
@@ -22,8 +25,11 @@ public class AcceleratorLever : StationaryObject
     void Start()
     {
         HandleCollider = GetComponent<BoxCollider>();
-        AcceleratorHandle = HandleCollider.gameObject;
-        HandleMaxPosition = AcceleratorHandle.transform.position.z;
+        Accelerator = HandleCollider.gameObject;
+        AcceleratorHandle = Accelerator.transform.GetChild(0).gameObject;
+        VectorBeginPoint = Accelerator.transform.GetChild(2).gameObject;
+        VectorEndPoint = Accelerator.transform.GetChild(1).gameObject;
+        HandleMovementVector = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
     }
 
     // Update is called once per frame
@@ -33,41 +39,9 @@ public class AcceleratorLever : StationaryObject
         {
             if (bIsGrabbing)
             {
-
-                if (LastHandPosition < currentHandPosition.z)
-                {
-                    print("dragging it down");
-                    if (currentHandPosition.z >= HandleMinPosition)
-                    {
-                        print("Handle min position reached, event should be fired");
-                        bIsGrabbing = false;
-                        bDisableLever = true;
-                        //TODO: Event for accelerator stopped
-                    }
-
-                    else
-                    {
-                        AcceleratorHandle.transform.SetPositionAndRotation(new Vector3(AcceleratorHandle.transform.position.x, AcceleratorHandle.transform.position.y,
-                        PlayerHand.transform.position.z), AcceleratorHandle.transform.rotation);
-                        LastHandPosition = currentHandPosition.z;
-
-                    }
-                }
-
-                else if (LastHandPosition > currentHandPosition.z)
-                {
-                    print("Dragging it upwards");
-                    if (currentHandPosition.z <= HandleMaxPosition)
-                    {
-                        print("Handle max position reached");
-                        bIsGrabbing = false;
-                        AcceleratorHandle.transform.SetPositionAndRotation(new Vector3(AcceleratorHandle.transform.position.x,
-                        AcceleratorHandle.transform.position.y, HandleMaxPosition), AcceleratorHandle.transform.rotation);
-                        return;
-                    }
-
-                   
-                }
+                
+                
+                
 
                 
                 
@@ -84,7 +58,6 @@ public class AcceleratorLever : StationaryObject
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
         bCanGrab = true;
-        print("Controller entered");
         PlayerHand = currentController.gameObject;
     }
 
@@ -105,9 +78,8 @@ public class AcceleratorLever : StationaryObject
     {
         if (bCanGrab)
         {
-            print("Controller grabbed");
             bIsGrabbing = true;
-            LastHandPosition = PlayerHand.transform.position.z;
+
         }
     }
 
