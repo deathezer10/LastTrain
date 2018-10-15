@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.Extras;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Collider), typeof(FixedJoint))]
 public class PlayerViveController : MonoBehaviour
 {
 
@@ -66,19 +66,25 @@ public class PlayerViveController : MonoBehaviour
                         if (other.GetComponent<IStationaryGrabbable>() == null)
                         {
                             Rigidbody rb = other.GetComponent<Rigidbody>();
-                            rb.isKinematic = true;
+                            //rb.isKinematic = true;
                             rb.velocity = Vector3.zero;
 
-                            other.transform.parent = transform;
-                        }
+                            FixedJoint joint = GetComponent<FixedJoint>();
+                            joint.connectedBody = rb;
 
-                        Debug.Log(m_CurrentHand.ToString() + " grabbed: " + grabbableObject.ToString());
+                           // other.transform.parent = transform;
+                        }
                     }
                 }
 
                 // On Grab Released
                 if (GetCurrentHandObject() != null)
                 {
+                    if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(HandSourceToInputSource()))
+                    {
+                        iObject.OnUse();
+                    }
+
                     if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(HandSourceToInputSource()))
                     {
                         grabbableObject.OnGrabReleased(false);
@@ -88,14 +94,15 @@ public class PlayerViveController : MonoBehaviour
                         if (other.GetComponent<IStationaryGrabbable>() == null)
                         {
                             Rigidbody rb = other.GetComponent<Rigidbody>();
-                            rb.isKinematic = false;
+                           //  rb.isKinematic = false;
                             rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
                             rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
 
-                            other.transform.parent = null;
-                        }
+                            FixedJoint joint = GetComponent<FixedJoint>();
+                            joint.connectedBody = null;
 
-                        Debug.Log(m_CurrentHand.ToString() + " released: " + grabbableObject.ToString());
+                            // other.transform.parent = null;
+                        }
                     }
                 }
 

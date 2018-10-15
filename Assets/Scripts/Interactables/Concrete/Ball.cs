@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ball : GrabbableObject
 {
+    int useCount = 0;
+
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
     }
@@ -23,8 +25,11 @@ public class Ball : GrabbableObject
     public override void OnGrabReleased(bool snapped)
     {
     }
-    
+
     public override void OnUse()
     {
+        Debug.Log("Used ball: " + (++useCount).ToString());
+
+
     }
 }
