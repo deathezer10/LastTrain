@@ -41,7 +41,7 @@ public class AcceleratorLever : StationaryObject
             {
                 Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition;
                 HandMovementDirection.Normalize();
-                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.00015f))
+                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.20015f))
                 {
                     print("Downwards almost equal");
                     AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition,PlayerHand.transform.position);
@@ -50,7 +50,7 @@ public class AcceleratorLever : StationaryObject
 
                 }
                
-                if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.00015f))
+                if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.20015f))
                 {
                     print("Upwards almost equal");
                     AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
