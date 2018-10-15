@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.Extras;
 
-[RequireComponent(typeof(Collider), typeof(FixedJoint))]
+[RequireComponent(typeof(Collider))]
 public class PlayerViveController : MonoBehaviour
 {
 
@@ -66,13 +66,12 @@ public class PlayerViveController : MonoBehaviour
                         if (other.GetComponent<IStationaryGrabbable>() == null)
                         {
                             Rigidbody rb = other.GetComponent<Rigidbody>();
-                            //rb.isKinematic = true;
                             rb.velocity = Vector3.zero;
 
-                            FixedJoint joint = GetComponent<FixedJoint>();
+                            FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+                            joint.breakForce = 5000;
+                            joint.breakTorque = 5000;
                             joint.connectedBody = rb;
-
-                           // other.transform.parent = transform;
                         }
                     }
                 }
@@ -94,14 +93,10 @@ public class PlayerViveController : MonoBehaviour
                         if (other.GetComponent<IStationaryGrabbable>() == null)
                         {
                             Rigidbody rb = other.GetComponent<Rigidbody>();
-                           //  rb.isKinematic = false;
                             rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
                             rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
 
-                            FixedJoint joint = GetComponent<FixedJoint>();
-                            joint.connectedBody = null;
-
-                            // other.transform.parent = null;
+                            Destroy(GetComponent<FixedJoint>());
                         }
                     }
                 }
@@ -127,6 +122,22 @@ public class PlayerViveController : MonoBehaviour
                 AssignObjectToHand(m_CurrentHand, null);
             }
         }
+    }
+
+    private void OnJointBreak(float breakForce)
+    {
+        GetCurrentHandObject().GetComponent<IGrabbable>().OnGrabReleased(false);
+
+        AssignObjectToHand(m_CurrentHand, null);
+
+        //if (GetCurrentHandObject().GetComponent<IStationaryGrabbable>() == null)
+        //{
+        //    Rigidbody rb = other.GetComponent<Rigidbody>();
+        //    //rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
+        //    //rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
+
+        //    Destroy(GetComponent<FixedJoint>());
+        //}
     }
 
     private SteamVR_Input_Sources HandSourceToInputSource()
