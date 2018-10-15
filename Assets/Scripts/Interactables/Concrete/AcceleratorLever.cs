@@ -36,19 +36,8 @@ public class AcceleratorLever : StationaryObject
 
                 if (LastHandPosition < currentHandPosition.z)
                 {
-                    if (currentHandPosition.z >= HandleMaxPosition)
-                    {
-                        print("Handle max position reached");
-                        bIsGrabbing = false;
-                        AcceleratorHandle.transform.SetPositionAndRotation(new Vector3(AcceleratorHandle.transform.position.x,
-                        AcceleratorHandle.transform.position.y, HandleMaxPosition), AcceleratorHandle.transform.rotation);
-                        return;
-                    }
-                }
-
-                else if (LastHandPosition > currentHandPosition.z)
-                {
-                    if (currentHandPosition.z <= HandleMinPosition)
+                    print("dragging it down");
+                    if (currentHandPosition.z >= HandleMinPosition)
                     {
                         print("Handle min position reached, event should be fired");
                         bIsGrabbing = false;
@@ -61,8 +50,23 @@ public class AcceleratorLever : StationaryObject
                         AcceleratorHandle.transform.SetPositionAndRotation(new Vector3(AcceleratorHandle.transform.position.x, AcceleratorHandle.transform.position.y,
                         PlayerHand.transform.position.z), AcceleratorHandle.transform.rotation);
                         LastHandPosition = currentHandPosition.z;
-                        
+
                     }
+                }
+
+                else if (LastHandPosition > currentHandPosition.z)
+                {
+                    print("Dragging it upwards");
+                    if (currentHandPosition.z <= HandleMaxPosition)
+                    {
+                        print("Handle max position reached");
+                        bIsGrabbing = false;
+                        AcceleratorHandle.transform.SetPositionAndRotation(new Vector3(AcceleratorHandle.transform.position.x,
+                        AcceleratorHandle.transform.position.y, HandleMaxPosition), AcceleratorHandle.transform.rotation);
+                        return;
+                    }
+
+                   
                 }
 
                 
