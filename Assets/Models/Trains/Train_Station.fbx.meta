@@ -35,6 +35,8 @@ ModelImporter:
     100058: transform7
     100060: transform8
     100062: transform9
+    100064: polySurface918
+    100066: polySurface919
     400000: polySurface270
     400002: polySurface278
     400004: polySurface279
@@ -67,13 +69,21 @@ ModelImporter:
     400058: transform7
     400060: transform8
     400062: transform9
+    400064: polySurface918
+    400066: polySurface919
     2100000: lambert1
     2300000: polySurface645
     2300002: polySurface917
+    2300004: polySurface918
+    2300006: polySurface919
     3300000: polySurface645
     3300002: polySurface917
+    3300004: polySurface918
+    3300006: polySurface919
     4300000: polySurface645
     4300002: polySurface917
+    4300004: polySurface918
+    4300006: polySurface919
   externalObjects:
   - first:
       type: UnityEngine:Material

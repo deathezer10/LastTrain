@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class GlassBox : MonoBehaviour
 {
-    public float breakReqForce;
+    public float thrownBreakForce, heldBreakForce;
     public GameObject brokenGlassPrefab;
     public GameObject initialBox;
     
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Rigidbody>())
@@ -16,15 +15,33 @@ public class GlassBox : MonoBehaviour
             Debug.Log("Hit by " + other.tag + " with a force of " + other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
         }
 
-        if (other.tag == "Extinguisher" && other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= breakReqForce)
+        if (other.tag == "Extinguisher")
         {
-            Instantiate(brokenGlassPrefab, initialBox.transform.position, initialBox.transform.rotation);
-            Destroy(initialBox);
-            // TODO Give the pieces of brokenGlassPrefab a portion of the extinguishers rigidbodys velocity.magnitude as force
-            // Piece Rigidbodies in an array and foreach .addforce, or just relay on the existing colliders and unity physics
+            var controller = PlayerViveController.GetControllerThatHolds(other.gameObject);
 
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            if (controller == null)     // If the object has been thrown
+            {
+                if (other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= thrownBreakForce)
+                {
+                    BreakGlass();
+                }
+            }
+            else                        // If the object is held in hand
+            {
+                if (controller.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= heldBreakForce)
+                {
+                    BreakGlass();
+                }
+            }
         }
+    }
+
+    private void BreakGlass()
+    {
+        Instantiate(brokenGlassPrefab, initialBox.transform.position, initialBox.transform.rotation);
+        Destroy(initialBox);
+
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
 }

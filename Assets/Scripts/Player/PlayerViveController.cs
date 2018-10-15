@@ -161,4 +161,17 @@ public class PlayerViveController : MonoBehaviour
             return (otherHand) ? m_CurrentLeftObject : m_CurrentRightObject;
     }
 
+    public static PlayerViveController GetControllerThatHolds(GameObject obj)
+    {
+        var controllers = FindObjectsOfType<PlayerViveController>();
+
+        foreach (PlayerViveController controller in controllers)
+        {
+            if (controller.GetCurrentHandObject() == obj)
+                return controller;
+        }
+
+        return null;
+    }
+
 }

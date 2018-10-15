@@ -9,7 +9,7 @@ public class TrainArriver : MonoBehaviour {
 
     public void BeginArrival()
     {
-        transform.DOMoveZ(m_TrainStoppingPoint, 5).SetEase(Ease.OutExpo);
+        transform.DOMoveZ(m_TrainStoppingPoint, 10).SetEase(Ease.OutQuart);
     }
 
 }

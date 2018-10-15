@@ -6,6 +6,8 @@ using DG.Tweening;
 public class StationButton : MonoBehaviour {
 
     public GameObject m_Train;
+    private const float m_ToggleOffset = -0.01f;
+    private bool m_Toggled = false;
 
 	// Use this for initialization
 	void Start ()
@@ -13,21 +15,19 @@ public class StationButton : MonoBehaviour {
         GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }
 	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyUp(KeyCode.A))
-        {
-
-            m_Train.GetComponent<TrainArriver>().BeginArrival();
-        }
-	}
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "GameController")
+        if (m_Toggled == false && other.tag == "GameController")
         {
+            m_Toggled = true;
+
             GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             m_Train.GetComponent<TrainArriver>().BeginArrival();
+
+            Vector3 newPos = transform.position;
+            newPos.x += m_ToggleOffset;
+
+            transform.position = newPos;
         }
     }
 
