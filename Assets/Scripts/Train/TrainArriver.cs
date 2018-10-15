@@ -5,11 +5,11 @@ using DG.Tweening;
 
 public class TrainArriver : MonoBehaviour {
 
-    public const float m_TrainStoppingPoint = 7.4f;
+    public const float m_TrainStoppingPoint = 4.85f;
 
     public void BeginArrival()
     {
-        transform.DOMoveX(m_TrainStoppingPoint, 5);
+        transform.DOMoveZ(m_TrainStoppingPoint, 5).SetEase(Ease.OutExpo);
     }
 
 }

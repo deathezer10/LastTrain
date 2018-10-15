@@ -6,24 +6,27 @@ using DG.Tweening;
 public class StationButton : MonoBehaviour {
 
     public GameObject m_Train;
-    const float m_TrainStoppingPoint = 7.4f;
 
 	// Use this for initialization
 	void Start ()
     {
-        GetComponent<Material>().SetColor("_Color", Color.red);
+        GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyUp(KeyCode.A))
+        {
+
+            m_Train.GetComponent<TrainArriver>().BeginArrival();
+        }
 	}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "GameController")
         {
-            GetComponent<Material>().SetColor("_Color", Color.green);
+            GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             m_Train.GetComponent<TrainArriver>().BeginArrival();
         }
     }
