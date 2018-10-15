@@ -10,15 +10,18 @@ public class AcceleratorLever : StationaryObject
     private GameObject PlayerHand;
     private GameObject VectorBeginPoint;
     private GameObject VectorEndPoint;
+
     private Vector3 HandleMovementDirection;
     private Vector3 LastHandPosition;
+    private Vector3 currentHandPosition;
+    private Vector3 HandleDefaultMaxPosition;
 
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
 
 
-    private Vector3 currentHandPosition;
+    
 
     // Use this for initialization
     void Start()
@@ -26,9 +29,11 @@ public class AcceleratorLever : StationaryObject
         HandleCollider = GetComponent<BoxCollider>();
         Accelerator = transform.parent.gameObject;
         AcceleratorHandle = HandleCollider.gameObject;
+        HandleDefaultMaxPosition = AcceleratorHandle.transform.position;
         VectorBeginPoint = Accelerator.transform.GetChild(2).gameObject;
         VectorEndPoint = Accelerator.transform.GetChild(1).gameObject;
         HandleMovementDirection = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
+        HandleMovementDirection.Normalize();
     }
 
     // Update is called once per frame
@@ -39,19 +44,33 @@ public class AcceleratorLever : StationaryObject
             if (bIsGrabbing)
             {
                 Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition;
-                
-                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.00005f))
+                HandMovementDirection.Normalize();
+                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f))
                 {
-                    print("Downwards almost equal");
+                    if(VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z)
+                    {
+                        //TODO: EVENT for Setting ACC. to ZERO
+                        bIsGrabbing = false;
+                        bDisableLever = true;
+                        print("Lever DISABLED GOOD JOB");
+                        return;
+                    }
+
+
                     AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition,PlayerHand.transform.position);
                     LastHandPosition = PlayerHand.transform.position;
                     return;
 
                 }
                
-                if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.00005f))
+                if(AlmostEqual(HandMovementDirection,-HandleMovementDirection,0.40015f))
                 {
-                    print("Upwards almost equal");
+                    if(HandleDefaultMaxPosition.z <= AcceleratorHandle.transform.position.z )
+                    {
+                        print("Max reached");
+                        return;
+                    }
+
                     AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     LastHandPosition = PlayerHand.transform.position;
                     return;
