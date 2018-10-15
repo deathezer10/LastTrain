@@ -37,9 +37,9 @@ public class TrainDoorHandler : MonoBehaviour
         foreach (var door in m_Doors)
         {
             if (door.Key == DoorSide.Left)
-                door.Value.DOLocalMoveX(-m_DoorOffset * direction, 1).SetSpeedBased();
+                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 1).SetSpeedBased();
             else
-                door.Value.DOLocalMoveX(m_DoorOffset * direction, 1).SetSpeedBased();
+                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 1).SetSpeedBased();
         }
     }
 
