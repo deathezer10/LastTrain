@@ -6,7 +6,7 @@ using DG.Tweening;
 public class StationButton : MonoBehaviour {
 
     public GameObject m_Train;
-    private const float m_ToggleOffset = -0.02f;
+    private const float m_ToggleOffset = -0.01f;
     private bool m_Toggled = false;
 
 	// Use this for initialization
