@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class PlayerOriginHandler : MonoBehaviour
@@ -13,9 +14,24 @@ public class PlayerOriginHandler : MonoBehaviour
         get { return m_IsOutsideOrigin; }
     }
 
+    public TextMeshPro[] m_MoveBackTextMesh;
+
     private void Start()
     {
         m_CurrentMaterial = GetComponent<MeshRenderer>().material;
+    }
+
+    private void Update()
+    {
+        ToggleMoveBackText(m_IsOutsideOrigin);
+    }
+
+    private void ToggleMoveBackText(bool enabled)
+    {
+        foreach (TextMeshPro text in m_MoveBackTextMesh)
+        {
+            text.gameObject.SetActive(enabled);
+        }
     }
 
     private void OnTriggerStay(Collider other)
