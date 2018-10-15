@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrownBreakForce: 3.5
-  heldBreakForce: 3.5
+  heldBreakForce: 3
   brokenGlassPrefab: {fileID: 1798390676371920, guid: e60d64d7c472e784393c3700667946a3,
     type: 2}
   initialBox: {fileID: 1391336992030782}

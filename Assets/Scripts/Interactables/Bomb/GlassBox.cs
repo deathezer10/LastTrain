@@ -11,24 +11,23 @@ public class GlassBox : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Rigidbody>())
-        {
-            Debug.Log("Hit by " + other.tag + " with a force of " + other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
-        }
-
         if (other.tag == "Extinguisher")
         {
             var controller = PlayerViveController.GetControllerThatHolds(other.gameObject);
 
-            if (controller == null)     // If the object has been thrown
+            if (controller == null)             // If the object has been thrown
             {
+                Debug.Log("Thrown Hit with a force of " + other.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
+
                 if (other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= thrownBreakForce)
                 {
                     BreakGlass();
                 }
             }
-            else                        // If the object is held in hand
+            else                                // If the object is held in hand
             {
+                Debug.Log("Held Hit with a force of " + controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude);
+
                 if (controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude >= heldBreakForce)
                 {
                     BreakGlass();
