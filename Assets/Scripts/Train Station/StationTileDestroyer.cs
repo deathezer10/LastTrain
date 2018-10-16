@@ -17,7 +17,7 @@ public class StationTileDestroyer : MonoBehaviour {
     {
         if ((transform.position - m_Train.transform.position).magnitude >= m_DestroyDistance)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
