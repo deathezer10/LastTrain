@@ -10,7 +10,7 @@ public class PlayerViveMovement : MonoBehaviour
     private CharacterController m_CController;
     private Camera m_CurrentCamera;
 
-    private const float m_PlayerMoveSpeed = 1.8f;
+    private const float m_PlayerMoveSpeed = 2;
 
     private void Start()
     {
