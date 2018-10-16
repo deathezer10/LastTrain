@@ -9,6 +9,7 @@ public class StationMover : MonoBehaviour
     public GameObject m_Train;
     public GameObject m_TunnelPrefab;
     GameObject m_LastRightTunnel;
+    Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
     int m_InitialTunnelSpawnAmount = 3;
     int m_TotalTunnelCreated = 0;
@@ -28,14 +29,14 @@ public class StationMover : MonoBehaviour
         {
             m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * m_TunnelGapOffset), Quaternion.identity, transform); // Right side
             GameObject leftTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
-            m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
-            m_RemovableObjects.Enqueue(leftTunnel.transform);
+            m_InitialRemovableObjects.Enqueue(m_LastRightTunnel.transform);
+            m_InitialRemovableObjects.Enqueue(leftTunnel.transform);
         }
 
         for (int i = 0; i < transform.childCount; ++i)
         {
             if (transform.GetChild(i).tag != "TrainTunnel")
-                m_RemovableObjects.Enqueue(transform.GetChild(i));
+                m_InitialRemovableObjects.Enqueue(transform.GetChild(i));
         }
     }
 
@@ -55,9 +56,9 @@ public class StationMover : MonoBehaviour
             {
                 if (m_IsFirstTimeDestroy)
                 {
-                    while (m_RemovableObjects.Count > 0)
+                    while (m_InitialRemovableObjects.Count > 0)
                     {
-                        Destroy(m_RemovableObjects.Dequeue().gameObject);
+                        Destroy(m_InitialRemovableObjects.Dequeue().gameObject);
                     }
 
                     m_IsFirstTimeDestroy = false;
