@@ -33,7 +33,7 @@ public class DoorLever : MonoBehaviour
         {
             //TODO: activate button animation/add movement
 
-            DriverCabinDoor.init();
+            DriverCabinDoorLock.init();
         
         }
 

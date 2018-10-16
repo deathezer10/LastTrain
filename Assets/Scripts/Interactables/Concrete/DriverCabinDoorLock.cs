@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DriverCabinDoor : MonoBehaviour {
+public class DriverCabinDoorLock : MonoBehaviour {
+
+    public static bool bIsLocked = true;
+
+   
 
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -16,8 +20,13 @@ public class DriverCabinDoor : MonoBehaviour {
 
     public static void init()
     {
-        //TODO: Animation? or using transform.position to open?
-        //Sounds? 
+        //Do Sounds? 
+        bIsLocked = false;
+    } 
+
+    public static bool GetLock()
+    {
+        return bIsLocked;
     }
 
 }
