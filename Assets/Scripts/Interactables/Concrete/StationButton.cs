@@ -6,7 +6,7 @@ using DG.Tweening;
 public class StationButton : MonoBehaviour {
 
     public GameObject m_Train;
-    private const float m_ToggleOffset = -0.01f;
+    private const float m_ToggleOffset = -0.02f;
     private bool m_Toggled = false;
 
 	// Use this for initialization
@@ -24,7 +24,7 @@ public class StationButton : MonoBehaviour {
             GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             m_Train.GetComponent<TrainArriver>().BeginArrival();
 
-            transform.DOLocalMoveX(m_ToggleOffset, 0.1f).SetRelative();
+            transform.DOLocalMoveX(m_ToggleOffset, 0.2f).SetRelative();
         }
     }
 
