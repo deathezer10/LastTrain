@@ -10,7 +10,6 @@ public class StationMover : MonoBehaviour
     public GameObject m_TunnelPrefab;
     GameObject m_LastRightTunnel;
     int m_InitialTunnelSpawnAmount = 3;
-    int m_CurrentTunnelIndex = 0;
     float m_CurrentDistanceTraveled = 0;
     const float m_TunnelGapOffset = 20.05f;
 
@@ -24,8 +23,7 @@ public class StationMover : MonoBehaviour
     {
         for (int i = 1; i <= m_InitialTunnelSpawnAmount; ++i)
         {
-            m_CurrentTunnelIndex = i;
-            Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * m_TunnelGapOffset), Quaternion.identity, transform); // Right side
+            m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * m_TunnelGapOffset), Quaternion.identity, transform); // Right side
             Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
         }
     }
@@ -37,13 +35,12 @@ public class StationMover : MonoBehaviour
 
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
-        if (m_CurrentDistanceTraveled >= m_TunnelGapOffset)
+        if (Mathf.Abs(m_CurrentDistanceTraveled) >= m_TunnelGapOffset)
         {
             m_CurrentDistanceTraveled = 0;
-            m_CurrentTunnelIndex++;
 
-            GameObject tunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_CurrentTunnelIndex * m_TunnelGapOffset), Quaternion.identity, transform);
-            tunnel.gameObject.AddComponent<StationTileDestroyer>().SetUpDestroyer(m_Train, m_InitialTunnelSpawnAmount * m_TunnelGapOffset);
+            m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+            m_LastRightTunnel.gameObject.AddComponent<StationTileDestroyer>().SetUpDestroyer(m_Train, m_InitialTunnelSpawnAmount * m_TunnelGapOffset);
         }
     }
 
