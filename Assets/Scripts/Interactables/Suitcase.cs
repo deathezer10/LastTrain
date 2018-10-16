@@ -29,6 +29,7 @@ public class Suitcase : GrabbableObject
         foreach (GameObject go in keycardArray)
         {
             go.SetActive(true);
+            go.transform.SetParent(null);
         }
     }
 
