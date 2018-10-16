@@ -5,20 +5,17 @@ using UnityEngine;
 public class StationMover : MonoBehaviour
 {
 
+    // Tiling variables
+    public GameObject m_Train;
     public GameObject m_TunnelPrefab;
-
     GameObject m_LastRightTunnel;
-
     int m_InitialTunnelSpawnAmount = 3;
-
     int m_CurrentTunnelIndex = 0;
-
     float m_CurrentDistanceTraveled = 0;
-
     const float m_TunnelGapOffset = 20.05f;
 
+    // Movement variables
     bool m_IsMoving = false;
-
     const float m_StationMaxSpeed = 10;
     const float m_StationAcceleration = 1;
     float m_CurrentStationSpeed = 0;
@@ -36,7 +33,7 @@ public class StationMover : MonoBehaviour
     private void Update()
     {
         m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * ((m_IsMoving) ? 1 : -1) * Time.deltaTime), 0, m_StationMaxSpeed);
-        m_CurrentDistanceTraveled += m_CurrentStationSpeed;
+        m_CurrentDistanceTraveled += m_CurrentStationSpeed * Time.deltaTime;
 
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
@@ -45,7 +42,8 @@ public class StationMover : MonoBehaviour
             m_CurrentDistanceTraveled = 0;
             m_CurrentTunnelIndex++;
 
-            Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_CurrentTunnelIndex * m_TunnelGapOffset), Quaternion.identity, transform);
+            GameObject tunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_CurrentTunnelIndex * m_TunnelGapOffset), Quaternion.identity, transform);
+            tunnel.gameObject.AddComponent<StationTileDestroyer>().SetUpDestroyer(m_Train, m_InitialTunnelSpawnAmount * m_TunnelGapOffset);
         }
     }
 
