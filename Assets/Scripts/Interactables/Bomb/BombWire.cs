@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Valve.VR;
 using UnityEngine;
 
 public class BombWire : MonoBehaviour
 {
+    public float heldCutForce;
     public bool correctWire;
     public Color wrongCutColor, rightCutColor;
 
@@ -13,8 +15,8 @@ public class BombWire : MonoBehaviour
         {
             var controller = PlayerViveController.GetControllerThatHolds(other.gameObject);
 
-            // Check if player is holding the glass and a piece hasnt just randomly fallen on the wire collider
-            if (controller != null)
+            // Check if player is holding the glass and a piece hasn't just randomly landed on the wire collider
+            if (controller != null && controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude >= heldCutForce)
             {
                 Debug.Log("Trigger Wire cut state / animation / model change.");
 

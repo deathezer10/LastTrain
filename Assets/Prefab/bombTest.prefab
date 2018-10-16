@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heldCutForce: 1
   correctWire: 0
   wrongCutColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   rightCutColor: {r: 1, g: 1, b: 1, a: 1}
@@ -382,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heldCutForce: 1
   correctWire: 1
   wrongCutColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   rightCutColor: {r: 1, g: 1, b: 1, a: 1}
@@ -396,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heldCutForce: 1
   correctWire: 0
   wrongCutColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   rightCutColor: {r: 1, g: 1, b: 1, a: 1}
