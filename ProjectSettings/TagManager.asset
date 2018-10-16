@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HeadDisplay
   - Extinguisher
+  - GlassFragment
   layers:
   - Default
   - TransparentFX
