@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class DriverCabinDoorLock : StationaryObject
 {
 
@@ -19,6 +20,8 @@ public class DriverCabinDoorLock : StationaryObject
     private Vector3 BeginPoint;
     private Vector3 EndPoint;
     private Vector3 HandleMovementDirection = new Vector3(1, 0, 0);
+    private float timer;
+    private float velocity;
     // Use this for initialization
     void Start()
     {
@@ -33,7 +36,11 @@ public class DriverCabinDoorLock : StationaryObject
         {
             if (bIsGrabbing)
             {
+                timer = Time.time;
                 Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition;
+                float distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
+                
+
                 HandMovementDirection.Normalize();
 
                 if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f))
@@ -50,6 +57,8 @@ public class DriverCabinDoorLock : StationaryObject
 
                     transform.parent.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     LastHandPosition = PlayerHand.transform.position;
+                    float timed = Time.time - timer;
+                    velocity = distance / timed;
                     return;
 
                 }
@@ -121,10 +130,13 @@ public class DriverCabinDoorLock : StationaryObject
     public override void OnGrabReleased(bool snapped)
     {
         bIsGrabbing = false;
+        print(velocity.ToString());
     }
 
     public override void OnUse()
     {
+    
+
 
     }
 

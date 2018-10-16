@@ -23,7 +23,7 @@ public class KeyCardScanner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(bIsUnlocked)
+        if(!bIsUnlocked)
         {
             if (bIsCheckingKey)
             {
