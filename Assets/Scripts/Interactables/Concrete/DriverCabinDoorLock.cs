@@ -22,6 +22,12 @@ public class DriverCabinDoorLock : StationaryObject
     private float velocity;
     private float timed;
     private float distance;
+    private float TimefromGrab;
+    private float ReleasedTime;
+
+    private float HandVelocity;
+    private Vector3 Velocitystart;
+    private Vector3 VelocityEnd;
     // Use this for initialization
     void Start()
     {
@@ -31,14 +37,23 @@ public class DriverCabinDoorLock : StationaryObject
     // Update is called once per frame
     void Update()
     {
-
+        
         if (!bDisableLever)
         {
+            if (FastApproximately(0, velocity, 0.1f))
+            {
+                print("Velocity almost zero");
+                TimefromGrab = Time.time;
+                Velocitystart = PlayerHand.transform.position;
+
+            }
+
+            timer = Time.time;
             if (bIsGrabbing)
             {
-                timer = Time.time;
+                
                 Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition;
-                distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
+               
                 
 
                 HandMovementDirection.Normalize();
@@ -56,10 +71,13 @@ public class DriverCabinDoorLock : StationaryObject
                     */
 
                     transform.parent.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
-                    LastHandPosition = PlayerHand.transform.position;
                     timed = Time.time - timer;
+                    distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
+                    velocity = distance / timed;
+                    LastHandPosition = PlayerHand.transform.position;
+                    
+                    
                     return;
-
                 }
 
                 if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f))
@@ -72,14 +90,20 @@ public class DriverCabinDoorLock : StationaryObject
                     */
 
                     transform.parent.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
-                    LastHandPosition = PlayerHand.transform.position;
                     timed = Time.time - timer;
+                    distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
+                    velocity = distance / timed;
+                    LastHandPosition = PlayerHand.transform.position;
                     return;
 
                 }
-
+                
 
             }
+            timed = Time.time - timer;
+            distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
+            velocity = distance / timed;
+
         }
 
     }
@@ -96,7 +120,7 @@ public class DriverCabinDoorLock : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
-
+        
         if(bIsUnlocked)
         {
             bCanGrab = true;
@@ -124,15 +148,21 @@ public class DriverCabinDoorLock : StationaryObject
         {
             bIsGrabbing = true;
             LastHandPosition = PlayerHand.transform.position;
+            Velocitystart = PlayerHand.transform.position;
+            TimefromGrab = Time.time;
+            
         }
     }
 
     public override void OnGrabReleased(bool snapped)
     {
         bIsGrabbing = false;
-        velocity = distance / timed;
-        print(velocity.ToString("F2"));
-        
+        VelocityEnd = PlayerHand.transform.position;
+        ReleasedTime = Time.time - TimefromGrab;
+        float vel =  Vector3.Distance(Velocitystart, VelocityEnd) / ReleasedTime;
+        print(vel.ToString());
+        print(vel);
+      
     }
 
     public override void OnUse()
@@ -153,4 +183,9 @@ public class DriverCabinDoorLock : StationaryObject
         return equal;
     }
 
+
+    public static bool FastApproximately(float a, float b, float threshold)
+    {
+        return ((a - b) < 0 ? ((a - b) * -1) : (a - b)) <= threshold;
+    }
 }
