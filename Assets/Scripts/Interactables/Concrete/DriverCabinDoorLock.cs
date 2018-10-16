@@ -131,8 +131,8 @@ public class DriverCabinDoorLock : StationaryObject
     {
         bIsGrabbing = false;
         velocity = distance / timed;
-        print(velocity.ToString());
-        print(velocity);
+        print(velocity.ToString("F2"));
+        
     }
 
     public override void OnUse()
