@@ -12,7 +12,7 @@ public class StationMover : MonoBehaviour
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
     int m_InitialTunnelSpawnAmount = 3;
-    int m_TotalTunnelCreated = 0;
+    int m_CurrentTunnelIndex = 0;
     float m_CurrentDistanceTraveled = 0;
     const float m_TunnelGapOffset = 20.05f;
     bool m_IsFirstTimeDestroy = true;
@@ -50,9 +50,9 @@ public class StationMover : MonoBehaviour
         if (Mathf.Abs(m_CurrentDistanceTraveled) >= m_TunnelGapOffset)
         {
             m_CurrentDistanceTraveled = 0;
-            m_TotalTunnelCreated++;
+            m_CurrentTunnelIndex++;
 
-            if (m_TotalTunnelCreated >= 3)
+            if (m_CurrentTunnelIndex >= 3)
             {
                 if (m_IsFirstTimeDestroy)
                 {
@@ -62,9 +62,13 @@ public class StationMover : MonoBehaviour
                     }
 
                     m_IsFirstTimeDestroy = false;
+                    m_CurrentTunnelIndex = 0;
                 }
                 else
+                {
                     Destroy(m_RemovableObjects.Dequeue().gameObject);
+
+                }
             }
 
             m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
