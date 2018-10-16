@@ -27,7 +27,9 @@ public class StationMover : MonoBehaviour
         for (int i = 1; i <= m_InitialTunnelSpawnAmount; ++i)
         {
             m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * m_TunnelGapOffset), Quaternion.identity, transform); // Right side
-            Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
+            GameObject leftTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
+            m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+            m_RemovableObjects.Enqueue(leftTunnel.transform);
         }
 
         for (int i = 0; i < transform.childCount; ++i)
@@ -65,6 +67,7 @@ public class StationMover : MonoBehaviour
             }
 
             m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+            m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
         }
     }
 
