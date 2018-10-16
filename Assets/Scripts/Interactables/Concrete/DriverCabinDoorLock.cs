@@ -10,6 +10,7 @@ public class DriverCabinDoorLock : StationaryObject
     public static DriverCabinDoorLock instance;
     private GameObject PlayerHand;
     private Rigidbody doorBody;
+    private Mesh DoorMesh;
 
     public static bool bIsUnlocked = false;
     private bool bCanGrab = false;
@@ -26,15 +27,26 @@ public class DriverCabinDoorLock : StationaryObject
     private float distance;
     private float TimefromGrab;
     private float ReleasedTime;
+   
 
     private float HandVelocity;
     private Vector3 Velocitystart;
     private Vector3 VelocityEnd;
 
+    private float DoorWidth;
+    private Vector3 LeftDoorCorner;
+    private Vector3 RightDoorCorner;
+
     // Use this for initialization
     void Start()
     {
         doorBody = transform.parent.GetComponent<Rigidbody>();
+        DoorMesh = transform.parent.GetChild(0).gameObject.GetComponent<Mesh>();
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f), 5f);
+        Gizmos.DrawSphere(transform.TransformPoint(DoorMesh.bounds.center + new Vector3(-DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f), 5f);
+
+        print(DoorWidth.ToString());
     }
 
     // Update is called once per frame
@@ -73,6 +85,7 @@ public class DriverCabinDoorLock : StationaryObject
                         return;
                     }
                     */
+
                     if(bIsLastleft)
                     {
                         TimefromGrab = Time.time;
@@ -183,11 +196,11 @@ public class DriverCabinDoorLock : StationaryObject
         print(vel);
 
         if (bIsLastleft)
-            doorBody.velocity = -HandleMovementDirection * vel *4;
+            doorBody.velocity = -HandleMovementDirection * vel;
         
 
         else
-            doorBody.velocity = HandleMovementDirection * vel *4;
+            doorBody.velocity = HandleMovementDirection * vel;
 
 
     }
