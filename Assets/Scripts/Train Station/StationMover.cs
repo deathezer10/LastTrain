@@ -7,8 +7,6 @@ public class StationMover : MonoBehaviour
 
     public GameObject m_TunnelPrefab;
 
-    GameObject m_TrainStation;
-
     int m_InitialTunnelSpawnAmount = 3;
 
     const float m_TunnelGapOffset = 20.05f;
@@ -33,7 +31,7 @@ public class StationMover : MonoBehaviour
         if (m_IsMoving)
         {
             m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * Time.deltaTime), 0, m_StationMaxSpeed);
-            m_TrainStation.transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
+            transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
         }
         else
         {
