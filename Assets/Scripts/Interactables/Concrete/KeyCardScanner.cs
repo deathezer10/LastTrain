@@ -6,7 +6,7 @@ using Valve.VR;
 public class KeyCardScanner : MonoBehaviour
 {
     private float timer = 0.0f;
-    private float TimeToAnalyze = 2.0f;
+    private float TimeToAnalyze = 1.5f;
     private bool bIsCheckingKey = false;
     private string CardPrefix = "KeyCard_";
     private string UsedCard;
