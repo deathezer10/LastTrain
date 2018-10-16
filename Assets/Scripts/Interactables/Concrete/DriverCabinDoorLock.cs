@@ -155,6 +155,7 @@ public class DriverCabinDoorLock : StationaryObject
             LastHandPosition = PlayerHand.transform.position;
             Velocitystart = PlayerHand.transform.position;
             TimefromGrab = Time.time;
+            doorBody.velocity = Vector3.zero;
 
         }
     }
@@ -169,11 +170,11 @@ public class DriverCabinDoorLock : StationaryObject
         print(vel);
 
         if (bIsLastleft)
-            doorBody.velocity = -HandleMovementDirection * vel;
+            doorBody.velocity = -HandleMovementDirection * vel *5;
         
 
         else
-            doorBody.velocity = HandleMovementDirection * vel;
+            doorBody.velocity = HandleMovementDirection * vel *5;
 
 
     }
