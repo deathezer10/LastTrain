@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 33811665067934764}
   - component: {fileID: 23003459670011866}
   - component: {fileID: 65168723522153224}
-  - component: {fileID: 114775923135935090}
   - component: {fileID: 54872659621766742}
+  - component: {fileID: 114273575580050172}
   m_Layer: 0
   m_Name: DoorHandle
   m_TagString: Untagged
@@ -289,7 +289,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114775923135935090
+--- !u!114 &114273575580050172
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1272514379802926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96da98e850387b4ab9fa2a00d23a2cc, type: 3}
+  m_Script: {fileID: 11500000, guid: b13e3e3dbe1c96b4c97043106954f65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135265096323689610
