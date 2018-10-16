@@ -48,7 +48,7 @@ public class DriverCabinDoorLock : StationaryObject
             timer = Time.time;
             if (bIsGrabbing)
             {
-                if (FastApproximately(0, velocity, 0.1f))
+                if (FastApproximately(0, velocity, 0.2f))
                 {
                     print("Velocity almost zero");
                     TimefromGrab = Time.time;
@@ -73,6 +73,13 @@ public class DriverCabinDoorLock : StationaryObject
                         return;
                     }
                     */
+                    if(bIsLastleft)
+                    {
+                        TimefromGrab = Time.time;
+                        Velocitystart = PlayerHand.transform.position;
+                    }
+
+
 
                     transform.parent.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     timed = Time.time - timer;
@@ -92,6 +99,12 @@ public class DriverCabinDoorLock : StationaryObject
                         return;
                     }
                     */
+                    if (!bIsLastleft)
+                    {
+                        TimefromGrab = Time.time;
+                        Velocitystart = PlayerHand.transform.position;
+                    }
+
 
                     transform.parent.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     timed = Time.time - timer;
@@ -170,11 +183,11 @@ public class DriverCabinDoorLock : StationaryObject
         print(vel);
 
         if (bIsLastleft)
-            doorBody.velocity = -HandleMovementDirection * vel *5;
+            doorBody.velocity = -HandleMovementDirection * vel *4;
         
 
         else
-            doorBody.velocity = HandleMovementDirection * vel *5;
+            doorBody.velocity = HandleMovementDirection * vel *4;
 
 
     }
