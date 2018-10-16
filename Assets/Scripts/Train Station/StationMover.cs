@@ -7,7 +7,13 @@ public class StationMover : MonoBehaviour
 
     public GameObject m_TunnelPrefab;
 
+    GameObject m_LastRightTunnel;
+
     int m_InitialTunnelSpawnAmount = 3;
+
+    int m_CurrentTunnelIndex = 0;
+
+    float m_CurrentDistanceTraveled = 0;
 
     const float m_TunnelGapOffset = 20.05f;
 
@@ -21,21 +27,25 @@ public class StationMover : MonoBehaviour
     {
         for (int i = 1; i <= m_InitialTunnelSpawnAmount; ++i)
         {
-            Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * m_TunnelGapOffset), Quaternion.identity, transform);
-            Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform);
+            m_CurrentTunnelIndex = i;
+            Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * m_TunnelGapOffset), Quaternion.identity, transform); // Right side
+            Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
         }
     }
 
     private void Update()
     {
-        if (m_IsMoving)
-        {
-            m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * Time.deltaTime), 0, m_StationMaxSpeed);
-            transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
-        }
-        else
-        {
+        m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * ((m_IsMoving) ? 1 : -1) * Time.deltaTime), 0, m_StationMaxSpeed);
+        m_CurrentDistanceTraveled += m_CurrentStationSpeed;
 
+        transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
+
+        if (m_CurrentDistanceTraveled >= m_TunnelGapOffset)
+        {
+            m_CurrentDistanceTraveled = 0;
+            m_CurrentTunnelIndex++;
+
+            Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_CurrentTunnelIndex * m_TunnelGapOffset), Quaternion.identity, transform);
         }
     }
 
