@@ -7,12 +7,13 @@ public class TrainBoardingDetector : MonoBehaviour
 
     public TrainDoorHandler m_TrainDoorHandler;
 
-    public PlatformTiler m_PlatformTiler;
+    public StationMover m_StationMover;
 
     private const float m_PlatformMoveDelay = 5;
 
     private float m_PlayerTimeOnBoard;
-    
+
+    private bool m_HasMoved = false;
     
     private void OnTriggerStay(Collider other)
     {
@@ -21,12 +22,12 @@ public class TrainBoardingDetector : MonoBehaviour
             m_PlayerTimeOnBoard += Time.deltaTime;
 
             // After player stands in the train for X seconds, close the doors and move the train
-            if (m_PlayerTimeOnBoard >= m_PlatformMoveDelay)
+            if (m_HasMoved == false && m_PlayerTimeOnBoard >= m_PlatformMoveDelay)
             {
+                m_HasMoved = true;
                 m_TrainDoorHandler.ToggleDoors(false, () =>
                 {
-                    m_PlatformTiler.StartTiling();
-                    Destroy(gameObject);
+                    m_StationMover.ToggleMovement(true);
                 });
             }
         }

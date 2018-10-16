@@ -43,7 +43,7 @@ public class TrainDoorHandler : MonoBehaviour
                         onComplete();
                 });
             else
-                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 1).SetRelative().OnComplete(() =>
+                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 1).SetRelative().OnComplete(() =>
                 {
                     if (onComplete != null)
                         onComplete();
