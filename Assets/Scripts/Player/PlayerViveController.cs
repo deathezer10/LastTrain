@@ -19,7 +19,7 @@ public class PlayerViveController : MonoBehaviour
     private static GameObject m_CurrentLeftObject = null;
     private static GameObject m_CurrentRightObject = null;
 
-    private void OnTriggerEnter(Collider other)
+    virtual protected void OnTriggerEnter(Collider other)
     {
         if (PlayerOriginHandler.IsOutsideOrigin)
             return;
@@ -32,7 +32,7 @@ public class PlayerViveController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    virtual protected void OnTriggerStay(Collider other)
     {
         if (PlayerOriginHandler.IsOutsideOrigin)
             return;
@@ -106,7 +106,7 @@ public class PlayerViveController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    virtual protected void OnTriggerExit(Collider other)
     {
         var iObject = other.GetComponent<IInteractable>();
 
