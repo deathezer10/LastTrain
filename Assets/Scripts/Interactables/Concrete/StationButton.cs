@@ -24,10 +24,7 @@ public class StationButton : MonoBehaviour {
             GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             m_Train.GetComponent<TrainArriver>().BeginArrival();
 
-            Vector3 newPos = transform.position;
-            newPos.x += m_ToggleOffset;
-
-            transform.position = newPos;
+            transform.DOLocalMoveX(m_ToggleOffset, 0.1f).SetRelative();
         }
     }
 
