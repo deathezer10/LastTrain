@@ -10,6 +10,7 @@ public class KeyCardScanner : MonoBehaviour
     private bool bIsCheckingKey = false;
     private string CardPrefix = "KeyCard_";
     private string UsedCard;
+    private bool bIsUnlocked = false;
 
     // Use this for initialization
     void Start()
@@ -22,34 +23,40 @@ public class KeyCardScanner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (bIsCheckingKey)
+        if(bIsUnlocked)
         {
-            timer += Time.deltaTime;
-            int seconds = (int)timer % 60;
-        }
-
-        
-        if(timer >= TimeToAnalyze)
-        {
-            if(UsedCard.Contains("Right"))
+            if (bIsCheckingKey)
             {
-                print("Right card used");
-                //Some green led indication perhaps?
-                DriverCabinDoorLock.init();
+                timer += Time.deltaTime;
+                int seconds = (int)timer % 60;
             }
 
-            else
+
+            if (timer >= TimeToAnalyze)
             {
-                timer = 0.0f;
-                bIsCheckingKey = false;
-                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 5, 1, SteamVR_Input_Sources.LeftHand);
-                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 5, 1, SteamVR_Input_Sources.RightHand);
-                //Wrong keycard tried, some red led indications also perhaps ?
+                if (UsedCard.Contains("Right"))
+                {
+                    print("Right card used");
+                    bIsUnlocked = true;
+                    SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 1, 1, SteamVR_Input_Sources.LeftHand);
+                    SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 1, 1, SteamVR_Input_Sources.RightHand);
+                    //Some green led indication perhaps?
+                    DriverCabinDoorLock.init();
+                }
+
+                else
+                {
+                    timer = 0.0f;
+                    bIsCheckingKey = false;
+                    SteamVR_Input.actionsVibration[0].Execute(0, 0.7f, 10, 1, SteamVR_Input_Sources.LeftHand);
+                    SteamVR_Input.actionsVibration[0].Execute(0, 0.7f, 10, 1, SteamVR_Input_Sources.RightHand);
+                    //Wrong keycard tried, some red led indications also perhaps ?
+                }
+
             }
 
-        }
 
+        }
 
 
     }
