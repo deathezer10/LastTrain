@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 using Valve.VR;
-using Valve.VR.Extras;
+
 
 
 public class LightSwitch : StationaryObject
@@ -41,6 +40,7 @@ public class LightSwitch : StationaryObject
         {
             bSwitchIsOn = false;
             //Todo: move switch to off position
+            //Start train "Movement" + other..
             foreach (Light light in lights)
             {
                 light.intensity = 0;
