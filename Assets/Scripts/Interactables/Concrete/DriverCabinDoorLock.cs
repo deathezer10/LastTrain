@@ -17,11 +17,11 @@ public class DriverCabinDoorLock : StationaryObject
 
     private Vector3 CurrentHandPosition;
     private Vector3 LastHandPosition;
-    private Vector3 BeginPoint;
-    private Vector3 EndPoint;
     private Vector3 HandleMovementDirection = new Vector3(1, 0, 0);
     private float timer;
     private float velocity;
+    private float timed;
+    private float distance;
     // Use this for initialization
     void Start()
     {
@@ -38,7 +38,7 @@ public class DriverCabinDoorLock : StationaryObject
             {
                 timer = Time.time;
                 Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition;
-                float distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
+                distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
                 
 
                 HandMovementDirection.Normalize();
@@ -57,8 +57,7 @@ public class DriverCabinDoorLock : StationaryObject
 
                     transform.parent.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     LastHandPosition = PlayerHand.transform.position;
-                    float timed = Time.time - timer;
-                    velocity = distance / timed;
+                    timed = Time.time - timer;
                     return;
 
                 }
@@ -74,6 +73,7 @@ public class DriverCabinDoorLock : StationaryObject
 
                     transform.parent.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     LastHandPosition = PlayerHand.transform.position;
+                    timed = Time.time - timer;
                     return;
 
                 }
@@ -130,7 +130,9 @@ public class DriverCabinDoorLock : StationaryObject
     public override void OnGrabReleased(bool snapped)
     {
         bIsGrabbing = false;
+        velocity = distance / timed;
         print(velocity.ToString());
+        print(velocity);
     }
 
     public override void OnUse()
