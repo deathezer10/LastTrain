@@ -52,23 +52,19 @@ public class StationMover : MonoBehaviour
             m_CurrentDistanceTraveled = 0;
             m_CurrentTunnelIndex++;
 
-            if (m_CurrentTunnelIndex >= 3)
+            if (m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 5)
             {
-                if (m_IsFirstTimeDestroy)
+                while (m_InitialRemovableObjects.Count > 0)
                 {
-                    while (m_InitialRemovableObjects.Count > 0)
-                    {
-                        Destroy(m_InitialRemovableObjects.Dequeue().gameObject);
-                    }
-
-                    m_IsFirstTimeDestroy = false;
-                    m_CurrentTunnelIndex = 0;
+                    Destroy(m_InitialRemovableObjects.Dequeue().gameObject);
                 }
-                else
-                {
-                    Destroy(m_RemovableObjects.Dequeue().gameObject);
 
-                }
+                m_IsFirstTimeDestroy = false;
+                m_CurrentTunnelIndex = 0;
+            }
+            else if (m_CurrentTunnelIndex >= 3)
+            {
+                Destroy(m_RemovableObjects.Dequeue().gameObject);
             }
 
             m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
