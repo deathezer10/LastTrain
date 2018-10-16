@@ -169,11 +169,11 @@ public class DriverCabinDoorLock : StationaryObject
         print(vel);
 
         if (bIsLastleft)
-            doorBody.AddForce(new Vector3(-1, 0, 0) * velocity);
-
+            doorBody.velocity = -HandleMovementDirection * vel;
+        
 
         else
-            doorBody.AddForce(new Vector3(1, 0, 0) * velocity);
+            doorBody.velocity = HandleMovementDirection * vel;
 
 
     }
