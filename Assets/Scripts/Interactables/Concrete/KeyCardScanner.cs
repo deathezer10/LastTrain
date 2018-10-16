@@ -34,6 +34,7 @@ public class KeyCardScanner : MonoBehaviour
         {
             if(UsedCard.Contains("Right"))
             {
+                print("Right card used");
                 //Some green led indication perhaps?
                 DriverCabinDoorLock.init();
             }
