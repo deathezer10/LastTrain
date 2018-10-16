@@ -10,6 +10,7 @@ public class DriverCabinDoorLock : StationaryObject
     public static DriverCabinDoorLock instance;
     private GameObject PlayerHand;
     private Rigidbody doorBody;
+    private BoxCollider DoorMesh;
 
     public static bool bIsUnlocked = false;
     private bool bCanGrab = false;
@@ -27,14 +28,25 @@ public class DriverCabinDoorLock : StationaryObject
     private float TimefromGrab;
     private float ReleasedTime;
 
+
     private float HandVelocity;
     private Vector3 Velocitystart;
     private Vector3 VelocityEnd;
 
+    private float DoorWidth;
+    private Vector3 LeftDoorCorner;
+    private Vector3 RightDoorCorner;
+   
+   
     // Use this for initialization
     void Start()
     {
         doorBody = transform.parent.GetComponent<Rigidbody>();
+        DoorMesh = transform.parent.GetChild(0).gameObject.GetComponent<BoxCollider>();
+
+        RightDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
+        LeftDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(-DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
+
     }
 
     // Update is called once per frame
@@ -44,11 +56,33 @@ public class DriverCabinDoorLock : StationaryObject
         if (!bDisableLever)
         {
 
+            if(DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x <= LeftDoorCorner.x)
+            {
+                if(doorBody.velocity.x > 0.1f)
+                {
+                    doorBody.velocity = HandleMovementDirection * (doorBody.velocity.x / 2 );
+                }
+
+                else
+                    doorBody.velocity = Vector3.zero;
+            }
+
+            if(transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
+            {
+                if (doorBody.velocity.x > 0.1f)
+                {
+                    doorBody.velocity = -HandleMovementDirection * (doorBody.velocity.x / 2);
+                }
+
+                else
+                    doorBody.velocity = Vector3.zero;
+            }
+
 
             timer = Time.time;
             if (bIsGrabbing)
             {
-                if (FastApproximately(0, velocity, 0.1f))
+                if (FastApproximately(0, velocity, 0.2f))
                 {
                     print("Velocity almost zero");
                     TimefromGrab = Time.time;
@@ -64,15 +98,21 @@ public class DriverCabinDoorLock : StationaryObject
 
                 if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f))
                 {
-                    /*
-                    if (VectorEndPoint.transform.position.z <= AcceleratorHandle.transform.position.z)
+                    
+                    if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
                     {
-                        //TODO: EVENT for Setting ACC. to ZERO
-                        bIsGrabbing = false;
-                        bDisableLever = true;
+                        print("right limit reached");
                         return;
                     }
-                    */
+                    
+
+                    if (bIsLastleft)
+                    {
+                        TimefromGrab = Time.time;
+                        Velocitystart = PlayerHand.transform.position;
+                    }
+
+
 
                     transform.parent.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     timed = Time.time - timer;
@@ -86,12 +126,19 @@ public class DriverCabinDoorLock : StationaryObject
 
                 if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f))
                 {
-                    /*
-                    if (HandleDefaultMaxPosition.z >= AcceleratorHandle.transform.position.z)
+                    
+                    if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x <= LeftDoorCorner.x)
                     {
+                        print("Left limit reached");
                         return;
                     }
-                    */
+                    
+                    if (!bIsLastleft)
+                    {
+                        TimefromGrab = Time.time;
+                        Velocitystart = PlayerHand.transform.position;
+                    }
+
 
                     transform.parent.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position);
                     timed = Time.time - timer;
@@ -170,11 +217,11 @@ public class DriverCabinDoorLock : StationaryObject
         print(vel);
 
         if (bIsLastleft)
-            doorBody.velocity = -HandleMovementDirection * vel *5;
-        
+            doorBody.velocity = -HandleMovementDirection * vel;
+
 
         else
-            doorBody.velocity = HandleMovementDirection * vel *5;
+            doorBody.velocity = HandleMovementDirection * vel;
 
 
     }
