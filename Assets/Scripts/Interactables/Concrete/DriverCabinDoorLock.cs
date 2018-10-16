@@ -9,11 +9,13 @@ public class DriverCabinDoorLock : StationaryObject
 
     public static DriverCabinDoorLock instance;
     private GameObject PlayerHand;
+    private Rigidbody doorBody;
 
     public static bool bIsUnlocked = false;
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
+    private bool bIsLastleft = false;
 
     private Vector3 CurrentHandPosition;
     private Vector3 LastHandPosition;
@@ -28,33 +30,35 @@ public class DriverCabinDoorLock : StationaryObject
     private float HandVelocity;
     private Vector3 Velocitystart;
     private Vector3 VelocityEnd;
+
     // Use this for initialization
     void Start()
     {
-
+        doorBody = transform.parent.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (!bDisableLever)
         {
-            if (FastApproximately(0, velocity, 0.1f))
-            {
-                print("Velocity almost zero");
-                TimefromGrab = Time.time;
-                Velocitystart = PlayerHand.transform.position;
 
-            }
 
             timer = Time.time;
             if (bIsGrabbing)
             {
-                
+                if (FastApproximately(0, velocity, 0.1f))
+                {
+                    print("Velocity almost zero");
+                    TimefromGrab = Time.time;
+                    Velocitystart = PlayerHand.transform.position;
+
+                }
+
                 Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition;
-               
-                
+
+
 
                 HandMovementDirection.Normalize();
 
@@ -75,8 +79,8 @@ public class DriverCabinDoorLock : StationaryObject
                     distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
                     velocity = distance / timed;
                     LastHandPosition = PlayerHand.transform.position;
-                    
-                    
+
+                    bIsLastleft = false;
                     return;
                 }
 
@@ -94,15 +98,16 @@ public class DriverCabinDoorLock : StationaryObject
                     distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
                     velocity = distance / timed;
                     LastHandPosition = PlayerHand.transform.position;
+                    bIsLastleft = true;
                     return;
 
                 }
-                
 
+                timed = Time.time - timer;
+                distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
+                velocity = distance / timed;
             }
-            timed = Time.time - timer;
-            distance = Vector3.Distance(PlayerHand.transform.position, LastHandPosition);
-            velocity = distance / timed;
+
 
         }
 
@@ -120,13 +125,13 @@ public class DriverCabinDoorLock : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
-        
-        if(bIsUnlocked)
+
+        if (bIsUnlocked)
         {
             bCanGrab = true;
             PlayerHand = currentController.gameObject;
         }
-       
+
     }
 
     public override void OnControllerExit()
@@ -150,7 +155,7 @@ public class DriverCabinDoorLock : StationaryObject
             LastHandPosition = PlayerHand.transform.position;
             Velocitystart = PlayerHand.transform.position;
             TimefromGrab = Time.time;
-            
+
         }
     }
 
@@ -159,15 +164,23 @@ public class DriverCabinDoorLock : StationaryObject
         bIsGrabbing = false;
         VelocityEnd = PlayerHand.transform.position;
         ReleasedTime = Time.time - TimefromGrab;
-        float vel =  Vector3.Distance(Velocitystart, VelocityEnd) / ReleasedTime;
+        float vel = Vector3.Distance(Velocitystart, VelocityEnd) / ReleasedTime;
         print(vel.ToString());
         print(vel);
-      
+
+        if (bIsLastleft)
+            doorBody.AddForce(new Vector3(-1, 0, 0) * velocity);
+
+
+        else
+            doorBody.AddForce(new Vector3(1, 0, 0) * velocity);
+
+
     }
 
     public override void OnUse()
     {
-    
+
 
 
     }
