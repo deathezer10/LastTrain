@@ -8,8 +8,7 @@ public class StationButton : MonoBehaviour {
     public GameObject m_Train;
     private const float m_ToggleOffset = -0.02f;
     private bool m_Toggled = false;
-
-	// Use this for initialization
+    
 	void Start ()
     {
         GetComponent<Renderer>().material.SetColor("_Color", Color.red);

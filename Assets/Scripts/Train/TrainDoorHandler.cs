@@ -6,7 +6,7 @@ using DG.Tweening;
 public class TrainDoorHandler : MonoBehaviour
 {
 
-    const float m_DoorOffset = 1.1f;
+    const float m_DoorOffset = -1.1f;
 
     const string m_DoorNamePrefix = "SlideDr_";
 
@@ -37,7 +37,7 @@ public class TrainDoorHandler : MonoBehaviour
         foreach (var door in m_Doors)
         {
             if (door.Key == DoorSide.Left)
-                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 1).SetRelative().OnComplete(() =>
+                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 1).SetRelative().OnComplete(() =>
                 {
                     if (onComplete != null)
                         onComplete();
