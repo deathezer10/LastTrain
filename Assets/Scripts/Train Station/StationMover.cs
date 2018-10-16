@@ -52,6 +52,7 @@ public class StationMover : MonoBehaviour
             m_CurrentDistanceTraveled = 0;
             m_CurrentTunnelIndex++;
 
+            // For the first time after spawning 5 tunnels, destroy all the initial objects
             if (m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 5)
             {
                 while (m_InitialRemovableObjects.Count > 0)
@@ -62,7 +63,7 @@ public class StationMover : MonoBehaviour
                 m_IsFirstTimeDestroy = false;
                 m_CurrentTunnelIndex = 0;
             }
-            else if (m_CurrentTunnelIndex >= 3)
+            else if (m_CurrentTunnelIndex >= 3) // Destroy the oldest tunnel
             {
                 Destroy(m_RemovableObjects.Dequeue().gameObject);
             }
