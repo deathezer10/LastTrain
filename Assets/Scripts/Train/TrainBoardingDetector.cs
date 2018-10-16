@@ -7,7 +7,7 @@ public class TrainBoardingDetector : MonoBehaviour
 
     public TrainDoorHandler m_TrainDoorHandler;
 
-    public PlatformTiler m_PlatformTiler;
+    public StationMover m_StationMover;
 
     private const float m_PlatformMoveDelay = 5;
 
@@ -25,7 +25,7 @@ public class TrainBoardingDetector : MonoBehaviour
             {
                 m_TrainDoorHandler.ToggleDoors(false, () =>
                 {
-                    m_PlatformTiler.StartTiling();
+                    m_StationMover.ToggleMovement(true);
                     Destroy(gameObject);
                 });
             }
