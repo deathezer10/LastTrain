@@ -49,7 +49,7 @@ public class DriverCabinDoorLock : StationaryObject
         LocalRightDoorCorner = DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
 
         RightDoorCorner = transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f);
-        LeftDoorCorner = transform.TransformPoint(DoorMesh.bounds.center + new Vector3(-DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f);
+        LeftDoorCorner = transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.min.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z));
 
 
     }
@@ -106,7 +106,6 @@ public class DriverCabinDoorLock : StationaryObject
                     
                     if (transform.TransformPoint(LocalRightDoorCorner).x >= RightDoorCorner.x)
                     {
-                        bIsGrabbing = false;
                         return;
                     }
                     
@@ -134,7 +133,6 @@ public class DriverCabinDoorLock : StationaryObject
                     
                     if (transform.TransformPoint(LocalRightDoorCorner).x <= LeftDoorCorner.x)
                     {
-                        bIsGrabbing = false;
                         return;
                     }
                     
