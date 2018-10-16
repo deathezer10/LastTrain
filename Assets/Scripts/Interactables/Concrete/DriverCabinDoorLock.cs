@@ -38,20 +38,20 @@ public class DriverCabinDoorLock : StationaryObject
     private Vector3 RightDoorCorner;
     private Vector3 LocalLeftDoorCorner;
     private Vector3 LocalRightDoorCorner;
-
+   
     // Use this for initialization
     void Start()
     {
         doorBody = transform.parent.GetComponent<Rigidbody>();
         DoorMesh = transform.parent.GetChild(0).gameObject.GetComponent<BoxCollider>();
 
-        LocalLeftDoorCorner = DoorMesh.bounds.center + new Vector3(-DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
-        LocalRightDoorCorner = DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
+        LocalLeftDoorCorner = DoorMesh.bounds.center - new Vector3(DoorMesh.bounds.size.x, DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
+        LocalRightDoorCorner = DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
 
         RightDoorCorner = transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f);
-        LeftDoorCorner = transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.min.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z));
+        LeftDoorCorner = transform.TransformPoint(DoorMesh.bounds.center - new Vector3(DoorMesh.bounds.size.x, DoorMesh.bounds.size.y, DoorMesh.bounds.size.z)* 0.5f);
 
-
+        
     }
 
     // Update is called once per frame
@@ -106,6 +106,7 @@ public class DriverCabinDoorLock : StationaryObject
                     
                     if (transform.TransformPoint(LocalRightDoorCorner).x >= RightDoorCorner.x)
                     {
+                        print("right limit reached");
                         return;
                     }
                     
@@ -133,6 +134,7 @@ public class DriverCabinDoorLock : StationaryObject
                     
                     if (transform.TransformPoint(LocalRightDoorCorner).x <= LeftDoorCorner.x)
                     {
+                        print("Left limit reached");
                         return;
                     }
                     
