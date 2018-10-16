@@ -62,7 +62,7 @@ public class StationMover : MonoBehaviour
                 m_IsFirstTimeDestroy = false;
                 m_CurrentTunnelIndex = 0;
             }
-            else if (m_CurrentTunnelIndex >= 3)
+            else if (!m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 3)
             {
                 Destroy(m_RemovableObjects.Dequeue().gameObject);
             }
