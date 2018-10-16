@@ -10,7 +10,7 @@ public class DriverCabinDoorLock : StationaryObject
     public static DriverCabinDoorLock instance;
     private GameObject PlayerHand;
     private Rigidbody doorBody;
-    private Mesh DoorMesh;
+    private BoxCollider DoorMesh;
 
     public static bool bIsUnlocked = false;
     private bool bCanGrab = false;
@@ -27,7 +27,7 @@ public class DriverCabinDoorLock : StationaryObject
     private float distance;
     private float TimefromGrab;
     private float ReleasedTime;
-   
+
 
     private float HandVelocity;
     private Vector3 Velocitystart;
@@ -36,17 +36,22 @@ public class DriverCabinDoorLock : StationaryObject
     private float DoorWidth;
     private Vector3 LeftDoorCorner;
     private Vector3 RightDoorCorner;
+    private Vector3 LocalLeftDoorCorner;
+    private Vector3 LocalRightDoorCorner;
 
     // Use this for initialization
     void Start()
     {
         doorBody = transform.parent.GetComponent<Rigidbody>();
-        DoorMesh = transform.parent.GetChild(0).gameObject.GetComponent<Mesh>();
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f), 5f);
-        Gizmos.DrawSphere(transform.TransformPoint(DoorMesh.bounds.center + new Vector3(-DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f), 5f);
+        DoorMesh = transform.parent.GetChild(0).gameObject.GetComponent<BoxCollider>();
 
-        print(DoorWidth.ToString());
+        LocalLeftDoorCorner = DoorMesh.bounds.center + new Vector3(-DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
+        LocalRightDoorCorner = DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
+
+        RightDoorCorner = transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f);
+        LeftDoorCorner = transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.min.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z));
+
+
     }
 
     // Update is called once per frame
@@ -55,6 +60,28 @@ public class DriverCabinDoorLock : StationaryObject
 
         if (!bDisableLever)
         {
+
+            if(transform.TransformPoint(LocalRightDoorCorner).x <= LeftDoorCorner.x)
+            {
+                if(doorBody.velocity.x > 0.1f)
+                {
+                    doorBody.velocity = HandleMovementDirection * (doorBody.velocity.x / 2 );
+                }
+
+                else
+                    doorBody.velocity = Vector3.zero;
+            }
+
+            if(transform.TransformPoint(LocalRightDoorCorner).x >= RightDoorCorner.x)
+            {
+                if (doorBody.velocity.x > 0.1f)
+                {
+                    doorBody.velocity = -HandleMovementDirection * (doorBody.velocity.x / 2);
+                }
+
+                else
+                    doorBody.velocity = Vector3.zero;
+            }
 
 
             timer = Time.time;
@@ -76,17 +103,14 @@ public class DriverCabinDoorLock : StationaryObject
 
                 if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f))
                 {
-                    /*
-                    if (VectorEndPoint.transform.position.z <= AcceleratorHandle.transform.position.z)
+                    
+                    if (transform.TransformPoint(LocalRightDoorCorner).x >= RightDoorCorner.x)
                     {
-                        //TODO: EVENT for Setting ACC. to ZERO
-                        bIsGrabbing = false;
-                        bDisableLever = true;
                         return;
                     }
-                    */
+                    
 
-                    if(bIsLastleft)
+                    if (bIsLastleft)
                     {
                         TimefromGrab = Time.time;
                         Velocitystart = PlayerHand.transform.position;
@@ -106,12 +130,12 @@ public class DriverCabinDoorLock : StationaryObject
 
                 if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f))
                 {
-                    /*
-                    if (HandleDefaultMaxPosition.z >= AcceleratorHandle.transform.position.z)
+                    
+                    if (transform.TransformPoint(LocalRightDoorCorner).x <= LeftDoorCorner.x)
                     {
                         return;
                     }
-                    */
+                    
                     if (!bIsLastleft)
                     {
                         TimefromGrab = Time.time;
@@ -197,7 +221,7 @@ public class DriverCabinDoorLock : StationaryObject
 
         if (bIsLastleft)
             doorBody.velocity = -HandleMovementDirection * vel;
-        
+
 
         else
             doorBody.velocity = HandleMovementDirection * vel;
