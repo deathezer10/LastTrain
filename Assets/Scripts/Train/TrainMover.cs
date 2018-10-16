@@ -28,7 +28,7 @@ public class TrainMover : MonoBehaviour
         if (m_CurrentTrainState == TrainState.Moving)
         {
             m_CurrentTrainSpeed = Mathf.Clamp(m_CurrentTrainSpeed + Time.deltaTime, 0, m_MaxTrainMoveSpeed);
-            transform.Translate(Vector3.forward * m_CurrentTrainSpeed);
+            transform.parent.Translate(Vector3.forward * m_CurrentTrainSpeed);
         }
     }
 
@@ -44,7 +44,7 @@ public class TrainMover : MonoBehaviour
                 m_TrainDoorHandler.ToggleDoors(false, () =>
                 {
                     m_CurrentTrainState = TrainState.Moving;
-                    GameObject.FindWithTag("Player").transform.SetParent(transform);
+                    GameObject.FindWithTag("Player").transform.SetParent(transform.parent);
                 });
             }
         }
