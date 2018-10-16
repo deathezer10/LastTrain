@@ -36,8 +36,7 @@ public class DriverCabinDoorLock : StationaryObject
     private float DoorWidth;
     private Vector3 LeftDoorCorner;
     private Vector3 RightDoorCorner;
-    private Vector3 LocalLeftDoorCorner;
-    private Vector3 LocalRightDoorCorner;
+   
    
     // Use this for initialization
     void Start()
@@ -45,13 +44,9 @@ public class DriverCabinDoorLock : StationaryObject
         doorBody = transform.parent.GetComponent<Rigidbody>();
         DoorMesh = transform.parent.GetChild(0).gameObject.GetComponent<BoxCollider>();
 
-        LocalLeftDoorCorner = DoorMesh.bounds.center - new Vector3(DoorMesh.bounds.size.x, DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
-        LocalRightDoorCorner = DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f;
+        RightDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
+        LeftDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(-DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
 
-        RightDoorCorner = transform.TransformPoint(DoorMesh.bounds.center + new Vector3(DoorMesh.bounds.size.x, -DoorMesh.bounds.size.y, DoorMesh.bounds.size.z) * 0.5f);
-        LeftDoorCorner = transform.TransformPoint(DoorMesh.bounds.center - new Vector3(DoorMesh.bounds.size.x, DoorMesh.bounds.size.y, DoorMesh.bounds.size.z)* 0.5f);
-
-        
     }
 
     // Update is called once per frame
@@ -61,7 +56,7 @@ public class DriverCabinDoorLock : StationaryObject
         if (!bDisableLever)
         {
 
-            if(transform.TransformPoint(LocalRightDoorCorner).x <= LeftDoorCorner.x)
+            if(DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x <= LeftDoorCorner.x)
             {
                 if(doorBody.velocity.x > 0.1f)
                 {
@@ -72,7 +67,7 @@ public class DriverCabinDoorLock : StationaryObject
                     doorBody.velocity = Vector3.zero;
             }
 
-            if(transform.TransformPoint(LocalRightDoorCorner).x >= RightDoorCorner.x)
+            if(transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
             {
                 if (doorBody.velocity.x > 0.1f)
                 {
@@ -104,7 +99,7 @@ public class DriverCabinDoorLock : StationaryObject
                 if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f))
                 {
                     
-                    if (transform.TransformPoint(LocalRightDoorCorner).x >= RightDoorCorner.x)
+                    if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
                     {
                         print("right limit reached");
                         return;
@@ -132,7 +127,7 @@ public class DriverCabinDoorLock : StationaryObject
                 if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f))
                 {
                     
-                    if (transform.TransformPoint(LocalRightDoorCorner).x <= LeftDoorCorner.x)
+                    if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x <= LeftDoorCorner.x)
                     {
                         print("Left limit reached");
                         return;
