@@ -30,16 +30,24 @@ public class TrainDoorHandler : MonoBehaviour
         }
     }
 
-    public void ToggleDoors(bool opened)
+    public void ToggleDoors(bool opened, System.Action onComplete = null)
     {
         int direction = (opened) ? 1 : -1;
 
         foreach (var door in m_Doors)
         {
             if (door.Key == DoorSide.Left)
-                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 1).SetRelative();
+                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 1).SetRelative().OnComplete(() =>
+                {
+                    if (onComplete != null)
+                        onComplete();
+                });
             else
-                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 1).SetRelative();
+                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 1).SetRelative().OnComplete(() =>
+                {
+                    if (onComplete != null)
+                        onComplete();
+                });
         }
     }
 
