@@ -61,9 +61,9 @@ GameObject:
   - component: {fileID: 23240039714100672}
   - component: {fileID: 65451391710470796}
   - component: {fileID: 54390158624961878}
-  - component: {fileID: 114530349943318618}
+  - component: {fileID: 114033389362919066}
   m_Layer: 0
-  m_Name: bombTest
+  m_Name: BombTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,6 +374,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114033389362919066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567328043253608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c3fda427f457149b13148811b8e1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114217315140901986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -389,17 +400,6 @@ MonoBehaviour:
   correctWire: 0
   wrongCutColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   rightCutColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &114530349943318618
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1567328043253608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c55740830c19004dae3ea955400fb99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114747142086606784
 MonoBehaviour:
   m_ObjectHideFlags: 1

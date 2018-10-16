@@ -155,3 +155,4 @@ MonoBehaviour:
   brokenGlassPrefab: {fileID: 1970878764106350, guid: 02d9f88fa2fce7d4b83b25469b6b712d,
     type: 2}
   initialBox: {fileID: 1720252308299108}
+  bombObject: {fileID: 1567328043253608, guid: 9d51b48b093597240be1e615ec201edd, type: 2}
