@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Righter : GrabbableObject {
+public class Lighter : GrabbableObject {
 	[SerializeField]
 	private ParticleSystem m_particle;
 

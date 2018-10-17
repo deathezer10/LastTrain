@@ -4,7 +4,8 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.Extras;
 
-public class DebugViveController : PlayerViveController {
+public class DebugViveController : PlayerViveController
+{
 
     override protected void OnTriggerEnter(Collider other)
     {
@@ -65,6 +66,7 @@ public class DebugViveController : PlayerViveController {
                 }
             }
         }
+
     }
 
     override protected void OnTriggerExit(Collider other)

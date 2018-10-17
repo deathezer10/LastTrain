@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 54119983226537242}
   - component: {fileID: 114876410038249464}
   m_Layer: 0
-  m_Name: Righter
+  m_Name: Lighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1132,7 +1132,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.50215185
+          value: 0
           inSlope: 1.870869
           outSlope: 1.870869
           tangentMode: 0
@@ -1140,8 +1140,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.096560635
         - serializedVersion: 3
-          time: 0.5683752
-          value: 1
+          time: 0.41943413
+          value: 0.99141693
           inSlope: 0.54376405
           outSlope: 0.54376405
           tangentMode: 0
@@ -1149,7 +1149,7 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
+          time: 0.672348
           value: 0
           inSlope: -1.0905026
           outSlope: -1.0905026
@@ -1402,8 +1402,8 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4.712389
-      minScalar: -4.712389
+      scalar: 3.1415925
+      minScalar: -3.1415925
       maxCurve:
         serializedVersion: 2
         m_Curve:

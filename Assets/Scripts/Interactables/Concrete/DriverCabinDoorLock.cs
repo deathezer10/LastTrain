@@ -36,6 +36,7 @@ public class DriverCabinDoorLock : StationaryObject
     private float DoorWidth;
     private Vector3 LeftDoorCorner;
     private Vector3 RightDoorCorner;
+    private Vector3 DoorSlamVelocity;
    
    
     // Use this for initialization
@@ -58,9 +59,12 @@ public class DriverCabinDoorLock : StationaryObject
 
             if(DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x <= LeftDoorCorner.x)
             {
-                if(doorBody.velocity.x > 0.1f)
+                if(doorBody.velocity.x < -0.01f)
                 {
-                    doorBody.velocity = HandleMovementDirection * (doorBody.velocity.x / 2 );
+                    DoorSlamVelocity = doorBody.velocity;
+                    doorBody.velocity = Vector3.zero;
+                    doorBody.velocity = HandleMovementDirection * (DoorSlamVelocity.x / 2 );
+                    return;
                 }
 
                 else
@@ -69,9 +73,12 @@ public class DriverCabinDoorLock : StationaryObject
 
             if(transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
             {
-                if (doorBody.velocity.x > 0.1f)
+                if (doorBody.velocity.x > 0.01f)
                 {
-                    doorBody.velocity = -HandleMovementDirection * (doorBody.velocity.x / 2);
+                    DoorSlamVelocity = doorBody.velocity;
+                    doorBody.velocity = Vector3.zero;
+                    doorBody.velocity = -HandleMovementDirection * (DoorSlamVelocity.x / 2);
+                    return;
                 }
 
                 else
@@ -183,7 +190,24 @@ public class DriverCabinDoorLock : StationaryObject
 
     public override void OnControllerExit()
     {
+        if(bIsGrabbing)
+        {
+            VelocityEnd = PlayerHand.transform.position;
+            ReleasedTime = Time.time - TimefromGrab;
+            float vel = Vector3.Distance(Velocitystart, VelocityEnd) / ReleasedTime;
+
+
+            if (bIsLastleft)
+                doorBody.velocity = -HandleMovementDirection * vel;
+
+
+            else
+                doorBody.velocity = HandleMovementDirection * vel;
+
+        }
+
         bCanGrab = false;
+        bIsGrabbing = false;
     }
 
     public override void OnControllerStay()
@@ -209,20 +233,23 @@ public class DriverCabinDoorLock : StationaryObject
 
     public override void OnGrabReleased(bool snapped)
     {
+        if(bIsGrabbing)
+        {
+            VelocityEnd = PlayerHand.transform.position;
+            ReleasedTime = Time.time - TimefromGrab;
+            float vel = Vector3.Distance(Velocitystart, VelocityEnd) / ReleasedTime;
+
+
+            if (bIsLastleft)
+                doorBody.velocity = -HandleMovementDirection * vel;
+
+
+            else
+                doorBody.velocity = HandleMovementDirection * vel;
+
+        }
+
         bIsGrabbing = false;
-        VelocityEnd = PlayerHand.transform.position;
-        ReleasedTime = Time.time - TimefromGrab;
-        float vel = Vector3.Distance(Velocitystart, VelocityEnd) / ReleasedTime;
-        print(vel.ToString());
-        print(vel);
-
-        if (bIsLastleft)
-            doorBody.velocity = -HandleMovementDirection * vel;
-
-
-        else
-            doorBody.velocity = HandleMovementDirection * vel;
-
 
     }
 

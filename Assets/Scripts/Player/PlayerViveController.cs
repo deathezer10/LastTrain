@@ -19,6 +19,84 @@ public class PlayerViveController : MonoBehaviour
     private static GameObject m_CurrentLeftObject = null;
     private static GameObject m_CurrentRightObject = null;
 
+    private Collider m_CurrentObjectCollider;
+
+    private void Update()
+    {
+        if (m_CurrentObjectCollider != null)
+        {
+            if (PlayerOriginHandler.IsOutsideOrigin)
+                return;
+
+            var iObject = m_CurrentObjectCollider.GetComponent<IInteractable>();
+
+            if (iObject != null)
+            {
+                iObject.OnControllerStay();
+
+                var grabbableObject = m_CurrentObjectCollider.GetComponent<IGrabbable>();
+
+                if (grabbableObject != null)
+                {
+
+                    // On Grab
+                    if (GetCurrentHandObject() == null)
+                    {
+                        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(HandSourceToInputSource()))
+                        {
+                            // If other hand is holding this object, unassign it
+                            if (GetCurrentHandObject(true) != null && GetCurrentHandObject(true) == m_CurrentObjectCollider.gameObject)
+                            {
+                                AssignObjectToHand(GetOtherHand(), null);
+                            }
+
+                            grabbableObject.OnGrab();
+
+                            AssignObjectToHand(m_CurrentHand, m_CurrentObjectCollider.gameObject);
+
+                            if (m_CurrentObjectCollider.GetComponent<IStationaryGrabbable>() == null)
+                            {
+                                Rigidbody rb = m_CurrentObjectCollider.GetComponent<Rigidbody>();
+                                rb.velocity = Vector3.zero;
+
+                                FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+                                joint.breakForce = 7500;
+                                joint.breakTorque = Mathf.Infinity;
+                                joint.connectedBody = rb;
+                            }
+                        }
+                    }
+
+                    // On Grab Released
+                    if (GetCurrentHandObject() != null)
+                    {
+                        if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(HandSourceToInputSource()))
+                        {
+                            iObject.OnUse();
+                        }
+
+                        if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(HandSourceToInputSource()))
+                        {
+                            grabbableObject.OnGrabReleased(false);
+
+                            AssignObjectToHand(m_CurrentHand, null);
+
+                            Destroy(GetComponent<FixedJoint>());
+
+                            if (m_CurrentObjectCollider.GetComponent<IStationaryGrabbable>() == null)
+                            {
+                                Rigidbody rb = m_CurrentObjectCollider.GetComponent<Rigidbody>();
+                                rb.velocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetVelocity());
+                                rb.angularVelocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity());
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
     virtual protected void OnTriggerEnter(Collider other)
     {
         if (PlayerOriginHandler.IsOutsideOrigin)
@@ -29,81 +107,12 @@ public class PlayerViveController : MonoBehaviour
         if (iObject != null)
         {
             iObject.OnControllerEnter(this, m_CurrentHand);
+            m_CurrentObjectCollider = other;
         }
     }
 
     virtual protected void OnTriggerStay(Collider other)
     {
-        if (PlayerOriginHandler.IsOutsideOrigin)
-            return;
-
-        var iObject = other.GetComponent<IInteractable>();
-
-        if (iObject != null)
-        {
-            iObject.OnControllerStay();
-
-            var grabbableObject = other.GetComponent<IGrabbable>();
-
-            if (grabbableObject != null)
-            {
-
-                // On Grab
-                if (GetCurrentHandObject() == null)
-                {
-                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(HandSourceToInputSource()))
-                    {
-                        // If other hand is holding this object, unassign it
-                        if (GetCurrentHandObject(true) != null && GetCurrentHandObject(true) == other.gameObject)
-                        {
-                            AssignObjectToHand(GetOtherHand(), null);
-                        }
-
-                        grabbableObject.OnGrab();
-
-                        AssignObjectToHand(m_CurrentHand, other.gameObject);
-
-                        if (other.GetComponent<IStationaryGrabbable>() == null)
-                        {
-                            Rigidbody rb = other.GetComponent<Rigidbody>();
-                            rb.velocity = Vector3.zero;
-
-                            FixedJoint joint = gameObject.AddComponent<FixedJoint>();
-                            joint.breakForce = 7500;
-                            joint.breakTorque = Mathf.Infinity;
-                            joint.connectedBody = rb;
-                        }
-                    }
-                }
-
-                // On Grab Released
-                if (GetCurrentHandObject() != null)
-                {
-                    if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(HandSourceToInputSource()))
-                    {
-                        iObject.OnUse();
-                    }
-
-                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(HandSourceToInputSource()))
-                    {
-                        grabbableObject.OnGrabReleased(false);
-
-                        AssignObjectToHand(m_CurrentHand, null);
-
-                        Destroy(GetComponent<FixedJoint>());
-
-                        if (other.GetComponent<IStationaryGrabbable>() == null)
-                        {
-                            Rigidbody rb = other.GetComponent<Rigidbody>();
-                            rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
-                            rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
-                        }
-                    }
-                }
-
-            }
-
-        }
     }
 
     virtual protected void OnTriggerExit(Collider other)
@@ -118,6 +127,7 @@ public class PlayerViveController : MonoBehaviour
 
             if (grabbableObject != null && GetCurrentHandObject() == other.gameObject)
             {
+                m_CurrentObjectCollider = null;
                 grabbableObject.OnGrabReleased(true);
                 AssignObjectToHand(m_CurrentHand, null);
                 Destroy(GetComponent<FixedJoint>());
@@ -127,6 +137,7 @@ public class PlayerViveController : MonoBehaviour
 
     private void OnJointBreak(float breakForce)
     {
+        m_CurrentObjectCollider = null;
         AssignObjectToHand(m_CurrentHand, null);
     }
 
