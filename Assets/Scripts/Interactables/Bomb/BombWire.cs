@@ -17,7 +17,7 @@ public class BombWire : MonoBehaviour
             // Check if player is holding the glass and a piece hasn't just randomly landed on the wire collider
             if (controller != null && controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude >= heldCutForce)
             {
-                Debug.Log("Trigger Wire cut state / animation / model change.");
+                GetComponent<BoxCollider>().enabled = false;
 
                 Bomb bomb = FindObjectOfType<Bomb>();
 
@@ -46,14 +46,7 @@ public class BombWire : MonoBehaviour
 
         foreach (MeshRenderer mR in wireRenderers)
         {
-            if (mR.enabled)
-            {
-                mR.enabled = false;
-            }
-            else
-            {
-                mR.enabled = true;
-            }
+            mR.enabled = mR.enabled ? mR.enabled = false : mR.enabled = true;
         }
     }
 }

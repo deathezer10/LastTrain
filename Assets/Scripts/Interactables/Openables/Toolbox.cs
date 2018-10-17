@@ -69,7 +69,7 @@ public class Toolbox : GrabbableObject
     {
     }
 
-    public override void OnGrabReleased(bool snapped)
+    public override void OnGrabReleased()
     {
     }
 
