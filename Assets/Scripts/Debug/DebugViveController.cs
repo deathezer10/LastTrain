@@ -58,6 +58,11 @@ public class DebugViveController : PlayerViveController {
 
                     Destroy(GetComponent<FixedJoint>());
                 }
+
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    iObject.OnUse();
+                }
             }
         }
     }
