@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Bomb : GrabbableObject
 {
-    private void Start()
-    {
-        enabled = false;
-    }
-
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
     }
@@ -31,5 +26,12 @@ public class Bomb : GrabbableObject
 
     public override void OnUse()
     {
+    }
+
+    public void UnlockRigidbody()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+
+        rb.constraints = RigidbodyConstraints.None;
     }
 }

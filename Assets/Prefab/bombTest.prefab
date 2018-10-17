@@ -107,8 +107,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567328043253608}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.368, y: 1.056, z: 6.393}
+  m_LocalRotation: {x: -0, y: 0.7164713, z: -0, w: 0.69761664}
+  m_LocalPosition: {x: 1.266, y: 1.157, z: 6.564202}
   m_LocalScale: {x: 2.5, y: 4, z: 3.7}
   m_Children:
   - {fileID: 4345010559720060}
@@ -116,7 +116,7 @@ Transform:
   - {fileID: 4903725867345486}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 91.52801, z: 0}
 --- !u!4 &4345010559720060
 Transform:
   m_ObjectHideFlags: 1
@@ -324,7 +324,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &65054986013605242
 BoxCollider:
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567328043253608}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7c3fda427f457149b13148811b8e1ec, type: 3}
   m_Name: 
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heldCutForce: 1
-  correctWire: 0
+  correctWire: 1
   wrongCutColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   rightCutColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114747142086606784
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heldCutForce: 1
-  correctWire: 1
+  correctWire: 0
   wrongCutColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   rightCutColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114847216713120756

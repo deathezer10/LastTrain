@@ -14,6 +14,7 @@ public class Suitcase : GrabbableObject
         suitcaseAnimator = GetComponent<Animator>();
     }
 
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
@@ -21,6 +22,7 @@ public class Suitcase : GrabbableObject
             OpenSuitCase();
         }
     }
+    */
 
     public void OpenSuitCase()
     {
@@ -30,6 +32,13 @@ public class Suitcase : GrabbableObject
         {
             go.SetActive(true);
             go.transform.SetParent(null);
+        }
+
+        BoxCollider[] suitCaseColliders = GetComponents<BoxCollider>();
+
+        foreach (BoxCollider bc in suitCaseColliders)
+        {
+            bc.enabled = true;
         }
     }
 

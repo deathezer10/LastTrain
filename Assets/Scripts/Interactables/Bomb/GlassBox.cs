@@ -6,7 +6,7 @@ using UnityEngine;
 public class GlassBox : MonoBehaviour
 {
     public float thrownBreakForce, heldBreakForce;
-    public GameObject brokenGlassPrefab, initialBox, bombObject;
+    public GameObject brokenGlassPrefab, initialBox;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -20,7 +20,7 @@ public class GlassBox : MonoBehaviour
 
                 if (other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= thrownBreakForce)
                 {
-                    bombObject.GetComponent<Bomb>().enabled = true;
+                    FindObjectOfType<Bomb>().UnlockRigidbody();
                     BreakGlass();
                 }
             }
@@ -30,7 +30,7 @@ public class GlassBox : MonoBehaviour
 
                 if (controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude >= heldBreakForce)
                 {
-                    bombObject.GetComponent<Bomb>().enabled = true;
+                    FindObjectOfType<Bomb>().UnlockRigidbody();
                     BreakGlass();
                 }
             }

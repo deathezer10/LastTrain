@@ -1,23 +1,14 @@
 fileFormatVersion: 2
-guid: e8cede5a824c9b54c9b6d3256716162e
+guid: 2facf40eb41738e42af795073bfeda7e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: bottom
-    100002: middle
-    100004: pCube9
-    100006: //RootNode
-    100008: top
-    400000: bottom
-    400002: middle
-    400004: pCube9
-    400006: //RootNode
-    400008: top
+    100000: //RootNode
+    400000: //RootNode
     2100000: lambert1
-    4300000: pCube9
-    7400000: suitcase_open
-    9500000: //RootNode
-    13700000: pCube9
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: polySurface1
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -45,35 +36,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: suitcase_open
-      takeName: suitcase_open
-      firstFrame: 1
-      lastFrame: 14
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -97,8 +60,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -123,7 +86,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
