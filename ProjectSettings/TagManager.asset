@@ -8,6 +8,15 @@ TagManager:
   - Extinguisher
   - GlassFragment
   - TrainTunnel
+  - TeleportIgnore
+  - ExcludeTeleport
+  - Leg
+  - SnapCube
+  - Arm
+  - SnapCylinder
+  - Saucers
+  - Torso
+  - Head
   layers:
   - Default
   - TransparentFX
