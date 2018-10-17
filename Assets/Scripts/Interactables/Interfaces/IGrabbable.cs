@@ -11,9 +11,8 @@ public interface IGrabbable
     void OnGrab();
 
     /// <summary>
-    /// Called when the player releases the Trigger button WHILE grabbing it or if the object moves out of the trigger box (snapped)
+    /// Called when the player releases the Trigger button WHILE grabbing it
     /// </summary>
-    /// <param name="snapped">Did the object moved out of trigger box while we were holding it?</param>
-    void OnGrabReleased(bool snapped);
+    void OnGrabReleased();
 
 }

@@ -56,7 +56,7 @@ public class Suitcase : GrabbableObject
     {
     }
 
-    public override void OnGrabReleased(bool snapped)
+    public override void OnGrabReleased()
     {
     }
 

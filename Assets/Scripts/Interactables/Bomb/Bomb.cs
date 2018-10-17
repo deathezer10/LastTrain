@@ -23,7 +23,7 @@ public class Bomb : GrabbableObject
     {
     }
 
-    public override void OnGrabReleased(bool snapped)
+    public override void OnGrabReleased()
     {
     }
 

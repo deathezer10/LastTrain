@@ -74,7 +74,7 @@ public class LightSwitch : StationaryObject
 
     }
 
-    public override void OnGrabReleased(bool snapped)
+    public override void OnGrabReleased()
     {
 
     }

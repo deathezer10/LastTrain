@@ -13,6 +13,6 @@ public abstract class StationaryObject : MonoBehaviour, IInteractable, IStationa
     public abstract void OnControllerExit();
     public abstract void OnControllerStay();
     public abstract void OnGrab();
-    public abstract void OnGrabReleased(bool snapped);
+    public abstract void OnGrabReleased();
     public abstract void OnUse();
 }

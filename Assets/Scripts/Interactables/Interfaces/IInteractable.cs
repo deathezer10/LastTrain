@@ -18,7 +18,7 @@ public interface IInteractable
     void OnControllerExit();
 
     /// <summary>
-    /// Called every frame when the vive controller is inside the collider
+    /// Called once every frame when the vive controller is inside the collider
     /// </summary>
     void OnControllerStay();
 

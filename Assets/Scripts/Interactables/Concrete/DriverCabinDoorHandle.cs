@@ -106,7 +106,7 @@ public class DriverCabinDoorHandle : StationaryObject {
         }
     }
 
-    public override void OnGrabReleased(bool snapped)
+    public override void OnGrabReleased()
     {
         bIsGrabbing = false;
     }
