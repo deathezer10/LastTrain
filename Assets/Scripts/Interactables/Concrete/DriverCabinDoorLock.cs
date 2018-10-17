@@ -60,7 +60,9 @@ public class DriverCabinDoorLock : StationaryObject
             {
                 if(doorBody.velocity.x > 0.1f)
                 {
+                    doorBody.velocity = Vector3.zero;
                     doorBody.velocity = HandleMovementDirection * (doorBody.velocity.x / 2 );
+                    return;
                 }
 
                 else
@@ -71,7 +73,9 @@ public class DriverCabinDoorLock : StationaryObject
             {
                 if (doorBody.velocity.x > 0.1f)
                 {
+                    doorBody.velocity = Vector3.zero;
                     doorBody.velocity = -HandleMovementDirection * (doorBody.velocity.x / 2);
+                    return;
                 }
 
                 else
