@@ -23,7 +23,7 @@ public class PlayerViveController : MonoBehaviour
 
     private void Update()
     {
-        if (m_CurrentObjectCollider != null)
+        if (GetCurrentHandObject() == m_CurrentObjectCollider.gameObject && m_CurrentObjectCollider != null)
         {
             if (PlayerOriginHandler.IsOutsideOrigin)
                 return;
