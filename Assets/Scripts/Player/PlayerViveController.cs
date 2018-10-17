@@ -73,7 +73,6 @@ public class PlayerViveController : MonoBehaviour
                         if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(HandSourceToInputSource()))
                         {
                             iObject.OnUse();
-                            Debug.Log("On Use");
                         }
 
                         if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(HandSourceToInputSource()))
@@ -87,8 +86,8 @@ public class PlayerViveController : MonoBehaviour
                             if (m_CurrentObjectCollider.GetComponent<IStationaryGrabbable>() == null)
                             {
                                 Rigidbody rb = m_CurrentObjectCollider.GetComponent<Rigidbody>();
-                                rb.velocity = GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
-                                rb.angularVelocity = GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
+                                rb.velocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetVelocity());
+                                rb.angularVelocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity());
                             }
                         }
                     }
@@ -110,7 +109,6 @@ public class PlayerViveController : MonoBehaviour
             iObject.OnControllerEnter(this, m_CurrentHand);
             m_CurrentObjectCollider = other;
         }
-
     }
 
     virtual protected void OnTriggerStay(Collider other)
