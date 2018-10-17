@@ -34,12 +34,10 @@ public class Suitcase : GrabbableObject
             go.transform.SetParent(null);
         }
 
-        BoxCollider[] suitCaseColliders = GetComponents<BoxCollider>();
+        BoxCollider newBC = gameObject.AddComponent<BoxCollider>();
 
-        foreach (BoxCollider bc in suitCaseColliders)
-        {
-            bc.enabled = true;
-        }
+        newBC.size = new Vector3(0.31f, 0.2f, 0.015f);
+        newBC.center = new Vector3(0, 0.13f, 0.1f);
     }
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
