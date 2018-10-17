@@ -6,6 +6,61 @@ using Valve.VR.Extras;
 
 public class DebugViveController : PlayerViveController
 {
+    private static GameObject m_CurrentDebugObject = null;
+
+    override protected void Update()
+    {
+        var currentObject = m_CurrentDebugObject;
+
+        if (currentObject != null)
+        {
+            if (PlayerOriginHandler.IsOutsideOrigin)
+                return;
+
+            var iObject = currentObject.GetComponent<IInteractable>();
+
+            if (iObject != null)
+            {
+                iObject.OnControllerStay();
+
+                var grabbableObject = currentObject.GetComponent<IGrabbable>();
+
+                if (grabbableObject != null)
+                {
+                    // On Grab
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        grabbableObject.OnGrab();
+
+                        if (currentObject.GetComponent<IStationaryGrabbable>() == null)
+                        {
+                            Rigidbody rb = currentObject.GetComponent<Rigidbody>();
+                            rb.velocity = Vector3.zero;
+
+                            FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+                            joint.breakForce = 7500;
+                            joint.breakTorque = Mathf.Infinity;
+                            joint.connectedBody = rb;
+                        }
+                    }
+
+                    // On Grab Released
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        grabbableObject.OnGrabReleased();
+
+                        Destroy(GetComponent<FixedJoint>());
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.LeftShift))
+                    {
+                        iObject.OnUse();
+                    }
+                }
+            }
+        }
+    }
+
 
     override protected void OnTriggerEnter(Collider other)
     {
@@ -35,38 +90,9 @@ public class DebugViveController : PlayerViveController
 
             if (grabbableObject != null)
             {
-                // On Grab
-                if (Input.GetMouseButtonDown(0))
-                {
-                    grabbableObject.OnGrab();
-
-                    if (other.GetComponent<IStationaryGrabbable>() == null)
-                    {
-                        Rigidbody rb = other.GetComponent<Rigidbody>();
-                        rb.velocity = Vector3.zero;
-
-                        FixedJoint joint = gameObject.AddComponent<FixedJoint>();
-                        joint.breakForce = 7500;
-                        joint.breakTorque = Mathf.Infinity;
-                        joint.connectedBody = rb;
-                    }
-                }
-
-                // On Grab Released
-                if (Input.GetMouseButtonUp(0))
-                {
-                    grabbableObject.OnGrabReleased();
-
-                    Destroy(GetComponent<FixedJoint>());
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftShift))
-                {
-                    iObject.OnUse();
-                }
+                m_CurrentDebugObject=other.gameObject;
             }
         }
-
     }
 
     override protected void OnTriggerExit(Collider other)
@@ -79,7 +105,6 @@ public class DebugViveController : PlayerViveController
 
             var grabbableObject = other.GetComponent<IGrabbable>();
 
-            grabbableObject.OnGrabReleased();
             Destroy(GetComponent<FixedJoint>());
         }
     }
