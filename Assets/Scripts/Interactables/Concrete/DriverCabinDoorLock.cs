@@ -63,7 +63,7 @@ public class DriverCabinDoorLock : StationaryObject
                 {
                     DoorSlamVelocity = doorBody.velocity;
                     doorBody.velocity = Vector3.zero;
-                    doorBody.velocity = HandleMovementDirection * (DoorSlamVelocity.x / 2 );
+                    doorBody.velocity = HandleMovementDirection * (DoorSlamVelocity.x / 6 );
                     return;
                 }
 
@@ -77,7 +77,7 @@ public class DriverCabinDoorLock : StationaryObject
                 {
                     DoorSlamVelocity = doorBody.velocity;
                     doorBody.velocity = Vector3.zero;
-                    doorBody.velocity = -HandleMovementDirection * (DoorSlamVelocity.x / 2);
+                    doorBody.velocity = -HandleMovementDirection * (DoorSlamVelocity.x / 6);
                     return;
                 }
 

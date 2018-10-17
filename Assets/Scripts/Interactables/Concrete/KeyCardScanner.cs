@@ -12,7 +12,7 @@ public class KeyCardScanner : StationaryObject
     private string UsedCard;
     private bool bIsUnlocked = false;
     private string VibrationHand;
-    private bool bLocked = false;
+    
 
     // Use this for initialization
     void Start()
@@ -34,8 +34,7 @@ public class KeyCardScanner : StationaryObject
 
                 if (timer >= TimeToAnalyze)
                 {
-                    if (!bLocked)
-                    {
+                   
                         if (UsedCard.Contains("Right"))
                         {
                             print("Right card used");
@@ -59,9 +58,9 @@ public class KeyCardScanner : StationaryObject
                                 SteamVR_Input.actionsVibration[0].Execute(0, 0.7f, 10, 1, SteamVR_Input_Sources.RightHand);
                             //Wrong keycard tried, some red led indications also perhaps ?
 
-                            bLocked = true;
+                            
                         }
-                    }
+                    
                 }
 
 
@@ -95,7 +94,7 @@ public class KeyCardScanner : StationaryObject
             bIsCheckingKey = false;
             timer = 0.0f;
             UsedCard = null;
-            bLocked = false;
+            
         }
 
     }

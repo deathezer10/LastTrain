@@ -38,25 +38,6 @@ public class BrakeLever : StationaryObject
     // Update is called once per frame
     void Update()
     {
-    }
-
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
-    {
-        bCanGrab = true;
-        PlayerHand = currentController.gameObject;
-        Debug.Log("Enter");
-    }
-
-    public override void OnControllerExit()
-    {
-        bCanGrab = false;
-        Debug.Log("Exit");
-    }
-
-    public override void OnControllerStay()
-    {
-        currentHandPosition = PlayerHand.transform.position;
-
         if (!bDisableLever)
         {
 
@@ -80,6 +61,7 @@ public class BrakeLever : StationaryObject
 
                 if (cross.z < 0) angle = -angle;
 
+                /*
                 if (angle < 0)
                     if (currentZRotation <= minZRotation)
                     {
@@ -95,12 +77,31 @@ public class BrakeLever : StationaryObject
                         bIsGrabbing = false;
                         return;
                     }
+                    */
 
                 transform.parent.Rotate(0, 0, -angle);
                 HandOffsetStart = currentHandPosition;
                 currentZRotation = transform.parent.rotation.z;
             }
         }
+    }
+
+    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    {
+        bCanGrab = true;
+        PlayerHand = currentController.gameObject;
+        Debug.Log("Enter");
+    }
+
+    public override void OnControllerExit()
+    {
+        bCanGrab = false;
+        Debug.Log("Exit");
+    }
+
+    public override void OnControllerStay()
+    {
+        currentHandPosition = PlayerHand.transform.position;
     }
 
     public override void OnUse()
@@ -116,7 +117,6 @@ public class BrakeLever : StationaryObject
             bIsGrabbing = true;
             HandOffsetStart = PlayerHand.transform.position;
             currentHandPosition = PlayerHand.transform.position;
-
         }
         Debug.Log("Grabbed");
     }
