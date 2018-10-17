@@ -16,15 +16,15 @@ public class BrakeLever : StationaryObject
     private Transform LastHandLocation;
     Vector3 currentHandPosition;
 
-   // private float MaxHandReach = 10.0f;              //Adjust reach before player lets go of the lever
+    // private float MaxHandReach = 10.0f;              //Adjust reach before player lets go of the lever
     private float minZRotation = -0.03f;              //Setting lowest reachable rotation for the lever
     private float maxZRotation = 0.02f;               //Setting the max reachable rotation for the lever
     private float currentZRotation = 0.0f;
 
-    
-    
 
-   
+
+
+
 
     // Use this for initialization
     void Start()
@@ -38,6 +38,25 @@ public class BrakeLever : StationaryObject
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    {
+        bCanGrab = true;
+        PlayerHand = currentController.gameObject;
+        Debug.Log("Enter");
+    }
+
+    public override void OnControllerExit()
+    {
+        bCanGrab = false;
+        Debug.Log("Exit");
+    }
+
+    public override void OnControllerStay()
+    {
+        currentHandPosition = PlayerHand.transform.position;
+
         if (!bDisableLever)
         {
 
@@ -76,6 +95,7 @@ public class BrakeLever : StationaryObject
                         bIsGrabbing = false;
                         return;
                     }
+
                 transform.parent.Rotate(0, 0, -angle);
                 HandOffsetStart = currentHandPosition;
                 currentZRotation = transform.parent.rotation.z;
@@ -83,27 +103,9 @@ public class BrakeLever : StationaryObject
         }
     }
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
-    {
-        bCanGrab = true;
-        PlayerHand = currentController.gameObject;
-    }
-
-    public override void OnControllerExit()
-    {
-        bCanGrab = false;
-    }
-
-    public override void OnControllerStay()
-    {
-        if (bIsGrabbing)
-        {
-            currentHandPosition = PlayerHand.transform.position;
-        }
-    }
-
     public override void OnUse()
     {
+        Debug.Log("Use");
 
     }
 
@@ -116,11 +118,13 @@ public class BrakeLever : StationaryObject
             currentHandPosition = PlayerHand.transform.position;
 
         }
+        Debug.Log("Grabbed");
     }
 
-    public override void OnGrabReleased(bool snapped)
+    public override void OnGrabReleased()
     {
         bIsGrabbing = false;
+        Debug.Log("GrabReleased");
     }
 
 }

@@ -55,7 +55,7 @@ public class DebugViveController : PlayerViveController
                 // On Grab Released
                 if (Input.GetMouseButtonUp(0))
                 {
-                    grabbableObject.OnGrabReleased(false);
+                    grabbableObject.OnGrabReleased();
 
                     Destroy(GetComponent<FixedJoint>());
                 }
@@ -79,7 +79,7 @@ public class DebugViveController : PlayerViveController
 
             var grabbableObject = other.GetComponent<IGrabbable>();
 
-            grabbableObject.OnGrabReleased(true);
+            grabbableObject.OnGrabReleased();
             Destroy(GetComponent<FixedJoint>());
         }
     }

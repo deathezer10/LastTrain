@@ -25,7 +25,7 @@ public class Lighter : GrabbableObject {
         transform.eulerAngles = Vector3.zero;
     }
 
-    public override void OnGrabReleased(bool snapped)
+    public override void OnGrabReleased()
     {
         Debug.Log("ライターを離したよ");
     }
