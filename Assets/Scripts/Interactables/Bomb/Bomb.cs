@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bomb : GrabbableObject
 {
+    public MeshRenderer phLightRenderer;
+    public Color red, green;
+
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
     }
@@ -26,6 +29,16 @@ public class Bomb : GrabbableObject
 
     public override void OnUse()
     {
+    }
+
+    public void CutWrongWire()
+    {
+        phLightRenderer.material.color = red;
+    }
+
+    public void CutRightWire()
+    {
+        phLightRenderer.material.color = green;
     }
 
     public void UnlockRigidbody()
