@@ -4,7 +4,8 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.Extras;
 
-public class DebugViveController : PlayerViveController {
+public class DebugViveController : PlayerViveController
+{
 
     override protected void OnTriggerEnter(Collider other)
     {
@@ -19,10 +20,10 @@ public class DebugViveController : PlayerViveController {
         }
     }
 
-    override protected IEnumerator OnTriggerStay(Collider other)
+    override protected void OnTriggerStay(Collider other)
     {
         if (PlayerOriginHandler.IsOutsideOrigin)
-            yield return null;
+            return;
 
         var iObject = other.GetComponent<IInteractable>();
 
@@ -66,7 +67,6 @@ public class DebugViveController : PlayerViveController {
             }
         }
 
-        yield return new WaitForEndOfFrame();
     }
 
     override protected void OnTriggerExit(Collider other)
