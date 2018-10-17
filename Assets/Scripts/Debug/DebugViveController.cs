@@ -19,10 +19,10 @@ public class DebugViveController : PlayerViveController {
         }
     }
 
-    override protected void OnTriggerStay(Collider other)
+    override protected IEnumerator OnTriggerStay(Collider other)
     {
         if (PlayerOriginHandler.IsOutsideOrigin)
-            return;
+            yield return null;
 
         var iObject = other.GetComponent<IInteractable>();
 
@@ -65,6 +65,8 @@ public class DebugViveController : PlayerViveController {
                 }
             }
         }
+
+        yield return new WaitForEndOfFrame();
     }
 
     override protected void OnTriggerExit(Collider other)

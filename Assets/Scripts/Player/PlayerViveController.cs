@@ -19,6 +19,10 @@ public class PlayerViveController : MonoBehaviour
     private static GameObject m_CurrentLeftObject = null;
     private static GameObject m_CurrentRightObject = null;
 
+    private void Start()
+    {
+    }
+
     virtual protected void OnTriggerEnter(Collider other)
     {
         if (PlayerOriginHandler.IsOutsideOrigin)
@@ -32,10 +36,10 @@ public class PlayerViveController : MonoBehaviour
         }
     }
 
-    virtual protected void OnTriggerStay(Collider other)
+    virtual protected IEnumerator OnTriggerStay(Collider other)
     {
         if (PlayerOriginHandler.IsOutsideOrigin)
-            return;
+            yield return null;
 
         var iObject = other.GetComponent<IInteractable>();
 
@@ -82,6 +86,7 @@ public class PlayerViveController : MonoBehaviour
                     if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(HandSourceToInputSource()))
                     {
                         iObject.OnUse();
+                        Debug.Log("On Use");
                     }
 
                     if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(HandSourceToInputSource()))
@@ -104,6 +109,8 @@ public class PlayerViveController : MonoBehaviour
             }
 
         }
+
+        yield return new WaitForEndOfFrame();
     }
 
     virtual protected void OnTriggerExit(Collider other)
