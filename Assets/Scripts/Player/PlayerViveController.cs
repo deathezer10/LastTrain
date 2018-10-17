@@ -104,7 +104,7 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = other.GetComponent<IInteractable>();
 
-        if (iObject != null)
+        if (iObject != null && m_CurrentObjectCollider == null)
         {
             iObject.OnControllerEnter(this, m_CurrentHand);
             m_CurrentObjectCollider = other;
