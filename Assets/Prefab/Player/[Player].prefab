@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114116121521317292}
   - component: {fileID: 143949566230339502}
   - component: {fileID: 114887977918750060}
+  - component: {fileID: 114143172508609132}
   m_Layer: 9
   m_Name: '[Player]'
   m_TagString: Player
@@ -41,6 +42,7 @@ GameObject:
   - component: {fileID: 4109064308801742}
   - component: {fileID: 20335114981071620}
   - component: {fileID: 81908034855392552}
+  - component: {fileID: 114493541656175652}
   m_Layer: 9
   m_Name: Camera
   m_TagString: Untagged
@@ -165,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4642561740245398}
   - component: {fileID: 114638757868370404}
-  - component: {fileID: 135945431039850438}
+  - component: {fileID: 65386326522250894}
   - component: {fileID: 54128118536958806}
   - component: {fileID: 114721115948166198}
   m_Layer: 9
@@ -184,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4396594326088306}
   - component: {fileID: 114001949698407954}
-  - component: {fileID: 135281502689162378}
+  - component: {fileID: 65182397426375696}
   - component: {fileID: 54220034373576296}
   - component: {fileID: 114061107646726352}
   m_Layer: 9
@@ -622,6 +624,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &65182397426375696
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667628240253908}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09, y: 0.05, z: 0.22}
+  m_Center: {x: 0, y: -0.02, z: -0.06}
+--- !u!65 &65386326522250894
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638970996972856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09, y: 0.05, z: 0.22}
+  m_Center: {x: 0, y: -0.02, z: -0.06}
 --- !u!81 &81908034855392552
 AudioListener:
   m_ObjectHideFlags: 1
@@ -814,6 +840,17 @@ MonoBehaviour:
   - {x: -1.15, y: 0.01, z: -0.9}
   - {x: -1.15, y: 0.01, z: 0.9}
   - {x: 1.15, y: 0.01, z: 0.9}
+--- !u!114 &114143172508609132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000708315405500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0693af6e069d98244aec6adb6bc1dbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114223815672633936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -970,6 +1007,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TargetArgument: _MainTex
   m_OffsetSpeed: {x: 0, y: 1}
+--- !u!114 &114493541656175652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1098503889214610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 078713edb793cf74296743df9562c646, type: 2}
 --- !u!114 &114638757868370404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1172,30 +1221,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
---- !u!135 &135281502689162378
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1667628240253908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135945431039850438
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1638970996972856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136200638648453042
 CapsuleCollider:
   m_ObjectHideFlags: 1
