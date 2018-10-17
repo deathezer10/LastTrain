@@ -36,6 +36,7 @@ public class DriverCabinDoorLock : StationaryObject
     private float DoorWidth;
     private Vector3 LeftDoorCorner;
     private Vector3 RightDoorCorner;
+    private Vector3 DoorSlamVelocity;
    
    
     // Use this for initialization
@@ -58,10 +59,11 @@ public class DriverCabinDoorLock : StationaryObject
 
             if(DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x <= LeftDoorCorner.x)
             {
-                if(doorBody.velocity.x > 0.1f)
+                if(doorBody.velocity.x < -0.01f)
                 {
+                    DoorSlamVelocity = doorBody.velocity;
                     doorBody.velocity = Vector3.zero;
-                    doorBody.velocity = HandleMovementDirection * (doorBody.velocity.x / 2 );
+                    doorBody.velocity = HandleMovementDirection * (DoorSlamVelocity.x / 2 );
                     return;
                 }
 
@@ -71,10 +73,11 @@ public class DriverCabinDoorLock : StationaryObject
 
             if(transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
             {
-                if (doorBody.velocity.x > 0.1f)
+                if (doorBody.velocity.x > 0.01f)
                 {
+                    DoorSlamVelocity = doorBody.velocity;
                     doorBody.velocity = Vector3.zero;
-                    doorBody.velocity = -HandleMovementDirection * (doorBody.velocity.x / 2);
+                    doorBody.velocity = -HandleMovementDirection * (DoorSlamVelocity.x / 2);
                     return;
                 }
 
