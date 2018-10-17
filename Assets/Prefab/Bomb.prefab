@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 33716419691450526}
   - component: {fileID: 23525254207256148}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: IndicatorLightPH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ Transform:
   m_GameObject: {fileID: 1734880286711484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.7167406, y: 1.112, z: 3.456}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 3, y: 3.5, z: 3.5}
   m_Children:
   - {fileID: 4845568814481272}
   - {fileID: 4757448864783834}
