@@ -7,14 +7,16 @@ public class DoorLever : MonoBehaviour
   
     private PlayerViveController[] foundControllers;
     private GameObject parent;
-    private BoxCollider LeverTip;
+    private BoxCollider ButtonCollider;
+    
 
     // Use this for initialization
     void Start()
     {
         foundControllers = FindObjectsOfType<PlayerViveController>();
         parent = transform.root.gameObject;
-        LeverTip = GetComponent<BoxCollider>();
+        ButtonCollider = GetComponent<BoxCollider>();
+        
         
     }
     
@@ -31,8 +33,8 @@ public class DoorLever : MonoBehaviour
 
         if(other.gameObject.name == "Umbrella")
         {
-            //TODO: activate button animation/add movement
 
+            transform.position = transform.TransformPoint(ButtonCollider.bounds.center - (ButtonCollider.bounds.max / 2));
             DriverCabinDoorLock.init();
         
         }

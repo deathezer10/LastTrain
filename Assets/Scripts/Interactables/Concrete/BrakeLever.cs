@@ -7,6 +7,7 @@ public class BrakeLever : StationaryObject
     private GameObject PlayerHand;
     private PlayerViveController[] foundControllers;
     private BoxCollider LeverTip;
+    private BoxCollider DisablePoint;
 
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
@@ -17,9 +18,9 @@ public class BrakeLever : StationaryObject
     Vector3 currentHandPosition;
 
     // private float MaxHandReach = 10.0f;              //Adjust reach before player lets go of the lever
-    private float minZRotation = -0.03f;              //Setting lowest reachable rotation for the lever
-    private float maxZRotation = 0.02f;               //Setting the max reachable rotation for the lever
-    private float currentZRotation = 0.0f;
+    private float minXRotation;              //Setting lowest reachable rotation for the lever
+    private float maxXRotation;               //Setting the max reachable rotation for the lever
+    private float currentXRotation;
 
 
 
@@ -31,13 +32,15 @@ public class BrakeLever : StationaryObject
     {
         foundControllers = FindObjectsOfType<PlayerViveController>();
         LeverTip = GetComponent<BoxCollider>();
-        currentZRotation = transform.parent.rotation.z;
-
+        currentXRotation = transform.parent.rotation.x;
+        maxXRotation = currentXRotation;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        print(currentXRotation);
         if (!bDisableLever)
         {
 
@@ -59,29 +62,28 @@ public class BrakeLever : StationaryObject
 
                 Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
 
-                if (cross.z < 0) angle = -angle;
+                if (cross.x < 0) angle = -angle;
 
                 /*
                 if (angle < 0)
-                    if (currentZRotation <= minZRotation)
+                    if (currentXRotation <= minXRotation)
                     {
                         bIsGrabbing = false;
                         bDisableLever = true;
                         //TODO here: Activate the functions for engaging the brake/accelerator
                         return;
                     }
-
+                    */
                 if (angle > 0)
-                    if (currentZRotation >= maxZRotation)
+                    if (currentXRotation >= maxXRotation)
                     {
-                        bIsGrabbing = false;
                         return;
                     }
-                    */
+                    
 
                 transform.parent.Rotate(0, 0, -angle);
                 HandOffsetStart = currentHandPosition;
-                currentZRotation = transform.parent.rotation.z;
+                currentXRotation = transform.parent.rotation.x;
             }
         }
     }
@@ -106,8 +108,7 @@ public class BrakeLever : StationaryObject
 
     public override void OnUse()
     {
-        Debug.Log("Use");
-
+        
     }
 
     public override void OnGrab()
@@ -118,13 +119,12 @@ public class BrakeLever : StationaryObject
             HandOffsetStart = PlayerHand.transform.position;
             currentHandPosition = PlayerHand.transform.position;
         }
-        Debug.Log("Grabbed");
+       
     }
 
     public override void OnGrabReleased()
     {
         bIsGrabbing = false;
-        Debug.Log("GrabReleased");
     }
 
 }
