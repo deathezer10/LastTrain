@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DebugPlayer : MonoBehaviour {
 
@@ -8,6 +9,9 @@ public class DebugPlayer : MonoBehaviour {
     private Camera m_CurrentCamera;
 
     private const float m_PlayerMoveSpeed = 3;
+
+    [SerializeField]
+    private UnityEvent m_inputEvent;
 
     private void Start()
     {
@@ -20,7 +24,14 @@ public class DebugPlayer : MonoBehaviour {
         MouseViewUpdate();
         
         if (Input.GetMouseButton(1))
+        {
             MouseUpdate();
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            m_inputEvent.Invoke();
+        }
 
         PlayerUpdate();
     }
