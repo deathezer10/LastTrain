@@ -18,7 +18,7 @@ public class BrakeLever : StationaryObject
     Vector3 currentHandPosition;
 
     // private float MaxHandReach = 10.0f;              //Adjust reach before player lets go of the lever
-    private float minXRotation;              //Setting lowest reachable rotation for the lever
+    private float minXRotation = -0.57f;              //Setting lowest reachable rotation for the lever
     private float maxXRotation;               //Setting the max reachable rotation for the lever
     private float currentXRotation;
 
@@ -41,9 +41,10 @@ public class BrakeLever : StationaryObject
     void Update()
     {
         print(currentXRotation);
+       
         if (!bDisableLever)
         {
-            print(currentXRotation);
+           
             if (bIsGrabbing)
             {
 
@@ -63,8 +64,9 @@ public class BrakeLever : StationaryObject
                 Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
 
                 if (cross.x < 0) angle = -angle;
+               
 
-                /*
+
                 if (angle < 0)
                     if (currentXRotation <= minXRotation)
                     {
@@ -73,7 +75,7 @@ public class BrakeLever : StationaryObject
                         //TODO here: Activate the functions for engaging the brake/accelerator
                         return;
                     }
-                    */
+                    
                 
                 if (angle > 0)
                     if (currentXRotation >= maxXRotation)
@@ -82,7 +84,7 @@ public class BrakeLever : StationaryObject
                     }
                     
 
-                transform.parent.Rotate(-angle, 0, 0);
+                transform.parent.Rotate(angle, 0, 0);
                 HandOffsetStart = currentHandPosition;
                 currentXRotation = transform.parent.rotation.x;
             }
