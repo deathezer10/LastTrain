@@ -30,11 +30,13 @@ public class PlayerLaserPointerController : MonoBehaviour
             {
                 guiBase.OnPointerStay();
             }
-            
-            transform.position = (hitInfo.point - transform.position) / 2;
+
+            Vector3 newPos = transform.position;
+            newPos.z = hitInfo.point.z - newPos.z;
+            transform.position = newPos;
             
             Vector3 newScale = transform.localScale;
-            newScale.z = transform.position.z * 2;
+            newScale.z = transform.localPosition.z * 2;
             transform.localScale = newScale;
         }
         else
