@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AcceleratorLever : StationaryObject
 {
+    public static AcceleratorLever instance;
     private GameObject Accelerator;
     private GameObject AcceleratorHandle;
     BoxCollider HandleCollider;
@@ -20,9 +21,15 @@ public class AcceleratorLever : StationaryObject
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
 
-
+   public static bool IsTaskCompleted()
+    {
+        return instance.bDisableLever;
+    }
     
-
+    void Awake()
+    {
+        instance = this;
+    }
     // Use this for initialization
     void Start()
     {
@@ -49,10 +56,21 @@ public class AcceleratorLever : StationaryObject
                 {
                     if(VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z)
                     {
-                        //TODO: EVENT for Setting ACC. to ZERO
+                      
                         bIsGrabbing = false;
                         bDisableLever = true;
-                        print("acc zero");
+
+                        //Here sound effects or something
+
+                        if (BrakeLever.IsTaskCompleted())
+                        {
+                            //This was last lever,stop train&do something
+                        }
+
+                        else
+                            return; //Player still needs to engage the brakelever..
+
+
                         return;
                     }
 
@@ -67,7 +85,6 @@ public class AcceleratorLever : StationaryObject
                 {
                     if(HandleDefaultMaxPosition.z <= AcceleratorHandle.transform.position.z )
                     {
-                        print("acc max");
                         return;
                     }
 

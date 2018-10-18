@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BrakeLever : StationaryObject
 {
+    public static BrakeLever instance;
     private GameObject PlayerHand;
     private PlayerViveController[] foundControllers;
     private BoxCollider LeverTip;
@@ -23,9 +24,15 @@ public class BrakeLever : StationaryObject
     private float currentXRotation;
 
 
+    public static bool IsTaskCompleted()
+    {
+        return instance.bDisableLever;
+    }
 
-
-
+    void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start()
@@ -72,7 +79,19 @@ public class BrakeLever : StationaryObject
                     {
                         bIsGrabbing = false;
                         bDisableLever = true;
-                        //TODO here: Activate the functions for engaging the brake/accelerator
+
+
+                        //Sound effects here or something here
+
+
+                        if (AcceleratorLever.IsTaskCompleted())
+                        {
+                            //This was last lever to be activated train is now stopping? do something
+                        }
+
+                        else
+                            return; //Player still has to do the accelerator lever
+
                         return;
                     }
                     
