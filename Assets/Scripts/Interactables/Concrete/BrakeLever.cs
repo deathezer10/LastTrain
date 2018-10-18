@@ -43,7 +43,7 @@ public class BrakeLever : StationaryObject
         print(currentXRotation);
         if (!bDisableLever)
         {
-
+            print(currentXRotation);
             if (bIsGrabbing)
             {
 
@@ -74,6 +74,7 @@ public class BrakeLever : StationaryObject
                         return;
                     }
                     */
+                
                 if (angle > 0)
                     if (currentXRotation >= maxXRotation)
                     {
@@ -81,7 +82,7 @@ public class BrakeLever : StationaryObject
                     }
                     
 
-                transform.parent.Rotate(0, 0, -angle);
+                transform.parent.Rotate(-angle, 0, 0);
                 HandOffsetStart = currentHandPosition;
                 currentXRotation = transform.parent.rotation.x;
             }
