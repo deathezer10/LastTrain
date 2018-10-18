@@ -28,6 +28,9 @@ public class SawBlade : GrabbableObject
 
     public override void OnGrabReleased()
     {
+        spinning = false;
+
+        PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = PH_NotSpinColor;
     }
 
     public override void OnUse()
