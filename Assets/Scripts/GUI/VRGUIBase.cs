@@ -10,20 +10,11 @@ using UnityEditor;
 public abstract class VRGUIBase : MonoBehaviour
 {
 
-    public void OnPointerEntered()
-    {
+    public abstract void OnPointerEntered();
 
-    }
+    public abstract void OnPointerStay();
 
-    public void OnPointerStay()
-    {
-
-    }
-
-    public void OnPointerExit()
-    {
-
-    }
+    public abstract void OnPointerExit();
 
 }
 

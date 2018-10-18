@@ -5,44 +5,61 @@ using UnityEngine;
 public class PlayerLaserPointerController : MonoBehaviour
 {
 
-    const float m_PointerDistance = 10;
+    private float m_PointerDistance;
 
-    Vector3 m_OriginalPosition;
+    Vector3 m_OriginalLocalPosition;
     Vector3 m_OriginalScale;
+
+    VRGUIBase m_SelectedGUI;
 
     private void Start()
     {
-        m_OriginalPosition = transform.position;
+        m_OriginalLocalPosition = transform.localPosition;
         m_OriginalScale = transform.localScale;
+        m_PointerDistance = transform.localScale.z;
     }
 
     private void Update()
     {
         RaycastHit hitInfo;
 
-        Debug.DrawRay(transform.position, -transform.right, Color.yellow);
+        Debug.DrawRay(transform.parent.position, transform.forward, Color.yellow);
 
-        if (Physics.Raycast(transform.position, -transform.right, out hitInfo, m_PointerDistance))
+        if (Physics.Raycast(transform.parent.position, transform.forward, out hitInfo, m_PointerDistance))
         {
             VRGUIBase guiBase = hitInfo.transform.GetComponent<VRGUIBase>();
 
             if (guiBase != null)
             {
+                if (m_SelectedGUI == null)
+                {
+                    m_SelectedGUI = guiBase;
+                    guiBase.OnPointerEntered();
+                    Debug.Log("Entered");
+                }
+
                 guiBase.OnPointerStay();
+                Debug.Log("Stay");
             }
 
-            Vector3 newPos = transform.position;
-            newPos.z = hitInfo.point.z - newPos.z;
-            transform.position = newPos;
-            
+            transform.position = Vector3.Lerp(hitInfo.point, transform.parent.position, 0.5f);
+
             Vector3 newScale = transform.localScale;
             newScale.z = transform.localPosition.z * 2;
             transform.localScale = newScale;
         }
         else
         {
-            transform.position = m_OriginalPosition;
+            transform.localPosition = m_OriginalLocalPosition;
             transform.localScale = m_OriginalScale;
+
+            if (m_SelectedGUI != null)
+            {
+                m_SelectedGUI.OnPointerExit();
+                Debug.Log("Exit");
+                m_SelectedGUI = null;
+            }
+
         }
     }
 
