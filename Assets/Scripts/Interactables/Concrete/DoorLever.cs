@@ -35,9 +35,7 @@ public class DoorLever : MonoBehaviour
         if(other.gameObject.name == "Umbrella")
         {
 
-            transform.position = transform.TransformPoint(ButtonCollider.bounds.center - (ButtonCollider.bounds.max / 2));
             DriverCabinDoorLock.init();
-
             transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
         }
 
