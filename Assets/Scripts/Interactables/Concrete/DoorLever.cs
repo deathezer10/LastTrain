@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DoorLever : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class DoorLever : MonoBehaviour
     private PlayerViveController[] foundControllers;
     private GameObject parent;
     private BoxCollider ButtonCollider;
-    
+    private const float m_ToggleOffset = -0.02f;
 
     // Use this for initialization
     void Start()
@@ -36,7 +37,8 @@ public class DoorLever : MonoBehaviour
 
             transform.position = transform.TransformPoint(ButtonCollider.bounds.center - (ButtonCollider.bounds.max / 2));
             DriverCabinDoorLock.init();
-        
+
+            transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
         }
 
     }
