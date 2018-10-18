@@ -15,7 +15,7 @@ public class PlayerDeathHandler : MonoBehaviour
     {
         m_FadeImage.DOFade(1, 1).OnComplete(() =>
         {
-            SceneManager.LoadScene("TrainStation");
+            SceneManager.LoadScene("GameOver");
         });
     }
 
