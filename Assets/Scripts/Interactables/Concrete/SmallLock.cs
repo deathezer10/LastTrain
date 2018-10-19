@@ -33,7 +33,7 @@ public class SmallLock : GrabbableObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "SawBlade" && other.gameObject.GetComponent<SawBlade>().IsSpinning())
+        if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
             BreakPieces();
             UnlockRigidbody();
