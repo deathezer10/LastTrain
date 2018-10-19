@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 65510204910055086}
   - component: {fileID: 54070253073369184}
   - component: {fileID: 114806390533943442}
-  - component: {fileID: 65994968498698220}
+  - component: {fileID: 136146009440791144}
   m_Layer: 0
   m_Name: SmallLock
   m_TagString: Untagged
@@ -760,18 +760,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65994968498698220
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1235491117804504}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.04, y: 0.07, z: 0.05}
-  m_Center: {x: 0, y: 0.01, z: 0}
 --- !u!114 &114709589145144716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -796,3 +784,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uncutTopPart: {fileID: 1902265100288004}
   cutTopPart: {fileID: 1175712070557826}
+--- !u!136 &136146009440791144
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1235491117804504}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.08
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
