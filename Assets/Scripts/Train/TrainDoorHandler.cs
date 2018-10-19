@@ -8,7 +8,7 @@ public class TrainDoorHandler : MonoBehaviour
 
     const float m_DoorOffset = -1.1f;
 
-    const string m_DoorNamePrefix = "SlideDr_";
+    const string m_DoorNamePrefix = "PC_DoubleDr_";
 
     private enum DoorSide { Left, Right }
 
