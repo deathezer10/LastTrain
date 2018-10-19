@@ -12,6 +12,7 @@ public abstract class VRGUIBase : MonoBehaviour
 
     public abstract void OnPointerEntered();
 
+    // Called once every Update when the laser pointer is on the collider
     public abstract void OnPointerStay();
 
     public abstract void OnPointerExit();

@@ -11,7 +11,7 @@ public class PlayerDeathHandler : MonoBehaviour
 
     public Image m_FadeImage;
 
-    public void KillPlayer()
+    public void KillPlayer(string gameOverText)
     {
         m_FadeImage.DOFade(1, 1).OnComplete(() =>
         {
@@ -23,7 +23,7 @@ public class PlayerDeathHandler : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.S) ||SteamVR_Input._default.inActions.GrabUse.GetStateDown(SteamVR_Input_Sources.LeftHand))
         {
-            KillPlayer();
+            KillPlayer("You died because you pressed the use button");
         }
     }
 
