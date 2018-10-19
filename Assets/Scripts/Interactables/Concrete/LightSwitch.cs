@@ -9,11 +9,12 @@ public class LightSwitch : StationaryObject
 {
     private Light[] lights;
     private bool bSwitchIsOn = false;
-    TrainDoorHandler TrainDoors;
+    
     // Use this for initialization
     void Start()
     {
         lights = FindObjectsOfType(typeof(Light)) as Light[];
+       
     }
 
     // Update is called once per frame
@@ -50,9 +51,9 @@ public class LightSwitch : StationaryObject
         else
         {
             bSwitchIsOn = true;
-            TrainDoors.ToggleDoors(true);
+            FindObjectOfType<TrainDoorHandler>().ToggleDoors(false);
             //Todo: move switch to on position
-            
+
             foreach (Light light in lights)
             {
                 light.intensity = 50;

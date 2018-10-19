@@ -47,7 +47,7 @@ public class BrakeLever : StationaryObject
     // Update is called once per frame
     void Update()
     {
-        print(currentXRotation);
+        
        
         if (!bDisableLever)
         {
