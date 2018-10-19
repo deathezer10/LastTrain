@@ -30,8 +30,8 @@ TagManager:
   - PostProcessing
   - Player
   - GrabbableObject
-  - 
-  - 
+  - Environment
+  - SlidingDoor
   - 
   - 
   - 
