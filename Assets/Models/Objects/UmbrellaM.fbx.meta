@@ -1,21 +1,14 @@
 fileFormatVersion: 2
-guid: db3d2e7f3a69e1e4b979af41a5660f02
+guid: 47feb91fde3379745a77cc45c51e1ebe
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: CmptFireEx_Dr
-    100004: CmptFireEx_Lock
     400000: //RootNode
-    400002: CmptFireEx_Dr
-    400004: CmptFireEx_Lock
-    2100000: lambert1
-    2300000: CmptFireEx_Dr
-    2300002: CmptFireEx_Lock
-    3300000: CmptFireEx_Dr
-    3300002: CmptFireEx_Lock
-    4300000: CmptFireEx_Dr
-    4300002: CmptFireEx_Lock
+    2100000: StingrayPBS3
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: polySurface3154
   externalObjects: {}
   materials:
     importMaterials: 1

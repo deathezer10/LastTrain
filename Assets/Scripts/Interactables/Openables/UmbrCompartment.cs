@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UmbrCompartment : MonoBehaviour
 {
-    public bool rotating;
+    bool rotating;
     Quaternion finalRotation = new Quaternion(0, 0.7f, 0, 0.7f);
     
     void Update()

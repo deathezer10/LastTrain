@@ -17,11 +17,11 @@ public class SawBlade : GrabbableObject
         {
             if (holdingControllerHand == SteamVR_Input_Sources.LeftHand.ToString())
             {
-                SteamVR_Input.actionsVibration[0].Execute(0, 0.5f, 0.5f, 1, SteamVR_Input_Sources.LeftHand);
+                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 0.3f, 0.6f, SteamVR_Input_Sources.LeftHand);
             }
             else
             {
-                SteamVR_Input.actionsVibration[0].Execute(0, 0.5f, 0.5f, 1, SteamVR_Input_Sources.RightHand);
+                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 0.3f, 0.6f, SteamVR_Input_Sources.RightHand);
             }
         }
     }
@@ -56,9 +56,12 @@ public class SawBlade : GrabbableObject
 
     public override void OnUse()
     {
-        spinning = spinning ? false : true;
+        if (held)
+        {
+            spinning = spinning ? false : true;
 
-        PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = spinning ? PH_SpinColor : PH_NotSpinColor;
+            PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = spinning ? PH_SpinColor : PH_NotSpinColor;
+        }
     }
 
     public bool IsSpinning()

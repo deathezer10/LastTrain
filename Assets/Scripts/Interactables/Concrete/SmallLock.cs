@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SmallLock : GrabbableObject
 {
-    public GameObject uncutTopPart, cutTopPart;
+    public GameObject uncutTopPart, cutTopPart, umbrella;
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
@@ -35,6 +35,8 @@ public class SmallLock : GrabbableObject
     {
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
+            Debug.Log("Small lock hit with sawblade.");
+
             BreakLock();
         }
     }
@@ -45,6 +47,8 @@ public class SmallLock : GrabbableObject
         UnlockRigidbody();
         GetComponent<CapsuleCollider>().enabled = false;
         FindObjectOfType<UmbrCompartment>().OpenCompartment();
+        umbrella.SetActive(true);
+        umbrella.transform.SetParent(null);
     }
 
     private void BreakPieces()
