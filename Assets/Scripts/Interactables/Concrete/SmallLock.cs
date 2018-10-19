@@ -35,15 +35,20 @@ public class SmallLock : GrabbableObject
     {
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
-            BreakPieces();
-            UnlockRigidbody();
-            GetComponent<CapsuleCollider>().enabled = false;
+            BreakLock();
         }
+    }
+
+    private void BreakLock()
+    {
+        BreakPieces();
+        UnlockRigidbody();
+        GetComponent<CapsuleCollider>().enabled = false;
+        FindObjectOfType<UmbrCompartment>().OpenCompartment();
     }
 
     private void BreakPieces()
     {
-        Debug.Log("Break pieces apart");
         uncutTopPart.SetActive(false);
         cutTopPart.SetActive(true);
         cutTopPart.transform.SetParent(null);
