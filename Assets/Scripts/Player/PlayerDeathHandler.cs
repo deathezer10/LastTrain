@@ -9,21 +9,28 @@ using Valve.VR;
 public class PlayerDeathHandler : MonoBehaviour
 {
 
-    public Image m_FadeImage;
+    public ImageFader m_ImageFader;
 
-    public void KillPlayer(string gameOverText)
+    private static string m_GameOverTextKey = "death_timeup";
+
+    public static string GameOverTextKey {
+        get { return m_GameOverTextKey; }
+    }
+
+    public void KillPlayer(string gameOverTextKey)
     {
-        m_FadeImage.DOFade(1, 1).OnComplete(() =>
+        m_ImageFader.DoFade(ImageFader.FadeType.ToOpaque, 1, () =>
         {
+            m_GameOverTextKey = gameOverTextKey;
             SceneManager.LoadScene("GameOver");
         });
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.S) ||SteamVR_Input._default.inActions.GrabUse.GetStateDown(SteamVR_Input_Sources.LeftHand))
+        if (Input.GetKeyUp(KeyCode.S) || SteamVR_Input._default.inActions.GrabUse.GetStateDown(SteamVR_Input_Sources.LeftHand))
         {
-            KillPlayer("You died because you pressed the use button");
+            KillPlayer("death_trainhit");
         }
     }
 
