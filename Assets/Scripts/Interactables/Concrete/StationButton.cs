@@ -21,7 +21,7 @@ public class StationButton : StationaryObject {
         {
             m_Toggled = true;
 
-            SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 0, currentController.HandSourceToInputSource());
+            SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, currentController.HandSourceToInputSource());
 
             GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             m_Train.GetComponent<TrainArriver>().BeginArrival();
