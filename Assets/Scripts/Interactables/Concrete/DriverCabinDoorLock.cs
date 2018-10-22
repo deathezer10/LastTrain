@@ -61,7 +61,7 @@ public class DriverCabinDoorLock : StationaryObject
             {
                 timer = Time.time;
 
-                if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.4f).x <= LeftDoorCorner.x)
+                if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.38f).x <= LeftDoorCorner.x)
                 {
                     if (doorBody.velocity.x < -0.01f)
                     {
@@ -138,7 +138,7 @@ public class DriverCabinDoorLock : StationaryObject
                     if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f))
                     {
 
-                        if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.4f).x <= LeftDoorCorner.x)
+                        if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.38f).x <= LeftDoorCorner.x)
                         {
                             print("Left limit reached");
                             return;
