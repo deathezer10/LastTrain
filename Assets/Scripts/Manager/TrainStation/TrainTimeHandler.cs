@@ -18,8 +18,10 @@ public class TrainTimeHandler : MonoBehaviour {
         foreach (var displayLight in m_DisplayLights)
         {
             displayLight.ToggleLights(true, true);
-            StartCoroutine(CycleDisplayLights());
         }
+
+        m_CurrentAnnouncementCount = 0;
+        StartCoroutine(CycleDisplayLights());
     }
 
     public void StopTrainTime()
@@ -31,8 +33,10 @@ public class TrainTimeHandler : MonoBehaviour {
 
     IEnumerator CycleDisplayLights()
     {
-        while (m_CurrentAnnouncementCount < 5)
+        while (m_CurrentAnnouncementCount < StationDisplayLight.STATIONNODE_AMOUNT - 1)
         {
+            yield return new WaitForSeconds(5);
+
             m_CurrentAnnouncementCount++;
 
             foreach (var displayLight in m_DisplayLights)
@@ -41,10 +45,6 @@ public class TrainTimeHandler : MonoBehaviour {
             }
 
             // TODO play announcement
-
-            Debug.Log("GG: " + m_CurrentAnnouncementCount);
-
-            yield return new WaitForSeconds(10);
         }
 
         GameObject.FindWithTag("Player").GetComponent<PlayerDeathHandler>().KillPlayer("death_timeup");

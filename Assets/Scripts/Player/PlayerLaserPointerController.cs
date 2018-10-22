@@ -35,11 +35,9 @@ public class PlayerLaserPointerController : MonoBehaviour
                 {
                     m_SelectedGUI = guiBase;
                     guiBase.OnPointerEntered();
-                    Debug.Log("Entered");
                 }
 
                 guiBase.OnPointerStay();
-                Debug.Log("Stay");
             }
 
             transform.position = Vector3.Lerp(hitInfo.point, transform.parent.position, 0.5f);
@@ -56,7 +54,6 @@ public class PlayerLaserPointerController : MonoBehaviour
             if (m_SelectedGUI != null)
             {
                 m_SelectedGUI.OnPointerExit();
-                Debug.Log("Exit");
                 m_SelectedGUI = null;
             }
 

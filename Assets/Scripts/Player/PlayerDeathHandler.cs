@@ -9,7 +9,7 @@ using Valve.VR;
 public class PlayerDeathHandler : MonoBehaviour
 {
 
-    public ImageFader m_ImageFader;
+    public ImageFader m_DeathFader;
 
     private static string m_GameOverTextKey = "death_timeup";
 
@@ -19,7 +19,7 @@ public class PlayerDeathHandler : MonoBehaviour
 
     public void KillPlayer(string gameOverTextKey)
     {
-        m_ImageFader.DoFade(ImageFader.FadeType.ToOpaque, 1, () =>
+        m_DeathFader.DoFade(ImageFader.FadeType.ToOpaque, 1, () =>
         {
             m_GameOverTextKey = gameOverTextKey;
             SceneManager.LoadScene("GameOver");
