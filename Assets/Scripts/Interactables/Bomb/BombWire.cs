@@ -36,13 +36,11 @@ public class BombWire : MonoBehaviour
         {
             Debug.Log("Bomb diffused, trigger next sequence.");
             bomb.CutRightWire();
-            // Diffuse bomb - Display a change in bomb state / play announcement about bomb diffusal?
         }
         else
         {
             Debug.Log("Bomb exploded, trigger death state.");
             bomb.CutWrongWire();
-            FindObjectOfType<PlayerDeathHandler>().KillPlayer("The Bomb exploded!");
         }
 
         SwapWireModel();
