@@ -26,7 +26,7 @@ public class TrainArriver : MonoBehaviour
 
         tweener.OnUpdate(() =>
         {
-            if (tweener.ElapsedPercentage() >= 0.8f && !m_IsAudioFading)
+            if (tweener.ElapsedPercentage() >= 0.5f && !m_IsAudioFading)
             {
                 GetComponent<AudioSource>().DOFade(0, 3);
                 m_IsAudioFading = true;
