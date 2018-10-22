@@ -37,13 +37,13 @@ public class TrainDoorHandler : MonoBehaviour
         foreach (var door in m_Doors)
         {
             if (door.Key == DoorSide.Left)
-                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 1).SetRelative().OnComplete(() =>
+                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 2).SetRelative().OnComplete(() =>
                 {
                     if (onComplete != null)
                         onComplete();
                 });
             else
-                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 1).SetRelative().OnComplete(() =>
+                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 2).SetRelative().OnComplete(() =>
                 {
                     if (onComplete != null)
                         onComplete();
