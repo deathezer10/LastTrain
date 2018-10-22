@@ -71,6 +71,7 @@ public class Bomb : GrabbableObject
     public void CutRightWire()
     {
         phLightRenderer.material.color = green;
+        StopCoroutine(BombCountdown());
     }
 
     public void UnlockRigidbody()
