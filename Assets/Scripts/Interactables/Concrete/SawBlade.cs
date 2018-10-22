@@ -58,7 +58,7 @@ public class SawBlade : GrabbableObject
 
         PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = PH_NotSpinColor;
 
-        sawBladeAnimator.Play(0);
+        sawBladeAnimator.Play("SawBladeStop");
 
         holdingControllerHand = "";
     }
@@ -77,7 +77,7 @@ public class SawBlade : GrabbableObject
             }
             else
             {
-                sawBladeAnimator.Play(0);
+                sawBladeAnimator.Play("SawBladeStop");
             }
         }
     }
