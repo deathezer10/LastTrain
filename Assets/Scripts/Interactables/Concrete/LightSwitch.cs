@@ -9,7 +9,7 @@ public class LightSwitch : StationaryObject
 {
     List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
-    Audio = GetComponent<AudioPlayer>();
+    
     private AudioPlayer Audio;
 
     private void Start()
@@ -17,6 +17,7 @@ public class LightSwitch : StationaryObject
         for (int i = 0; i < transform.childCount; ++i)
         {
             m_TrainLights.Add(transform.GetChild(i).GetComponent<Light>());
+            Audio = GetComponent<AudioPlayer>();
         }
     }
 
