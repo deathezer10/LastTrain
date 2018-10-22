@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 using DG.Tweening;
 
-public class StationButton : MonoBehaviour {
+public class StationButton : StationaryObject {
 
     public GameObject m_Train;
     private const float m_ToggleOffset = -0.03f;
@@ -13,12 +14,14 @@ public class StationButton : MonoBehaviour {
     {
         GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }
-	
-    private void OnTriggerEnter(Collider other)
+
+    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
-        if (m_Toggled == false && other.tag == "GameController")
+        if (m_Toggled == false)
         {
             m_Toggled = true;
+
+            SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, currentController.HandSourceToInputSource());
 
             GetComponent<Renderer>().material.SetColor("_Color", Color.green);
             m_Train.GetComponent<TrainArriver>().BeginArrival();
@@ -27,4 +30,23 @@ public class StationButton : MonoBehaviour {
         }
     }
 
+    public override void OnControllerExit()
+    {
+    }
+
+    public override void OnControllerStay()
+    {
+    }
+
+    public override void OnGrab()
+    {
+    }
+
+    public override void OnGrabReleased()
+    {
+    }
+
+    public override void OnUse()
+    {
+    }
 }
