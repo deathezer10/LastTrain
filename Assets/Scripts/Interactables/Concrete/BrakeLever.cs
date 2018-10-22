@@ -22,7 +22,7 @@ public class BrakeLever : StationaryObject
     private float minXRotation = -0.57f;              //Setting lowest reachable rotation for the lever
     private float maxXRotation;               //Setting the max reachable rotation for the lever
     private float currentXRotation;
-
+    private AudioPlayer Audio;
 
     public static bool IsTaskCompleted()
     {
@@ -32,6 +32,7 @@ public class BrakeLever : StationaryObject
     void Awake()
     {
         instance = this;
+        Audio = GetComponent<AudioPlayer>();
     }
 
     // Use this for initialization
@@ -80,8 +81,7 @@ public class BrakeLever : StationaryObject
                         bIsGrabbing = false;
                         bDisableLever = true;
 
-
-                        //Sound effects here or something here
+                        Audio.Play();
 
 
                         if (AcceleratorLever.IsTaskCompleted())

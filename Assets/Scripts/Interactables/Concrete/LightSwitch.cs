@@ -9,12 +9,13 @@ public class LightSwitch : StationaryObject
 {
     private Light[] lights;
     private bool bSwitchIsOn = false;
+    private AudioPlayer Audio;
     
     // Use this for initialization
     void Start()
     {
         lights = FindObjectsOfType(typeof(Light)) as Light[];
-       
+        Audio = GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -26,8 +27,8 @@ public class LightSwitch : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
-        print(handSource.ToString());
-        print(SteamVR_Input_Sources.LeftHand.ToString());
+        Audio.Play();
+
         if (handSource.ToString() == SteamVR_Input_Sources.LeftHand.ToString())
             SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, SteamVR_Input_Sources.LeftHand);
 
@@ -40,8 +41,8 @@ public class LightSwitch : StationaryObject
         if (bSwitchIsOn)
         {
             bSwitchIsOn = false;
-            //Todo: move switch to off position
-           
+            transform.root.Rotate(new Vector3(0, 0, 1), 80);
+
             foreach (Light light in lights)
             {
                 light.intensity = 0;
@@ -52,8 +53,7 @@ public class LightSwitch : StationaryObject
         {
             bSwitchIsOn = true;
             FindObjectOfType<TrainDoorHandler>().ToggleDoors(false);
-            //Todo: move switch to on position
-
+            transform.root.Rotate(new Vector3(0,0,-1), 80);
             foreach (Light light in lights)
             {
                 light.intensity = 50;
