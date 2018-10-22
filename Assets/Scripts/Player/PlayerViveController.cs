@@ -20,7 +20,7 @@ public class PlayerViveController : MonoBehaviour
     private static GameObject m_CurrentRightObject = null;
 
 
-    virtual protected void Update()
+    virtual protected void LateUpdate()
     {
         var currentObject = GetCurrentHandObject();
 
@@ -143,7 +143,7 @@ public class PlayerViveController : MonoBehaviour
         AssignObjectToHand(m_CurrentHand, null);
     }
 
-    private SteamVR_Input_Sources HandSourceToInputSource()
+    public SteamVR_Input_Sources HandSourceToInputSource()
     {
         return (m_CurrentHand == HandSource.LeftHand) ? SteamVR_Input_Sources.LeftHand : SteamVR_Input_Sources.RightHand;
     }
