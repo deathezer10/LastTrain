@@ -10,17 +10,19 @@ public class Bomb : GrabbableObject
     public Color red, green;
 
     float timeRemaining = 180f;
+    bool timerRunning;
     TextMeshPro timerTextMesh;
 
     private void Start()
     {
+        timerRunning = true;
         timerTextMesh = GetComponentInChildren<TextMeshPro>();
         StartCoroutine(BombCountdown());
     }
 
     private IEnumerator BombCountdown()
     {
-        while (timeRemaining >= 0)
+        while (timeRemaining >= 0 && timerRunning)
         {
             timeRemaining -= Time.deltaTime;
             
@@ -71,6 +73,7 @@ public class Bomb : GrabbableObject
     public void CutRightWire()
     {
         phLightRenderer.material.color = green;
+        timerRunning = false;
         StopCoroutine(BombCountdown());
     }
 
