@@ -7,59 +7,49 @@ using Valve.VR;
 
 public class LightSwitch : StationaryObject
 {
-    private Light[] lights;
+    List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
-    
-    // Use this for initialization
-    void Start()
+
+    private void Start()
     {
-        lights = FindObjectsOfType(typeof(Light)) as Light[];
-       
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            m_TrainLights.Add(transform.GetChild(i).GetComponent<Light>());
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
-        print(handSource.ToString());
-        print(SteamVR_Input_Sources.LeftHand.ToString());
         if (handSource.ToString() == SteamVR_Input_Sources.LeftHand.ToString())
             SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, SteamVR_Input_Sources.LeftHand);
-
         else
             SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, SteamVR_Input_Sources.RightHand);
-
-        
-         
 
         if (bSwitchIsOn)
         {
             bSwitchIsOn = false;
-            //Todo: move switch to off position
-           
-            foreach (Light light in lights)
+
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            foreach (Light light in m_TrainLights)
             {
-                light.intensity = 0;
+                light.enabled = false;
             }
         }
-       
         else
         {
             bSwitchIsOn = true;
-            FindObjectOfType<TrainDoorHandler>().ToggleDoors(false);
-            //Todo: move switch to on position
 
-            foreach (Light light in lights)
+            FindObjectOfType<TrainDoorHandler>().ToggleDoors(false, () => { FindObjectOfType<StationMover>().ToggleMovement(true); });
+
+            transform.localRotation = Quaternion.Euler(0, 0, -90);
+
+            foreach (Light light in m_TrainLights)
             {
-                light.intensity = 50;
+                light.enabled = true;
             }
         }
-       
+
     }
 
     public override void OnControllerExit()
