@@ -14,30 +14,34 @@ public class Suitcase : GrabbableObject
         suitcaseAnimator = GetComponent<Animator>();
     }
 
-    /*
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            OpenSuitCase();
-        }
-    }
-    */
-
-    public void OpenSuitCase()
+    private void OpenSuitCase()
     {
         suitcaseAnimator.Play("suitcase_open");
+
+        RearrangeColliders();
 
         foreach (GameObject go in keycardArray)
         {
             go.SetActive(true);
             go.transform.SetParent(null);
         }
+    }
+
+    private void RearrangeColliders()
+    {
+        BoxCollider oldBC = GetComponent<BoxCollider>();
 
         BoxCollider newBC = gameObject.AddComponent<BoxCollider>();
 
-        newBC.size = new Vector3(0.31f, 0.2f, 0.015f);
         newBC.center = new Vector3(0, 0.13f, 0.1f);
+        newBC.size = new Vector3(0.31f, 0.2f, 0.015f);
+
+        newBC = gameObject.AddComponent<BoxCollider>();
+
+        newBC.center = new Vector3(0, 0.012f, 0f);
+        newBC.size = new Vector3(0.31f, 0.015f, 0.205f);
+
+        Destroy(oldBC);
     }
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
