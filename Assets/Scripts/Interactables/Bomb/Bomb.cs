@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -22,9 +23,8 @@ public class Bomb : GrabbableObject
         while (timeRemaining >= 0)
         {
             timeRemaining -= Time.deltaTime;
-            var integer = (int)timeRemaining;
             
-            timerTextMesh.text = integer.ToString("0");
+            timerTextMesh.text = string.Format("{0:0}:{1:00}", ((int)timeRemaining / 60), (int)timeRemaining % 60);
             
             yield return null;
         }

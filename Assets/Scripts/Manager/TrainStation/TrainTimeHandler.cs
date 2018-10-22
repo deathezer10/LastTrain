@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrainTimeHandler : MonoBehaviour {
-
-    float m_CurrentTrainTime = 0;
+    
     int m_CurrentAnnouncementCount = 0;
 
     StationDisplayLight[] m_DisplayLights;
@@ -42,18 +41,14 @@ public class TrainTimeHandler : MonoBehaviour {
             }
 
             // TODO play announcement
-            
-            yield return new WaitForSeconds(60);
+
+            Debug.Log("GG: " + m_CurrentAnnouncementCount);
+
+            yield return new WaitForSeconds(10);
         }
 
-
+        GameObject.FindWithTag("Player").GetComponent<PlayerDeathHandler>().KillPlayer("death_timeup");
     }
-
-    private void Update()
-    {
-        m_CurrentTrainTime += Time.deltaTime;
-
-
-    }
+   
 
 }
