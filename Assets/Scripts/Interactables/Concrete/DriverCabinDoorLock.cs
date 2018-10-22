@@ -61,35 +61,25 @@ public class DriverCabinDoorLock : StationaryObject
             {
                 timer = Time.time;
 
-                if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.34f).x <= LeftDoorCorner.x)
+                
+                if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.32f).x <= LeftDoorCorner.x)
                 {
                     if (doorBody.velocity.x < -0.01f)
                     {
-                        DoorSlamVelocity = doorBody.velocity;
+                        DoorSlamVelocity = -doorBody.velocity;
                         doorBody.velocity = Vector3.zero;
-                        doorBody.velocity = HandleMovementDirection * (DoorSlamVelocity.x / 6);
+                        doorBody.velocity = HandleMovementDirection * (DoorSlamVelocity.x / 4);
                         return;
                     }
 
-                    else
-                        doorBody.velocity = Vector3.zero;
                 }
 
                 if (transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
                 {
-                    if (doorBody.velocity.x > 0.01f)
-                    {
-                        DoorSlamVelocity = doorBody.velocity;
-                        doorBody.velocity = Vector3.zero;
-                        doorBody.velocity = -HandleMovementDirection * (DoorSlamVelocity.x / 6);
-                        return;
-                    }
-
-                    else
                         doorBody.velocity = Vector3.zero;
                 }
 
-
+    
                
                 if (bIsGrabbing)
                 {

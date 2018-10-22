@@ -34,21 +34,38 @@ public class TrainDoorHandler : MonoBehaviour
     {
         int direction = (opened) ? 1 : -1;
 
-        foreach (var door in m_Doors)
+        for (int i = 0; i < m_Doors.Count; ++i)
         {
+            var door = m_Doors[i];
+
             if (door.Key == DoorSide.Left)
-                door.Value.DOLocalMoveZ(m_DoorOffset * direction, 2).SetRelative().OnComplete(() =>
+            {
+                var tweener = door.Value.DOLocalMoveZ(m_DoorOffset * direction, 2).SetRelative();
+
+                if (i == 0)
                 {
-                    if (onComplete != null)
-                        onComplete();
-                });
+                    tweener.OnComplete(() =>
+                    {
+                        if (onComplete != null)
+                            onComplete();
+                    });
+                }
+            }
             else
-                door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 2).SetRelative().OnComplete(() =>
+            {
+                var tweener = door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 2).SetRelative();
+
+                if (i == 0)
                 {
-                    if (onComplete != null)
-                        onComplete();
-                });
+                    tweener.OnComplete(() =>
+                    {
+                         if (onComplete != null)
+                             onComplete();
+                    });
+                }
+            }
         }
+
     }
 
 }

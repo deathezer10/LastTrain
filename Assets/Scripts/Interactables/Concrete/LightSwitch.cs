@@ -16,6 +16,8 @@ public class LightSwitch : StationaryObject
 
     private AudioPlayer Audio;
 
+    private bool m_FirstTime = true;
+
     private void Start()
     {
         for (int i = 0; i < transform.childCount; ++i)
@@ -50,8 +52,8 @@ public class LightSwitch : StationaryObject
         else
         {
             bSwitchIsOn = true;
-
-            if (m_StationMover.isMoving == false)
+            
+            if (m_FirstTime)
             {
                 m_BombContainer.SetActive(true);
 
@@ -73,6 +75,8 @@ public class LightSwitch : StationaryObject
                     m_StationMover.ToggleMovement(true);
                     m_TrainTimeHandler.StartTrainTime();
                 });
+
+                m_FirstTime = false;
             }
 
             transform.localRotation = Quaternion.Euler(0, 0, -90);

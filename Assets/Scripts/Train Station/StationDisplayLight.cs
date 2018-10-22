@@ -5,12 +5,14 @@ using UnityEngine;
 public class StationDisplayLight : MonoBehaviour
 {
 
+    public static int STATIONNODE_AMOUNT = 4;
+
     List<Transform> m_StationNodes = new List<Transform>();
 
     MeshRenderer m_MeshRenderer;
 
     int m_CurrentNodeIndex = 0;
-    
+
     bool m_IsLightBlinking = false;
 
     private void Start()
@@ -67,7 +69,7 @@ public class StationDisplayLight : MonoBehaviour
         if (enableBlink == false)
             StopAllCoroutines();
     }
-    
+
     IEnumerator BlinkLight()
     {
         const float m_VisibleTime = 0.75f;
