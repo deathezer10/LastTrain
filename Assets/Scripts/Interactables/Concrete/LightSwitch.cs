@@ -9,17 +9,22 @@ public class LightSwitch : StationaryObject
 {
     List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
+    
+    private AudioPlayer Audio;
 
     private void Start()
     {
         for (int i = 0; i < transform.childCount; ++i)
         {
             m_TrainLights.Add(transform.GetChild(i).GetComponent<Light>());
+            Audio = GetComponent<AudioPlayer>();
         }
     }
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
+        Audio.Play();
+
         if (handSource.ToString() == SteamVR_Input_Sources.LeftHand.ToString())
             SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, SteamVR_Input_Sources.LeftHand);
         else

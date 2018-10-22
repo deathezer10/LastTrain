@@ -20,6 +20,7 @@ public class AcceleratorLever : StationaryObject
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
+    private AudioPlayer Audio;
 
    public static bool IsTaskCompleted()
     {
@@ -41,6 +42,7 @@ public class AcceleratorLever : StationaryObject
         VectorEndPoint = Accelerator.transform.GetChild(1).gameObject;
         HandleMovementDirection = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
         HandleMovementDirection.Normalize();
+        Audio = GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -60,7 +62,8 @@ public class AcceleratorLever : StationaryObject
                         bIsGrabbing = false;
                         bDisableLever = true;
 
-                        //Here sound effects or something
+                        Audio.Play();
+                      
 
                         if (BrakeLever.IsTaskCompleted())
                         {
