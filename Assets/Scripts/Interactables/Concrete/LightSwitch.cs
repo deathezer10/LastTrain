@@ -35,7 +35,7 @@ public class LightSwitch : StationaryObject
 
             foreach (Light light in m_TrainLights)
             {
-                light.enabled = false;
+                light.gameObject.SetActive(false);
             }
         }
         else
@@ -50,7 +50,7 @@ public class LightSwitch : StationaryObject
 
             foreach (Light light in m_TrainLights)
             {
-                light.enabled = true;
+                light.gameObject.SetActive(true);
             }
         }
 
