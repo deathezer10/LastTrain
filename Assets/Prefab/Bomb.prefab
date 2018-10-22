@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldCutForce: 0
+  heldCutForce: 1
   correctWire: 0
 --- !u!114 &114181163675238230
 MonoBehaviour:
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldCutForce: 0
+  heldCutForce: 1
   correctWire: 0
 --- !u!114 &114509282248427570
 MonoBehaviour:
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldCutForce: 0
+  heldCutForce: 1
   correctWire: 0
 --- !u!114 &114661502272051642
 MonoBehaviour:
@@ -1077,5 +1077,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldCutForce: 0
+  heldCutForce: 1
   correctWire: 1

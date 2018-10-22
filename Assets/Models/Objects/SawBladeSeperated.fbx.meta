@@ -1,14 +1,25 @@
 fileFormatVersion: 2
-guid: 022481abb2dde7e4884d05f43ca7fa2f
+guid: 38a918c71d58eaa4db290a1eec31db95
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: lambert1
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: polySurface3175
+    100000: group1
+    100002: polySurface3157
+    100004: polySurface3158
+    100006: //RootNode
+    100008: transform1
+    400000: group1
+    400002: polySurface3157
+    400004: polySurface3158
+    400006: //RootNode
+    400008: transform1
+    2100000: StingrayPBS3
+    2300000: polySurface3157
+    2300002: polySurface3158
+    3300000: polySurface3157
+    3300002: polySurface3158
+    4300000: polySurface3157
+    4300002: polySurface3158
   externalObjects: {}
   materials:
     importMaterials: 1
