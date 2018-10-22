@@ -26,7 +26,9 @@ public class StationButton : StationaryObject {
             GetComponent<AudioPlayer>().Play();
 
             GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-            m_Train.GetComponent<TrainArriver>().BeginArrival();
+            m_Train.GetComponent<TrainArriver>().BeginArrival(()=> {
+                transform.Find("AnnouncementBeep").GetComponent<AudioPlayer>().Play();
+            });
 
             transform.DOLocalMoveX(m_ToggleOffset, 0.2f).SetRelative();
         }
