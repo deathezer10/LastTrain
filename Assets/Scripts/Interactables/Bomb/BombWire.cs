@@ -42,7 +42,7 @@ public class BombWire : MonoBehaviour
         {
             Debug.Log("Bomb exploded, trigger death state.");
             bomb.CutWrongWire();
-            // Explode - Death state
+            FindObjectOfType<PlayerDeathHandler>().KillPlayer("The Bomb exploded!");
         }
 
         SwapWireModel();
