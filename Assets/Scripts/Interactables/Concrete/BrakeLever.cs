@@ -9,20 +9,18 @@ public class BrakeLever : StationaryObject
     private PlayerViveController[] foundControllers;
     private BoxCollider LeverTip;
     private BoxCollider DisablePoint;
+    private AudioPlayer Audio;
 
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
     private bool bCanGrab = false;
 
     private Vector3 HandOffsetStart;
-    private Transform LastHandLocation;
-    Vector3 currentHandPosition;
-
-    // private float MaxHandReach = 10.0f;              //Adjust reach before player lets go of the lever
-    private float minXRotation = -0.45f;              //Setting lowest reachable rotation for the lever
+    private Vector3 currentHandPosition;
+    private float minXRotation = -0.45f;       //Setting lowest reachable rotation for the lever
     private float maxXRotation;               //Setting the max reachable rotation for the lever
     private float currentXRotation;
-    private AudioPlayer Audio;
+   
 
     public static bool IsTaskCompleted()
     {
@@ -42,57 +40,37 @@ public class BrakeLever : StationaryObject
         LeverTip = GetComponent<BoxCollider>();
         currentXRotation = transform.parent.rotation.x;
         maxXRotation = currentXRotation;
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-       
         if (!bDisableLever)
         {
-           
             if (bIsGrabbing)
             {
-
-                //if (MaxHandReach < Vector3.Distance(LeverTip.transform.position, PlayerHand.transform.position))
-                //{
-                //    Debug.Log("hello world");
-                //    bIsGrabbing = false;
-                //    bCanGrab = false;
-                //    return;
-                //}
-                //else
-
                 Vector3 targetDir = HandOffsetStart - transform.parent.position;
                 Vector3 NewtargetDir = currentHandPosition - transform.parent.position;
                 float angle = Vector3.Angle(targetDir, NewtargetDir);
 
                 Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
-
                 if (cross.x < 0) angle = -angle;
                
-
-
                 if (angle < 0)
                     if (currentXRotation <= minXRotation)
                     {
                         bIsGrabbing = false;
                         bDisableLever = true;
-
                         Audio.Play();
-
 
                         if (AcceleratorLever.IsTaskCompleted())
                         {
                             //This was last lever to be activated train is now stopping? do something
+                            return;
                         }
 
                         else
                             return; //Player still has to do the accelerator lever
-
-                        return;
                     }
                     
                 
@@ -102,7 +80,6 @@ public class BrakeLever : StationaryObject
                         return;
                     }
                     
-
                 transform.parent.Rotate(angle, 0, 0);
                 HandOffsetStart = currentHandPosition;
                 currentXRotation = transform.parent.rotation.x;
@@ -114,13 +91,11 @@ public class BrakeLever : StationaryObject
     {
         bCanGrab = true;
         PlayerHand = currentController.gameObject;
-        Debug.Log("Enter");
     }
 
     public override void OnControllerExit()
     {
         bCanGrab = false;
-        Debug.Log("Exit");
     }
 
     public override void OnControllerStay()
@@ -141,12 +116,10 @@ public class BrakeLever : StationaryObject
             HandOffsetStart = PlayerHand.transform.position;
             currentHandPosition = PlayerHand.transform.position;
         }
-       
     }
 
     public override void OnGrabReleased()
     {
         bIsGrabbing = false;
     }
-
 }

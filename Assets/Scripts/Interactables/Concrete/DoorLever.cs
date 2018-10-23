@@ -12,17 +12,17 @@ public class DoorLever : MonoBehaviour
     private const float m_ToggleOffset = -0.02f;
     private AudioPlayer Audio;
     private bool bDisable = false;
-    // Use this for initialization
+
+   
     void Start()
     {
         foundControllers = FindObjectsOfType<PlayerViveController>();
         parent = transform.root.gameObject;
         ButtonCollider = GetComponent<BoxCollider>();
         Audio = GetComponent<AudioPlayer>();
-
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
 
@@ -40,8 +40,5 @@ public class DoorLever : MonoBehaviour
                 DriverCabinDoorLock.init();
                 transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
             }
-
     }
-
-
 }
