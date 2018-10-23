@@ -12,8 +12,9 @@ public class SawBlade : GrabbableObject
     private HandSource playerHand;
     
     bool spinning, held;
+    float vibrationTimer;
     Animator sawBladeAnimator;
-
+    
     private void Start()
     {
         sawBladeAnimator = GetComponent<Animator>();
@@ -23,10 +24,11 @@ public class SawBlade : GrabbableObject
     {
         if (spinning && held)
         {
-            if (playerController != null)
+            if (playerController != null && Time.time >= vibrationTimer)
             {
                 var source = playerHand.ToInputSource();
                 playerController.Vibration(0, 0.3f, 0.3f, 0.5f, source);
+                vibrationTimer = Time.time + 0.3f;
             }
         }
     }
@@ -75,6 +77,7 @@ public class SawBlade : GrabbableObject
             if (spinning)
             {
                 sawBladeAnimator.Play("SawBladeSpin");
+                vibrationTimer = Time.time + 0.3f;
             }
             else
             {
