@@ -25,8 +25,8 @@ public class SawBlade : GrabbableObject
         {
             if (playerController != null)
             {
-                // var source = playerHand.ToInputSource();
-                // playerController.Vibration(0, 0.3f, 0.3f, 0.8f, source);
+                var source = playerHand.ToInputSource();
+                playerController.Vibration(0, 0.3f, 0.3f, 0.5f, source);
             }
         }
     }
@@ -39,6 +39,8 @@ public class SawBlade : GrabbableObject
 
     public override void OnControllerExit()
     {
+        playerController = null;
+        held = false;
     }
 
     public override void OnControllerStay()
