@@ -36,7 +36,7 @@ public class AcceleratorLever : StationaryObject
     void Start()
     {
         HandleCollider = GetComponent<BoxCollider>();
-        Accelerator = transform.parent.gameObject;
+        Accelerator = gameObject;
         AcceleratorHandle = HandleCollider.gameObject;
         HandleDefaultMaxPosition = AcceleratorHandle.transform.position;
         VectorBeginPoint = Accelerator.transform.GetChild(2).gameObject;

@@ -38,7 +38,7 @@ public class BrakeLever : StationaryObject
     {
         foundControllers = FindObjectsOfType<PlayerViveController>();
         LeverTip = GetComponent<BoxCollider>();
-        currentXRotation = transform.parent.rotation.x;
+        currentXRotation = transform.rotation.x;
         maxXRotation = currentXRotation;
     }
 
@@ -49,8 +49,8 @@ public class BrakeLever : StationaryObject
         {
             if (bIsGrabbing)
             {
-                Vector3 targetDir = HandOffsetStart - transform.parent.position;
-                Vector3 NewtargetDir = currentHandPosition - transform.parent.position;
+                Vector3 targetDir = HandOffsetStart - transform.position;
+                Vector3 NewtargetDir = currentHandPosition - transform.position;
                 float angle = Vector3.Angle(targetDir, NewtargetDir);
 
                 Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
@@ -80,9 +80,9 @@ public class BrakeLever : StationaryObject
                         return;
                     }
                     
-                transform.parent.Rotate(angle, 0, 0);
+                transform.Rotate(angle, 0, 0);
                 HandOffsetStart = currentHandPosition;
-                currentXRotation = transform.parent.rotation.x;
+                currentXRotation = transform.rotation.x;
             }
         }
     }
