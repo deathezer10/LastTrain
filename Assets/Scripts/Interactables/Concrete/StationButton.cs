@@ -15,13 +15,14 @@ public class StationButton : StationaryObject {
         GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
         if (m_Toggled == false)
         {
             m_Toggled = true;
 
-            SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, .5f, currentController.HandSourceToInputSource());
+            var source = currentController.GetCurrentHand().ToInputSource();
+            currentController.Vibration(0, 0.7f, 10, 1, source);
 
             GetComponent<AudioPlayer>().Play();
 

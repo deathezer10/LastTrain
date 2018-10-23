@@ -53,7 +53,7 @@ public class Toolbox : GrabbableObject
         }
     }
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
     }
 
