@@ -23,8 +23,9 @@ public class LightSwitch : StationaryObject
         for (int i = 0; i < transform.childCount; ++i)
         {
             m_TrainLights.Add(transform.GetChild(i).GetComponent<Light>());
-            Audio = GetComponent<AudioPlayer>();
         }
+
+        Audio = GetComponent<AudioPlayer>();
 
         // lol
         m_TrainTimeHandler = FindObjectOfType<TrainTimeHandler>();

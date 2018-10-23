@@ -68,9 +68,9 @@ public class StationMover : MonoBehaviour
                 m_CurrentTunnelIndex = 0;
             }
 //<<<<<<< HEAD
-            else if (m_CurrentTunnelIndex >= 3) // Destroy the oldest tunnel
+            //else if (m_CurrentTunnelIndex >= 3) // Destroy the oldest tunnel
 //=======
-   //         else if (!m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 3)
+   else if (!m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 3)
 //>>>>>>> 61dfa09ae768cf74e27db473e9ec3580fa38505b
             {
                 Destroy(m_RemovableObjects.Dequeue().gameObject);

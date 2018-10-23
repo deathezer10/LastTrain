@@ -39,8 +39,8 @@ public class AcceleratorLever : StationaryObject
         Accelerator = gameObject;
         AcceleratorHandle = HandleCollider.gameObject;
         HandleDefaultMaxPosition = AcceleratorHandle.transform.position;
-        VectorBeginPoint = Accelerator.transform.GetChild(2).gameObject;
-        VectorEndPoint = Accelerator.transform.GetChild(1).gameObject;
+        VectorBeginPoint = Accelerator.transform.GetChild(1).gameObject;
+        VectorEndPoint = Accelerator.transform.GetChild(0).gameObject;
         HandleMovementDirection = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
         HandleMovementDirection.Normalize(); //The direction where Acceleratorhandle can be moved forth and back.
         Audio = GetComponent<AudioPlayer>();
