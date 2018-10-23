@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 15cc9b042c82e054dbfad573338fcd15
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: DCabinDr
+    100002: SlidingDoor_1
+    100004: SlidingDoor_10
+    100006: SlidingDoor_11
+    100008: SlidingDoor_12
+    100010: SlidingDoor_13
+    100012: SlidingDoor_14
+    100014: SlidingDoor_15
+    100016: SlidingDoor_16
+    100018: SlidingDoor_2
+    100020: SlidingDoor_3
+    100022: SlidingDoor_4
+    100024: SlidingDoor_5
+    100026: SlidingDoor_6
+    100028: SlidingDoor_7
+    100030: SlidingDoor_8
+    100032: SlidingDoor_9
+    100034: //RootNode
+    400000: DCabinDr
+    400002: SlidingDoor_1
+    400004: SlidingDoor_10
+    400006: SlidingDoor_11
+    400008: SlidingDoor_12
+    400010: SlidingDoor_13
+    400012: SlidingDoor_14
+    400014: SlidingDoor_15
+    400016: SlidingDoor_16
+    400018: SlidingDoor_2
+    400020: SlidingDoor_3
+    400022: SlidingDoor_4
+    400024: SlidingDoor_5
+    400026: SlidingDoor_6
+    400028: SlidingDoor_7
+    400030: SlidingDoor_8
+    400032: SlidingDoor_9
+    400034: //RootNode
+    2100000: PC_A_Shader
+    2100002: Alpha2_Shader
+    2300000: DCabinDr
+    2300002: SlidingDoor_1
+    2300004: SlidingDoor_10
+    2300006: SlidingDoor_11
+    2300008: SlidingDoor_12
+    2300010: SlidingDoor_13
+    2300012: SlidingDoor_14
+    2300014: SlidingDoor_15
+    2300016: SlidingDoor_16
+    2300018: SlidingDoor_2
+    2300020: SlidingDoor_3
+    2300022: SlidingDoor_4
+    2300024: SlidingDoor_5
+    2300026: SlidingDoor_6
+    2300028: SlidingDoor_7
+    2300030: SlidingDoor_8
+    2300032: SlidingDoor_9
+    3300000: DCabinDr
+    3300002: SlidingDoor_1
+    3300004: SlidingDoor_10
+    3300006: SlidingDoor_11
+    3300008: SlidingDoor_12
+    3300010: SlidingDoor_13
+    3300012: SlidingDoor_14
+    3300014: SlidingDoor_15
+    3300016: SlidingDoor_16
+    3300018: SlidingDoor_2
+    3300020: SlidingDoor_3
+    3300022: SlidingDoor_4
+    3300024: SlidingDoor_5
+    3300026: SlidingDoor_6
+    3300028: SlidingDoor_7
+    3300030: SlidingDoor_8
+    3300032: SlidingDoor_9
+    4300000: SlidingDoor_2
+    4300002: SlidingDoor_1
+    4300004: SlidingDoor_4
+    4300006: SlidingDoor_8
+    4300008: SlidingDoor_5
+    4300010: SlidingDoor_7
+    4300012: SlidingDoor_6
+    4300014: SlidingDoor_13
+    4300016: SlidingDoor_16
+    4300018: SlidingDoor_12
+    4300020: SlidingDoor_10
+    4300022: SlidingDoor_11
+    4300024: SlidingDoor_9
+    4300026: SlidingDoor_14
+    4300028: SlidingDoor_15
+    4300030: SlidingDoor_3
+    4300032: DCabinDr
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha2_Shader
+    second: {fileID: 2100000, guid: 8c37932d874afab49bc2edd22c6ef773, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_A_Shader
+    second: {fileID: 2100000, guid: 82902ac2ff2bc9f4e9bae62f85f5122d, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

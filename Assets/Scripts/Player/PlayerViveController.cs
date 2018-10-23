@@ -64,7 +64,7 @@ public class PlayerViveController : MonoBehaviour
                         if (currentObject.GetComponent<IStationaryGrabbable>() == null)
                         {
                             FixedJoint joint = currentObject.AddComponent<FixedJoint>();
-                            joint.breakForce = 7500;
+                            joint.breakForce = 20000;
                             joint.breakTorque = Mathf.Infinity;
                             joint.connectedBody = GetComponent<Rigidbody>();
 
