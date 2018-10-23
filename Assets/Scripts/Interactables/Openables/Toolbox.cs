@@ -34,8 +34,8 @@ public class Toolbox : GrabbableObject
 
         newBC = gameObject.AddComponent<BoxCollider>();
 
-        newBC.center = new Vector3(0, 0.007f, 0.003f);
-        newBC.size = new Vector3(0.22f, 0.015f, 0.125f);
+        newBC.center = new Vector3(0, 0.025f, 0.003f);
+        newBC.size = new Vector3(0.22f, 0.04f, 0.125f);
 
         Destroy(oldBC);
     }

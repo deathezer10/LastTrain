@@ -35,8 +35,6 @@ public class SmallLock : GrabbableObject
     {
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
-            Debug.Log("Small lock hit with sawblade.");
-
             BreakLock();
         }
     }

@@ -10,6 +10,12 @@ public class SawBlade : GrabbableObject
 
     string holdingControllerHand;
     bool spinning, held;
+    Animator sawBladeAnimator;
+
+    private void Start()
+    {
+        sawBladeAnimator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -17,11 +23,11 @@ public class SawBlade : GrabbableObject
         {
             if (holdingControllerHand == SteamVR_Input_Sources.LeftHand.ToString())
             {
-                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 0.3f, 0.6f, SteamVR_Input_Sources.LeftHand);
+                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 0.3f, 0.8f, SteamVR_Input_Sources.LeftHand);
             }
             else
             {
-                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 0.3f, 0.6f, SteamVR_Input_Sources.RightHand);
+                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 0.3f, 0.8f, SteamVR_Input_Sources.RightHand);
             }
         }
     }
@@ -51,6 +57,9 @@ public class SawBlade : GrabbableObject
         held = false;
 
         PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = PH_NotSpinColor;
+
+        sawBladeAnimator.Play("SawBladeStop");
+
         holdingControllerHand = "";
     }
 
@@ -61,6 +70,15 @@ public class SawBlade : GrabbableObject
             spinning = spinning ? false : true;
 
             PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = spinning ? PH_SpinColor : PH_NotSpinColor;
+
+            if (spinning)
+            {
+                sawBladeAnimator.Play("SawBladeSpin");
+            }
+            else
+            {
+                sawBladeAnimator.Play("SawBladeStop");
+            }
         }
     }
 

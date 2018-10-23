@@ -12,12 +12,13 @@ public class KeyCardScanner : StationaryObject
     private string UsedCard;
     private bool bIsUnlocked = false;
     private string VibrationHand;
-    
+    private AudioPlayer[] Audio;
+
 
     // Use this for initialization
     void Start()
     {
-
+        Audio = GetComponents<AudioPlayer>();
     }
 
 
@@ -34,33 +35,45 @@ public class KeyCardScanner : StationaryObject
 
                 if (timer >= TimeToAnalyze)
                 {
-                   
-                        if (UsedCard.Contains("Right"))
-                        {
-                            print("Right card used");
-                            bIsUnlocked = true;
 
-                            if (VibrationHand == SteamVR_Input_Sources.LeftHand.ToString())
-                                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 1, 1, SteamVR_Input_Sources.LeftHand);
-                            else
-                                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 1, 1, SteamVR_Input_Sources.RightHand);
-                            //Some green led indication perhaps?
-                            DriverCabinDoorLock.init();
+                    if (UsedCard.Contains("Right"))
+                    {
+                        bIsUnlocked = true;
+                        foreach (AudioPlayer audio in Audio)
+                        {
+                            if (audio.clip.name == "keycard_access_1")
+                                audio.Play();
                         }
+
+
+                        if (VibrationHand == SteamVR_Input_Sources.LeftHand.ToString())
+                            SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 1, 1, SteamVR_Input_Sources.LeftHand);
 
                         else
-                        {
-                            timer = 0.0f;
-                            bIsCheckingKey = false;
-                            if (VibrationHand == SteamVR_Input_Sources.LeftHand.ToString())
-                                SteamVR_Input.actionsVibration[0].Execute(0, 0.7f, 10, 1, SteamVR_Input_Sources.LeftHand);
-                            else
-                                SteamVR_Input.actionsVibration[0].Execute(0, 0.7f, 10, 1, SteamVR_Input_Sources.RightHand);
-                            //Wrong keycard tried, some red led indications also perhaps ?
+                            SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 1, 1, SteamVR_Input_Sources.RightHand);
+                        //Some green led indication perhaps?
+                        DriverCabinDoorLock.init();
+                    }
 
-                            
+                    else
+                    {
+                        timer = 0.0f;
+                        bIsCheckingKey = false;
+                        foreach (AudioPlayer audio in Audio)
+                        {
+                            if (audio.clip.name == "access_denied")
+                                audio.Play();
                         }
-                    
+
+                        if (VibrationHand == SteamVR_Input_Sources.LeftHand.ToString())
+                            SteamVR_Input.actionsVibration[0].Execute(0, 0.7f, 10, 1, SteamVR_Input_Sources.LeftHand);
+                        else
+                            SteamVR_Input.actionsVibration[0].Execute(0, 0.7f, 10, 1, SteamVR_Input_Sources.RightHand);
+                        //Wrong keycard tried, some red led indications also perhaps ?
+
+
+                    }
+
                 }
 
 
@@ -94,7 +107,7 @@ public class KeyCardScanner : StationaryObject
             bIsCheckingKey = false;
             timer = 0.0f;
             UsedCard = null;
-            
+
         }
 
     }

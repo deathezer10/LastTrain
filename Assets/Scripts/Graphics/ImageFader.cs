@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
-[RequireComponent(typeof(ImageFader))]
+[RequireComponent(typeof(Image))]
 public class ImageFader : MonoBehaviour
 {
 
+    public bool m_FadeOutOnStart;
     private Image m_FaderImage;
 
     public enum FadeType
@@ -18,18 +20,21 @@ public class ImageFader : MonoBehaviour
     private void Start()
     {
         m_FaderImage = GetComponent<Image>();
+
+        if (m_FadeOutOnStart)
+        {
+            m_FaderImage.DOFade(0, 1);
+        }
     }
 
-    public void DoFade(FadeType fadeType, float duration, System.Action onComplete)
+    public void DoFade(FadeType fadeType, float duration, System.Action onComplete = null)
     {
-        if (fadeType == FadeType.ToInvisible)
-        {
-            
-        }
-        else if (fadeType == FadeType.ToOpaque)
-        {
 
-        }
+        var tweener = m_FaderImage.DOFade((fadeType == FadeType.ToOpaque) ? 1 : 0, duration).OnComplete(() =>
+        {
+            if (onComplete != null) onComplete.Invoke();
+        });
+
     }
 
 }

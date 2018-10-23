@@ -2,64 +2,91 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-
-
+using DG.Tweening;
 
 public class LightSwitch : StationaryObject
 {
-    private Light[] lights;
+    public GameObject m_BombContainer;
+    List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
-    
-    // Use this for initialization
-    void Start()
+
+    private TrainTimeHandler m_TrainTimeHandler;
+    private TrainDoorHandler m_TrainDoorHandler;
+    private StationMover m_StationMover;
+
+    private AudioPlayer Audio;
+
+    private bool m_FirstTime = true;
+
+    private void Start()
     {
-        lights = FindObjectsOfType(typeof(Light)) as Light[];
-       
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            m_TrainLights.Add(transform.GetChild(i).GetComponent<Light>());
+            Audio = GetComponent<AudioPlayer>();
+        }
+
+        // lol
+        m_TrainTimeHandler = FindObjectOfType<TrainTimeHandler>();
+        m_TrainDoorHandler = FindObjectOfType<TrainDoorHandler>();
+        m_StationMover = FindObjectOfType<StationMover>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
     {
-        print(handSource.ToString());
-        print(SteamVR_Input_Sources.LeftHand.ToString());
-        if (handSource.ToString() == SteamVR_Input_Sources.LeftHand.ToString())
-            SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, SteamVR_Input_Sources.LeftHand);
+        Audio.Play();
 
-        else
-            SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, SteamVR_Input_Sources.RightHand);
-
-        
-         
+        SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, currentController.HandSourceToInputSource());
 
         if (bSwitchIsOn)
         {
             bSwitchIsOn = false;
-            //Todo: move switch to off position
-           
-            foreach (Light light in lights)
+
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            foreach (Light light in m_TrainLights)
             {
-                light.intensity = 0;
+                light.gameObject.SetActive(false);
             }
         }
-       
         else
         {
             bSwitchIsOn = true;
-            FindObjectOfType<TrainDoorHandler>().ToggleDoors(false);
-            //Todo: move switch to on position
-
-            foreach (Light light in lights)
+            
+            if (m_FirstTime)
             {
-                light.intensity = 50;
+                m_BombContainer.SetActive(true);
+
+                foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
+                {
+                    collider.enabled = false;
+                }
+
+                m_BombContainer.transform.DOLocalMoveY(0.5f, 5).OnComplete(() =>
+                {
+                    foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
+                    {
+                        collider.enabled = true;
+                    }
+                });
+
+                m_TrainDoorHandler.ToggleDoors(false, () =>
+                {
+                    m_StationMover.ToggleMovement(true);
+                    m_TrainTimeHandler.StartTrainTime();
+                });
+
+                m_FirstTime = false;
+            }
+
+            transform.localRotation = Quaternion.Euler(0, 0, -90);
+
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(true);
             }
         }
-       
+
     }
 
     public override void OnControllerExit()

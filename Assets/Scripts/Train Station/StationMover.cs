@@ -19,8 +19,12 @@ public class StationMover : MonoBehaviour
 
     // Movement variables
     bool m_IsMoving = false;
+    public bool isMoving {
+        get { return m_IsMoving; }
+    }
+
     const float m_StationMaxSpeed = 10;
-    const float m_StationAcceleration = 1;
+    const float m_StationAcceleration = 0.5f;
     float m_CurrentStationSpeed = 0;
 
     private void Start()
