@@ -35,7 +35,7 @@ public class TrainTimeHandler : MonoBehaviour {
     {
         while (m_CurrentAnnouncementCount < StationDisplayLight.STATIONNODE_AMOUNT - 1)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(60);
 
             m_CurrentAnnouncementCount++;
 
