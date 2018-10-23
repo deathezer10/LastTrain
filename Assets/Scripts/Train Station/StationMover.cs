@@ -14,7 +14,7 @@ public class StationMover : MonoBehaviour
     int m_InitialTunnelSpawnAmount = 3;
     int m_CurrentTunnelIndex = 0;
     float m_CurrentDistanceTraveled = 0;
-    const float m_TunnelGapOffset = 20.05f;
+    const float m_TunnelGapOffset = 20.24f;
     bool m_IsFirstTimeDestroy = true;
 
     // Movement variables
