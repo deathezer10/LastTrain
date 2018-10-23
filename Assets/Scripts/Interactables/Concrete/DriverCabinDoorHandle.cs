@@ -76,7 +76,7 @@ public class DriverCabinDoorHandle : StationaryObject {
 
 
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
         bCanGrab = true;
         PlayerHand = currentController.gameObject;

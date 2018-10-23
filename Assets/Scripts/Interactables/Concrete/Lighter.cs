@@ -6,7 +6,7 @@ public class Lighter : GrabbableObject {
 	[SerializeField]
 	private ParticleSystem m_particle;
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
     }
 

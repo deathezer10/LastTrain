@@ -144,7 +144,7 @@ public class DriverCabinDoorLock : StationaryObject
         bIsUnlocked = true;
     }
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
         Awaked = true;
         if (bIsUnlocked)

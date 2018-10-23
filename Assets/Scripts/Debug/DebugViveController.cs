@@ -71,7 +71,7 @@ public class DebugViveController : PlayerViveController
 
         if (iObject != null)
         {
-            iObject.OnControllerEnter(this, GetCurrentHand());
+            iObject.OnControllerEnter(this);
         }
     }
 
@@ -103,9 +103,17 @@ public class DebugViveController : PlayerViveController
         {
             iObject.OnControllerExit();
 
-            var grabbableObject = other.GetComponent<IGrabbable>();
-
             Destroy(GetComponent<FixedJoint>());
         }
+    }
+
+    override public void Vibration(
+        float secondsFromNow,
+        float durationSeconds,
+        float frequency,
+        float amplitude,
+        SteamVR_Input_Sources handSource)
+    {
+
     }
 }

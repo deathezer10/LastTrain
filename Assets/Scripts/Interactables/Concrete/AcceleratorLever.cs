@@ -103,7 +103,7 @@ public class AcceleratorLever : StationaryObject
     }
 
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
         bCanGrab = true;
         PlayerHand = currentController.gameObject;

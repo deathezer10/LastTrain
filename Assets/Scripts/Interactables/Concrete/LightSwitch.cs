@@ -32,11 +32,12 @@ public class LightSwitch : StationaryObject
         m_StationMover = FindObjectOfType<StationMover>();
     }
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
         Audio.Play();
 
-        SteamVR_Input.actionsVibration[0].Execute(0, 0.2f, 5, 1, currentController.HandSourceToInputSource());
+        var source = currentController.GetCurrentHand().ToInputSource();
+        currentController.Vibration(0, 0.2f, 5, 1, source);
 
         if (bSwitchIsOn)
         {

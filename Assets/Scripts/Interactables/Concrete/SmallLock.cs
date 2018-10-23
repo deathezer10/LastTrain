@@ -7,7 +7,7 @@ public class SmallLock : GrabbableObject
 {
     public GameObject uncutTopPart, cutTopPart, umbrella;
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
     }
 
