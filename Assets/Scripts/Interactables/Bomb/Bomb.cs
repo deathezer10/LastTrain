@@ -31,7 +31,10 @@ public class Bomb : GrabbableObject
             yield return null;
         }
 
-        TimerTimeOut();
+        if (timeRemaining <= 0)
+        {
+            TimerTimeOut();
+        }
     }
 
     public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
