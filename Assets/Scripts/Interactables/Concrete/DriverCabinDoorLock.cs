@@ -41,28 +41,17 @@ public class DriverCabinDoorLock : StationaryObject
         LeftDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(-DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
     }
 
-
-    void Update()
+    void OnCollisionEnter(Collision other)
     {
-        if (doorBody.velocity.x <= -0.00001f)
+        if (!(other.gameObject.name == "PlayerOrigin"))
         {
-            if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
-            {
-                DoorSlamVelocity = -doorBody.velocity;
-                doorBody.velocity = Vector3.zero;
-                doorBody.velocity = HandleMovementDirection * (DoorSlamVelocity.x / 4);
-                return;
-            }
+            doorBody.velocity = Vector3.zero;
+            doorBody.angularVelocity = Vector3.zero;
+            doorBody.Sleep();
         }
-
-        else if (doorBody.velocity.x >= 0.00001f)
-        {
-            if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.34f).x <= LeftDoorCorner.x)
-            {
-                return;
-            }
-        }
-
+    }
+        void Update()
+    {
 
         if (!bDisableLever)
         {
