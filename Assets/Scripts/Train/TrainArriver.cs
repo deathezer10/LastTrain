@@ -8,7 +8,7 @@ public class TrainArriver : MonoBehaviour
 
     public TrainDoorHandler m_TrainDoor;
 
-    const float m_TrainStoppingPoint = 4.85f;
+    const float m_TrainStoppingPoint = -4;
 
     bool m_IsAudioFading = false;
 
