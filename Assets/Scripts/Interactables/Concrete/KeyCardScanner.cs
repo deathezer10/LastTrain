@@ -11,8 +11,12 @@ public class KeyCardScanner : StationaryObject
     [SerializeField]
     private AudioPlayer FailedAudio;
 
+    private bool isDone = false;
+
     private void OnTriggerEnter(Collider other)
     {
+        if(isDone) return;
+
         if (successAudio.IsPlaying()) return;
         if (FailedAudio.IsPlaying()) return;
 
@@ -32,6 +36,8 @@ public class KeyCardScanner : StationaryObject
 
         //Some green led indication perhaps?
         DriverCabinDoorLock.init();
+
+        isDone = true;
     }
 
     private void ScanFailed(KeyCard card)
