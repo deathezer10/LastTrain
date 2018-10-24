@@ -380,7 +380,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -425,7 +425,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -521,6 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadd2339125f1c647b8d43d4ca0fb5c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  successAudio: {fileID: 114396647456423134}
+  FailedAudio: {fileID: 114047738938670668}
 --- !u!114 &114922419159156708
 MonoBehaviour:
   m_ObjectHideFlags: 1

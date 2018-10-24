@@ -18,7 +18,7 @@ public class PlayerViveMovement : MonoBehaviour
         m_CurrentCamera = GetComponentInChildren<Camera>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector3 moveDir = Vector3.zero;
 

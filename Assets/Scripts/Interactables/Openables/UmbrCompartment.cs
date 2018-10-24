@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UmbrCompartment : MonoBehaviour
 {
-    public GameObject visualLockBottom, visualLockTop, physicsLockBottom, physicsLockTop, umbrella;
+    public GameObject visualLockBottom, visualLockTop, physicsLockBottom, physicsLockTop, umbrella, umbrellaVisual;
 
     bool rotating;
     Quaternion finalRotation = new Quaternion(0, 0.7f, 0, 0.7f);
@@ -18,6 +18,7 @@ public class UmbrCompartment : MonoBehaviour
             if (transform.localRotation.y >= 0.7f)
             {
                 rotating = false;
+                umbrellaVisual.SetActive(false);
                 umbrella.SetActive(true);
                 umbrella.transform.SetParent(null);
             }

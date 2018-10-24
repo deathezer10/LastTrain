@@ -20,6 +20,7 @@ public class ExtghsrCompartment : MonoBehaviour
                 rotating = false;
                 visualExtinguisher.SetActive(false);
                 physicsExtinguisher.SetActive(true);
+                physicsExtinguisher.transform.parent = null;
             }
         }
     }
@@ -32,7 +33,7 @@ public class ExtghsrCompartment : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "GameController")
+        if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
             OpenExCompartment();
         }

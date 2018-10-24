@@ -5,96 +5,57 @@ using Valve.VR;
 
 public class KeyCardScanner : StationaryObject
 {
-    private float timer = 0.0f;
-    private const float TimeToAnalyze = 1.0f;
-    private bool bIsCheckingKey = false;
-    private const string CardPrefix = "KeyCard_";
-    private string UsedCard;
-    private bool bIsUnlocked = false;
-    private PlayerViveController playerController;
-    private HandSource playerHand;
-    private AudioPlayer[] Audio;
+    [SerializeField]
+    private AudioPlayer successAudio;
 
+    [SerializeField]
+    private AudioPlayer FailedAudio;
 
-    // Use this for initialization
-    void Start()
-    {
-        Audio = GetComponents<AudioPlayer>();
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!bIsUnlocked)
-        {
-            if (bIsCheckingKey)
-            {
-                timer += Time.deltaTime;
-
-                if (timer >= TimeToAnalyze)
-                {
-                    if (UsedCard.Contains("Right"))
-                    {
-                        bIsUnlocked = true;
-                        foreach (AudioPlayer audio in Audio)
-                        {
-                            if (audio.clip.name == "keycard_access_1")
-                                audio.Play();
-                        }
-
-                        playerController.Vibration(0, 0.3f, 1, 1, playerHand.ToInputSource());
-
-                        //Some green led indication perhaps?
-                        DriverCabinDoorLock.init();
-                    }
-
-                    else
-                    {
-                        timer = 0.0f;
-                        bIsCheckingKey = false;
-                        foreach (AudioPlayer audio in Audio)
-                        {
-                            if (audio.clip.name == "access_denied")
-                                audio.Play();
-                        }
-                        
-                        playerController.Vibration(0, 0.7f, 10, 1, playerHand.ToInputSource());
-
-                        //Wrong keycard tried, some red led indications also perhaps ?
-                    }
-                }
-            }
-        }
-    }
-
-
+    private bool isDone = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Contains(CardPrefix))
-        {
-            bIsCheckingKey = true;
-            UsedCard = other.gameObject.name;
+        if(isDone) return;
+
+        if (successAudio.IsPlaying()) return;
+        if (FailedAudio.IsPlaying()) return;
+
+        KeyCard card = other.GetComponent<KeyCard>();
+
+        if (card) {
+            if(card.IsSuccess()) ScanSuccess(card);
+            else ScanFailed(card);
         }
+    }
+
+    private void ScanSuccess(KeyCard card)
+    {
+        if (successAudio) successAudio.Play();
+
+        card.playerController.Vibration(0, 0.7f, 10, 1, card.playerHand.ToInputSource());
+
+        //Some green led indication perhaps?
+        DriverCabinDoorLock.init();
+
+        isDone = true;
+    }
+
+    private void ScanFailed(KeyCard card)
+    {
+        if (FailedAudio) FailedAudio.Play();
+
+        card.playerController.Vibration(0, 0.3f, 1, 1, card.playerHand.ToInputSource());
     }
 
 
     private void OnTriggerLeave(Collider other)
     {
-        if (other.gameObject.name.Contains(CardPrefix))
-        {
-            bIsCheckingKey = false;
-            timer = 0.0f;
-            UsedCard = null;
-        }
+
     }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
-        playerController = currentController;
-        playerHand = playerController.GetCurrentHand();
+
     }
 
     public override void OnControllerExit()
