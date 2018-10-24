@@ -6,7 +6,7 @@ public class DoorIgnoreCollision : MonoBehaviour
 {
 
     private BoxCollider Collider;
-    private bool bIsColliding;
+    public bool bIsColliding;
 
     // Use this for initialization
     void Start()
@@ -17,22 +17,12 @@ public class DoorIgnoreCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(bIsColliding)
-        {
-            Collider.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            Collider.gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            Collider.gameObject.GetComponent<Rigidbody>().Sleep();
-        }
+        
     }
 
     void OnCollisionEnter(Collision other)
     {
-        print("Colission start");
         bIsColliding = true;
-        Collider.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        Collider.gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        Collider.gameObject.GetComponent<Rigidbody>().Sleep();
-
     }
 
     void OnCollisionLeave(Collision other)
