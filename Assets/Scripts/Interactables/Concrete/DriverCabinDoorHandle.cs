@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class DriverCabinDoorHandle : StationaryObject {
 
-    private GameObject m_Door;
     private PlayerViveController[] foundControllers;
-    private BoxCollider m_DoorHandle;
     private GameObject PlayerHand;
 
     private bool bIsGrabbing = false;
@@ -15,17 +13,7 @@ public class DriverCabinDoorHandle : StationaryObject {
 
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
-    private float CurrentYRotation;
-    private float MaxYRotation = 100.0f;
-    private float MinYRotation = -200.0f;
 
-    // Use this for initialization
-    void Start () {
-        m_Door = transform.parent.gameObject;
-        m_DoorHandle = FindObjectOfType<BoxCollider>();
-        CurrentYRotation = transform.parent.rotation.y;
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		
@@ -61,20 +49,9 @@ public class DriverCabinDoorHandle : StationaryObject {
 
                 transform.parent.Rotate(0, -angle, 0);
                 PreviousHandPosition = CurrentHandPosition;
-                CurrentYRotation = transform.parent.rotation.z;
             }
-
-
-
-
         }
-
-
-
-
 	}
-
-
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {

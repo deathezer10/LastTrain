@@ -18,7 +18,6 @@ public class DriverCabinDoorLock : StationaryObject
     private bool bIsLastleft = false;
     private bool Awaked = false;
 
-    private Vector3 CurrentHandPosition;
     private Vector3 LastHandPosition;
     private Vector3 HandleMovementDirection = new Vector3(1, 0, 0);
     private Vector3 LeftDoorCorner;
@@ -178,10 +177,7 @@ public class DriverCabinDoorLock : StationaryObject
 
     public override void OnControllerStay()
     {
-        if (bIsGrabbing)
-        {
-            CurrentHandPosition = PlayerHand.transform.position;
-        }
+
     }
 
     public override void OnGrab()

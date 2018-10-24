@@ -32,7 +32,6 @@ public class KeyCardScanner : StationaryObject
             if (bIsCheckingKey)
             {
                 timer += Time.deltaTime;
-                int seconds = (int)timer % 60;
 
                 if (timer >= TimeToAnalyze)
                 {

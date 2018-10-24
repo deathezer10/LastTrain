@@ -5,10 +5,6 @@ using DG.Tweening;
 
 public class DoorLever : MonoBehaviour
 {
-
-    private PlayerViveController[] foundControllers;
-    private GameObject parent;
-    private BoxCollider ButtonCollider;
     private const float m_ToggleOffset = -0.02f;
     private AudioPlayer Audio;
     private bool bDisable = false;
@@ -16,9 +12,6 @@ public class DoorLever : MonoBehaviour
    
     void Start()
     {
-        foundControllers = FindObjectsOfType<PlayerViveController>();
-        parent = transform.root.gameObject;
-        ButtonCollider = GetComponent<BoxCollider>();
         Audio = GetComponent<AudioPlayer>();
     }
 

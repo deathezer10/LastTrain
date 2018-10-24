@@ -6,8 +6,6 @@ public class BrakeLever : StationaryObject
 {
     public static BrakeLever instance;
     private GameObject PlayerHand;
-    private PlayerViveController[] foundControllers;
-    private BoxCollider LeverTip;
     private BoxCollider DisablePoint;
     private AudioPlayer Audio;
 
@@ -36,8 +34,6 @@ public class BrakeLever : StationaryObject
     // Use this for initialization
     void Start()
     {
-        foundControllers = FindObjectsOfType<PlayerViveController>();
-        LeverTip = GetComponent<BoxCollider>();
         currentXRotation = transform.rotation.x;
         maxXRotation = currentXRotation;
     }
