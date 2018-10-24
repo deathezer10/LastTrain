@@ -6,7 +6,7 @@ public class Ball : GrabbableObject
 {
     int useCount = 0;
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
     }
 

@@ -5,24 +5,17 @@ using DG.Tweening;
 
 public class DoorLever : MonoBehaviour
 {
-
-    private PlayerViveController[] foundControllers;
-    private GameObject parent;
-    private BoxCollider ButtonCollider;
     private const float m_ToggleOffset = -0.02f;
     private AudioPlayer Audio;
     private bool bDisable = false;
-    // Use this for initialization
+
+
     void Start()
     {
-        foundControllers = FindObjectsOfType<PlayerViveController>();
-        parent = transform.root.gameObject;
-        ButtonCollider = GetComponent<BoxCollider>();
         Audio = GetComponent<AudioPlayer>();
-
     }
 
-    // Update is called once per frame
+
     void Update()
     {
 
@@ -33,15 +26,12 @@ public class DoorLever : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!bDisable)
-            if (other.gameObject.name == "Umbrella" || other.gameObject.name == "Controller (left)" || other.gameObject.name == "Controller (right)")
+            if (other.gameObject.name == "Umbrella" || ((other.gameObject.name == "Controller (left)" || other.gameObject.name == "Controller (right)") && DriverCabinDoorLock.bIsUnlocked))
             {
                 bDisable = true;
                 Audio.Play();
                 DriverCabinDoorLock.init();
                 transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
             }
-
     }
-
-
 }

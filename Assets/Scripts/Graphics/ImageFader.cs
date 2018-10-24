@@ -30,7 +30,7 @@ public class ImageFader : MonoBehaviour
     public void DoFade(FadeType fadeType, float duration, System.Action onComplete = null)
     {
 
-        var tweener = m_FaderImage.DOFade((fadeType == FadeType.ToOpaque) ? 1 : 0, duration).OnComplete(() =>
+        m_FaderImage.DOFade((fadeType == FadeType.ToOpaque) ? 1 : 0, duration).OnComplete(() =>
         {
             if (onComplete != null) onComplete.Invoke();
         });

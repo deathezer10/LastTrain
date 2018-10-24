@@ -8,7 +8,7 @@ public class TrainDoorHandler : MonoBehaviour
 
     const float m_DoorOffset = -1.1f;
 
-    const string m_DoorNamePrefix = "PC_DoubleDr_";
+    const string m_DoorNamePrefix = "BoardingDoor_";
 
     private enum DoorSide { Left, Right }
 
@@ -20,6 +20,9 @@ public class TrainDoorHandler : MonoBehaviour
         for (int i = 0; i < transform.childCount; ++i)
         {
             Transform childTransform = transform.GetChild(i);
+
+            if (!childTransform.name.Contains(m_DoorNamePrefix))
+                continue;
 
             int doorIndex = int.Parse(childTransform.name.Replace(m_DoorNamePrefix, string.Empty));
 
@@ -59,8 +62,8 @@ public class TrainDoorHandler : MonoBehaviour
                 {
                     tweener.OnComplete(() =>
                     {
-                         if (onComplete != null)
-                             onComplete();
+                        if (onComplete != null)
+                            onComplete();
                     });
                 }
             }

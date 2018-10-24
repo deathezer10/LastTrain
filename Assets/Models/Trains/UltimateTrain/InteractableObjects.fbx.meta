@@ -1,0 +1,249 @@
+fileFormatVersion: 2
+guid: 785b34aece9f80d4c9cc30bf11adb134
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Accelerator
+    100002: Brake
+    100004: BrokenDCWindow_01
+    100006: BrokenDCWindow_02
+    100008: BrokenDCWindow_03
+    100010: BrokenDCWindow_04
+    100012: BrokenDCWindow_05
+    100014: BrokenDCWindow_06
+    100016: BrokenDCWindow_07
+    100018: BrokenDCWindow_08
+    100020: Cmpt_FireEx_Dr
+    100022: Cmpt_FireEx_Lock
+    100024: Cmpt_Umbrella_Dr
+    100026: Cmpt_Umbrella_LockA
+    100028: Cmpt_Umbrella_LockB
+    100030: DC_Window
+    100032: DCabinDrButton
+    100034: Handle_CirLong_End
+    100036: Handle_CirLong_Mid
+    100038: Handle_CirLong_Top
+    100040: Handle_CirShort_Btm
+    100042: Handle_CirShort_Mid
+    100044: Handle_CirShort_Top
+    100046: Handle_Tri_Btm
+    100048: Handle_Tri_Mid
+    100050: Handle_Tri_Top
+    100052: //RootNode
+    100054: LIghtSwitch
+    400000: Accelerator
+    400002: Brake
+    400004: BrokenDCWindow_01
+    400006: BrokenDCWindow_02
+    400008: BrokenDCWindow_03
+    400010: BrokenDCWindow_04
+    400012: BrokenDCWindow_05
+    400014: BrokenDCWindow_06
+    400016: BrokenDCWindow_07
+    400018: BrokenDCWindow_08
+    400020: Cmpt_FireEx_Dr
+    400022: Cmpt_FireEx_Lock
+    400024: Cmpt_Umbrella_Dr
+    400026: Cmpt_Umbrella_LockA
+    400028: Cmpt_Umbrella_LockB
+    400030: DC_Window
+    400032: DCabinDrButton
+    400034: Handle_CirLong_End
+    400036: Handle_CirLong_Mid
+    400038: Handle_CirLong_Top
+    400040: Handle_CirShort_Btm
+    400042: Handle_CirShort_Mid
+    400044: Handle_CirShort_Top
+    400046: Handle_Tri_Btm
+    400048: Handle_Tri_Mid
+    400050: Handle_Tri_Top
+    400052: //RootNode
+    400054: LIghtSwitch
+    2100000: PC_C_Shader
+    2100002: Alpha2_Shader
+    2100004: InnerShell_Shader
+    2100006: DC_A_Shader
+    2300000: Accelerator
+    2300002: Brake
+    2300004: BrokenDCWindow_01
+    2300006: BrokenDCWindow_02
+    2300008: BrokenDCWindow_03
+    2300010: BrokenDCWindow_04
+    2300012: BrokenDCWindow_05
+    2300014: BrokenDCWindow_06
+    2300016: BrokenDCWindow_07
+    2300018: BrokenDCWindow_08
+    2300020: Cmpt_FireEx_Dr
+    2300022: Cmpt_FireEx_Lock
+    2300024: Cmpt_Umbrella_Dr
+    2300026: Cmpt_Umbrella_LockA
+    2300028: Cmpt_Umbrella_LockB
+    2300030: DC_Window
+    2300032: DCabinDrButton
+    2300034: Handle_CirLong_End
+    2300036: Handle_CirLong_Mid
+    2300038: Handle_CirLong_Top
+    2300040: Handle_CirShort_Btm
+    2300042: Handle_CirShort_Mid
+    2300044: Handle_CirShort_Top
+    2300046: Handle_Tri_Btm
+    2300048: Handle_Tri_Mid
+    2300050: Handle_Tri_Top
+    2300052: LIghtSwitch
+    3300000: Accelerator
+    3300002: Brake
+    3300004: BrokenDCWindow_01
+    3300006: BrokenDCWindow_02
+    3300008: BrokenDCWindow_03
+    3300010: BrokenDCWindow_04
+    3300012: BrokenDCWindow_05
+    3300014: BrokenDCWindow_06
+    3300016: BrokenDCWindow_07
+    3300018: BrokenDCWindow_08
+    3300020: Cmpt_FireEx_Dr
+    3300022: Cmpt_FireEx_Lock
+    3300024: Cmpt_Umbrella_Dr
+    3300026: Cmpt_Umbrella_LockA
+    3300028: Cmpt_Umbrella_LockB
+    3300030: DC_Window
+    3300032: DCabinDrButton
+    3300034: Handle_CirLong_End
+    3300036: Handle_CirLong_Mid
+    3300038: Handle_CirLong_Top
+    3300040: Handle_CirShort_Btm
+    3300042: Handle_CirShort_Mid
+    3300044: Handle_CirShort_Top
+    3300046: Handle_Tri_Btm
+    3300048: Handle_Tri_Mid
+    3300050: Handle_Tri_Top
+    3300052: LIghtSwitch
+    4300000: LIghtSwitch
+    4300002: DC_Window
+    4300004: BrokenDCWindow_01
+    4300006: BrokenDCWindow_02
+    4300008: BrokenDCWindow_06
+    4300010: BrokenDCWindow_08
+    4300012: BrokenDCWindow_05
+    4300014: BrokenDCWindow_04
+    4300016: BrokenDCWindow_03
+    4300018: BrokenDCWindow_07
+    4300020: Cmpt_Umbrella_Dr
+    4300022: Cmpt_Umbrella_LockB
+    4300024: Cmpt_Umbrella_LockA
+    4300026: Cmpt_FireEx_Dr
+    4300028: Cmpt_FireEx_Lock
+    4300030: DCabinDrButton
+    4300032: Accelerator
+    4300034: Brake
+    4300036: Handle_CirLong_Top
+    4300038: Handle_CirLong_Mid
+    4300040: Handle_CirLong_End
+    4300042: Handle_Tri_Top
+    4300044: Handle_Tri_Mid
+    4300046: Handle_Tri_Btm
+    4300048: Handle_CirShort_Top
+    4300050: Handle_CirShort_Mid
+    4300052: Handle_CirShort_Btm
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha2_Shader
+    second: {fileID: 2100000, guid: 8c37932d874afab49bc2edd22c6ef773, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DC_A_Shader
+    second: {fileID: 2100000, guid: e5711bd843443a3429c334e40fbcc18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: InnerShell_Shader
+    second: {fileID: 2100000, guid: 8bf25666015308b4f9a1bd9c1ca82764, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_C_Shader
+    second: {fileID: 2100000, guid: e82791bfcc82df04f8362698f642aedc, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

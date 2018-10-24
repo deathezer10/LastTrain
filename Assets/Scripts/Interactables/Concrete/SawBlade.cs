@@ -8,10 +8,13 @@ public class SawBlade : GrabbableObject
     public Color PH_SpinColor, PH_NotSpinColor;
     public GameObject PH_SpinIndicator;  // To be replaced with sound / animation for spin
 
-    string holdingControllerHand;
+    private PlayerViveController playerController;
+    private HandSource playerHand;
+    
     bool spinning, held;
+    float vibrationTimer;
     Animator sawBladeAnimator;
-
+    
     private void Start()
     {
         sawBladeAnimator = GetComponent<Animator>();
@@ -21,23 +24,25 @@ public class SawBlade : GrabbableObject
     {
         if (spinning && held)
         {
-            if (holdingControllerHand == SteamVR_Input_Sources.LeftHand.ToString())
+            if (playerController != null && Time.time >= vibrationTimer)
             {
-                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 0.3f, 0.8f, SteamVR_Input_Sources.LeftHand);
-            }
-            else
-            {
-                SteamVR_Input.actionsVibration[0].Execute(0, 0.3f, 0.3f, 0.8f, SteamVR_Input_Sources.RightHand);
+                var source = playerHand.ToInputSource();
+                playerController.Vibration(0, 0.3f, 0.3f, 0.5f, source);
+                vibrationTimer = Time.time + 0.3f;
             }
         }
     }
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
+        playerController = currentController;
+        playerHand = playerController.GetCurrentHand();
     }
 
     public override void OnControllerExit()
     {
+        playerController = null;
+        held = false;
     }
 
     public override void OnControllerStay()
@@ -47,8 +52,6 @@ public class SawBlade : GrabbableObject
     public override void OnGrab()
     {
         held = true;
-
-        holdingControllerHand = PlayerViveController.GetControllerThatHolds(gameObject).GetCurrentHand().ToString();
     }
 
     public override void OnGrabReleased()
@@ -60,7 +63,7 @@ public class SawBlade : GrabbableObject
 
         sawBladeAnimator.Play("SawBladeStop");
 
-        holdingControllerHand = "";
+        playerController = null;
     }
 
     public override void OnUse()
@@ -74,6 +77,7 @@ public class SawBlade : GrabbableObject
             if (spinning)
             {
                 sawBladeAnimator.Play("SawBladeSpin");
+                vibrationTimer = Time.time + 0.3f;
             }
             else
             {

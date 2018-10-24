@@ -14,7 +14,7 @@ public class StationMover : MonoBehaviour
     int m_InitialTunnelSpawnAmount = 3;
     int m_CurrentTunnelIndex = 0;
     float m_CurrentDistanceTraveled = 0;
-    const float m_TunnelGapOffset = 20.05f;
+    const float m_TunnelGapOffset = 20.24f;
     bool m_IsFirstTimeDestroy = true;
 
     // Movement variables
@@ -68,9 +68,9 @@ public class StationMover : MonoBehaviour
                 m_CurrentTunnelIndex = 0;
             }
 //<<<<<<< HEAD
-            else if (m_CurrentTunnelIndex >= 3) // Destroy the oldest tunnel
+            //else if (m_CurrentTunnelIndex >= 3) // Destroy the oldest tunnel
 //=======
-   //         else if (!m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 3)
+   else if (!m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 3)
 //>>>>>>> 61dfa09ae768cf74e27db473e9ec3580fa38505b
             {
                 Destroy(m_RemovableObjects.Dequeue().gameObject);

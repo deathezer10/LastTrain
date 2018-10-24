@@ -9,7 +9,7 @@ using UnityEngine;
 public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
     public abstract void OnControllerExit();
-    public abstract void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource);
+    public abstract void OnControllerEnter(PlayerViveController currentController);
     public abstract void OnControllerStay();
     public abstract void OnGrab();
     public abstract void OnGrabReleased();

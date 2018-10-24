@@ -44,7 +44,7 @@ public class Suitcase : GrabbableObject
         Destroy(oldBC);
     }
 
-    public override void OnControllerEnter(PlayerViveController currentController, PlayerViveController.HandSource handSource)
+    public override void OnControllerEnter(PlayerViveController currentController)
     {
     }
 

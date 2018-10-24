@@ -4,16 +4,23 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.Extras;
 
+public enum HandSource
+{
+    LeftHand,
+    RightHand
+}
+
+public static partial class HandSourceEx
+{
+    public static SteamVR_Input_Sources ToInputSource(this HandSource param)
+    {
+        return (param == HandSource.LeftHand) ? SteamVR_Input_Sources.LeftHand : SteamVR_Input_Sources.RightHand;
+    }
+}
+
 [RequireComponent(typeof(Collider))]
 public class PlayerViveController : MonoBehaviour
 {
-
-    public enum HandSource
-    {
-        LeftHand,
-        RightHand
-    }
-
     public HandSource m_CurrentHand;
 
     private static GameObject m_CurrentLeftObject = null;
@@ -41,7 +48,7 @@ public class PlayerViveController : MonoBehaviour
                 {
 
                     // On Grab
-                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(HandSourceToInputSource()))
+                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(m_CurrentHand.ToInputSource()))
                     {
                         // If other hand is holding this object, unassign it
                         if (GetCurrentHandObject(true) != null && GetCurrentHandObject(true) == currentObject.gameObject)
@@ -57,7 +64,7 @@ public class PlayerViveController : MonoBehaviour
                         if (currentObject.GetComponent<IStationaryGrabbable>() == null)
                         {
                             FixedJoint joint = currentObject.AddComponent<FixedJoint>();
-                            joint.breakForce = 7500;
+                            joint.breakForce = 20000;
                             joint.breakTorque = Mathf.Infinity;
                             joint.connectedBody = GetComponent<Rigidbody>();
 
@@ -67,12 +74,12 @@ public class PlayerViveController : MonoBehaviour
 
 
                     // On Grab Released
-                    if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(HandSourceToInputSource()))
+                    if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(m_CurrentHand.ToInputSource()))
                     {
                         iObject.OnUse();
                     }
 
-                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(HandSourceToInputSource()))
+                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(m_CurrentHand.ToInputSource()))
                     {
                         grabbableObject.OnGrabReleased();
 
@@ -103,7 +110,7 @@ public class PlayerViveController : MonoBehaviour
         if (iObject != null)
         {
             AssignObjectToHand(GetCurrentHand(), other.gameObject);
-            iObject.OnControllerEnter(this, m_CurrentHand);
+            iObject.OnControllerEnter(this);
         }
     }
 
@@ -143,11 +150,6 @@ public class PlayerViveController : MonoBehaviour
         AssignObjectToHand(m_CurrentHand, null);
     }
 
-    public SteamVR_Input_Sources HandSourceToInputSource()
-    {
-        return (m_CurrentHand == HandSource.LeftHand) ? SteamVR_Input_Sources.LeftHand : SteamVR_Input_Sources.RightHand;
-    }
-
     private void AssignObjectToHand(HandSource hand, GameObject go)
     {
         if (hand == HandSource.LeftHand)
@@ -185,6 +187,25 @@ public class PlayerViveController : MonoBehaviour
         }
 
         return null;
+    }
+
+    virtual public void Vibration(
+        float secondsFromNow, 
+        float durationSeconds, 
+        float frequency, 
+        float amplitude,
+        SteamVR_Input_Sources handSource)
+    {
+        SteamVR_Input.actionsVibration[0].Execute(secondsFromNow, durationSeconds, frequency, amplitude, handSource);
+    }
+
+    public void VibrationCurrentHand(
+        float secondsFromNow,
+        float durationSeconds,
+        float frequency,
+        float amplitude)
+    {
+        Vibration(secondsFromNow, durationSeconds, frequency, amplitude, m_CurrentHand.ToInputSource());
     }
 
 }

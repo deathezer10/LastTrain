@@ -44,6 +44,36 @@ ModelImporter:
     100076: polySurface3054
     100078: polySurface3055
     100080: //RootNode
+    100082: group1
+    100084: pCube11
+    100086: pCylinder9
+    100088: polySurface1220
+    100090: polySurface1222
+    100092: polySurface1225
+    100094: polySurface1228
+    100096: polySurface1229
+    100098: polySurface1230
+    100100: polySurface1797
+    100102: polySurface1799
+    100104: polySurface1800
+    100106: polySurface1809
+    100108: polySurface1818
+    100110: polySurface1821
+    100112: polySurface2996
+    100114: polySurface3020
+    100116: polySurface3025
+    100118: polySurface3027
+    100120: polySurface3031
+    100122: polySurface3032
+    100124: polySurface3034
+    100126: polySurface3035
+    100128: polySurface3036
+    100130: polySurface3038
+    100132: polySurface3174
+    100134: polySurface3175
+    100136: polySurface449
+    100138: pSphere1
+    100140: transform1
     400000: Accelerator
     400002: Brake
     400004: BtnDriverCabinPassengerCabin_Dr
@@ -85,9 +115,44 @@ ModelImporter:
     400076: polySurface3054
     400078: polySurface3055
     400080: //RootNode
+    400082: group1
+    400084: pCube11
+    400086: pCylinder9
+    400088: polySurface1220
+    400090: polySurface1222
+    400092: polySurface1225
+    400094: polySurface1228
+    400096: polySurface1229
+    400098: polySurface1230
+    400100: polySurface1797
+    400102: polySurface1799
+    400104: polySurface1800
+    400106: polySurface1809
+    400108: polySurface1818
+    400110: polySurface1821
+    400112: polySurface2996
+    400114: polySurface3020
+    400116: polySurface3025
+    400118: polySurface3027
+    400120: polySurface3031
+    400122: polySurface3032
+    400124: polySurface3034
+    400126: polySurface3035
+    400128: polySurface3036
+    400130: polySurface3038
+    400132: polySurface3174
+    400134: polySurface3175
+    400136: polySurface449
+    400138: pSphere1
+    400140: transform1
     2100000: lambert5
     2100002: lambert3
     2100004: lambert6
+    2100006: PC_C_Shader
+    2100008: InnerShell_Shader
+    2100010: DC_A_Shader
+    2100012: PC_A_Shader
+    2100014: Alpha2_Shader
     2300000: Accelerator
     2300002: Brake
     2300004: BtnDriverCabinPassengerCabin_Dr
@@ -128,6 +193,33 @@ ModelImporter:
     2300074: polySurface3052
     2300076: polySurface3054
     2300078: polySurface3055
+    2300080: pCylinder9
+    2300082: polySurface1220
+    2300084: polySurface1222
+    2300086: polySurface1225
+    2300088: polySurface1228
+    2300090: polySurface1229
+    2300092: polySurface1230
+    2300094: polySurface1797
+    2300096: polySurface1799
+    2300098: polySurface1800
+    2300100: polySurface1809
+    2300102: polySurface1818
+    2300104: polySurface1821
+    2300106: polySurface2996
+    2300108: polySurface3020
+    2300110: polySurface3025
+    2300112: polySurface3027
+    2300114: polySurface3031
+    2300116: polySurface3032
+    2300118: polySurface3034
+    2300120: polySurface3035
+    2300122: polySurface3036
+    2300124: polySurface3038
+    2300126: polySurface3174
+    2300128: polySurface3175
+    2300130: polySurface449
+    2300132: pSphere1
     3300000: Accelerator
     3300002: Brake
     3300004: BtnDriverCabinPassengerCabin_Dr
@@ -168,6 +260,33 @@ ModelImporter:
     3300074: polySurface3052
     3300076: polySurface3054
     3300078: polySurface3055
+    3300080: pCylinder9
+    3300082: polySurface1220
+    3300084: polySurface1222
+    3300086: polySurface1225
+    3300088: polySurface1228
+    3300090: polySurface1229
+    3300092: polySurface1230
+    3300094: polySurface1797
+    3300096: polySurface1799
+    3300098: polySurface1800
+    3300100: polySurface1809
+    3300102: polySurface1818
+    3300104: polySurface1821
+    3300106: polySurface2996
+    3300108: polySurface3020
+    3300110: polySurface3025
+    3300112: polySurface3027
+    3300114: polySurface3031
+    3300116: polySurface3032
+    3300118: polySurface3034
+    3300120: polySurface3035
+    3300122: polySurface3036
+    3300124: polySurface3038
+    3300126: polySurface3174
+    3300128: polySurface3175
+    3300130: polySurface449
+    3300132: pSphere1
     4300000: CmptFireExtinguisher_Lock
     4300002: Handle_3_Brm
     4300004: Handle_2_Mid
@@ -208,7 +327,60 @@ ModelImporter:
     4300074: CmptUmbrella_Lock_B
     4300076: CmptUmbrella_Lock_A
     4300078: LightSwitch
+    4300080: polySurface449
+    4300082: polySurface3174
+    4300084: polySurface3175
+    4300086: polySurface1222
+    4300088: polySurface1225
+    4300090: polySurface1220
+    4300092: pCylinder9
+    4300094: polySurface2996
+    4300096: pSphere1
+    4300098: polySurface3025
+    4300100: polySurface3020
+    4300102: polySurface3027
+    4300104: polySurface3031
+    4300106: polySurface3032
+    4300108: polySurface3034
+    4300110: polySurface3035
+    4300112: polySurface3036
+    4300114: polySurface3038
+    4300116: polySurface1809
+    4300118: polySurface1818
+    4300120: polySurface1821
+    4300122: polySurface1229
+    4300124: polySurface1228
+    4300126: polySurface1230
+    4300128: polySurface1799
+    4300130: polySurface1797
+    4300132: polySurface1800
+    2186277476908879412: ImportLogs
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha2_Shader
+    second: {fileID: 2100000, guid: 8c37932d874afab49bc2edd22c6ef773, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DC_A_Shader
+    second: {fileID: 2100000, guid: e5711bd843443a3429c334e40fbcc18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: InnerShell_Shader
+    second: {fileID: 2100000, guid: 8bf25666015308b4f9a1bd9c1ca82764, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_A_Shader
+    second: {fileID: 2100000, guid: 82902ac2ff2bc9f4e9bae62f85f5122d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_C_Shader
+    second: {fileID: 2100000, guid: e82791bfcc82df04f8362698f642aedc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

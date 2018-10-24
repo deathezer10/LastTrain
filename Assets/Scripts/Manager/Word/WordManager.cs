@@ -140,7 +140,6 @@ public class WordManager : SingletonMonoBehaviour<WordManager> {
     {
         string path = "WordJson/" + language.ToStringQuickly();
 
-        var fullPath = Application.dataPath + "/" + path;
         // Assetsフォルダからロード
         var request = Resources.LoadAsync(path);  
         yield return new WaitUntil(()=>!request.isDone);
