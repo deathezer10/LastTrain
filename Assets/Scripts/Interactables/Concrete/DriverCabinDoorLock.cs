@@ -33,7 +33,7 @@ public class DriverCabinDoorLock : StationaryObject
     private float TimefromGrab;
     private float ReleasedTime;
 
-    private DoorIgnoreCollision m_Ignore;
+   
 
     void Start()
     {
@@ -41,25 +41,16 @@ public class DriverCabinDoorLock : StationaryObject
         DoorMesh = transform.parent.gameObject.GetComponent<BoxCollider>();
         RightDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
         LeftDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(-DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
-        m_Ignore = transform.parent.gameObject.GetComponent<DoorIgnoreCollision>();
+       
     }
 
    
         void Update()
     {
-        if(m_Ignore.bIsColliding)
-        {
-            doorBody.isKinematic = true;
-        }
-
-        else if(!m_Ignore.bIsColliding)
-        {
-            doorBody.isKinematic = false;
-        }
-
+       
         if (!bDisableLever)
         {
-            if(!m_Ignore.bIsColliding)
+            
             if (Awaked)
             {
                 

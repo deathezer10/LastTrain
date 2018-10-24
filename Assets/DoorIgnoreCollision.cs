@@ -4,30 +4,38 @@ using UnityEngine;
 
 public class DoorIgnoreCollision : MonoBehaviour
 {
-
-    private BoxCollider Collider;
+    private Rigidbody rbDoor;
     public bool bIsColliding;
 
     // Use this for initialization
     void Start()
     {
-        Collider = transform.gameObject.GetComponent<BoxCollider>();
+        rbDoor = transform.gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(bIsColliding)
+        {
+            rbDoor.velocity = Vector3.zero;
+        }
     }
 
     void OnCollisionEnter(Collision other)
     {
+        print("collision enter");
         bIsColliding = true;
+        rbDoor.isKinematic = true;
+        rbDoor.velocity = Vector3.zero;
     }
 
-    void OnCollisionLeave(Collision other)
+    void OnCollisionExit(Collision other)
     {
+        print("Collision exit");
         bIsColliding = false;
+        rbDoor.isKinematic = false;
+        rbDoor.velocity = Vector3.zero;
     }
 
 }
