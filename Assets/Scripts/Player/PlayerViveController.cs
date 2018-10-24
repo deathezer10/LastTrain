@@ -27,7 +27,7 @@ public class PlayerViveController : MonoBehaviour
     private static GameObject m_CurrentRightObject = null;
 
 
-    virtual protected void LateUpdate()
+    virtual protected void Update()
     {
         var currentObject = GetCurrentHandObject();
 
