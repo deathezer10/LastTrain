@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UmbrCompartment : MonoBehaviour
 {
-    public GameObject visualLockTop, visualLockBottom, physicsLockTop, physicsLockBottom, umbrella;
+    public GameObject visualLockBottom, visualLockTop, physicsLockBottom, physicsLockTop, umbrella;
 
     bool rotating;
     Quaternion finalRotation = new Quaternion(0, 0.7f, 0, 0.7f);
