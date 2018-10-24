@@ -47,7 +47,7 @@ public class PlayerViveController : MonoBehaviour
                 if (grabbableObject != null)
                 {
 
-                    // On Grab
+                    // On Grab (Trigger Down)
                     if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(m_CurrentHand.ToInputSource()))
                     {
                         // If other hand is holding this object, unassign it
@@ -64,7 +64,7 @@ public class PlayerViveController : MonoBehaviour
                         if (currentObject.GetComponent<IStationaryGrabbable>() == null)
                         {
                             FixedJoint joint = currentObject.AddComponent<FixedJoint>();
-                            joint.breakForce = 20000;
+                            joint.breakForce = 7500;
                             joint.breakTorque = Mathf.Infinity;
                             joint.connectedBody = GetComponent<Rigidbody>();
 
@@ -72,13 +72,13 @@ public class PlayerViveController : MonoBehaviour
                         }
                     }
 
-
-                    // On Grab Released
+                    // On Item Use (Grab Down)
                     if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(m_CurrentHand.ToInputSource()))
                     {
                         iObject.OnUse();
                     }
 
+                    // On Grab Released (Trigger Up)
                     if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(m_CurrentHand.ToInputSource()))
                     {
                         grabbableObject.OnGrabReleased();
@@ -107,7 +107,7 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = other.GetComponent<IInteractable>();
 
-        if (iObject != null)
+        if (GetCurrentHandObject() == null && iObject != null)
         {
             AssignObjectToHand(GetCurrentHand(), other.gameObject);
             iObject.OnControllerEnter(this);
@@ -190,9 +190,9 @@ public class PlayerViveController : MonoBehaviour
     }
 
     virtual public void Vibration(
-        float secondsFromNow, 
-        float durationSeconds, 
-        float frequency, 
+        float secondsFromNow,
+        float durationSeconds,
+        float frequency,
         float amplitude,
         SteamVR_Input_Sources handSource)
     {
