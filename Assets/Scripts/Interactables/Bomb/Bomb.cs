@@ -24,7 +24,7 @@ public class Bomb : GrabbableObject
 
         foreach (AudioPlayer player in audioPlayers)
         {
-            if (player.clip.name == "bomb_timer_loop")
+            if (player.clip.name == "bomb_timer_1")
             {
                 player.Play();
                 break;
@@ -34,23 +34,23 @@ public class Bomb : GrabbableObject
 
     private IEnumerator BombCountdown()
     {
-        if (timeRemaining <= 20 && timeRemaining > 0)
-        {
-            foreach (AudioPlayer player in audioPlayers)
-            {
-                if (player.clip.name == "bomb_timer_loop")
-                {
-                    player.audioSource.pitch = 1.5f;
-                    break;
-                }
-            }
-        }
-
         while (timeRemaining >= 0 && timerRunning)
         {
             timeRemaining -= Time.deltaTime;
 
             timerTextMesh.text = string.Format("{0:0}:{1:00}", ((int)timeRemaining / 60), (int)timeRemaining % 60);
+
+            if (timeRemaining <= 20 && timeRemaining > 0)
+            {
+                foreach (AudioPlayer player in audioPlayers)
+                {
+                    if (player.clip.name == "bomb_timer_1")
+                    {
+                        player.audioSource.pitch = 1 + ((20 - timeRemaining) / 20);
+                        break;
+                    }
+                }
+            }
 
             yield return null;
         }
@@ -94,6 +94,7 @@ public class Bomb : GrabbableObject
         {
             if (player.clip.name == "bomb_explosion_1")
             {
+                player.audioSource.volume = 0.5f;
                 player.audioSource.loop = false;
                 player.Play();
                 break;

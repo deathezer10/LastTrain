@@ -64,7 +64,7 @@ public class LightSwitch : StationaryObject
                     collider.enabled = false;
                 }
 
-                m_BombContainer.transform.DOLocalMoveY(0.5f, 5).OnComplete(() =>
+                m_BombContainer.transform.DOLocalMoveY(0.5f, 2).OnComplete(() =>
                 {
                     foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
                     {

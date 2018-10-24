@@ -19,6 +19,7 @@ public class DoorIgnoreCollision : MonoBehaviour
 
     void Awake()
     {
+        collider = transform.GetComponent<BoxCollider>();
         rbDoor = transform.gameObject.GetComponent<Rigidbody>();
         minimumExtent = Mathf.Min(Mathf.Min(collider.bounds.extents.x, collider.bounds.extents.y), collider.bounds.extents.z);
         //partialExtent = minimumExtent * (1.0f - skinWidth); 
