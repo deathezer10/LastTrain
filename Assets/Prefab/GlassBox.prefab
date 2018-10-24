@@ -150,9 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839fbf8a737d7fd4590770cb6e71ef61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrownBreakForce: 3.5
+  thrownBreakForce: 3
   heldBreakForce: 3
   brokenGlassPrefab: {fileID: 1970878764106350, guid: 02d9f88fa2fce7d4b83b25469b6b712d,
     type: 2}
   initialBox: {fileID: 1720252308299108}
-  bombObject: {fileID: 1567328043253608, guid: 9d51b48b093597240be1e615ec201edd, type: 2}
