@@ -13,11 +13,13 @@ public class UmbrCompartment : MonoBehaviour
     {
         if (rotating && transform.localRotation != finalRotation)
         {
-            transform.Rotate(0f, 60f * Time.deltaTime, 0f);
+            transform.Rotate(0f, 80f * Time.deltaTime, 0f);
 
             if (transform.localRotation.y >= 0.7f)
             {
                 rotating = false;
+                umbrella.SetActive(true);
+                umbrella.transform.SetParent(null);
             }
         }
     }
@@ -41,9 +43,6 @@ public class UmbrCompartment : MonoBehaviour
 
         physicsLockTop.SetActive(true);
         physicsLockTop.transform.parent = null;
-
-        umbrella.SetActive(true);
-        umbrella.transform.SetParent(null);
 
         rotating = true;
     }
