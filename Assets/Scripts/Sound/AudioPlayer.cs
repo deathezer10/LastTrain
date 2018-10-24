@@ -54,4 +54,6 @@ public class AudioPlayer : MonoBehaviour {
 
         return clip;
     }
+
+    public bool IsPlaying() { return audioSource.isPlaying; }
 }

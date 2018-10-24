@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Suitcase : GrabbableObject
 {
-    public GameObject[] keycardArray;
+    public GameObject cardHolder;
 
     Animator suitcaseAnimator;
     bool opened;
@@ -20,10 +20,18 @@ public class Suitcase : GrabbableObject
 
         RearrangeColliders();
 
-        foreach (GameObject go in keycardArray)
+        var tmp = new List<Transform>();
+
+        for (int i = 0; i < cardHolder.transform.childCount; i++)
         {
-            go.SetActive(true);
-            go.transform.SetParent(null);
+            var obj = cardHolder.transform.GetChild(i);
+            obj.gameObject.SetActive(true);
+            tmp.Add(obj);
+        }
+
+        foreach (var trans in tmp)
+        {
+            trans.SetParent(null);
         }
     }
 
