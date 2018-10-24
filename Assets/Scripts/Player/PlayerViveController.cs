@@ -121,7 +121,7 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = other.GetComponent<IInteractable>();
 
-        if (iObject != null && GetCurrentHandObject(true) != other.gameObject)
+        if (GetCurrentHandObject() == null && iObject != null && GetCurrentHandObject(true) != other.gameObject)
         {
             AssignObjectToHand(GetCurrentHand(), other.gameObject);
         }
