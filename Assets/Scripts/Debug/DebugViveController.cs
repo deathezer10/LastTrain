@@ -8,7 +8,7 @@ public class DebugViveController : PlayerViveController
 {
     private static GameObject m_CurrentDebugObject = null;
 
-    override protected void LateUpdate()
+    override protected void Update()
     {
         var currentObject = m_CurrentDebugObject;
 
