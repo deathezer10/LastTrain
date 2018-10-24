@@ -9,13 +9,13 @@ public class DoorLever : MonoBehaviour
     private AudioPlayer Audio;
     private bool bDisable = false;
 
-   
+
     void Start()
     {
         Audio = GetComponent<AudioPlayer>();
     }
 
-    
+
     void Update()
     {
 
@@ -26,7 +26,7 @@ public class DoorLever : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!bDisable)
-            if (other.gameObject.name == "Umbrella" || other.gameObject.name == "Controller (left)" || other.gameObject.name == "Controller (right)")
+            if (other.gameObject.name == "Umbrella" || ((other.gameObject.name == "Controller (left)" || other.gameObject.name == "Controller (right)") && DriverCabinDoorLock.bIsUnlocked))
             {
                 bDisable = true;
                 Audio.Play();

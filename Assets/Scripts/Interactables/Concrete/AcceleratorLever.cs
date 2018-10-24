@@ -41,6 +41,11 @@ public class AcceleratorLever : StationaryObject
         HandleDefaultMaxPosition = AcceleratorHandle.transform.position;
         VectorBeginPoint = Accelerator.transform.GetChild(1).gameObject;
         VectorEndPoint = Accelerator.transform.GetChild(0).gameObject;
+
+        // Unparent the child
+        VectorBeginPoint.transform.parent = transform.parent;
+        VectorEndPoint.transform.parent = transform.parent;
+
         HandleMovementDirection = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
         HandleMovementDirection.Normalize(); //The direction where Acceleratorhandle can be moved forth and back.
         Audio = GetComponent<AudioPlayer>();
@@ -68,7 +73,6 @@ public class AcceleratorLever : StationaryObject
                             //This was last lever,stop train&do something
                             return;
                         }
-
                         else
                             return; //Player still needs to engage the brakelever..
                     }

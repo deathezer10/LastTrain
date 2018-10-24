@@ -36,7 +36,7 @@ public class DriverCabinDoorLock : StationaryObject
     void Start()
     {
         doorBody = transform.parent.GetComponent<Rigidbody>();
-        DoorMesh = transform.parent.GetChild(0).gameObject.GetComponent<BoxCollider>();
+        DoorMesh = transform.parent.gameObject.GetComponent<BoxCollider>();
         RightDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
         LeftDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(-DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
     }

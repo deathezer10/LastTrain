@@ -21,6 +21,9 @@ public class TrainDoorHandler : MonoBehaviour
         {
             Transform childTransform = transform.GetChild(i);
 
+            if (!childTransform.name.Contains(m_DoorNamePrefix))
+                continue;
+
             int doorIndex = int.Parse(childTransform.name.Replace(m_DoorNamePrefix, string.Empty));
 
             if (doorIndex % 2 == 0)
@@ -59,8 +62,8 @@ public class TrainDoorHandler : MonoBehaviour
                 {
                     tweener.OnComplete(() =>
                     {
-                         if (onComplete != null)
-                             onComplete();
+                        if (onComplete != null)
+                            onComplete();
                     });
                 }
             }
