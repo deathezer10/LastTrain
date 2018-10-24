@@ -41,6 +41,7 @@ public class GlassBox : MonoBehaviour
     {
         Instantiate(brokenGlassPrefab, initialBox.transform.position, initialBox.transform.rotation);
         Destroy(initialBox);
+        GetComponent<AudioPlayer>().Play();
 
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }

@@ -13,25 +13,49 @@ public class Bomb : GrabbableObject
     bool timerRunning;
     TextMeshPro timerTextMesh;
 
+    private AudioPlayer[] audioPlayers;
+
     private void Start()
     {
         timerRunning = true;
         timerTextMesh = GetComponentInChildren<TextMeshPro>();
         StartCoroutine(BombCountdown());
+        audioPlayers = GetComponents<AudioPlayer>();
+
+        foreach (AudioPlayer player in audioPlayers)
+        {
+            if (player.clip.name == "bomb_timer_loop")
+            {
+                player.Play();
+                break;
+            }
+        }
     }
 
     private IEnumerator BombCountdown()
     {
+        if (timeRemaining <= 20 && timeRemaining > 0)
+        {
+            foreach (AudioPlayer player in audioPlayers)
+            {
+                if (player.clip.name == "bomb_timer_loop")
+                {
+                    player.audioSource.pitch = 1.5f;
+                    break;
+                }
+            }
+        }
+
         while (timeRemaining >= 0 && timerRunning)
         {
             timeRemaining -= Time.deltaTime;
-            
+
             timerTextMesh.text = string.Format("{0:0}:{1:00}", ((int)timeRemaining / 60), (int)timeRemaining % 60);
-            
+
             yield return null;
         }
 
-        if (timeRemaining <= 0)
+        if (timeRemaining < 0)
         {
             TimerTimeOut();
         }
@@ -65,6 +89,16 @@ public class Bomb : GrabbableObject
     {
         phLightRenderer.material.color = red;
         FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bomb");
+
+        foreach (AudioPlayer player in audioPlayers)
+        {
+            if (player.clip.name == "bomb_explosion_1")
+            {
+                player.audioSource.loop = false;
+                player.Play();
+                break;
+            }
+        }
     }
 
     public void CutWrongWire()
