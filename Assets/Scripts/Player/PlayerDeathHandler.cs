@@ -28,7 +28,7 @@ public class PlayerDeathHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.S) || SteamVR_Input._default.inActions.GrabUse.GetStateDown(SteamVR_Input_Sources.LeftHand))
+        if (Input.GetKeyUp(KeyCode.S))
         {
             KillPlayer("death_trainhit");
         }
