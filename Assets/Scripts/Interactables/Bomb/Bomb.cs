@@ -89,7 +89,18 @@ public class Bomb : GrabbableObject
     {
         phLightRenderer.material.color = red;
         FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bomb");
+        PlayExplosionSound();
+    }
 
+    public void CutWrongWire()
+    {
+        phLightRenderer.material.color = red;
+        FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bombwrongwire");
+        PlayExplosionSound();
+    }
+
+    private void PlayExplosionSound()
+    {
         foreach (AudioPlayer player in audioPlayers)
         {
             if (player.clip.name == "bomb_explosion_1")
@@ -102,17 +113,26 @@ public class Bomb : GrabbableObject
         }
     }
 
-    public void CutWrongWire()
-    {
-        phLightRenderer.material.color = red;
-        FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bombwrongwire");
-    }
-
     public void CutRightWire()
     {
         phLightRenderer.material.color = green;
         timerRunning = false;
+
+        foreach (AudioPlayer player in audioPlayers)
+            player.audioSource.Stop();
+
         StopCoroutine(BombCountdown());
+
+        foreach (AudioPlayer player in audioPlayers)
+        {
+            if (player.clip.name == "umbrella_unfolding_2")
+            {
+                player.audioSource.volume = 0.5f;
+                player.audioSource.loop = false;
+                player.Play();
+                break;
+            }
+        }
     }
 
     public void UnlockRigidbody()
