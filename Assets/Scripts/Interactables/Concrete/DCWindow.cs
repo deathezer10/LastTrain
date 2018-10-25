@@ -6,7 +6,8 @@ using UnityEngine;
 public class DCWindow : MonoBehaviour
 {
     public float thrownBreakForce, heldBreakForce;
-    public GameObject brokenWindowPrefab, initialWindow;
+    public GameObject initialWindow;
+    public GameObject[] brokenWindowPieces;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -33,8 +34,13 @@ public class DCWindow : MonoBehaviour
 
     private void BreakGlass()
     {
-        Instantiate(brokenWindowPrefab, initialWindow.transform.position, initialWindow.transform.rotation);
         Destroy(initialWindow);
+
+        foreach (GameObject go in brokenWindowPieces)
+        {
+            go.SetActive(true);
+        }
+
         GetComponent<AudioPlayer>().Play();
 
         GetComponent<BoxCollider>().enabled = false;
