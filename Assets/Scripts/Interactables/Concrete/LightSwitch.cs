@@ -6,17 +6,11 @@ using DG.Tweening;
 
 public class LightSwitch : StationaryObject
 {
-    public GameObject m_BombContainer;
     List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
-
-    private TrainTimeHandler m_TrainTimeHandler;
-    private TrainDoorHandler m_TrainDoorHandler;
-    private StationMover m_StationMover;
-
+    
     private AudioPlayer Audio;
-
-    private bool m_FirstTime = true;
+    
 
     private void Start()
     {
@@ -26,11 +20,7 @@ public class LightSwitch : StationaryObject
         }
 
         Audio = GetComponent<AudioPlayer>();
-
-        // lol
-        m_TrainTimeHandler = FindObjectOfType<TrainTimeHandler>();
-        m_TrainDoorHandler = FindObjectOfType<TrainDoorHandler>();
-        m_StationMover = FindObjectOfType<StationMover>();
+        
     }
 
     public override void OnControllerEnter(PlayerViveController currentController)
@@ -55,32 +45,6 @@ public class LightSwitch : StationaryObject
         {
             bSwitchIsOn = true;
             
-            if (m_FirstTime)
-            {
-                m_BombContainer.SetActive(true);
-
-                foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
-                {
-                    collider.enabled = false;
-                }
-
-                m_BombContainer.transform.DOLocalMoveY(0.5f, 2).OnComplete(() =>
-                {
-                    foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
-                    {
-                        collider.enabled = true;
-                    }
-                });
-
-                m_TrainDoorHandler.ToggleDoors(false, () =>
-                {
-                    m_StationMover.ToggleMovement(true);
-                    m_TrainTimeHandler.StartTrainTime();
-                });
-
-                m_FirstTime = false;
-            }
-
             transform.localRotation = Quaternion.Euler(0, 0, -90);
 
             foreach (Light light in m_TrainLights)

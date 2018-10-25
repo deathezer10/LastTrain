@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 82290461891798282}
   - component: {fileID: 114494969716825540}
   - component: {fileID: 114227463429943816}
+  - component: {fileID: 114529594900546162}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -269,7 +270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1792075764955550
 GameObject:
   m_ObjectHideFlags: 1
@@ -1641,11 +1642,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23361026223725846}
@@ -1674,6 +1675,21 @@ MonoBehaviour:
   pitchRandomRange: 0
   playDelay: 0
   _clip: {fileID: 8300000, guid: 1a09b97461801bd49a796576478cea11, type: 3}
+--- !u!114 &114529594900546162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033655420370026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2782a74d37cb4974c9ac2bee8d406729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizePitch: 1
+  pitchRandomRange: 0.2
+  playDelay: 0
+  _clip: {fileID: 8300000, guid: 640f4b4d451171c418d72bfcf2c3e130, type: 3}
 --- !u!114 &114544348374943280
 MonoBehaviour:
   m_ObjectHideFlags: 1

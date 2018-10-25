@@ -3,30 +3,28 @@ using System.Collections.Generic;
 using Valve.VR;
 using UnityEngine;
 
-public class GlassBox : MonoBehaviour
+public class DCWindow : MonoBehaviour
 {
     public float thrownBreakForce, heldBreakForce;
-    public GameObject brokenGlassPrefab, initialBox;
-    
+    public GameObject brokenWindowPrefab, initialWindow;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Extinguisher")
         {
             var controller = PlayerViveController.GetControllerThatHolds(other.gameObject);
 
-            if (controller == null)             // If the object has been thrown
+            if (controller == null)
             {
                 if (other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= thrownBreakForce)
                 {
-                    FindObjectOfType<Bomb>().UnlockRigidbody();
                     BreakGlass();
                 }
             }
-            else                                // If the object is held in hand
+            else
             {
                 if (controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude >= heldBreakForce)
                 {
-                    FindObjectOfType<Bomb>().UnlockRigidbody();
                     BreakGlass();
                 }
             }
@@ -35,11 +33,10 @@ public class GlassBox : MonoBehaviour
 
     private void BreakGlass()
     {
-        Instantiate(brokenGlassPrefab, initialBox.transform.position, initialBox.transform.rotation);
-        Destroy(initialBox);
+        Instantiate(brokenWindowPrefab, initialWindow.transform.position, initialWindow.transform.rotation);
+        Destroy(initialWindow);
         GetComponent<AudioPlayer>().Play();
 
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
     }
-
 }
