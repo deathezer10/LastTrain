@@ -109,8 +109,11 @@ public class AcceleratorLever : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
-        bCanGrab = true;
-        PlayerHand = currentController.gameObject;
+        if(DriverCabinDoorLock.bIsUnlocked)
+        {
+            bCanGrab = true;
+            PlayerHand = currentController.gameObject;
+        }
     }
 
     public override void OnControllerExit()
