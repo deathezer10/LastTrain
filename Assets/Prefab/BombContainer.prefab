@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839fbf8a737d7fd4590770cb6e71ef61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrownBreakForce: 3.5
+  thrownBreakForce: 2.5
   heldBreakForce: 3
   brokenGlassPrefab: {fileID: 1970878764106350, guid: 02d9f88fa2fce7d4b83b25469b6b712d,
     type: 2}

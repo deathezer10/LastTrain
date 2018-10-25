@@ -1,1 +1,1 @@
-{"key":["language","title"],"value":["japan","終電"]}
+{"key":["language","title","death_bomb","death_timeup","death_trainhit","death_bombwrongwire"],"value":["japan","終電","<Pending>","<Pending>","<Pending>","<Pending>"]}

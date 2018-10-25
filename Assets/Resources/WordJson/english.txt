@@ -1,1 +1,1 @@
-{"key":["language","title"],"value":["english","LastTrain"]}
+{"key":["language","title","death_bomb","death_timeup","death_trainhit","death_bombwrongwire"],"value":["english","LastTrain","You were killed by the bomb explosion","The train crashed into the wall","You were flattened by the train","You clipped the wrong wire"]}
