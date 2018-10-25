@@ -8,7 +8,6 @@ public class DriverCabinDoorLock : StationaryObject
 
     public static DriverCabinDoorLock instance;
     private GameObject PlayerHand;
-    private GameObject DoorPhysics;
     private Rigidbody doorBody;
     private BoxCollider DoorMesh;
 
@@ -38,12 +37,10 @@ public class DriverCabinDoorLock : StationaryObject
 
     void Start()
     {
-        doorBody = transform.parent.GetChild(1).GetComponent<Rigidbody>();
+        doorBody = transform.parent.GetComponent<Rigidbody>();
         DoorMesh = transform.parent.gameObject.GetComponent<BoxCollider>();
-        DoorPhysics = transform.parent.GetChild(1).GetComponent<BoxCollider>().gameObject;
         RightDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
         LeftDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(-DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
-        transform.parent = DoorPhysics.transform;
        
     }
 
