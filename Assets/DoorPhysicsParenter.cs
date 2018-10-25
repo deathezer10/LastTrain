@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorPhysicsParenter : MonoBehaviour {
     private GameObject DoorPhysics;
+    private GameObject DoorHandle;
 
 
 
@@ -11,8 +12,8 @@ public class DoorPhysicsParenter : MonoBehaviour {
 	void Start () {
         DoorPhysics = transform.GetChild(1).gameObject;
         transform.gameObject.transform.parent = DoorPhysics.transform;
-        DoorPhysics.GetComponent<SphereCollider>().enabled = false;
-        DoorPhysics.GetComponent<MeshRenderer>().enabled = false;
+        DoorHandle = transform.GetChild(0).gameObject;
+        DoorHandle.transform.parent = DoorPhysics.transform;
 	}
 	
 	// Update is called once per frame
