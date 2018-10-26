@@ -16,8 +16,6 @@ public class DoorPhysicsParenter : MonoBehaviour {
         DoorPhysics.transform.parent = transform.parent;
         this.transform.parent = DoorPhysics.transform;
         DoorHandle.transform.parent = DoorPhysics.transform;
-       // DoorHandle = transform.GetChild(0).gameObject;
-      //  DoorHandle.transform.parent = DoorPhysics.transform;
 	}
 	
 	// Update is called once per frame
