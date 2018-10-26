@@ -19,11 +19,11 @@ public class PlayerDeathHandler : MonoBehaviour
 
     public void KillPlayer(string gameOverTextKey)
     {
-        m_DeathFader.DoFade(ImageFader.FadeType.ToOpaque, 1, () =>
-        {
-            m_GameOverTextKey = gameOverTextKey;
-            SceneManager.LoadScene("GameOver");
-        });
+        m_DeathFader.FadeIn(1, () =>
+         {
+             m_GameOverTextKey = gameOverTextKey;
+             SceneManager.LoadScene("GameOver");
+         });
     }
 
     private void Update()

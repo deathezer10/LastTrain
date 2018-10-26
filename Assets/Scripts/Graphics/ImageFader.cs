@@ -4,37 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-[RequireComponent(typeof(Image))]
 public class ImageFader : MonoBehaviour
 {
-
     public bool m_FadeOutOnStart;
     private Image m_FaderImage;
 
-    public enum FadeType
-    {
-        ToOpaque,
-        ToInvisible,
-    }
+    [SerializeField]
+    private Color m_fadeColor;
 
     private void Start()
     {
-        m_FaderImage = GetComponent<Image>();
 
         if (m_FadeOutOnStart)
         {
-            m_FaderImage.DOFade(0, 1);
+            FadeManager.Instance._fadeColor = m_fadeColor;
+            StartCoroutine(FadeManager.Instance.FadeOut(1));
         }
     }
 
-    public void DoFade(FadeType fadeType, float duration, System.Action onComplete = null)
+    public void FadeIn(float duration, System.Action onComplete = null)
     {
-
-        m_FaderImage.DOFade((fadeType == FadeType.ToOpaque) ? 1 : 0, duration).OnComplete(() =>
-        {
-            if (onComplete != null) onComplete.Invoke();
-        });
-
+        FadeManager.Instance._fadeColor = m_fadeColor;
+        StartCoroutine(FadeManager.Instance.FadeIn(duration,onComplete));
     }
 
 }
