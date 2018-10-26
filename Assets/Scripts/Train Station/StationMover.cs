@@ -6,7 +6,6 @@ public class StationMover : MonoBehaviour
 {
 
     // Tiling variables
-    public GameObject m_Train;
     public GameObject m_TunnelPrefab;
     GameObject m_LastRightTunnel;
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
@@ -23,9 +22,18 @@ public class StationMover : MonoBehaviour
         get { return m_IsMoving; }
     }
 
-    const float m_StationMaxSpeed = 10;
+    float m_CurrentStationMaxSpeed = 10;
+    public float currentMaxSpeed {
+        get { return m_CurrentStationMaxSpeed; }
+        set { m_CurrentStationMaxSpeed = value; }
+    }
+
     const float m_StationAcceleration = 0.5f;
     float m_CurrentStationSpeed = 0;
+    public float currentSpeed {
+        get { return m_CurrentStationSpeed; }
+        set { m_CurrentStationSpeed = value; }
+    }
 
     private void Start()
     {
@@ -46,7 +54,7 @@ public class StationMover : MonoBehaviour
 
     private void Update()
     {
-        m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * ((m_IsMoving) ? 1 : -1) * Time.deltaTime), 0, m_StationMaxSpeed);
+        m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * ((m_IsMoving) ? 1 : -1) * Time.deltaTime), 0, m_CurrentStationMaxSpeed);
         m_CurrentDistanceTraveled += m_CurrentStationSpeed * Time.deltaTime;
 
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
