@@ -11,9 +11,6 @@ using DG.Tweening;
 /// </summary>
 public class FadeManager :SingletonMonoBehaviour<FadeManager>
 {
-    // 透明度
-    private float _fadeAlpha = 0;
-
     [SerializeField]
     private UnityEngine.UI.Image _image;
 
@@ -36,15 +33,6 @@ public class FadeManager :SingletonMonoBehaviour<FadeManager>
         _defoColor = _fadeColor;
     }
 
-    private void Update() {
-        // Fade
-        if (0.0f < _fadeAlpha)
-        {
-            // 色と透明度を更新して白テクスチャを描画
-            this._fadeColor.a = this._fadeAlpha;
-            _image.color = this._fadeColor;
-        }
-    }
 
     /// <summary>
     /// フェードイン
@@ -55,6 +43,7 @@ public class FadeManager :SingletonMonoBehaviour<FadeManager>
     {
         // Fade 開始
         this.IsFading = true;
+        _image.color = _fadeColor;
 
         var tween = _image.DOFade(1, interval);
         yield return tween.WaitForCompletion();
