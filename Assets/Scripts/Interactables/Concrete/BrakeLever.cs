@@ -8,17 +8,25 @@ public class BrakeLever : StationaryObject
     private GameObject PlayerHand;
     private BoxCollider DisablePoint;
     private AudioPlayer Audio;
+    private StationMover stationmover;
 
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
     private bool bCanGrab = false;
+    private bool bStopTrain = false;
+    private bool bSlowDownTrain = false;
 
     private Vector3 HandOffsetStart;
     private Vector3 currentHandPosition;
     private float minXRotation = -0.45f;       //Setting lowest reachable rotation for the lever
     private float maxXRotation;               //Setting the max reachable rotation for the lever
     private float currentXRotation;
-   
+
+    private float PreviousTrainSpeed = 10.0f;
+    private float NewTrainSpeed;
+    private float rate = 0.3f;
+    private float time = 0.0f;
+    private float i;
 
     public static bool IsTaskCompleted()
     {
@@ -34,6 +42,7 @@ public class BrakeLever : StationaryObject
     // Use this for initialization
     void Start()
     {
+        stationmover = FindObjectOfType<StationMover>();
         currentXRotation = transform.rotation.x;
         maxXRotation = currentXRotation;
     }
@@ -41,6 +50,22 @@ public class BrakeLever : StationaryObject
     // Update is called once per frame
     void Update()
     {
+
+        if(bStopTrain)
+        {
+            i += Time.deltaTime * rate;
+            print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
+            stationmover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
+
+        }
+
+        if(bSlowDownTrain)
+        {
+            i += Time.deltaTime * rate;
+            print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
+            stationmover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
+        }
+
         if (!bDisableLever)
         {
             if (bIsGrabbing)
@@ -61,12 +86,22 @@ public class BrakeLever : StationaryObject
 
                         if (AcceleratorLever.IsTaskCompleted())
                         {
+                            bStopTrain = true;
+                            PreviousTrainSpeed = stationmover.currentSpeed;
+                            NewTrainSpeed = 0;
                             //This was last lever to be activated train is now stopping? do something
                             return;
                         }
 
                         else
-                            return; //Player still has to do the accelerator lever
+                        {
+                            bSlowDownTrain = true;
+                            PreviousTrainSpeed = stationmover.currentSpeed;
+                            NewTrainSpeed = 3;
+                            stationmover.currentMaxSpeed = 3;
+                            return;
+                        }
+                            
                     }
                     
                 

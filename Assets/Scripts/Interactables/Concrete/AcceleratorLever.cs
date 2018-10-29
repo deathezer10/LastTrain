@@ -74,7 +74,7 @@ public class AcceleratorLever : StationaryObject
 
         if (bIsGrabbing) //Player is grabbing the acceleratorhandle
         {
-            if(Vector3.Distance(PlayerHand.transform.position,AcceleratorHandle.transform.position) > 0.3)
+            if(Vector3.Distance(PlayerHand.transform.position,AcceleratorHandle.transform.position) > 0.2)
             {
                 bIsGrabbing = false;
             }
@@ -90,16 +90,14 @@ public class AcceleratorLever : StationaryObject
                     if (!bDisableLever)
                     {
                         bDisableLever = true;
-                        Audio.Play();
+                        //Audio.Play();
                     }
-
                     
-                    
-                        
-
                     if (BrakeLever.IsTaskCompleted())
                     {
-                        //This was last lever,stop train&do something
+                        stationMover.currentMaxSpeed = 0;
+                        PreviousTrainSpeed = stationMover.currentSpeed;
+                        NewTrainSpeed = 0;
                         return;
                     }
                     else
@@ -109,6 +107,7 @@ public class AcceleratorLever : StationaryObject
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
                 PreviousTrainSpeed = stationMover.currentSpeed;
                 NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
+                if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
                 i = 0.0f;
                 LastHandPosition = PlayerHand.transform.position;
                 return;
@@ -131,6 +130,7 @@ public class AcceleratorLever : StationaryObject
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
                 PreviousTrainSpeed = stationMover.currentSpeed;
                 NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
+                if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
                 i = 0.0f;
                 LastHandPosition = PlayerHand.transform.position;
                 return;
