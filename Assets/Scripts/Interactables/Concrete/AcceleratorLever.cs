@@ -90,7 +90,6 @@ public class AcceleratorLever : StationaryObject
                     if (!bDisableLever)
                     {
                         bDisableLever = true;
-                        
                         //Audio.Play();
                     }
                     
