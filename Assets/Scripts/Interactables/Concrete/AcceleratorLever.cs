@@ -84,11 +84,9 @@ public class AcceleratorLever : StationaryObject
                 }
 
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
-                float a = (VectorBeginPoint.transform.position.z - VectorEndPoint.transform.position.z) / (VectorBeginPoint.transform.position.z - VectorEndPoint.transform.position.z);
-                float b = VectorBeginPoint.transform.position.z - a * VectorBeginPoint.transform.position.z;
-                float newval = a * AcceleratorHandle.transform.position.z + b;
-                stationMover.currentSpeed = Mathf.Lerp(3, 10, newval);
-                print(Mathf.Lerp(3, 10, newval));
+                print(normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
+                stationMover.currentSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
+                
                 LastHandPosition = PlayerHand.transform.position;
                 return;
             }
@@ -108,11 +106,8 @@ public class AcceleratorLever : StationaryObject
                 }
                 
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
-                float a = (VectorBeginPoint.transform.position.z - VectorEndPoint.transform.position.z) / (VectorBeginPoint.transform.position.z - VectorEndPoint.transform.position.z);
-                float b = VectorBeginPoint.transform.position.z - a * VectorBeginPoint.transform.position.z;
-                float newval = a * AcceleratorHandle.transform.position.z + b;
-                stationMover.currentSpeed = Mathf.Lerp(3, 10, newval);
-                print(Mathf.Lerp(3, 10, newval));
+                print(normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
+                stationMover.currentSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
                 LastHandPosition = PlayerHand.transform.position;
                 return;
 
@@ -187,4 +182,11 @@ public class AcceleratorLever : StationaryObject
         return equal;
     }
 
+
+    private float normalize01(float value, float min, float max)
+    {
+	    float normalized = (value - min) / (max - min);
+        return normalized;
+    }
 }
+
