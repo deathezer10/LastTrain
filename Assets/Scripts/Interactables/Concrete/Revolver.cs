@@ -35,20 +35,25 @@ public class Revolver : GrabbableObject
     {
         if (m_IsGrabbing == false)
             return;
-        
+
         RaycastHit hitInfo;
 
         int mask = (1 << LayerMask.NameToLayer("Environment"));
-        
-        if (Physics.Raycast(m_LaserPointer.transform.parent.position, m_LaserPointer.transform.right, out hitInfo, m_PointerDistance, mask))
+
+        var origin = m_LaserPointer.transform.parent.position;
+        var dir = m_LaserPointer.transform.TransformDirection(-Vector3.forward);
+
+        Debug.DrawRay(origin, dir * 100);
+
+        if (Physics.Raycast(origin, dir, out hitInfo, m_PointerDistance, mask))
         {
             m_LaserPointer.transform.position = Vector3.Lerp(hitInfo.point, m_LaserPointer.transform.parent.position, 0.5f);
 
             Vector3 newScale = m_LaserPointer.transform.localScale;
-            newScale.z = m_LaserPointer.transform.localPosition.z * 2;
+            newScale.z = Mathf.Abs(m_LaserPointer.transform.localPosition.z * 2);
             m_LaserPointer.transform.localScale = newScale;
-
             Debug.Log("Ray hit");
+
         }
         else
         {
