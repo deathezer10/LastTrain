@@ -95,21 +95,33 @@ public class AcceleratorLever : StationaryObject
                     
                     if (BrakeLever.IsTaskCompleted())
                     {
-                        stationMover.currentMaxSpeed = 0;
+                        
                         PreviousTrainSpeed = stationMover.currentSpeed;
                         NewTrainSpeed = 0;
                         i = 0;
-                        return;
+                        
                     }
+
                     else
-                        return; //Player still needs to engage the brakelever..
+                    {
+                        PreviousTrainSpeed = stationMover.currentSpeed;
+                        NewTrainSpeed = 3;
+                        if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
+                        i = 0.0f;
+                    }
+                   
                 }
 
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
-                PreviousTrainSpeed = stationMover.currentSpeed;
-                NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
-                if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
-                i = 0.0f;
+
+                if (!bDisableLever)
+                {
+                    PreviousTrainSpeed = stationMover.currentSpeed;
+                    NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
+                    if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
+                    i = 0.0f;
+                }
+                
                 LastHandPosition = PlayerHand.transform.position;
                 return;
             }
