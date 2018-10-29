@@ -32,7 +32,7 @@ public class ScrewDriverTip : MonoBehaviour
         {
             if(m_ScrewDriver.bIsScrewing)
             {
-                other.transform.parent.Rotate(new Vector3(0, 0, 1), speed);
+                other.transform.parent.Rotate(new Vector3(0, 0, -2), speed);
             }
         }
     }

@@ -26,12 +26,13 @@ public class ScrewDriver : GrabbableObject {
         if(bIsGrabbing)
         {
             ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
+            ScrewDriverClone.transform.rotation = m_ScrewDriver.transform.rotation;
         }
 
 
         if(bIsScrewing)
         {
-            ScrewDriverClone.transform.Rotate(new Vector3(0,0,1.5f), speed);
+            ScrewDriverClone.transform.Rotate(new Vector3(0,0,-2.0f), speed);
         }
 	}
 
@@ -43,7 +44,9 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnControllerExit()
     {
-        
+        m_ScrewDriver.GetComponent<MeshRenderer>().enabled = true;
+        Destroy(ScrewDriverClone);
+        bIsGrabbing = false;
     }
 
     public override void OnControllerStay()

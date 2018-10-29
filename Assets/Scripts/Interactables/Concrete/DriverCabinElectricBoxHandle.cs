@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DriverCabinDoorHandle : StationaryObject {
+public class DriverCabinElectricBoxHandle : StationaryObject {
 
-    private PlayerViveController[] foundControllers;
+   
     private GameObject PlayerHand;
 
     private bool bIsGrabbing = false;
