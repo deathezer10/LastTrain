@@ -52,4 +52,13 @@ public class KeyCard : GrabbableObject {
     {
 
     }
+
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
 }

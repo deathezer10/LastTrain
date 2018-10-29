@@ -86,6 +86,14 @@ public class SawBlade : GrabbableObject
         }
     }
 
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
     public bool IsSpinning()
     {
         return spinning;

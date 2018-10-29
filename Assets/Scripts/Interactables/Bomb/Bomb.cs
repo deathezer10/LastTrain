@@ -85,6 +85,14 @@ public class Bomb : GrabbableObject
     {
     }
 
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
     private void TimerTimeOut()
     {
         phLightRenderer.material.color = red;

@@ -80,4 +80,13 @@ public class Suitcase : GrabbableObject
             opened = true;
         }
     }
+
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
 }

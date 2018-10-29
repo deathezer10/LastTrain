@@ -82,4 +82,13 @@ public class KeyCardScanner : StationaryObject
     {
 
     }
+
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+    
 }

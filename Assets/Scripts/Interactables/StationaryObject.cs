@@ -15,4 +15,7 @@ public abstract class StationaryObject : MonoBehaviour, IInteractable, IStationa
     public abstract void OnGrab();
     public abstract void OnGrabReleased();
     public abstract void OnUse();
+    public abstract void OnUseDown();
+    public abstract void OnUseUp();
+
 }

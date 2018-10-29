@@ -54,4 +54,13 @@ public class StationButton : StationaryObject {
     public override void OnUse()
     {
     }
+
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
 }

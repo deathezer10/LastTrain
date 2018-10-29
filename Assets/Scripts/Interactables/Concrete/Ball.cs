@@ -29,7 +29,14 @@ public class Ball : GrabbableObject
     public override void OnUse()
     {
         Debug.Log("Used ball: " + (++useCount).ToString());
-
-
     }
+
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
 }

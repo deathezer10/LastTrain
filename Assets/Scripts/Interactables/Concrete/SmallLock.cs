@@ -31,6 +31,14 @@ public class SmallLock : GrabbableObject
     {
     }
 
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())

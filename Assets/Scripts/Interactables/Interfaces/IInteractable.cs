@@ -22,8 +22,17 @@ public interface IInteractable
     void OnControllerStay();
 
     /// <summary>
-    /// Called when the player pressed the grip button WHILE grabbing it
+    /// Called when the player pressed the grip button WHILE grabbing it, called once every frame while held down
+    /// </summary>
+    void OnUseDown();
+
+    /// <summary>
+    /// Called when the player pressed the grip button WHILE grabbing it, called only once
     /// </summary>
     void OnUse();
-        
+
+    /// <summary>
+    /// Called when the player pressed the grip button WHILE grabbing it, called once after the player relased the Use button
+    /// </summary>
+    void OnUseUp();
 }

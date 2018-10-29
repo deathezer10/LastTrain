@@ -36,7 +36,7 @@ public class PlayerViveMovement : MonoBehaviour
 
         if (currentHand != SteamVR_Input_Sources.Any)
         {
-            if (SteamVR_Input._default.inActions.MoveDirectionPad.GetAxis(currentHand).y >= m_ForwardTouchpadThreshold)
+            if (SteamVR_Input._default.inActions.MoveDirectionPad.GetAxis(currentHand).y >= (m_ForwardTouchpadThreshold - 1))
             {
                 moveDir = m_CurrentCamera.transform.forward * m_PlayerMoveSpeed;
             }

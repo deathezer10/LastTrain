@@ -79,4 +79,13 @@ public class LightSwitch : StationaryObject
     {
 
     }
+
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
 }

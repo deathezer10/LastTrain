@@ -218,6 +218,14 @@ public class DriverCabinDoorLock : StationaryObject
 
     }
 
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
     private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)
     {
         bool equal = true;

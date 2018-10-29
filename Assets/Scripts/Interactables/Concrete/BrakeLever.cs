@@ -108,6 +108,14 @@ public class BrakeLever : StationaryObject
         
     }
 
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
     public override void OnGrab()
     {
         if (bCanGrab)

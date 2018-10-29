@@ -13,5 +13,7 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     public abstract void OnControllerStay();
     public abstract void OnGrab();
     public abstract void OnGrabReleased();
+    public abstract void OnUseDown();
     public abstract void OnUse();
+    public abstract void OnUseUp();
 }

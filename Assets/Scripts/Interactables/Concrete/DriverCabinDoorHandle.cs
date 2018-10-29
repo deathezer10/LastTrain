@@ -93,8 +93,13 @@ public class DriverCabinDoorHandle : StationaryObject {
         
     }
 
+    public override void OnUseDown()
+    {
+    }
 
-
+    public override void OnUseUp()
+    {
+    }
 
 }
 

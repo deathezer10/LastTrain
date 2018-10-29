@@ -36,4 +36,13 @@ public class Lighter : GrabbableObject {
         if (m_particle.isPlaying) m_particle.Stop();
         else m_particle.Play();
     }
+
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
+    }
+
 }
