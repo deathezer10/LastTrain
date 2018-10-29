@@ -42,9 +42,10 @@ GameObject:
   - component: {fileID: 65825139647828230}
   - component: {fileID: 54119983226537242}
   - component: {fileID: 114876410038249464}
+  - component: {fileID: 136193177753508516}
   m_Layer: 0
   m_Name: Lighter
-  m_TagString: Untagged
+  m_TagString: Lighter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,8 +74,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1155123142284220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.5, z: -0.2}
-  m_LocalScale: {x: 0.5, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: -0, y: 0.5, z: -0.115}
+  m_LocalScale: {x: 0.26809, y: 0.2, z: 0.5141}
   m_Children: []
   m_Father: {fileID: 4766033009756724}
   m_RootOrder: 1
@@ -99,8 +100,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1640551699455686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.241, z: 1.959}
-  m_LocalScale: {x: 0.05, y: 0.1, z: 0.05}
+  m_LocalPosition: {x: -5.6895275, y: 1.0738103, z: -85.240906}
+  m_LocalScale: {x: 0.03, y: 0.1, z: 0.05}
   m_Children:
   - {fileID: 4281866834339984}
   - {fileID: 4186363709473478}
@@ -157,7 +158,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3dc2c1535ecb95349b742959e4c5b560, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -242,6 +243,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_particle: {fileID: 198672556504469778}
+--- !u!136 &136193177753508516
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640551699455686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!198 &198672556504469778
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -250,7 +264,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1672034338806482}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 0.6
   stopAction: 0
   looping: 1
   prewarm: 0
@@ -321,7 +335,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.15
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -894,7 +908,7 @@ ParticleSystem:
     m_TextureBilinearFiltering: 0
     randomDirectionAmount: 0
     sphericalDirectionAmount: 0
-    randomPositionAmount: 0
+    randomPositionAmount: 0.1
     radius:
       value: 0.01
       mode: 0
