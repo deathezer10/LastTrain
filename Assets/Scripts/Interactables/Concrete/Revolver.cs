@@ -20,9 +20,9 @@ public class Revolver : GrabbableObject
         m_LaserPointer.SetActive(false);
         m_OriginalLocalPosition = m_LaserPointer.transform.localPosition;
         m_OriginalScale = m_LaserPointer.transform.localScale;
-        m_PointerDistance = m_LaserPointer.transform.localScale.y;
+        m_PointerDistance = m_LaserPointer.transform.localScale.z;
     }
-
+    
     public override void OnControllerEnter(PlayerViveController currentController)
     {
     }
@@ -38,22 +38,16 @@ public class Revolver : GrabbableObject
 
         RaycastHit hitInfo;
 
-        int mask = (1 << LayerMask.NameToLayer("Environment"));
-
         var origin = m_LaserPointer.transform.parent.position;
         var dir = m_LaserPointer.transform.TransformDirection(-Vector3.forward);
 
-        Debug.DrawRay(origin, dir * 100);
-
-        if (Physics.Raycast(origin, dir, out hitInfo, m_PointerDistance, mask))
+        if (Physics.Raycast(origin, dir, out hitInfo, m_PointerDistance))
         {
             m_LaserPointer.transform.position = Vector3.Lerp(hitInfo.point, m_LaserPointer.transform.parent.position, 0.5f);
 
             Vector3 newScale = m_LaserPointer.transform.localScale;
             newScale.z = Mathf.Abs(m_LaserPointer.transform.localPosition.z * 2);
             m_LaserPointer.transform.localScale = newScale;
-            Debug.Log("Ray hit");
-
         }
         else
         {
