@@ -19,6 +19,7 @@ TagManager:
   - Head
   - SawBlade
   - Lighter
+  - PaperBurnArea
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - Environment
   - SlidingDoor
   - Glass
-  - 
+  - ScrewDriver
   - 
   - 
   - 

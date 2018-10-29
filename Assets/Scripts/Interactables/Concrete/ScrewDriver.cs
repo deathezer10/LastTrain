@@ -47,17 +47,17 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnGrab()
     {
-        m_ScrewDriver.GetComponent<BoxCollider>().isTrigger = true;
         ScrewDriverClone = (GameObject)Instantiate(m_ScrewDriver, transform.position, transform.rotation,m_ScrewDriver.transform);
+        m_ScrewDriver.GetComponent<MeshRenderer>().enabled = false;
         Destroy(ScrewDriverClone.GetComponent("ScrewDriver"));
-
+        ScrewDriverClone.GetComponent<Rigidbody>().useGravity = false;
         bIsGrabbing = true;
     }
 
     public override void OnGrabReleased()
     {
+        m_ScrewDriver.GetComponent<MeshRenderer>().enabled = true;
         Destroy(ScrewDriverClone);
-        m_ScrewDriver.GetComponent<BoxCollider>().isTrigger = false;
         bIsGrabbing = false;
     }
 
