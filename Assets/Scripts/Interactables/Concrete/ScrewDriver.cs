@@ -23,9 +23,15 @@ public class ScrewDriver : GrabbableObject {
 	// Update is called once per frame
 	void Update () {
 		
+        if(bIsGrabbing)
+        {
+            ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
+        }
+
+
         if(bIsScrewing)
         {
-            ScrewDriverClone.transform.Rotate(new Vector3(0,0,1), speed);
+            ScrewDriverClone.transform.Rotate(new Vector3(0,0,1.5f), speed);
         }
 	}
 
