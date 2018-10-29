@@ -24,7 +24,7 @@ public class AcceleratorLever : StationaryObject
 
     private float PreviousTrainSpeed = 10.0f;
     private float NewTrainSpeed = 10.0f;
-    private float rate = 0.05f;
+    private float rate = 0.3f;
     private float time = 0.0f;
     private float i;
 
@@ -66,6 +66,7 @@ public class AcceleratorLever : StationaryObject
         if(bIsActivating)
         {
             i += Time.deltaTime * rate;
+            print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
         }
        
