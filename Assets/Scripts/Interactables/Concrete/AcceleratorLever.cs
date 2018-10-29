@@ -36,6 +36,7 @@ public class AcceleratorLever : StationaryObject
     // Use this for initialization
     void Start()
     {
+        stationMover = FindObjectOfType<StationMover>();
         HandleCollider = GetComponent<BoxCollider>();
         Accelerator = gameObject;
         AcceleratorHandle = HandleCollider.gameObject;
@@ -71,7 +72,9 @@ public class AcceleratorLever : StationaryObject
                         Audio.Play();
                     }
 
-
+                    
+                    
+                        
 
                     if (BrakeLever.IsTaskCompleted())
                     {
@@ -83,29 +86,33 @@ public class AcceleratorLever : StationaryObject
                 }
 
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
-                float newvalue = (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z) / (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z) *
-                    (AcceleratorHandle.transform.position.z - HandleDefaultMaxPosition.z) + HandleDefaultMaxPosition.z;
-                stationMover.currentSpeed = Mathf.Lerp(3, 10, newvalue);
+                float a = (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z) / (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z);
+                float b = HandleDefaultMaxPosition.z - a * HandleDefaultMaxPosition.z;
+                float newval = a * AcceleratorHandle.transform.position.z + b;
+                stationMover.currentSpeed = Mathf.Lerp(3, 10, newval);
                 LastHandPosition = PlayerHand.transform.position;
                 return;
             }
 
             if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f)) //If player trying to move handle forward in the direction of the handle
             {
-                if(bDisableLever)
+
+                if (bDisableLever)
                 {
                     bDisableLever = false;
                 }
 
-                if (HandleDefaultMaxPosition.z <= AcceleratorHandle.transform.position.z) //Max point reached can't push it out of bounds
+                
+                if (VectorBeginPoint.transform.position.z <= AcceleratorHandle.transform.position.z) //Max point reached can't push it out of bounds
                 {
                     return;
                 }
-
+                
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
-                float newvalue = (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z) / (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z) *
-                    (AcceleratorHandle.transform.position.z - HandleDefaultMaxPosition.z) + HandleDefaultMaxPosition.z;
-                stationMover.currentSpeed = Mathf.Lerp(3, 10, newvalue);
+                float a = (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z) / (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z);
+                float b = HandleDefaultMaxPosition.z - a * HandleDefaultMaxPosition.z;
+                float newval = a * AcceleratorHandle.transform.position.z + b;
+                stationMover.currentSpeed = Mathf.Lerp(3, 10, newval);
                 LastHandPosition = PlayerHand.transform.position;
                 return;
 
