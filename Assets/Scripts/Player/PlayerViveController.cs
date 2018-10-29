@@ -71,11 +71,23 @@ public class PlayerViveController : MonoBehaviour
                             currentObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                         }
                     }
-
-                    // On Item Use (Grab Down)
+                    
+                    // On Item Use (Grab)
                     if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(m_CurrentHand.ToInputSource()))
                     {
                         iObject.OnUse();
+                    }
+
+                    // On Item Use (Grab Down)
+                    if (SteamVR_Input._default.inActions.GrabUse.GetState(m_CurrentHand.ToInputSource()))
+                    {
+                        iObject.OnUseDown();
+                    }
+
+                    // On Item Use (Grab Up)
+                    if (SteamVR_Input._default.inActions.GrabUse.GetStateUp(m_CurrentHand.ToInputSource()))
+                    {
+                        iObject.OnUseUp();
                     }
 
                     // On Grab Released (Trigger Up)
