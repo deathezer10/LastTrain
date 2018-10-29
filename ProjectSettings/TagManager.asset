@@ -18,6 +18,7 @@ TagManager:
   - Torso
   - Head
   - SawBlade
+  - Lighter
   layers:
   - Default
   - TransparentFX

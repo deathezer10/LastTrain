@@ -6,7 +6,7 @@ public class Revolver : GrabbableObject
 {
 
     [SerializeField]
-    GameObject m_LaserPointer;
+    GameObject m_LaserOrigin;
 
     private float m_PointerDistance;
 
@@ -17,10 +17,10 @@ public class Revolver : GrabbableObject
 
     private void Start()
     {
-        m_LaserPointer.SetActive(false);
-        m_OriginalLocalPosition = m_LaserPointer.transform.localPosition;
-        m_OriginalScale = m_LaserPointer.transform.localScale;
-        m_PointerDistance = m_LaserPointer.transform.localScale.y;
+        m_LaserOrigin.SetActive(false);
+        m_OriginalLocalPosition = m_LaserOrigin.transform.localPosition;
+        m_OriginalScale = m_LaserOrigin.transform.localScale;
+        m_PointerDistance = m_LaserOrigin.transform.localScale.y;
     }
 
     public override void OnControllerEnter(PlayerViveController currentController)
@@ -35,37 +35,38 @@ public class Revolver : GrabbableObject
     {
         if (m_IsGrabbing == false)
             return;
-
-
+        
         RaycastHit hitInfo;
 
-        int mask = ~(1 << LayerMask.NameToLayer("Player"));
+        int mask = (1 << LayerMask.NameToLayer("Environment"));
         
-        if (Physics.Raycast(m_LaserPointer.transform.parent.position, m_LaserPointer.transform.forward, out hitInfo, m_PointerDistance, mask))
+        if (Physics.Raycast(m_LaserOrigin.transform.parent.position, m_LaserOrigin.transform.forward, out hitInfo, m_PointerDistance, mask))
         {
-            m_LaserPointer.transform.position = Vector3.Lerp(hitInfo.point, m_LaserPointer.transform.parent.position, 0.5f);
+            m_LaserOrigin.transform.position = Vector3.Lerp(hitInfo.point, m_LaserOrigin.transform.parent.position, 0.5f);
 
-            Vector3 newScale = m_LaserPointer.transform.localScale;
-            newScale.y = m_LaserPointer.transform.localPosition.y * 2;
-            m_LaserPointer.transform.localScale = newScale;
+            Vector3 newScale = m_LaserOrigin.transform.localScale;
+            newScale.y = m_LaserOrigin.transform.localPosition.y * 2;
+            m_LaserOrigin.transform.localScale = newScale;
+
+            Debug.Log("Ray hit");
         }
         else
         {
-            m_LaserPointer.transform.localPosition = m_OriginalLocalPosition;
-            m_LaserPointer.transform.localScale = m_OriginalScale;
+            m_LaserOrigin.transform.localPosition = m_OriginalLocalPosition;
+            m_LaserOrigin.transform.localScale = m_OriginalScale;
         }
     }
 
     public override void OnGrab()
     {
         m_IsGrabbing = true;
-        m_LaserPointer.SetActive(true);
+        m_LaserOrigin.SetActive(true);
     }
 
     public override void OnGrabReleased()
     {
         m_IsGrabbing = false;
-        m_LaserPointer.SetActive(false);
+        m_LaserOrigin.SetActive(false);
     }
 
     public override void OnUse()

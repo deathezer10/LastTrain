@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lighter : GrabbableObject {
-	[SerializeField]
-	private ParticleSystem m_particle;
+public class Lighter : GrabbableObject
+{
+    [SerializeField]
+    private ParticleSystem m_particle;
+
+    bool lit;
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -20,7 +23,7 @@ public class Lighter : GrabbableObject {
 
     public override void OnGrab()
     {
-		Debug.Log("ライターを持ったよ");
+        Debug.Log("ライターを持ったよ");
 
         transform.eulerAngles = Vector3.zero;
     }
@@ -33,8 +36,32 @@ public class Lighter : GrabbableObject {
     public override void OnUse()
     {
         Debug.Log("ライターを使ったよ");
-        if (m_particle.isPlaying) m_particle.Stop();
-        else m_particle.Play();
+        if (lit)
+        {
+            m_particle.Stop();
+            lit = false;
+        }
+        else
+        {
+            m_particle.Play();
+            lit = true;
+        }
+    }
+
+    public bool IsLit()
+    {
+        return lit;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (lit)
+        {
+            if (other.tag == "PaperBurnArea")
+            {
+                other.GetComponent<NPBurnArea>().IncreaseHeat();
+            }
+        }
     }
 
     public override void OnUseDown()
