@@ -14,8 +14,7 @@ public class AcceleratorLever : StationaryObject
 
     private Vector3 HandleMovementDirection;
     private Vector3 LastHandPosition;
-    private Vector3 HandleDefaultMaxPosition;
-
+    
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
@@ -40,7 +39,6 @@ public class AcceleratorLever : StationaryObject
         HandleCollider = GetComponent<BoxCollider>();
         Accelerator = gameObject;
         AcceleratorHandle = HandleCollider.gameObject;
-        HandleDefaultMaxPosition = AcceleratorHandle.transform.position;
         VectorBeginPoint = Accelerator.transform.GetChild(1).gameObject;
         VectorEndPoint = Accelerator.transform.GetChild(0).gameObject;
 
@@ -86,10 +84,11 @@ public class AcceleratorLever : StationaryObject
                 }
 
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
-                float a = (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z) / (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z);
-                float b = HandleDefaultMaxPosition.z - a * HandleDefaultMaxPosition.z;
+                float a = (VectorBeginPoint.transform.position.z - VectorEndPoint.transform.position.z) / (VectorBeginPoint.transform.position.z - VectorEndPoint.transform.position.z);
+                float b = VectorBeginPoint.transform.position.z - a * VectorBeginPoint.transform.position.z;
                 float newval = a * AcceleratorHandle.transform.position.z + b;
                 stationMover.currentSpeed = Mathf.Lerp(3, 10, newval);
+                print(Mathf.Lerp(3, 10, newval));
                 LastHandPosition = PlayerHand.transform.position;
                 return;
             }
@@ -109,10 +108,11 @@ public class AcceleratorLever : StationaryObject
                 }
                 
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
-                float a = (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z) / (HandleDefaultMaxPosition.z - VectorEndPoint.transform.position.z);
-                float b = HandleDefaultMaxPosition.z - a * HandleDefaultMaxPosition.z;
+                float a = (VectorBeginPoint.transform.position.z - VectorEndPoint.transform.position.z) / (VectorBeginPoint.transform.position.z - VectorEndPoint.transform.position.z);
+                float b = VectorBeginPoint.transform.position.z - a * VectorBeginPoint.transform.position.z;
                 float newval = a * AcceleratorHandle.transform.position.z + b;
                 stationMover.currentSpeed = Mathf.Lerp(3, 10, newval);
+                print(Mathf.Lerp(3, 10, newval));
                 LastHandPosition = PlayerHand.transform.position;
                 return;
 
