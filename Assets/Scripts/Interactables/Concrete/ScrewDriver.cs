@@ -6,23 +6,26 @@ public class ScrewDriver : GrabbableObject {
 
     private GameObject m_ScrewDriver;
     private BoxCollider m_Tip;
-    
+    GameObject ScrewDriverClone;
+
+
 
     private bool bIsGrabbing = false;
     public bool bIsScrewing = false;
     private float speed = 1.0f;
     // Use this for initialization
+
     void Start () {
         m_ScrewDriver = transform.gameObject;
         m_Tip = transform.GetChild(0).GetComponent<BoxCollider>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
         if(bIsScrewing)
         {
-            m_ScrewDriver.transform.Rotate(new Vector3(0,0,1), speed);
+            ScrewDriverClone.transform.Rotate(new Vector3(0,0,1), speed);
         }
 	}
 
@@ -44,11 +47,17 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnGrab()
     {
+        m_ScrewDriver.GetComponent<BoxCollider>().isTrigger = true;
+        ScrewDriverClone = (GameObject)Instantiate(m_ScrewDriver, transform.position, transform.rotation,m_ScrewDriver.transform);
+        Destroy(ScrewDriverClone.GetComponent("ScrewDriver"));
+
         bIsGrabbing = true;
     }
 
     public override void OnGrabReleased()
     {
+        Destroy(ScrewDriverClone);
+        m_ScrewDriver.GetComponent<BoxCollider>().isTrigger = false;
         bIsGrabbing = false;
     }
 
