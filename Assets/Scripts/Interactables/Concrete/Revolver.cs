@@ -15,6 +15,8 @@ public class Revolver : GrabbableObject
 
     bool m_IsGrabbing = false;
 
+    PlayerViveController m_CurrentController;
+
     private void Start()
     {
         m_LaserPointer.SetActive(false);
@@ -22,9 +24,10 @@ public class Revolver : GrabbableObject
         m_OriginalScale = m_LaserPointer.transform.localScale;
         m_PointerDistance = m_LaserPointer.transform.localScale.z;
     }
-    
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        m_CurrentController = currentController;
     }
 
     public override void OnControllerExit()
@@ -54,12 +57,18 @@ public class Revolver : GrabbableObject
             m_LaserPointer.transform.localPosition = m_OriginalLocalPosition;
             m_LaserPointer.transform.localScale = m_OriginalScale;
         }
+
+
+        if (GetComponent<FixedJoint>())
+            GetComponent<FixedJoint>().breakForce = Mathf.Infinity;
     }
 
     public override void OnGrab()
     {
         m_IsGrabbing = true;
         m_LaserPointer.SetActive(true);
+        transform.rotation = m_CurrentController.transform.rotation;
+        transform.Rotate(new Vector3(0, -90, 0));
     }
 
     public override void OnGrabReleased()
