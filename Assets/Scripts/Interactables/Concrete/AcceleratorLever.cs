@@ -74,6 +74,13 @@ public class AcceleratorLever : StationaryObject
 
         if (bIsGrabbing) //Player is grabbing the acceleratorhandle
         {
+            if(Vector3.Distance(PlayerHand.transform.position,AcceleratorHandle.transform.position) > 0.3)
+            {
+                bIsGrabbing = false;
+            }
+
+
+
             Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition; //We get the small movement vector of player's hand
             HandMovementDirection.Normalize();
             if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f)) //If player is trying to drag the handle towards the direction the handle can move
