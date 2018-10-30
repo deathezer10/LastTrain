@@ -4,13 +4,14 @@ using UnityEngine;
 using Valve.VR;
 using DG.Tweening;
 
-public class StationButton : StationaryObject {
+public class StationButton : StationaryObject, IShootable
+{
 
     public GameObject m_Train;
     private const float m_ToggleOffset = -0.03f;
     private bool m_Toggled = false;
-    
-	void Start ()
+
+    void Start()
     {
         GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }
@@ -21,13 +22,17 @@ public class StationButton : StationaryObject {
         {
             m_Toggled = true;
 
-            var source = currentController.GetCurrentHand().ToInputSource();
-            currentController.Vibration(0, 0.7f, 10, 1, source);
+            if (currentController != null)
+            {
+                var source = currentController.GetCurrentHand().ToInputSource();
+                currentController.Vibration(0, 0.7f, 10, 1, source);
+            }
 
             GetComponent<AudioPlayer>().Play();
 
             GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-            m_Train.GetComponent<TrainArriver>().BeginArrival(()=> {
+            m_Train.GetComponent<TrainArriver>().BeginArrival(() =>
+            {
                 transform.Find("AnnouncementBeep").GetComponent<AudioPlayer>().Play();
             });
 
@@ -61,6 +66,11 @@ public class StationButton : StationaryObject {
 
     public override void OnUseUp()
     {
+    }
+
+    public void OnShot(Revolver revolver)
+    {
+        OnControllerEnter(null);
     }
 
 }
