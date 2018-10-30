@@ -9,6 +9,30 @@ using System.Linq;
 
 public class PlayerTeleportation : MonoBehaviour
 {
+    /// <summary>
+    /// 移動の際使用するデータ
+    /// </summary>
+    class MoveData
+    {
+        public float height;
+        public float v0;
+        public float sin;
+        public float cos;
+        public float arrivalTime;
+
+        public MoveData(Transform trans, float initialVelocity)
+        {
+            //コントローラの向いている角度(x軸回転)をラジアン角へ
+            var angleFacing = -Mathf.Deg2Rad * trans.eulerAngles.x;
+            this.height = trans.position.y;
+            this.v0 = initialVelocity;
+            this.sin = Mathf.Sin(angleFacing);
+            this.cos = Mathf.Cos(angleFacing);
+            var g = Gravity;
+            this.arrivalTime = (initialVelocity * sin) / g + Mathf.Sqrt((square(initialVelocity) * square(sin)) / square(g) + (2F * height) / g);
+        }
+    }
+
     [SerializeField] 
     private GameObject _targetMarker;
 
@@ -20,8 +44,6 @@ public class PlayerTeleportation : MonoBehaviour
 
     [SerializeField]
     private float _initialVelocity = 1;
-
-    private List<Vector3> _vertexes = new List<Vector3>();
 
     static readonly float Gravity = 9.81F;
 
@@ -37,14 +59,19 @@ public class PlayerTeleportation : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
+    [SerializeField]
+    private SteamVR_Input_Sources handType;
+    [SerializeField]
+    private SteamVR_Action_Boolean padAction;
+
     void Start()
     {
         _targetMarker.SetActive(false);
         //デバイスの入力受け付け
         var input = SteamVR_Input._default;
 
-        this.UpdateAsObservable()                                               //Updateが呼ばれた時
-            .Where(_ => input.inActions.GrabPinch.GetStateDown(SteamVR_Input_Sources.RightHand)) //コントローラーのトリガーを押している間
+        this.UpdateAsObservable()
+            .Where(_ => padAction.GetState(handType)) // bコントローラーのパッドを押している間
             .Subscribe(_ => _targetMarker.SetActive(true));
 
         this.UpdateAsObservable()
@@ -53,12 +80,7 @@ public class PlayerTeleportation : MonoBehaviour
 
         //コントローラの入力の後に読みたい
         this.LateUpdateAsObservable()
-            .Where(_ => _targetMarker.activeSelf) //ターゲットマーカーが表示されているとき
             .Subscribe(_ => showOrbit());        //放物線を表示させる
-
-        this.LateUpdateAsObservable()
-            .Where(_ => !_targetMarker.activeSelf)          //ターゲットマーカーが非表示のとき
-            .Subscribe(_ => _lineRenderer.enabled = false); //放物線を非表示にする
     }
 
     /// <summary>
@@ -66,13 +88,17 @@ public class PlayerTeleportation : MonoBehaviour
     /// </summary>
     void moveToPoint()
     {
-        FadeManager.Instance._fadeColor = _fadeColor;
-        StartCoroutine(FadeManager.Instance.Fading(_fadeTime, _fadeTime, () =>
+        if (_lineRenderer.enabled)
         {
-            _ownPlayer.transform.position = _targetMarker.transform.position;
-        }));
+            FadeManager.Instance._fadeColor = _fadeColor;
+            StartCoroutine(FadeManager.Instance.Fading(_fadeTime, _fadeTime, () =>
+            {
+                _ownPlayer.transform.position = _targetMarker.transform.position;
+            }));
+        }
 
         _targetMarker.SetActive(false);
+        _lineRenderer.enabled = false;
     }
 
     /// <summary>
@@ -80,62 +106,85 @@ public class PlayerTeleportation : MonoBehaviour
     /// </summary>
     void showOrbit()
     {
-        _lineRenderer.enabled = true;
-
         //コントローラの向いている角度(x軸回転)をラジアン角へ
-        var angleFacing = -Mathf.Deg2Rad * transform.eulerAngles.x;
-        var h = transform.position.y;
-        var v0 = _initialVelocity;
-        var sin = Mathf.Sin(angleFacing);
-        var cos = Mathf.Cos(angleFacing);
-        var g = Gravity;
-
-        //地面に到達する時間の式 :
-        //  t = (v0 * sinθ) / g + √ (v0^2 * sinθ^2) / g^2 + 2 * h / g
-        var arrivalTime = GetArrivalTime(v0, sin, cos, h);
+        var data = new MoveData(transform, _initialVelocity);
 
         // 目標地点の取得
-        var indicationPos = GetIndicationPos(v0, cos, sin, arrivalTime);
+        var indicationPos = GetIndicationPos(data.v0, data.cos, data.sin, data.arrivalTime);
         var vec = (indicationPos - this.transform.position).normalized;
 
-        Ray ray = new Ray(_camera.transform.position, vec);
+        var hit = IsVisible(_camera.transform.position, vec);
+
+        if (hit == null)
+        {
+            _targetMarker.SetActive(false);
+            _lineRenderer.enabled = false;
+
+            return;
+        }
+
+        // 床の上の高さにする
+        data.height = hit.Value.point.y;
+
+        // 設定
+        SetLineMarker(data);
+    }
+
+    /// <summary>
+    /// 見えている？
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="dir"></param>
+    /// <returns></returns>
+    private RaycastHit? IsVisible(Vector3 pos,Vector3 dir)
+    {
+        Ray ray = new Ray(pos, dir);
         RaycastHit hit;
         Debug.DrawLine(ray.origin, ray.direction * _initialVelocity, Color.green);
 
-        if (Physics.Raycast(ray, out hit, v0))
+        if (Physics.Raycast(ray, out hit, 20.0f))
         {
-            v0 = (hit.point - _camera.transform.position).magnitude;
-            if (_ownPlayer.transform.position.y < hit.point.y)
-            {
-                arrivalTime = GetArrivalTime(v0, sin, cos, h);
-            }
-            else
-            {
-                h = hit.point.y;
-            }
+            // TODO:ここらへんで床判断
+
+            return hit;
         }
+        return null;
+    }
+
+    /// <summary>
+    /// ラインとマーカーの設定
+    /// </summary>
+    /// <param name="data"></param>
+    private void SetLineMarker(MoveData data)
+    {
+        var vertexes = new List<Vector3>();
 
         for (var i = 0; i < _vertexCount; i++)
         {
             //delta時間あたりのワールド座標(ラインレンダラーの節)
-            var delta = i * arrivalTime / _vertexCount;
-            var x = v0 * cos * delta;
-            var y = v0 * sin * delta - 0.5F * g * square(delta);
+            var delta = i * data.arrivalTime / _vertexCount;
+            var x = data.v0 * data.cos * delta;
+            var y = data.v0 * data.sin * delta - 0.5F * g * square(delta);
             var forward = new Vector3(transform.forward.x, 0, transform.forward.z);
-            var vertex = transform.position + forward * x + Vector3.up * y;
-            _vertexes.Add(vertex);
+            Vector3 vertex = transform.position + forward * x + Vector3.up * y;
+
+            if(vertex.IsAnyNan()) return;
+            
+            vertexes.Add(vertex);
         }
+
+        _lineRenderer.enabled = true;
+
         //ターゲットマーカーを頂点の最終地点へ
-        var last = _vertexes.Last();
-        if (last.IsAnyNan() == false)
-        {
-            _targetMarker.transform.position = last;
-            //LineRendererの頂点の設置
-            _lineRenderer.positionCount = _vertexes.Count;
-            _lineRenderer.SetPositions(_vertexes.ToArray());
-        }
+        var last = vertexes.Last();
+        _targetMarker.transform.position = last;
+
+        //LineRendererの頂点の設置
+        _lineRenderer.positionCount = vertexes.Count;
+        _lineRenderer.SetPositions(vertexes.ToArray());
+
         //リストの初期化
-        _vertexes.Clear();
+        vertexes.Clear();
     }
 
     /// <summary>
@@ -147,6 +196,14 @@ public class PlayerTeleportation : MonoBehaviour
         return Mathf.Pow(num, 2);
     }
 
+    /// <summary>
+    /// 到達目標地点を求める
+    /// </summary>
+    /// <param name="v0"></param>
+    /// <param name="cos"></param>
+    /// <param name="sin"></param>
+    /// <param name="time"></param>
+    /// <returns></returns>
     private Vector3 GetIndicationPos(float v0, float cos, float sin, float time)
     {
         //delta時間あたりのワールド座標(ラインレンダラーの節)
@@ -156,11 +213,5 @@ public class PlayerTeleportation : MonoBehaviour
         var IndicationPos = this.transform.position + forward * x + Vector3.up * y;
 
         return IndicationPos;
-    } 
-
-    private float GetArrivalTime(float initialVelocity,float sin,float cos,float height)
-    {
-        float g = Gravity;
-        return (initialVelocity * sin) / g + Mathf.Sqrt((square(initialVelocity) * square(sin)) / square(g) + (2F * height) / g);
-    }   
+    }
 }
