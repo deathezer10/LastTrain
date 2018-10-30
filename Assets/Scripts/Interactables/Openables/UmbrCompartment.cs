@@ -7,8 +7,14 @@ public class UmbrCompartment : MonoBehaviour
     public GameObject visualLockBottom, visualLockTop, physicsLockBottom, physicsLockTop, umbrella, umbrellaVisual;
 
     bool rotating;
+    //AudioPlayer lockBreakAudio;
     Quaternion finalRotation = new Quaternion(0, 0.7f, 0, 0.7f);
-    
+
+    private void Start()
+    {
+        //lockBreakAudio = GetComponent<AudioPlayer>();
+    }
+
     void Update()
     {
         if (rotating && transform.localRotation != finalRotation)
@@ -30,6 +36,7 @@ public class UmbrCompartment : MonoBehaviour
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
             OpenCompartment();
+            //lockBreakAudio.Play();
             GetComponent<CapsuleCollider>().enabled = false;
         }
     }
