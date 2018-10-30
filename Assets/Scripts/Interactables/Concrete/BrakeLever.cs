@@ -120,7 +120,7 @@ public class BrakeLever : StationaryObject
         }
     }
 
-    public override bool hideControllerOnGrab { get { return true; } }
+    public override bool hideControllerOnGrab { get { return false; } }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {

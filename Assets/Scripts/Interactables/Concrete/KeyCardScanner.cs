@@ -31,6 +31,9 @@ public class KeyCardScanner : StationaryObject, IShootable
 
     private void ScanSuccess(KeyCard card)
     {
+        if (isDone)
+            return;
+
         if (successAudio) successAudio.Play();
 
         if (card != null)
