@@ -6,7 +6,7 @@ public class NewsPaperSmoke : MonoBehaviour
 {
     public GameObject smokeObject;
 
-    public bool smoking;
+    bool smoking;
 
     void Start()
     {
@@ -46,6 +46,6 @@ public class NewsPaperSmoke : MonoBehaviour
     public void SmokingStart()
     {
         smoking = true;
-        GetComponent<CapsuleCollider>().enabled = true;
+        smokeObject.GetComponent<CapsuleCollider>().enabled = true;
     }
 }
