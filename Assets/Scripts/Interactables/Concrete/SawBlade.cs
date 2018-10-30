@@ -26,7 +26,7 @@ public class SawBlade : GrabbableObject
             if (Time.time >= vibrationTimer)
             {
                 var source = playerHand.ToInputSource();
-                playerController.Vibration(0, 0.2f, 0.2f, 0.5f, source);
+                playerController.Vibration(0, 0.2f, 0.2f, 0.7f, source);
                 vibrationTimer = Time.time + 0.2f;
             }
         }
@@ -89,6 +89,7 @@ public class SawBlade : GrabbableObject
             else
             {
                 sawBladeAnimator.Play("SawBladeStop");
+                spinAudio.Stop();
             }
         }
     }
