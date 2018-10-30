@@ -20,6 +20,9 @@ TagManager:
   - SawBlade
   - Lighter
   - PaperBurnArea
+  - SmokeDetector
+  - Screw
+  - Screwdriver
   layers:
   - Default
   - TransparentFX
@@ -35,7 +38,7 @@ TagManager:
   - Environment
   - SlidingDoor
   - Glass
-  - ScrewDriver
+  - 
   - 
   - 
   - 

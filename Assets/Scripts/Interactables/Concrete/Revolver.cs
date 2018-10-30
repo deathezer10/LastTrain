@@ -17,6 +17,12 @@ public class Revolver : GrabbableObject
 
     PlayerViveController m_CurrentController;
 
+    GameObject m_CurrentPointedObject;
+
+    RaycastHit? m_CurrentHitInfo;
+
+    int m_CurrentBulletCount = 2;
+
     private void Start()
     {
         m_LaserPointer.SetActive(false);
@@ -32,6 +38,9 @@ public class Revolver : GrabbableObject
 
     public override void OnControllerExit()
     {
+        m_IsGrabbing = false;
+        m_LaserPointer.SetActive(false);
+        m_CurrentController.ToggleControllerModel(true);
     }
 
     public override void OnControllerStay()
@@ -51,16 +60,23 @@ public class Revolver : GrabbableObject
             Vector3 newScale = m_LaserPointer.transform.localScale;
             newScale.z = Mathf.Abs(m_LaserPointer.transform.localPosition.z * 2);
             m_LaserPointer.transform.localScale = newScale;
+
+            if (hitInfo.transform.GetComponent<IShootable>() != null)
+            {
+                m_CurrentPointedObject = hitInfo.transform.gameObject;
+                m_CurrentHitInfo = hitInfo;
+            }
+            else
+            {
+                m_CurrentPointedObject = null;
+                m_CurrentHitInfo = null;
+            }
         }
         else
         {
             m_LaserPointer.transform.localPosition = m_OriginalLocalPosition;
             m_LaserPointer.transform.localScale = m_OriginalScale;
         }
-
-
-        if (GetComponent<FixedJoint>())
-            GetComponent<FixedJoint>().breakForce = Mathf.Infinity;
     }
 
     public override void OnGrab()
@@ -68,17 +84,37 @@ public class Revolver : GrabbableObject
         m_IsGrabbing = true;
         m_LaserPointer.SetActive(true);
         transform.rotation = m_CurrentController.transform.rotation;
-        transform.Rotate(new Vector3(0, -90, 0));
+        transform.Rotate(new Vector3(0, -90, -15));
+        transform.position = m_CurrentController.transform.position;
+        m_CurrentController.ToggleControllerModel(false);
     }
 
     public override void OnGrabReleased()
     {
         m_IsGrabbing = false;
         m_LaserPointer.SetActive(false);
+        m_CurrentController.ToggleControllerModel(true);
     }
 
     public override void OnUse()
     {
+        if (m_CurrentBulletCount > 0)
+        {
+            m_CurrentBulletCount--;
+
+            if (m_CurrentController.GetComponent<IShootable>() != null)
+                m_CurrentPointedObject.GetComponent<IShootable>().OnShot(this);
+
+
+
+            // Play firing sound
+            GetComponent<AudioPlayer>().Play("bulletfire");
+        }
+        else
+        {
+            // Play no bullet sound
+            GetComponent<AudioPlayer>().Play("bulletnone");
+        }
     }
 
     public override void OnUseDown()

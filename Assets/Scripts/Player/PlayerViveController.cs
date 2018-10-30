@@ -67,6 +67,7 @@ public class PlayerViveController : MonoBehaviour
                             joint.breakForce = 7500;
                             joint.breakTorque = Mathf.Infinity;
                             joint.connectedBody = GetComponent<Rigidbody>();
+                            joint.enablePreprocessing = false;
 
                             currentObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                         }
@@ -160,6 +161,11 @@ public class PlayerViveController : MonoBehaviour
     private void OnJointBreak(float breakForce)
     {
         AssignObjectToHand(m_CurrentHand, null);
+    }
+
+    public void ToggleControllerModel(bool toggle)
+    {
+        transform.Find("Model").gameObject.SetActive(toggle);
     }
 
     private void AssignObjectToHand(HandSource hand, GameObject go)

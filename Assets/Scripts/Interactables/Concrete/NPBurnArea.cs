@@ -6,7 +6,7 @@ public class NPBurnArea : MonoBehaviour
 {
     ParticleSystem fireParticle, smokeParticle;
 
-    float burnThreshold = 45f;
+    float burnThreshold = 60f;
     float currentHeat;
 
     void Start()
@@ -22,6 +22,7 @@ public class NPBurnArea : MonoBehaviour
     {
         fireParticle.Play();
         smokeParticle.Play();
+        FindObjectOfType<NewsPaperSmoke>().SmokingStart();
     }
 
     public void IncreaseHeat()
