@@ -13,6 +13,7 @@ public class Lighter : GrabbableObject
     private void Start()
     {
         litCollider = GetComponent<CapsuleCollider>();
+        m_particle.Stop();
     }
 
     public override void OnControllerEnter(PlayerViveController currentController)
