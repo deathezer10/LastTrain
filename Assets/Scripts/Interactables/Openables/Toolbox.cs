@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,20 +7,14 @@ public class Toolbox : GrabbableObject
 {
     public GameObject[] containedObjectsArray;
 
+    AudioPlayer openAudio;
     Animator toolboxAnimator;
     bool opened;
 
     void Start()
     {
         toolboxAnimator = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            OpenToolbox();
-        }
+        openAudio = GetComponent<AudioPlayer>();
     }
     
     // Re-arrange colliders on the main object body for Grab rigidbody to reflect the new model state.
@@ -43,8 +38,16 @@ public class Toolbox : GrabbableObject
     public void OpenToolbox()
     {
         toolboxAnimator.Play("toolbox_open");
+        openAudio.Play();
 
         ReArrangeColliders();
+
+        StartCoroutine(ObjectActivateDelay());
+    }
+
+    IEnumerator ObjectActivateDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
 
         foreach (GameObject go in containedObjectsArray)
         {

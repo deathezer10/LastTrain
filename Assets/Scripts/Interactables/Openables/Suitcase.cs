@@ -6,17 +6,20 @@ public class Suitcase : GrabbableObject
 {
     public GameObject cardHolder;
 
+    AudioPlayer openAudio;
     Animator suitcaseAnimator;
     bool opened;
 
     void Start()
     {
         suitcaseAnimator = GetComponent<Animator>();
+        openAudio = GetComponent<AudioPlayer>();
     }
 
     private void OpenSuitCase()
     {
         suitcaseAnimator.Play("suitcase_open");
+        openAudio.Play();
 
         RearrangeColliders();
 

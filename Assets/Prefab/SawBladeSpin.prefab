@@ -182,9 +182,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1632485256176790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7420056, y: 1.138, z: -85.4319}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalRotation: {x: -0, y: -0.68296295, z: -0, w: 0.73045313}
+  m_LocalPosition: {x: 0.0017, y: -0.0006, z: 0.0109}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4980559263229694}
   - {fileID: 4149502544220186}
@@ -193,7 +193,7 @@ Transform:
   - {fileID: 4130410607754664}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -86.151, z: 0}
 --- !u!4 &4043414008127086
 Transform:
   m_ObjectHideFlags: 1
@@ -616,9 +616,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf4730f31d142446967632ff48b4b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PH_SpinColor: {r: 0.23504186, g: 1, b: 0, a: 1}
-  PH_NotSpinColor: {r: 1, g: 0.2539002, b: 0.15566039, a: 1}
-  PH_SpinIndicator: {fileID: 1227188924593550}
 --- !u!114 &114848914809252826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -631,7 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomizePitch: 1
-  pitchRandomRange: 0.2
+  pitchRandomRange: 0.25
   playDelay: 0
   _clip: {fileID: 8300000, guid: c15c9d37bacce16449178c55d34d36dc, type: 3}
   clipAlias: 
