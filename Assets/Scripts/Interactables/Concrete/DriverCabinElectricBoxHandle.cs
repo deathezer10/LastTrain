@@ -71,6 +71,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
     public override void OnControllerExit()
     {
         bCanGrab = false;
+        bIsGrabbing = false;
     }
 
     public override void OnControllerStay()
