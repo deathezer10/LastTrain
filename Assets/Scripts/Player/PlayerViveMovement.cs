@@ -11,7 +11,7 @@ public class PlayerViveMovement : MonoBehaviour
     private Camera m_CurrentCamera;
 
     private const float m_PlayerMoveSpeed = 2;
-    private const float m_ForwardTouchpadThreshold = 0.35f;
+    private const float m_ForwardTouchpadThreshold = 0.15f;
 
     private void Start()
     {
@@ -42,7 +42,7 @@ public class PlayerViveMovement : MonoBehaviour
             }
             else
             {
-                moveDir = -m_CurrentCamera.transform.forward * m_PlayerMoveSpeed;
+                moveDir = -m_CurrentCamera.transform.forward * (m_PlayerMoveSpeed * 0.2f);
             }
         }
 
