@@ -6,6 +6,7 @@ using UnityEngine;
 public class Toolbox : GrabbableObject
 {
     public GameObject[] containedObjectsArray;
+    public GameObject sawBladeVisual;
 
     AudioPlayer openAudio;
     Animator toolboxAnimator;
@@ -48,6 +49,8 @@ public class Toolbox : GrabbableObject
     IEnumerator ObjectActivateDelay()
     {
         yield return new WaitForSeconds(1.5f);
+
+        sawBladeVisual.SetActive(false);
 
         foreach (GameObject go in containedObjectsArray)
         {
