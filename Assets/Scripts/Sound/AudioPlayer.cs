@@ -4,8 +4,9 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(AudioSource))]
-public class AudioPlayer : MonoBehaviour {
-	[SerializeField]
+public class AudioPlayer : MonoBehaviour
+{
+    [SerializeField]
     private bool randomizePitch = true;
 
     [SerializeField]
@@ -17,12 +18,13 @@ public class AudioPlayer : MonoBehaviour {
     [SerializeField]
     private AudioClip _clip;
 
+    public string clipAlias = "";
+
     protected AudioSource m_Audiosource;
 
     public AudioSource audioSource { get { return m_Audiosource; } }
 
-    public AudioClip clip
-    {
+    public AudioClip clip {
         get { return _clip; }
         private set { _clip = value; }
     }
@@ -32,17 +34,32 @@ public class AudioPlayer : MonoBehaviour {
         m_Audiosource = GetComponent<AudioSource>();
     }
 
-	private void OnEnable() {
-		_clip.LoadAudioData();
-	}
+    private void OnEnable()
+    {
+        _clip.LoadAudioData();
+    }
 
-	private void OnDisable() {
+    private void OnDisable()
+    {
         _clip.UnloadAudioData();
     }
 
-	public void Play(){
-		InternalPlayClip();
-	}
+    public void Play()
+    {
+        InternalPlayClip();
+    }
+
+    public void Play(string clipAlias)
+    {
+        foreach (AudioPlayer player in transform.GetComponents<AudioPlayer>())
+        {
+            if (player.clipAlias == clipAlias)
+            {
+                player.InternalPlayClip();
+                return;
+            }
+        }
+    }
 
     AudioClip InternalPlayClip()
     {

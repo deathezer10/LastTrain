@@ -163,6 +163,11 @@ public class PlayerViveController : MonoBehaviour
         AssignObjectToHand(m_CurrentHand, null);
     }
 
+    public void ToggleControllerModel(bool toggle)
+    {
+        transform.Find("Model").gameObject.SetActive(toggle);
+    }
+
     private void AssignObjectToHand(HandSource hand, GameObject go)
     {
         if (hand == HandSource.LeftHand)
