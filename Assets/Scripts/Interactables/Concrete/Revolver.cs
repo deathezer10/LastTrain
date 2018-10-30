@@ -15,16 +15,19 @@ public class Revolver : GrabbableObject
 
     bool m_IsGrabbing = false;
 
+    PlayerViveController m_CurrentController;
+
     private void Start()
     {
         m_LaserPointer.SetActive(false);
         m_OriginalLocalPosition = m_LaserPointer.transform.localPosition;
         m_OriginalScale = m_LaserPointer.transform.localScale;
-        m_PointerDistance = m_LaserPointer.transform.localScale.y;
+        m_PointerDistance = m_LaserPointer.transform.localScale.z;
     }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        m_CurrentController = currentController;
     }
 
     public override void OnControllerExit()
@@ -36,17 +39,17 @@ public class Revolver : GrabbableObject
         if (m_IsGrabbing == false)
             return;
 
-
         RaycastHit hitInfo;
 
-        int mask = ~(1 << LayerMask.NameToLayer("Player"));
-        
-        if (Physics.Raycast(m_LaserPointer.transform.parent.position, m_LaserPointer.transform.forward, out hitInfo, m_PointerDistance, mask))
+        var origin = m_LaserPointer.transform.parent.position;
+        var dir = m_LaserPointer.transform.TransformDirection(-Vector3.forward);
+
+        if (Physics.Raycast(origin, dir, out hitInfo, m_PointerDistance))
         {
             m_LaserPointer.transform.position = Vector3.Lerp(hitInfo.point, m_LaserPointer.transform.parent.position, 0.5f);
 
             Vector3 newScale = m_LaserPointer.transform.localScale;
-            newScale.y = m_LaserPointer.transform.localPosition.y * 2;
+            newScale.z = Mathf.Abs(m_LaserPointer.transform.localPosition.z * 2);
             m_LaserPointer.transform.localScale = newScale;
         }
         else
@@ -54,12 +57,18 @@ public class Revolver : GrabbableObject
             m_LaserPointer.transform.localPosition = m_OriginalLocalPosition;
             m_LaserPointer.transform.localScale = m_OriginalScale;
         }
+
+
+        if (GetComponent<FixedJoint>())
+            GetComponent<FixedJoint>().breakForce = Mathf.Infinity;
     }
 
     public override void OnGrab()
     {
         m_IsGrabbing = true;
         m_LaserPointer.SetActive(true);
+        transform.rotation = m_CurrentController.transform.rotation;
+        transform.Rotate(new Vector3(0, -90, 0));
     }
 
     public override void OnGrabReleased()
