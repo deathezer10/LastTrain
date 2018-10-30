@@ -21,6 +21,8 @@ TagManager:
   - Lighter
   - PaperBurnArea
   - SmokeDetector
+  - Screw
+  - Screwdriver
   layers:
   - Default
   - TransparentFX

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33270287413037818}
   - component: {fileID: 65827637095031928}
   - component: {fileID: 114927358249463714}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,9 +42,9 @@ GameObject:
   - component: {fileID: 136350764061175958}
   - component: {fileID: 54908674962314022}
   - component: {fileID: 114110593771356094}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ScrewDriver
-  m_TagString: Untagged
+  m_TagString: Screwdriver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774718936074742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.636, y: 1.085, z: -1.665}
+  m_LocalPosition: {x: -0.80787086, y: 0.49903917, z: -2.5331562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4448246216312428}
