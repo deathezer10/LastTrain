@@ -19,6 +19,8 @@ public class Revolver : GrabbableObject
 
     GameObject m_CurrentPointedObject;
 
+    RaycastHit? m_CurrentHitInfo;
+
     int m_CurrentBulletCount = 2;
 
     private void Start()
@@ -36,6 +38,9 @@ public class Revolver : GrabbableObject
 
     public override void OnControllerExit()
     {
+        m_IsGrabbing = false;
+        m_LaserPointer.SetActive(false);
+        m_CurrentController.ToggleControllerModel(true);
     }
 
     public override void OnControllerStay()
@@ -59,11 +64,12 @@ public class Revolver : GrabbableObject
             if (hitInfo.transform.GetComponent<IShootable>() != null)
             {
                 m_CurrentPointedObject = hitInfo.transform.gameObject;
-                Debug.Log("Pointing at: " + m_CurrentPointedObject.name);
+                m_CurrentHitInfo = hitInfo;
             }
             else
             {
                 m_CurrentPointedObject = null;
+                m_CurrentHitInfo = null;
             }
         }
         else
@@ -78,14 +84,16 @@ public class Revolver : GrabbableObject
         m_IsGrabbing = true;
         m_LaserPointer.SetActive(true);
         transform.rotation = m_CurrentController.transform.rotation;
-        transform.Rotate(new Vector3(0, -90, 25));
+        transform.Rotate(new Vector3(0, -90, -15));
         transform.position = m_CurrentController.transform.position;
+        m_CurrentController.ToggleControllerModel(false);
     }
 
     public override void OnGrabReleased()
     {
         m_IsGrabbing = false;
         m_LaserPointer.SetActive(false);
+        m_CurrentController.ToggleControllerModel(true);
     }
 
     public override void OnUse()
@@ -94,7 +102,18 @@ public class Revolver : GrabbableObject
         {
             m_CurrentBulletCount--;
 
-            m_CurrentPointedObject.GetComponent<IShootable>().OnShot(this);
+            if (m_CurrentController.GetComponent<IShootable>() != null)
+                m_CurrentPointedObject.GetComponent<IShootable>().OnShot(this);
+
+
+
+            // Play firing sound
+            GetComponent<AudioPlayer>().Play("bulletfire");
+        }
+        else
+        {
+            // Play no bullet sound
+            GetComponent<AudioPlayer>().Play("bulletnone");
         }
     }
 
