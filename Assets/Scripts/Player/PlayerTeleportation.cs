@@ -32,6 +32,8 @@ public class PlayerTeleportation : MonoBehaviour
             this.arrivalTime = (initialVelocity * sin) / g + Mathf.Sqrt((square(initialVelocity) * square(sin)) / square(g) + (2F * height) / g);
         }
     }
+    [Tag,SerializeField]
+    private List<string> _getOnTags;
 
     [SerializeField] 
     private GameObject _targetMarker;
@@ -64,15 +66,24 @@ public class PlayerTeleportation : MonoBehaviour
     [SerializeField]
     private SteamVR_Action_Boolean padAction;
 
+    /// <summary>
+    /// テレポートのアシストに使用するものの表示設定関数
+    /// </summary>
+    /// <param name="active"></param>
+    private void TeleportAssistActive(bool active)
+    {
+        _targetMarker.SetActive(active);
+        _lineRenderer.enabled = active;
+    }
+
+    private void Awake() {
+        TeleportAssistActive(false);
+    }
+
     void Start()
     {
-        _targetMarker.SetActive(false);
         //デバイスの入力受け付け
         var input = SteamVR_Input._default;
-
-        this.UpdateAsObservable()
-            .Where(_ => padAction.GetState(handType)) // bコントローラーのパッドを押している間
-            .Subscribe(_ => _targetMarker.SetActive(true));
 
         this.UpdateAsObservable()
             .Where(_ => input.inActions.GrabPinch.GetStateUp(SteamVR_Input_Sources.RightHand)) //コントローラーのトリガーを離したとき
@@ -80,6 +91,7 @@ public class PlayerTeleportation : MonoBehaviour
 
         //コントローラの入力の後に読みたい
         this.LateUpdateAsObservable()
+            .Where(_ => padAction.GetState(handType)) // コントローラーのパッドを押している間
             .Subscribe(_ => showOrbit());        //放物線を表示させる
     }
 
@@ -97,8 +109,7 @@ public class PlayerTeleportation : MonoBehaviour
             }));
         }
 
-        _targetMarker.SetActive(false);
-        _lineRenderer.enabled = false;
+        TeleportAssistActive(false);
     }
 
     /// <summary>
@@ -117,8 +128,7 @@ public class PlayerTeleportation : MonoBehaviour
 
         if (hit == null)
         {
-            _targetMarker.SetActive(false);
-            _lineRenderer.enabled = false;
+            TeleportAssistActive(false);
 
             return;
         }
@@ -142,11 +152,15 @@ public class PlayerTeleportation : MonoBehaviour
         RaycastHit hit;
         Debug.DrawLine(ray.origin, ray.direction * _initialVelocity, Color.green);
 
-        if (Physics.Raycast(ray, out hit, 20.0f))
-        {
-            // TODO:ここらへんで床判断
+        if (Physics.Raycast(ray, out hit, 20.0f) == false) return null;
 
-            return hit;
+        var colliderTag = hit.collider.tag;
+        foreach (var tag in _getOnTags)
+        {
+            if(colliderTag == tag)
+            {
+                return hit;
+            }
         }
         return null;
     }
@@ -173,7 +187,7 @@ public class PlayerTeleportation : MonoBehaviour
             vertexes.Add(vertex);
         }
 
-        _lineRenderer.enabled = true;
+        TeleportAssistActive(true);
 
         //ターゲットマーカーを頂点の最終地点へ
         var last = vertexes.Last();

@@ -23,6 +23,7 @@ TagManager:
   - SmokeDetector
   - Screw
   - ScrewDriver
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,7 @@ TagManager:
   - SlidingDoor
   - Glass
   - ScrewDriver
-  - Floor
+  - 
   - 
   - 
   - 
