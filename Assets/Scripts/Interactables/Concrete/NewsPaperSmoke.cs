@@ -6,11 +6,13 @@ public class NewsPaperSmoke : MonoBehaviour
 {
     public GameObject smokeObject;
 
+    AudioPlayer burningAudio;
     bool smoking;
 
     void Start()
     {
         smokeObject.GetComponent<CapsuleCollider>().enabled = false;
+        burningAudio = GetComponent<AudioPlayer>();
     }
     
     void Update()
@@ -46,6 +48,7 @@ public class NewsPaperSmoke : MonoBehaviour
     public void SmokingStart()
     {
         smoking = true;
+        burningAudio.Play();
         smokeObject.GetComponent<CapsuleCollider>().enabled = true;
     }
 }
