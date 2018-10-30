@@ -10,9 +10,13 @@ public class Screw : MonoBehaviour
     public float Turnspeed = -3.0f;
     public float screwDistance = 0.03f;
     private Vector3 OriginalPosition;
-    public int value;
+    public int Axis;
     public float x, y, z;
     private bool bIsLoose = false;
+
+    public delegate void Unscrewed(string _object);
+    public static event Unscrewed OnLoose;
+
     // Use this for initialization
     void Start()
     {
@@ -41,9 +45,9 @@ public class Screw : MonoBehaviour
                 if (m_ScrewDriver.bIsScrewing)
                 {
                     transform.Rotate(new Vector3(0, 0, -1), Turnspeed);
-                    switch (value)
+                    switch (Axis)
                     {
-                        case 1:
+                        case 3:
                             {
                                 if (z < 0)
                                 {
@@ -51,7 +55,10 @@ public class Screw : MonoBehaviour
                                     if (OriginalPosition.z + screwDistance > transform.position.z)
                                     {
                                         bIsLoose = true;
+                                        transform.GetComponent<Rigidbody>().isKinematic = false;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
+                                        transform.GetComponent<BoxCollider>().isTrigger = false;
+                                        OnLoose("Electric");
                                         break;
                                     }
 
@@ -60,7 +67,7 @@ public class Screw : MonoBehaviour
                                         transform.position += new Vector3(0, 0, z);
                                         break;
                                     }
-                                    
+
                                 }
 
                                 else
@@ -68,7 +75,10 @@ public class Screw : MonoBehaviour
                                     if (OriginalPosition.z + screwDistance < transform.position.z)
                                     {
                                         bIsLoose = true;
+                                        transform.GetComponent<Rigidbody>().isKinematic = false;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
+                                        transform.GetComponent<BoxCollider>().isTrigger = false;
+                                        OnLoose("Electric");
                                         break;
                                     }
 
@@ -77,7 +87,7 @@ public class Screw : MonoBehaviour
                                         transform.position += new Vector3(0, 0, z);
                                         break;
                                     }
-                                } 
+                                }
                             }
 
 
@@ -91,6 +101,9 @@ public class Screw : MonoBehaviour
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
+                                        transform.GetComponent<Rigidbody>().isKinematic = false;
+                                        transform.GetComponent<BoxCollider>().isTrigger = false;
+                                        OnLoose("Electric");
                                         break;
                                     }
 
@@ -108,6 +121,9 @@ public class Screw : MonoBehaviour
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
+                                        transform.GetComponent<Rigidbody>().isKinematic = false;
+                                        transform.GetComponent<BoxCollider>().isTrigger = false;
+                                        OnLoose("Electric");
                                         break;
                                     }
 
@@ -120,7 +136,7 @@ public class Screw : MonoBehaviour
                             }
 
 
-                        case 3:
+                        case 1:
                             {
                                 if (x < 0)
                                 {
@@ -129,6 +145,9 @@ public class Screw : MonoBehaviour
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
+                                        transform.GetComponent<Rigidbody>().isKinematic = false;
+                                        transform.GetComponent<BoxCollider>().isTrigger = false;
+                                        OnLoose("Electric");
                                         break;
                                     }
 
@@ -146,6 +165,9 @@ public class Screw : MonoBehaviour
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
+                                        transform.GetComponent<Rigidbody>().isKinematic = false;
+                                        transform.GetComponent<BoxCollider>().isTrigger = false;
+                                        OnLoose("Electric");
                                         break;
                                     }
 
@@ -156,18 +178,12 @@ public class Screw : MonoBehaviour
                                     }
                                 }
                             }
-
-
                     }
                 }
             }
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-     
-    }
 
 
 }

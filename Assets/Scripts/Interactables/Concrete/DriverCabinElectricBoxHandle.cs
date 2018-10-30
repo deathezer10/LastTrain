@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DriverCabinElectricBoxHandle : ScrewSpot
+public class DriverCabinElectricBoxHandle : StationaryObject
 {
 
 
@@ -15,6 +15,11 @@ public class DriverCabinElectricBoxHandle : ScrewSpot
     private int ScrewCount = 2;
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
+
+    void Start()
+    {
+        Screw.OnLoose += UnScrewed;
+    }
 
     // Update is called once per frame
     void Update()
@@ -66,6 +71,7 @@ public class DriverCabinElectricBoxHandle : ScrewSpot
     public override void OnControllerExit()
     {
         bCanGrab = false;
+        bIsGrabbing = false;
     }
 
     public override void OnControllerStay()
@@ -105,21 +111,16 @@ public class DriverCabinElectricBoxHandle : ScrewSpot
     {
     }
 
-    public override void OnTriggerExit(Collider other)
+    private void UnScrewed(string _object)
     {
-        print("exit");
-        if (other.tag == "Screw")
+        if(_object == "Electric")
         {
             ScrewCount -= 1;
             if (ScrewCount == 0)
             {
                 bIsLocked = false;
-                print(ScrewCount);
             }
         }
-
-
-
     }
 }
 
