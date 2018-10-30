@@ -605,7 +605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af3a49f7f074874aa3bea73f522f577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FadeOutOnStart: 0
+  m_FadeOutOnStart: 1
+  m_fadeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114479301633315718
 MonoBehaviour:
   m_ObjectHideFlags: 1
