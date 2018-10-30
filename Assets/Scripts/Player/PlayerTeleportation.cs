@@ -34,6 +34,9 @@ public class PlayerTeleportation : MonoBehaviour
     [SerializeField]
     private Color _fadeColor;
 
+    [SerializeField]
+    private Camera _camera;
+
     void Start()
     {
         _targetMarker.SetActive(false);
@@ -78,6 +81,7 @@ public class PlayerTeleportation : MonoBehaviour
     void showOrbit()
     {
         _lineRenderer.enabled = true;
+
         //コントローラの向いている角度(x軸回転)をラジアン角へ
         var angleFacing = -Mathf.Deg2Rad * transform.eulerAngles.x;
         var h = transform.position.y;
@@ -88,7 +92,28 @@ public class PlayerTeleportation : MonoBehaviour
 
         //地面に到達する時間の式 :
         //  t = (v0 * sinθ) / g + √ (v0^2 * sinθ^2) / g^2 + 2 * h / g
-        var arrivalTime = (v0 * sin) / g + Mathf.Sqrt((square(v0) * square(sin)) / square(g) + (2F * h) / g);
+        var arrivalTime = GetArrivalTime(v0, sin, cos, h);
+
+        // 目標地点の取得
+        var indicationPos = GetIndicationPos(v0, cos, sin, arrivalTime);
+        var vec = (indicationPos - this.transform.position).normalized;
+
+        Ray ray = new Ray(_camera.transform.position, vec);
+        RaycastHit hit;
+        Debug.DrawLine(ray.origin, ray.direction * _initialVelocity, Color.green);
+
+        if (Physics.Raycast(ray, out hit, v0))
+        {
+            v0 = (hit.point - _camera.transform.position).magnitude;
+            if (_ownPlayer.transform.position.y < hit.point.y)
+            {
+                arrivalTime = GetArrivalTime(v0, sin, cos, h);
+            }
+            else
+            {
+                h = hit.point.y;
+            }
+        }
 
         for (var i = 0; i < _vertexCount; i++)
         {
@@ -102,7 +127,7 @@ public class PlayerTeleportation : MonoBehaviour
         }
         //ターゲットマーカーを頂点の最終地点へ
         var last = _vertexes.Last();
-        if ((float.IsNaN(last.x) || float.IsNaN(last.y) || float.IsNaN(last.z)) == false)
+        if (last.IsAnyNan() == false)
         {
             _targetMarker.transform.position = last;
             //LineRendererの頂点の設置
@@ -121,4 +146,21 @@ public class PlayerTeleportation : MonoBehaviour
     {
         return Mathf.Pow(num, 2);
     }
+
+    private Vector3 GetIndicationPos(float v0, float cos, float sin, float time)
+    {
+        //delta時間あたりのワールド座標(ラインレンダラーの節)
+        var x = v0 * cos * time;
+        var y = v0 * sin * time - 0.5F * Gravity * square(time);
+        var forward = new Vector3(this.transform.forward.x, 0, this.transform.forward.z);
+        var IndicationPos = this.transform.position + forward * x + Vector3.up * y;
+
+        return IndicationPos;
+    } 
+
+    private float GetArrivalTime(float initialVelocity,float sin,float cos,float height)
+    {
+        float g = Gravity;
+        return (initialVelocity * sin) / g + Mathf.Sqrt((square(initialVelocity) * square(sin)) / square(g) + (2F * height) / g);
+    }   
 }
