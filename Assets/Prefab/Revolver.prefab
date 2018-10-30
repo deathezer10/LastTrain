@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 33867358268522292}
   - component: {fileID: 23456986380945268}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: LaserPointerBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -525,6 +525,7 @@ MonoBehaviour:
     type: 2}
   m_BulletImpactParticle: {fileID: 1504635936272286, guid: 3a2efca8668816042a878f69287ba4d4,
     type: 2}
+  m_LaserPointerBall: {fileID: 1365417793244760}
 --- !u!114 &114887302651445986
 MonoBehaviour:
   m_ObjectHideFlags: 1
