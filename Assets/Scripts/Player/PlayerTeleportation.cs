@@ -164,7 +164,7 @@ public class PlayerTeleportation : MonoBehaviour
             //delta時間あたりのワールド座標(ラインレンダラーの節)
             var delta = i * data.arrivalTime / _vertexCount;
             var x = data.v0 * data.cos * delta;
-            var y = data.v0 * data.sin * delta - 0.5F * g * square(delta);
+            var y = data.v0 * data.sin * delta - 0.5F * Gravity * square(delta);
             var forward = new Vector3(transform.forward.x, 0, transform.forward.z);
             Vector3 vertex = transform.position + forward * x + Vector3.up * y;
 
