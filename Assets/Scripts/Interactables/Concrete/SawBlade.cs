@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class SawBlade : GrabbableObject
 {
-    public Color PH_SpinColor, PH_NotSpinColor;
-    public GameObject PH_SpinIndicator;  // To be replaced with sound / animation for spin
-
-    private PlayerViveController playerController;
-    private HandSource playerHand;
+    PlayerViveController playerController;
+    HandSource playerHand;
+    AudioPlayer spinAudio;
     
     bool spinning, held;
     float vibrationTimer;
@@ -18,17 +16,18 @@ public class SawBlade : GrabbableObject
     private void Start()
     {
         sawBladeAnimator = GetComponent<Animator>();
+        spinAudio = GetComponent<AudioPlayer>();
     }
 
     private void Update()
     {
         if (spinning && held)
         {
-            if (playerController != null && Time.time >= vibrationTimer)
+            if (Time.time >= vibrationTimer)
             {
                 var source = playerHand.ToInputSource();
-                playerController.Vibration(0, 0.3f, 0.3f, 0.5f, source);
-                vibrationTimer = Time.time + 0.3f;
+                playerController.Vibration(0, 0.2f, 0.2f, 0.5f, source);
+                vibrationTimer = Time.time + 0.2f;
             }
         }
     }
@@ -41,8 +40,12 @@ public class SawBlade : GrabbableObject
 
     public override void OnControllerExit()
     {
-        playerController = null;
+        spinning = false;
         held = false;
+
+        sawBladeAnimator.Play("SawBladeStop");
+        spinAudio.Stop();
+
         playerController.ToggleControllerModel(true);
     }
 
@@ -55,7 +58,7 @@ public class SawBlade : GrabbableObject
         held = true;
 
         transform.rotation = playerController.transform.rotation;
-        transform.Rotate(new Vector3(0, -90, -15));
+        transform.Rotate(new Vector3(0, 180, 0));
         transform.position = playerController.transform.position;
         playerController.ToggleControllerModel(false);
     }
@@ -65,13 +68,10 @@ public class SawBlade : GrabbableObject
         spinning = false;
         held = false;
 
-        PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = PH_NotSpinColor;
-
         sawBladeAnimator.Play("SawBladeStop");
+        spinAudio.Stop();
 
         playerController.ToggleControllerModel(true);
-
-        playerController = null;
     }
 
     public override void OnUse()
@@ -80,12 +80,11 @@ public class SawBlade : GrabbableObject
         {
             spinning = spinning ? false : true;
 
-            PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = spinning ? PH_SpinColor : PH_NotSpinColor;
-
             if (spinning)
             {
                 sawBladeAnimator.Play("SawBladeSpin");
-                vibrationTimer = Time.time + 0.3f;
+                spinAudio.Play();
+                vibrationTimer = Time.time;
             }
             else
             {

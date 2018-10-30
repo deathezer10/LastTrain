@@ -44,6 +44,11 @@ public class AudioPlayer : MonoBehaviour
         _clip.UnloadAudioData();
     }
 
+    public void Stop()
+    {
+        m_Audiosource.Stop();
+    }
+
     public void Play()
     {
         InternalPlayClip();
