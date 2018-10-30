@@ -489,10 +489,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.35
+  m_PlayOnAwake: 0
+  m_Volume: 0.4
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -9851,7 +9851,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.22
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -10020,7 +10020,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.55
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10681,11 +10681,11 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0.6820984
           value: 0
-          inSlope: 0.5262751
-          outSlope: 0.5262751
+          inSlope: -0.7041812
+          outSlope: -0.7041812
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.56768817
+          inWeight: 0.46669263
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -23495,7 +23495,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.22
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -23664,7 +23664,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.55
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -24325,11 +24325,11 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0.6820984
           value: 0
-          inSlope: 0.5262751
-          outSlope: 0.5262751
+          inSlope: -0.7041812
+          outSlope: -0.7041812
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.56768817
+          inWeight: 0.46669263
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -28037,7 +28037,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.22
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -28206,7 +28206,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.55
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -28867,11 +28867,11 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0.6820984
           value: 0
-          inSlope: 0.5262751
-          outSlope: 0.5262751
+          inSlope: -0.7041812
+          outSlope: -0.7041812
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.56768817
+          inWeight: 0.46669263
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -32579,7 +32579,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.22
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -32748,7 +32748,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.55
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -33409,11 +33409,11 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0.6820984
           value: 0
-          inSlope: 0.5262751
-          outSlope: 0.5262751
+          inSlope: -0.7041812
+          outSlope: -0.7041812
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.56768817
+          inWeight: 0.46669263
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2

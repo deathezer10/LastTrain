@@ -43,6 +43,7 @@ public class SawBlade : GrabbableObject
     {
         playerController = null;
         held = false;
+        playerController.ToggleControllerModel(true);
     }
 
     public override void OnControllerStay()
@@ -52,6 +53,11 @@ public class SawBlade : GrabbableObject
     public override void OnGrab()
     {
         held = true;
+
+        transform.rotation = playerController.transform.rotation;
+        transform.Rotate(new Vector3(0, -90, -15));
+        transform.position = playerController.transform.position;
+        playerController.ToggleControllerModel(false);
     }
 
     public override void OnGrabReleased()
@@ -62,6 +68,8 @@ public class SawBlade : GrabbableObject
         PH_SpinIndicator.GetComponent<MeshRenderer>().material.color = PH_NotSpinColor;
 
         sawBladeAnimator.Play("SawBladeStop");
+
+        playerController.ToggleControllerModel(true);
 
         playerController = null;
     }

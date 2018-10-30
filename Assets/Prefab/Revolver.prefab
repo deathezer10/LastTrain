@@ -522,7 +522,8 @@ MonoBehaviour:
   m_LaserPointer: {fileID: 1492633635811296}
   m_BarrelSmokeParticle: {fileID: 1567273754686702, guid: 14e58013462ee604ca7872a8a29082a1,
     type: 2}
-  m_BulletImpactParticle: {fileID: 0}
+  m_BulletImpactParticle: {fileID: 1504635936272286, guid: 3a2efca8668816042a878f69287ba4d4,
+    type: 2}
 --- !u!114 &114887302651445986
 MonoBehaviour:
   m_ObjectHideFlags: 1
