@@ -252,8 +252,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0.2
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   pitchRandomRange: 0.2
   playDelay: 0
   _clip: {fileID: 8300000, guid: 19eb74673942e574d964f58de49069b8, type: 3}
+  clipAlias: 
 --- !u!114 &114876410038249464
 MonoBehaviour:
   m_ObjectHideFlags: 1

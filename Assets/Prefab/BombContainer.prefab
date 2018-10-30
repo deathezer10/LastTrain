@@ -1346,7 +1346,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1545,6 +1545,7 @@ MonoBehaviour:
   pitchRandomRange: 0.2
   playDelay: 0
   _clip: {fileID: 8300000, guid: 7a0b1732f0ea7834191fe6d6fe09e53a, type: 3}
+  clipAlias: 
 --- !u!114 &114489620858957662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1675,6 +1676,7 @@ MonoBehaviour:
   pitchRandomRange: 0
   playDelay: 0
   _clip: {fileID: 8300000, guid: 1a09b97461801bd49a796576478cea11, type: 3}
+  clipAlias: 
 --- !u!114 &114529594900546162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1690,6 +1692,7 @@ MonoBehaviour:
   pitchRandomRange: 0.2
   playDelay: 0
   _clip: {fileID: 8300000, guid: 640f4b4d451171c418d72bfcf2c3e130, type: 3}
+  clipAlias: 
 --- !u!114 &114544348374943280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1718,6 +1721,7 @@ MonoBehaviour:
   pitchRandomRange: 0.2
   playDelay: 0
   _clip: {fileID: 8300000, guid: 1274bb386ecd3cf4f9f91c04fe23c817, type: 3}
+  clipAlias: 
 --- !u!114 &114730904596763270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1732,6 +1736,8 @@ MonoBehaviour:
   phLightRenderer: {fileID: 23425039613008942}
   red: {r: 1, g: 0, b: 0.026891708, a: 1}
   green: {r: 0.06696808, g: 1, b: 0, a: 1}
+  explosionParticlePrefab: {fileID: 1664335515049962, guid: e5187481273cb0e4d9846768366a3e86,
+    type: 2}
 --- !u!114 &114816667928879332
 MonoBehaviour:
   m_ObjectHideFlags: 1

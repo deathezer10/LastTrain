@@ -8,6 +8,7 @@ public class Bomb : GrabbableObject, IShootable
 {
     public MeshRenderer phLightRenderer;
     public Color red, green;
+    public GameObject explosionParticlePrefab;
 
     float timeRemaining = 180f;
     bool timerRunning;
@@ -97,6 +98,7 @@ public class Bomb : GrabbableObject, IShootable
     {
         phLightRenderer.material.color = red;
         FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bomb");
+        Instantiate(explosionParticlePrefab, transform.position, transform.rotation);
         PlayExplosionSound();
     }
 
@@ -104,6 +106,7 @@ public class Bomb : GrabbableObject, IShootable
     {
         phLightRenderer.material.color = red;
         FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bombwrongwire");
+        Instantiate(explosionParticlePrefab, transform.position, transform.rotation);
         PlayExplosionSound();
     }
 

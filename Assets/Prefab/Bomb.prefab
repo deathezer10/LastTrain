@@ -1243,6 +1243,8 @@ MonoBehaviour:
   phLightRenderer: {fileID: 23525254207256148}
   red: {r: 1, g: 0, b: 0.026891708, a: 1}
   green: {r: 0.06696808, g: 1, b: 0, a: 1}
+  explosionParticlePrefab: {fileID: 1664335515049962, guid: e5187481273cb0e4d9846768366a3e86,
+    type: 2}
 --- !u!114 &114904579834541090
 MonoBehaviour:
   m_ObjectHideFlags: 1
