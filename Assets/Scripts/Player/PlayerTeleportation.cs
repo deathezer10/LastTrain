@@ -19,6 +19,7 @@ public class PlayerTeleportation : MonoBehaviour
         public float sin;
         public float cos;
         public float arrivalTime;
+        public float height;
 
         public MoveData(Transform trans, float initialVelocity)
         {
@@ -137,8 +138,8 @@ public class PlayerTeleportation : MonoBehaviour
         }
 
         // 床の上の高さにする
-        //data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.extents.y;
-        data.UpdateArrivalTime();
+        data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.size.y;
+        //data.UpdateArrivalTime();
 
         // 設定
         SetLineMarker(data);
@@ -177,7 +178,7 @@ public class PlayerTeleportation : MonoBehaviour
     {
         var vertexes = new List<Vector3>();
 
-        for (var i = 0; i < _vertexCount; i++)
+        for (var i = 0; i <= _vertexCount; i++)
         {
             //delta時間あたりのワールド座標(ラインレンダラーの節)
             var delta = i * data.arrivalTime / _vertexCount;
@@ -185,6 +186,7 @@ public class PlayerTeleportation : MonoBehaviour
             var y = data.v0 * data.sin * delta - 0.5F * Gravity * square(delta);
             var forward = new Vector3(transform.forward.x, 0, transform.forward.z);
             Vector3 vertex = transform.position + forward * x + Vector3.up * y;
+            vertex.y += i * data.height / _vertexCount;
 
             if(vertex.IsAnyNan()) return;
             
