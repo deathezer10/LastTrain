@@ -10,6 +10,9 @@ public class Bomb : GrabbableObject, IShootable
     public Color red, green;
     public GameObject explosionParticlePrefab;
 
+    Vector3 explosionOffset1 = new Vector3(0f, -0.1f, 0.3f);
+    Vector3 explosionOffset2 = new Vector3(0f, 0.2f, -0.4f);
+
     float timeRemaining = 180f;
     bool timerRunning;
     TextMeshPro timerTextMesh;
@@ -100,7 +103,7 @@ public class Bomb : GrabbableObject, IShootable
     {
         phLightRenderer.material.color = red;
         FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bomb");
-        Instantiate(explosionParticlePrefab, transform.position, transform.rotation);
+        InstantiateExplosions();
         PlayExplosionSound();
     }
 
@@ -108,7 +111,7 @@ public class Bomb : GrabbableObject, IShootable
     {
         phLightRenderer.material.color = red;
         FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bombwrongwire");
-        Instantiate(explosionParticlePrefab, transform.position, transform.rotation);
+        InstantiateExplosions();
         PlayExplosionSound();
     }
 
@@ -124,6 +127,13 @@ public class Bomb : GrabbableObject, IShootable
                 break;
             }
         }
+    }
+
+    private void InstantiateExplosions()
+    {
+        Instantiate(explosionParticlePrefab, transform.position, transform.rotation);
+        Instantiate(explosionParticlePrefab, transform.position + explosionOffset1, transform.rotation);
+        Instantiate(explosionParticlePrefab, transform.position + explosionOffset2, transform.rotation);
     }
 
     public void CutRightWire()
