@@ -31,6 +31,12 @@ public class PlayerTeleportation : MonoBehaviour
             var g = Gravity;
             this.arrivalTime = (initialVelocity * sin) / g + Mathf.Sqrt((square(initialVelocity) * square(sin)) / square(g) + (2F * height) / g);
         }
+
+        public void UpdateArrivalTime()
+        {
+            var g = Gravity;
+            this.arrivalTime = (this.v0 * sin) / g + Mathf.Sqrt((square(this.v0) * square(sin)) / square(g) + (2F * height) / g);
+        }
     }
     [Tag,SerializeField]
     private List<string> _getOnTags;
@@ -86,7 +92,7 @@ public class PlayerTeleportation : MonoBehaviour
         var input = SteamVR_Input._default;
 
         this.UpdateAsObservable()
-            .Where(_ => input.inActions.GrabPinch.GetStateUp(SteamVR_Input_Sources.RightHand)) //コントローラーのトリガーを離したとき
+            .Where(_ => padAction.GetStateUp(handType)) //コントローラーのトリガーを離したとき
             .Subscribe(_ => moveToPoint());                                       //ターゲットマーカーの位置へ移動
 
         //コントローラの入力の後に読みたい
@@ -134,7 +140,8 @@ public class PlayerTeleportation : MonoBehaviour
         }
 
         // 床の上の高さにする
-        data.height = hit.Value.point.y;
+        data.height = hit.Value.collider.bounds.extents.y;
+        data.UpdateArrivalTime();
 
         // 設定
         SetLineMarker(data);
