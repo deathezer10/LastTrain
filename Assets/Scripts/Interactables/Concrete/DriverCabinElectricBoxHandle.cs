@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DriverCabinElectricBoxHandle : ScrewSpot
+public class DriverCabinElectricBoxHandle : StationaryObject
 {
 
 
@@ -15,6 +15,11 @@ public class DriverCabinElectricBoxHandle : ScrewSpot
     private int ScrewCount = 2;
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
+
+    void Start()
+    {
+        ScrewSpot.OnExit += ColliderExited;
+    }
 
     // Update is called once per frame
     void Update()
@@ -105,9 +110,9 @@ public class DriverCabinElectricBoxHandle : ScrewSpot
     {
     }
 
-    public override void OnTriggerExit(Collider other)
+     private void ColliderExited(Collider other)
     {
-        print("exit");
+        
         if (other.tag == "Screw")
         {
             ScrewCount -= 1;
