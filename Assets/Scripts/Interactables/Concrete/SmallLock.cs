@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallLock : GrabbableObject
+public class SmallLock : GrabbableObject, IShootable
 {
     public GameObject uncutTopPart, cutTopPart, umbrella;
 
@@ -69,5 +69,10 @@ public class SmallLock : GrabbableObject
         Rigidbody rb = GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.None;
+    }
+
+    public void OnShot(Revolver revolver)
+    {
+        BreakLock();
     }
 }

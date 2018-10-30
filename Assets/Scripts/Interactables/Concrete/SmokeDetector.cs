@@ -58,5 +58,6 @@ public class SmokeDetector : MonoBehaviour , IShootable
 
     public void OnShot(Revolver revolver)
     {
+        TriggerAlarm();
     }
 }

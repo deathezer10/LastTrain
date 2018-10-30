@@ -18,6 +18,9 @@ public class Revolver : GrabbableObject
     [SerializeField]
     GameObject m_BulletImpactParticle;
 
+    [SerializeField]
+    GameObject m_LaserPointerBall;
+
     private float m_PointerDistance;
 
     Vector3 m_OriginalLocalPosition;
@@ -78,10 +81,12 @@ public class Revolver : GrabbableObject
             if (hitInfo.transform.GetComponent<IShootable>() != null)
             {
                 m_CurrentPointedObject = hitInfo.transform.gameObject;
+                m_LaserPointerBall.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
             }
             else
             {
                 m_CurrentPointedObject = null;
+                m_LaserPointerBall.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
             }
         }
         else
