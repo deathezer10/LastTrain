@@ -27,7 +27,7 @@ public class Revolver : GrabbableObject
 
     RaycastHit? m_CurrentHitInfo;
 
-    int m_CurrentBulletCount = 2;
+    int m_CurrentBulletCount = 3;
 
     private void Start()
     {
@@ -66,22 +66,22 @@ public class Revolver : GrabbableObject
             Vector3 newScale = m_LaserPointer.transform.localScale;
             newScale.z = Mathf.Abs(m_LaserPointer.transform.localPosition.z * 2);
             m_LaserPointer.transform.localScale = newScale;
+            m_CurrentHitInfo = hitInfo;
 
             if (hitInfo.transform.GetComponent<IShootable>() != null)
             {
                 m_CurrentPointedObject = hitInfo.transform.gameObject;
-                m_CurrentHitInfo = hitInfo;
             }
             else
             {
                 m_CurrentPointedObject = null;
-                m_CurrentHitInfo = null;
             }
         }
         else
         {
             m_LaserPointer.transform.localPosition = m_OriginalLocalPosition;
             m_LaserPointer.transform.localScale = m_OriginalScale;
+            m_CurrentHitInfo = null;
         }
     }
 
@@ -112,6 +112,12 @@ public class Revolver : GrabbableObject
                 m_CurrentPointedObject.GetComponent<IShootable>().OnShot(this);
 
             Instantiate(m_BarrelSmokeParticle, m_LaserPointer.transform.parent);
+
+            if (m_CurrentHitInfo.HasValue)
+            {
+                Instantiate(m_BulletImpactParticle, m_CurrentHitInfo.Value.point, Quaternion.LookRotation(m_CurrentHitInfo.Value.normal));
+                Debug.Log("eyy");
+            }
 
             // Play firing sound
             GetComponent<AudioPlayer>().Play("bulletfire");
