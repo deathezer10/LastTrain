@@ -17,6 +17,10 @@ public class Revolver : GrabbableObject
 
     PlayerViveController m_CurrentController;
 
+    GameObject m_CurrentPointedObject;
+
+    int m_CurrentBulletCount = 2;
+
     private void Start()
     {
         m_LaserPointer.SetActive(false);
@@ -51,16 +55,22 @@ public class Revolver : GrabbableObject
             Vector3 newScale = m_LaserPointer.transform.localScale;
             newScale.z = Mathf.Abs(m_LaserPointer.transform.localPosition.z * 2);
             m_LaserPointer.transform.localScale = newScale;
+
+            if (hitInfo.transform.GetComponent<IShootable>() != null)
+            {
+                m_CurrentPointedObject = hitInfo.transform.gameObject;
+                Debug.Log("Pointing at: " + m_CurrentPointedObject.name);
+            }
+            else
+            {
+                m_CurrentPointedObject = null;
+            }
         }
         else
         {
             m_LaserPointer.transform.localPosition = m_OriginalLocalPosition;
             m_LaserPointer.transform.localScale = m_OriginalScale;
         }
-
-
-        if (GetComponent<FixedJoint>())
-            GetComponent<FixedJoint>().breakForce = Mathf.Infinity;
     }
 
     public override void OnGrab()
@@ -68,7 +78,8 @@ public class Revolver : GrabbableObject
         m_IsGrabbing = true;
         m_LaserPointer.SetActive(true);
         transform.rotation = m_CurrentController.transform.rotation;
-        transform.Rotate(new Vector3(0, -90, 0));
+        transform.Rotate(new Vector3(0, -90, 25));
+        transform.position = m_CurrentController.transform.position;
     }
 
     public override void OnGrabReleased()
@@ -79,6 +90,12 @@ public class Revolver : GrabbableObject
 
     public override void OnUse()
     {
+        if (m_CurrentBulletCount > 0)
+        {
+            m_CurrentBulletCount--;
+
+            m_CurrentPointedObject.GetComponent<IShootable>().OnShot(this);
+        }
     }
 
     public override void OnUseDown()
