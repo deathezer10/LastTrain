@@ -14,7 +14,7 @@ public class AcceleratorLever : StationaryObject
 
     private Vector3 HandleMovementDirection;
     private Vector3 LastHandPosition;
-    
+
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
@@ -63,18 +63,18 @@ public class AcceleratorLever : StationaryObject
 
     void Update()
     {
-        if(bIsActivating)
+        if (bIsActivating)
         {
             i += Time.deltaTime * rate;
             print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
         }
-       
+
 
 
         if (bIsGrabbing) //Player is grabbing the acceleratorhandle
         {
-            if(Vector3.Distance(PlayerHand.transform.position,AcceleratorHandle.transform.position) > 0.2)
+            if (Vector3.Distance(PlayerHand.transform.position, AcceleratorHandle.transform.position) > 0.2)
             {
                 bIsGrabbing = false;
             }
@@ -92,14 +92,14 @@ public class AcceleratorLever : StationaryObject
                         bDisableLever = true;
                         //Audio.Play();
                     }
-                    
+
                     if (BrakeLever.IsTaskCompleted())
                     {
-                        
+
                         PreviousTrainSpeed = stationMover.currentSpeed;
                         NewTrainSpeed = 0;
                         i = 0;
-                        
+
                     }
 
                     else
@@ -109,7 +109,7 @@ public class AcceleratorLever : StationaryObject
                         if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
                         i = 0.0f;
                     }
-                   
+
                 }
 
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
@@ -121,7 +121,7 @@ public class AcceleratorLever : StationaryObject
                     if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
                     i = 0.0f;
                 }
-                
+
                 LastHandPosition = PlayerHand.transform.position;
                 return;
             }
@@ -134,12 +134,12 @@ public class AcceleratorLever : StationaryObject
                     bDisableLever = false;
                 }
 
-                
+
                 if (VectorBeginPoint.transform.position.z <= AcceleratorHandle.transform.position.z) //Max point reached can't push it out of bounds
                 {
                     return;
                 }
-                
+
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
                 PreviousTrainSpeed = stationMover.currentSpeed;
                 NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
@@ -161,6 +161,7 @@ public class AcceleratorLever : StationaryObject
         }
     }
 
+    public override bool hideControllerOnGrab { get { return false; } }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -223,7 +224,7 @@ public class AcceleratorLever : StationaryObject
 
     private float normalize01(float value, float min, float max)
     {
-	    float normalized = (value - min) / (max - min);
+        float normalized = (value - min) / (max - min);
         return normalized;
     }
 }

@@ -120,6 +120,8 @@ public class BrakeLever : StationaryObject
         }
     }
 
+    public override bool hideControllerOnGrab { get { return true; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         if(DriverCabinDoorLock.bIsUnlocked)

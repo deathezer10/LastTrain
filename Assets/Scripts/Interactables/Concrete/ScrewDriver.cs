@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScrewDriver : GrabbableObject {
+public class ScrewDriver : GrabbableObject
+{
 
     private GameObject m_ScrewDriver;
     private BoxCollider m_Tip;
@@ -16,16 +17,18 @@ public class ScrewDriver : GrabbableObject {
     private float RotationValue;
     // Use this for initialization
 
-    void Start () {
+    void Start()
+    {
         m_ScrewDriver = transform.gameObject;
         m_Tip = transform.GetChild(0).GetComponent<BoxCollider>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-        if(bIsGrabbing)
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (bIsGrabbing)
         {
             Quaternion temp = Quaternion.LookRotation(-Controller.transform.forward);
             //ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
@@ -39,7 +42,7 @@ public class ScrewDriver : GrabbableObject {
 
     }
 
-   
+    public override bool hideControllerOnGrab { get { return true; } }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -48,7 +51,6 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnControllerExit()
     {
-        Controller.ToggleControllerModel(true);
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = true;
         Destroy(ScrewDriverClone);
         bIsGrabbing = false;
@@ -56,14 +58,13 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnControllerStay()
     {
-        
+
     }
 
     public override void OnGrab()
     {
-        Controller.ToggleControllerModel(false);
         m_ScrewDriver.transform.rotation = Quaternion.LookRotation(-Controller.transform.forward);
-        ScrewDriverClone = (GameObject)Instantiate(m_ScrewDriver, transform.position, transform.rotation,m_ScrewDriver.transform);
+        ScrewDriverClone = (GameObject)Instantiate(m_ScrewDriver, transform.position, transform.rotation, m_ScrewDriver.transform);
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = false;
         Destroy(ScrewDriverClone.GetComponent("ScrewDriver"));
         ScrewDriverClone.GetComponent<Rigidbody>().useGravity = false;
@@ -73,7 +74,6 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnGrabReleased()
     {
-        Controller.ToggleControllerModel(true);
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = true;
         Destroy(ScrewDriverClone);
         bIsGrabbing = false;
@@ -81,7 +81,7 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnUse()
     {
-      
+
     }
 
     public override void OnUseDown()

@@ -16,6 +16,8 @@ public class StationButton : StationaryObject, IShootable
         GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }
 
+    public override bool hideControllerOnGrab { get { return false; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         if (m_Toggled == false)

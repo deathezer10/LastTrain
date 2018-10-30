@@ -7,6 +7,8 @@ public class SmallLock : GrabbableObject, IShootable
 {
     public GameObject uncutTopPart, cutTopPart, umbrella;
 
+    public override bool hideControllerOnGrab { get { return false; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
     }

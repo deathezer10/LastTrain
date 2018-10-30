@@ -55,6 +55,8 @@ public class KeyCardScanner : StationaryObject, IShootable
 
     }
 
+    public override bool hideControllerOnGrab { get { return false; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
 

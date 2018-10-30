@@ -147,6 +147,8 @@ public class DriverCabinDoorLock : StationaryObject
         bIsUnlocked = true;
     }
 
+    public override bool hideControllerOnGrab { get { return false; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         Awaked = true;

@@ -6,6 +6,11 @@ public interface IGrabbable
 {
 
     /// <summary>
+    /// Hide the controller model upon grabbing?
+    /// </summary>
+    bool hideControllerOnGrab { get; }
+
+    /// <summary>
     /// Called when the player grabs the object using Trigger button
     /// </summary>
     void OnGrab();

@@ -6,6 +6,8 @@ public class Ball : GrabbableObject
 {
     int useCount = 0;
 
+    public override bool hideControllerOnGrab { get { return true; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
     }

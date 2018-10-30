@@ -32,6 +32,8 @@ public class SawBlade : GrabbableObject
         }
     }
 
+    public override bool hideControllerOnGrab { get { return true; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         playerController = currentController;
@@ -45,8 +47,6 @@ public class SawBlade : GrabbableObject
 
         sawBladeAnimator.Play("SawBladeStop");
         spinAudio.Stop();
-
-        playerController.ToggleControllerModel(true);
     }
 
     public override void OnControllerStay()
@@ -60,7 +60,6 @@ public class SawBlade : GrabbableObject
         transform.rotation = playerController.transform.rotation;
         transform.Rotate(new Vector3(0, 180, 0));
         transform.position = playerController.transform.position;
-        playerController.ToggleControllerModel(false);
     }
 
     public override void OnGrabReleased()
@@ -70,8 +69,6 @@ public class SawBlade : GrabbableObject
 
         sawBladeAnimator.Play("SawBladeStop");
         spinAudio.Stop();
-
-        playerController.ToggleControllerModel(true);
     }
 
     public override void OnUse()

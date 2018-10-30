@@ -5,6 +5,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
+
     /// <summary>
     /// Called once when the vive controller touches the collider
     /// </summary>

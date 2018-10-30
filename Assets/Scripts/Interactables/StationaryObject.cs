@@ -9,6 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public abstract class StationaryObject : MonoBehaviour, IInteractable, IStationaryGrabbable
 {
+    public abstract bool hideControllerOnGrab { get; }
     public abstract void OnControllerEnter(PlayerViveController currentController);
     public abstract void OnControllerExit();
     public abstract void OnControllerStay();

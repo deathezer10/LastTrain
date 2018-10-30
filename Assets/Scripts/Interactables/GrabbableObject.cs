@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
+    public abstract bool hideControllerOnGrab { get; }
     public abstract void OnControllerExit();
     public abstract void OnControllerEnter(PlayerViveController currentController);
     public abstract void OnControllerStay();

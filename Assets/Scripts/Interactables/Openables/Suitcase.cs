@@ -55,6 +55,8 @@ public class Suitcase : GrabbableObject
         Destroy(oldBC);
     }
 
+    public override bool hideControllerOnGrab { get { return true; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
     }

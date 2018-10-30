@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-using Valve.VR.Extras;
 
 public enum HandSource
 {
@@ -57,6 +56,9 @@ public class PlayerViveController : MonoBehaviour
                             AssignObjectToHand(GetOtherHand(), null);
                         }
 
+                        if (grabbableObject.hideControllerOnGrab)
+                            ToggleControllerModel(false);
+
                         grabbableObject.OnGrab();
 
                         AssignObjectToHand(m_CurrentHand, currentObject.gameObject);
@@ -72,7 +74,7 @@ public class PlayerViveController : MonoBehaviour
                             currentObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                         }
                     }
-                    
+
                     // On Item Use (Grab)
                     if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(m_CurrentHand.ToInputSource()))
                     {
@@ -94,18 +96,7 @@ public class PlayerViveController : MonoBehaviour
                     // On Grab Released (Trigger Up)
                     if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(m_CurrentHand.ToInputSource()))
                     {
-                        grabbableObject.OnGrabReleased();
-
-                        AssignObjectToHand(m_CurrentHand, null);
-
-                        Destroy(currentObject.GetComponent<FixedJoint>());
-
-                        if (currentObject.GetComponent<IStationaryGrabbable>() == null)
-                        {
-                            Rigidbody rb = currentObject.GetComponent<Rigidbody>();
-                            rb.velocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetVelocity());
-                            rb.angularVelocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity());
-                        }
+                        DetachCurrentObject(true);
                     }
 
                 }
@@ -154,6 +145,9 @@ public class PlayerViveController : MonoBehaviour
             {
                 AssignObjectToHand(m_CurrentHand, null);
                 Destroy(other.GetComponent<FixedJoint>());
+
+                if (grabbableObject.hideControllerOnGrab)
+                    ToggleControllerModel(true);
             }
         }
     }
@@ -205,6 +199,40 @@ public class PlayerViveController : MonoBehaviour
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Detaches the object that this controller is currently holding
+    /// </summary>
+    /// <param name="transferVelocity">Transfer the current velocity of the controller to the object?</param>
+    public void DetachCurrentObject(bool transferVelocity)
+    {
+        var currentObject = GetCurrentHandObject();
+
+        if (currentObject != null)
+        {
+            var grabbableObject = currentObject.GetComponent<IGrabbable>();
+
+            if (grabbableObject != null)
+            {
+                if (grabbableObject.hideControllerOnGrab)
+                    ToggleControllerModel(true);
+
+                grabbableObject.OnGrabReleased();
+
+                AssignObjectToHand(m_CurrentHand, null);
+
+                if (currentObject.GetComponent<FixedJoint>() != null)
+                    Destroy(currentObject.GetComponent<FixedJoint>());
+
+                if (currentObject.GetComponent<IStationaryGrabbable>() == null && transferVelocity)
+                {
+                    Rigidbody rb = currentObject.GetComponent<Rigidbody>();
+                    rb.velocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetVelocity());
+                    rb.angularVelocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity());
+                }
+            }
+        }
     }
 
     virtual public void Vibration(

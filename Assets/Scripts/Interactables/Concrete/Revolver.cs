@@ -47,6 +47,8 @@ public class Revolver : GrabbableObject
         m_PointerDistance = m_LaserPointer.transform.localScale.z;
     }
 
+    public override bool hideControllerOnGrab { get { return true; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         m_CurrentController = currentController;
@@ -104,14 +106,12 @@ public class Revolver : GrabbableObject
         transform.rotation = m_CurrentController.transform.rotation;
         transform.Rotate(new Vector3(0, -90, -15));
         transform.position = m_CurrentController.transform.position;
-        m_CurrentController.ToggleControllerModel(false);
     }
 
     public override void OnGrabReleased()
     {
         m_IsGrabbing = false;
         m_LaserPointer.SetActive(false);
-        m_CurrentController.ToggleControllerModel(true);
     }
 
     public override void OnUse()

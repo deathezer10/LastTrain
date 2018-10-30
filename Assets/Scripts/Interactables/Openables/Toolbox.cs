@@ -59,6 +59,8 @@ public class Toolbox : GrabbableObject
         }
     }
 
+    public override bool hideControllerOnGrab { get { return true; } }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
     }
