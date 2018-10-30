@@ -7,12 +7,14 @@ public class Lighter : GrabbableObject
     [SerializeField]
     private ParticleSystem m_particle;
 
+    AudioPlayer useAudio;
     CapsuleCollider litCollider;
     bool lit;
 
     private void Start()
     {
         litCollider = GetComponent<CapsuleCollider>();
+        useAudio = GetComponent<AudioPlayer>();
         m_particle.Stop();
     }
 
@@ -52,6 +54,7 @@ public class Lighter : GrabbableObject
         else
         {
             m_particle.Play();
+            useAudio.Play();
             lit = true;
             litCollider.enabled = true;
         }

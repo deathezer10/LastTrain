@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmokeDetector : MonoBehaviour
+public class SmokeDetector : MonoBehaviour , IShootable
 {
     public MeshRenderer[] indicatorArray;
     public Color triggeredColor;
@@ -54,5 +54,9 @@ public class SmokeDetector : MonoBehaviour
         alarmTriggered = true;
         // Call door open
         fireAlarmSound.Play();
+    }
+
+    public void OnShot(Revolver revolver)
+    {
     }
 }
