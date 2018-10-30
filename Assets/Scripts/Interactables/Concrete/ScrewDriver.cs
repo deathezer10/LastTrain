@@ -7,17 +7,19 @@ public class ScrewDriver : GrabbableObject {
     private GameObject m_ScrewDriver;
     private BoxCollider m_Tip;
     GameObject ScrewDriverClone;
-
+    private PlayerViveController Controller;
 
 
     private bool bIsGrabbing = false;
     public bool bIsScrewing = false;
     private float speed = 1.0f;
+    private float RotationValue;
     // Use this for initialization
 
     void Start () {
         m_ScrewDriver = transform.gameObject;
         m_Tip = transform.GetChild(0).GetComponent<BoxCollider>();
+
     }
 	
 	// Update is called once per frame
@@ -25,21 +27,22 @@ public class ScrewDriver : GrabbableObject {
 		
         if(bIsGrabbing)
         {
-            ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
-            ScrewDriverClone.transform.rotation = m_ScrewDriver.transform.rotation;
-        }
 
+            Quaternion temp = Quaternion.LookRotation(Controller.transform.forward);
+            ScrewDriverClone.transform.rotation = new Quaternion(temp.x, temp.y, RotationValue, temp.w);
+        }
+       
 
         if(bIsScrewing)
         {
-            ScrewDriverClone.transform.Rotate(new Vector3(0,0,-2.0f), speed);
+            RotationValue += 2;
         }
 	}
 
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
-        
+        Controller = currentController;
     }
 
     public override void OnControllerExit()
@@ -56,11 +59,13 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnGrab()
     {
+        m_ScrewDriver.transform.rotation = Quaternion.LookRotation(Controller.transform.forward);
         ScrewDriverClone = (GameObject)Instantiate(m_ScrewDriver, transform.position, transform.rotation,m_ScrewDriver.transform);
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = false;
         Destroy(ScrewDriverClone.GetComponent("ScrewDriver"));
         ScrewDriverClone.GetComponent<Rigidbody>().useGravity = false;
         bIsGrabbing = true;
+        RotationValue = ScrewDriverClone.transform.rotation.z;
     }
 
     public override void OnGrabReleased()
