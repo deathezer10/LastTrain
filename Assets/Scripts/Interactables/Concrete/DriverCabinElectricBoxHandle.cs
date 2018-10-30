@@ -18,7 +18,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
     void Start()
     {
-        ScrewSpot.OnExit += ColliderExited;
+        Screw.OnLoose += UnScrewed;
     }
 
     // Update is called once per frame
@@ -111,21 +111,16 @@ public class DriverCabinElectricBoxHandle : StationaryObject
     {
     }
 
-     private void ColliderExited(Collider other)
+    private void UnScrewed(string _object)
     {
-        
-        if (other.tag == "Screw")
+        if(_object == "Electric")
         {
             ScrewCount -= 1;
             if (ScrewCount == 0)
             {
                 bIsLocked = false;
-                print(ScrewCount);
             }
         }
-
-
-
     }
 }
 
