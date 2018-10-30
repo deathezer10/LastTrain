@@ -12,7 +12,7 @@ public class ScrewDriver : GrabbableObject {
 
     private bool bIsGrabbing = false;
     public bool bIsScrewing = false;
-    private float speed = 1.0f;
+    private float speed = 2.0f;
     private float RotationValue;
     // Use this for initialization
 

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DriverCabinElectricBoxHandle :  ScrewSpot {
+public class DriverCabinElectricBoxHandle : ScrewSpot
+{
 
-   
+
     private GameObject PlayerHand;
 
     private bool bIsGrabbing = false;
@@ -15,12 +16,13 @@ public class DriverCabinElectricBoxHandle :  ScrewSpot {
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
 
-	// Update is called once per frame
-	void Update () {
-		
-        if(!bDisableDoor)
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (!bDisableDoor)
         {
-            if(bIsGrabbing)
+            if (bIsGrabbing)
             {
                 Vector3 targetDir = PreviousHandPosition - transform.parent.position;
                 Vector3 NewtargetDir = CurrentHandPosition - transform.parent.position;
@@ -48,16 +50,16 @@ public class DriverCabinElectricBoxHandle :  ScrewSpot {
                     }
                     */
 
-                transform.parent.Rotate(0, -angle, 0);
+                transform.parent.Rotate(0, angle, 0);
                 PreviousHandPosition = CurrentHandPosition;
             }
         }
-	}
+    }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
-        if(!bIsLocked)
-        bCanGrab = true;
+        if (!bIsLocked)
+            bCanGrab = true;
         PlayerHand = currentController.gameObject;
     }
 
@@ -92,7 +94,7 @@ public class DriverCabinElectricBoxHandle :  ScrewSpot {
 
     public override void OnUse()
     {
-        
+
     }
 
     public override void OnUseDown()
@@ -107,16 +109,16 @@ public class DriverCabinElectricBoxHandle :  ScrewSpot {
     {
         print("exit");
         if (other.tag == "Screw")
-        { 
-            ScrewCount -= 1;
-        if(ScrewCount == 0)
         {
-            bIsLocked = false;
+            ScrewCount -= 1;
+            if (ScrewCount == 0)
+            {
+                bIsLocked = false;
                 print(ScrewCount);
             }
         }
 
-       
+
 
     }
 }
