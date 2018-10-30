@@ -19,6 +19,8 @@ TagManager:
   - Head
   - SawBlade
   - Lighter
+  - PaperBurnArea
+  - SmokeDetector
   layers:
   - Default
   - TransparentFX

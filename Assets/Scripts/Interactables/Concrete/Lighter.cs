@@ -7,7 +7,13 @@ public class Lighter : GrabbableObject
     [SerializeField]
     private ParticleSystem m_particle;
 
+    CapsuleCollider litCollider;
     bool lit;
+
+    private void Start()
+    {
+        litCollider = GetComponent<CapsuleCollider>();
+    }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -40,11 +46,13 @@ public class Lighter : GrabbableObject
         {
             m_particle.Stop();
             lit = false;
+            litCollider.enabled = false;
         }
         else
         {
             m_particle.Play();
             lit = true;
+            litCollider.enabled = true;
         }
     }
 
