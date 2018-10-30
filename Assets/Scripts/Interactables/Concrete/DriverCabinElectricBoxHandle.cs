@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DriverCabinElectricBoxHandle : StationaryObject {
+public class DriverCabinElectricBoxHandle :  ScrewSpot {
 
    
     private GameObject PlayerHand;
@@ -10,7 +10,8 @@ public class DriverCabinElectricBoxHandle : StationaryObject {
     private bool bIsGrabbing = false;
     private bool bDisableDoor = false;
     private bool bCanGrab = false;
-
+    private bool bIsLocked = true;
+    private int ScrewCount = 2;
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
 
@@ -55,6 +56,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject {
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        if(!bIsLocked)
         bCanGrab = true;
         PlayerHand = currentController.gameObject;
     }
@@ -101,5 +103,15 @@ public class DriverCabinElectricBoxHandle : StationaryObject {
     {
     }
 
+    public override void OnTriggerExit(Collider other)
+    {
+        ScrewCount -= 1;
+        if(ScrewCount == 0)
+        {
+            bIsLocked = false;
+        }
+ 
+
+    }
 }
 

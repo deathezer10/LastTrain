@@ -7,8 +7,8 @@ public class Screw : MonoBehaviour
     private BoxCollider ColliderTip;
     private ScrewDriver m_ScrewDriver;
 
-    private float Turnspeed = -1.0f;
-    private float screwDistance = 0.03f;
+    public float Turnspeed = -3.0f;
+    public float screwDistance = 0.03f;
     private Vector3 OriginalPosition;
     public int value;
     public float x, y, z;
@@ -51,6 +51,7 @@ public class Screw : MonoBehaviour
                                     if (OriginalPosition.z + screwDistance > transform.position.z)
                                     {
                                         bIsLoose = true;
+                                        transform.GetComponent<Rigidbody>().useGravity = true;
                                         break;
                                     }
 
@@ -67,6 +68,7 @@ public class Screw : MonoBehaviour
                                     if (OriginalPosition.z + screwDistance < transform.position.z)
                                     {
                                         bIsLoose = true;
+                                        transform.GetComponent<Rigidbody>().useGravity = true;
                                         break;
                                     }
 
@@ -88,6 +90,7 @@ public class Screw : MonoBehaviour
                                     if (OriginalPosition.y + screwDistance > transform.position.y)
                                     {
                                         bIsLoose = true;
+                                        transform.GetComponent<Rigidbody>().useGravity = true;
                                         break;
                                     }
 
@@ -104,6 +107,7 @@ public class Screw : MonoBehaviour
                                     if (OriginalPosition.y + screwDistance < transform.position.y)
                                     {
                                         bIsLoose = true;
+                                        transform.GetComponent<Rigidbody>().useGravity = true;
                                         break;
                                     }
 
@@ -124,6 +128,7 @@ public class Screw : MonoBehaviour
                                     if (OriginalPosition.x + screwDistance > transform.position.x)
                                     {
                                         bIsLoose = true;
+                                        transform.GetComponent<Rigidbody>().useGravity = true;
                                         break;
                                     }
 
@@ -140,6 +145,7 @@ public class Screw : MonoBehaviour
                                     if (OriginalPosition.x + screwDistance < transform.position.x)
                                     {
                                         bIsLoose = true;
+                                        transform.GetComponent<Rigidbody>().useGravity = true;
                                         break;
                                     }
 
@@ -160,7 +166,7 @@ public class Screw : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-
+     
     }
 
 
