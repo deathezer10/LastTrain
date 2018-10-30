@@ -8,6 +8,12 @@ public class Revolver : GrabbableObject
     [SerializeField]
     GameObject m_LaserPointer;
 
+    [SerializeField]
+    GameObject m_BarrelSmokeParticle;
+
+    [SerializeField]
+    GameObject m_BulletImpactParticle;
+
     private float m_PointerDistance;
 
     Vector3 m_OriginalLocalPosition;
@@ -105,7 +111,7 @@ public class Revolver : GrabbableObject
             if (m_CurrentController.GetComponent<IShootable>() != null)
                 m_CurrentPointedObject.GetComponent<IShootable>().OnShot(this);
 
-
+            Instantiate(m_BarrelSmokeParticle, m_LaserPointer.transform.parent);
 
             // Play firing sound
             GetComponent<AudioPlayer>().Play("bulletfire");
