@@ -29,7 +29,7 @@ public class ScrewDriver : GrabbableObject {
         {
             ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
             Quaternion temp = Quaternion.LookRotation(-Controller.transform.forward);
-            ScrewDriverClone.transform.rotation = new Quaternion(temp.x, temp.y, RotationValue, temp.w);
+            ScrewDriverClone.transform.rotation = new Quaternion(temp.x, temp.y, temp.z, temp.w);
         }
        
 

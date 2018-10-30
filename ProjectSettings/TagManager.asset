@@ -22,7 +22,7 @@ TagManager:
   - PaperBurnArea
   - SmokeDetector
   - Screw
-  - Screwdriver
+  - ScrewDriver
   layers:
   - Default
   - TransparentFX
@@ -38,7 +38,7 @@ TagManager:
   - Environment
   - SlidingDoor
   - Glass
-  - 
+  - ScrewDriver
   - 
   - 
   - 
