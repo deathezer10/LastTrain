@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Revolver : GrabbableObject
 {
+
+    [SerializeField]
+    GameObject m_BulletChamber;
 
     [SerializeField]
     GameObject m_LaserPointer;
@@ -25,9 +29,12 @@ public class Revolver : GrabbableObject
 
     GameObject m_CurrentPointedObject;
 
-    RaycastHit? m_CurrentHitInfo;
+    /// <summary>
+    /// The point of impact where the bullet landed, null if it hit nothing
+    /// </summary>
+    public RaycastHit? hitInfo { get; private set; }
 
-    int m_CurrentBulletCount = 3;
+    int m_CurrentBulletCount = 99;
 
     private void Start()
     {
@@ -66,7 +73,7 @@ public class Revolver : GrabbableObject
             Vector3 newScale = m_LaserPointer.transform.localScale;
             newScale.z = Mathf.Abs(m_LaserPointer.transform.localPosition.z * 2);
             m_LaserPointer.transform.localScale = newScale;
-            m_CurrentHitInfo = hitInfo;
+            this.hitInfo = hitInfo;
 
             if (hitInfo.transform.GetComponent<IShootable>() != null)
             {
@@ -81,7 +88,7 @@ public class Revolver : GrabbableObject
         {
             m_LaserPointer.transform.localPosition = m_OriginalLocalPosition;
             m_LaserPointer.transform.localScale = m_OriginalScale;
-            m_CurrentHitInfo = null;
+            this.hitInfo = null;
         }
     }
 
@@ -113,10 +120,10 @@ public class Revolver : GrabbableObject
 
             Instantiate(m_BarrelSmokeParticle, m_LaserPointer.transform.parent);
 
-            if (m_CurrentHitInfo.HasValue)
-            {
-                Instantiate(m_BulletImpactParticle, m_CurrentHitInfo.Value.point, Quaternion.LookRotation(m_CurrentHitInfo.Value.normal));
-            }
+            if (hitInfo.HasValue)
+                Instantiate(m_BulletImpactParticle, hitInfo.Value.point, Quaternion.LookRotation(hitInfo.Value.normal));
+
+            m_BulletChamber.transform.DOLocalRotate(new Vector3(90, 0, 0), 0.2f, RotateMode.LocalAxisAdd);
 
             // Play firing sound
             GetComponent<AudioPlayer>().Play("bulletfire");

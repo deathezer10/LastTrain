@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Valve.VR;
 using UnityEngine;
 
-public class GlassBox : MonoBehaviour
+public class GlassBox : MonoBehaviour, IShootable
 {
     public float thrownBreakForce, heldBreakForce;
     public GameObject brokenGlassPrefab, initialBox;
@@ -18,7 +18,6 @@ public class GlassBox : MonoBehaviour
             {
                 if (other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= thrownBreakForce)
                 {
-                    FindObjectOfType<Bomb>().UnlockRigidbody();
                     BreakGlass();
                 }
             }
@@ -26,7 +25,6 @@ public class GlassBox : MonoBehaviour
             {
                 if (controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude >= heldBreakForce)
                 {
-                    FindObjectOfType<Bomb>().UnlockRigidbody();
                     BreakGlass();
                 }
             }
@@ -35,6 +33,8 @@ public class GlassBox : MonoBehaviour
 
     private void BreakGlass()
     {
+        FindObjectOfType<Bomb>().UnlockRigidbody();
+
         Instantiate(brokenGlassPrefab, initialBox.transform.position, initialBox.transform.rotation);
         Destroy(initialBox);
         GetComponent<AudioPlayer>().Play();
@@ -42,4 +42,8 @@ public class GlassBox : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
+    public void OnShot(Revolver revolver)
+    {
+        BreakGlass();
+    }
 }

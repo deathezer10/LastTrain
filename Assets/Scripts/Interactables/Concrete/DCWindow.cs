@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Valve.VR;
 using UnityEngine;
 
-public class DCWindow : MonoBehaviour
+public class DCWindow : MonoBehaviour, IShootable
 {
     public float thrownBreakForce, heldBreakForce;
     public GameObject initialWindow;
@@ -44,5 +44,10 @@ public class DCWindow : MonoBehaviour
         GetComponent<AudioPlayer>().Play();
 
         GetComponent<BoxCollider>().enabled = false;
+    }
+    
+    public void OnShot(Revolver revolver)
+    {
+        BreakGlass();
     }
 }
