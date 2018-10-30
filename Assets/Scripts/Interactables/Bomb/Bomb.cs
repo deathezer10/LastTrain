@@ -113,7 +113,7 @@ public class Bomb : GrabbableObject, IShootable
         {
             if (player.clip.name == "bomb_explosion_1")
             {
-                player.audioSource.volume = 0.5f;
+                player.audioSource.volume = 1;
                 player.audioSource.loop = false;
                 player.Play();
                 break;
