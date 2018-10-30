@@ -27,18 +27,19 @@ public class ScrewDriver : GrabbableObject {
 		
         if(bIsGrabbing)
         {
-            ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
             Quaternion temp = Quaternion.LookRotation(-Controller.transform.forward);
-            ScrewDriverClone.transform.rotation = new Quaternion(temp.x, temp.y, RotationValue, temp.w);
+            ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
+            ScrewDriverClone.transform.rotation = Quaternion.Euler(temp.eulerAngles.x, temp.eulerAngles.y, RotationValue);
         }
-       
 
-        if(bIsScrewing)
+        if (bIsScrewing)
         {
-            RotationValue += 2;
+            RotationValue += speed;
         }
-	}
 
+    }
+
+   
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -59,13 +60,13 @@ public class ScrewDriver : GrabbableObject {
 
     public override void OnGrab()
     {
-        m_ScrewDriver.transform.rotation = Quaternion.LookRotation(Controller.transform.forward);
+        m_ScrewDriver.transform.rotation = Quaternion.LookRotation(-Controller.transform.forward);
         ScrewDriverClone = (GameObject)Instantiate(m_ScrewDriver, transform.position, transform.rotation,m_ScrewDriver.transform);
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = false;
         Destroy(ScrewDriverClone.GetComponent("ScrewDriver"));
         ScrewDriverClone.GetComponent<Rigidbody>().useGravity = false;
         bIsGrabbing = true;
-        RotationValue = ScrewDriverClone.transform.rotation.z;
+        RotationValue = ScrewDriverClone.transform.rotation.eulerAngles.z;
     }
 
     public override void OnGrabReleased()
