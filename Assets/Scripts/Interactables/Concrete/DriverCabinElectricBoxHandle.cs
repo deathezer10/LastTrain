@@ -105,12 +105,18 @@ public class DriverCabinElectricBoxHandle :  ScrewSpot {
 
     public override void OnTriggerExit(Collider other)
     {
-        ScrewCount -= 1;
+        print("exit");
+        if (other.tag == "Screw")
+        { 
+            ScrewCount -= 1;
         if(ScrewCount == 0)
         {
             bIsLocked = false;
+                print(ScrewCount);
+            }
         }
- 
+
+       
 
     }
 }

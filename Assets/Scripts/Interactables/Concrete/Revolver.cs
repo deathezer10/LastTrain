@@ -108,7 +108,7 @@ public class Revolver : GrabbableObject
         {
             m_CurrentBulletCount--;
 
-            if (m_CurrentController.GetComponent<IShootable>() != null)
+            if (m_CurrentPointedObject != null && m_CurrentPointedObject.GetComponent<IShootable>() != null)
                 m_CurrentPointedObject.GetComponent<IShootable>().OnShot(this);
 
             Instantiate(m_BarrelSmokeParticle, m_LaserPointer.transform.parent);
@@ -116,7 +116,6 @@ public class Revolver : GrabbableObject
             if (m_CurrentHitInfo.HasValue)
             {
                 Instantiate(m_BulletImpactParticle, m_CurrentHitInfo.Value.point, Quaternion.LookRotation(m_CurrentHitInfo.Value.normal));
-                Debug.Log("eyy");
             }
 
             // Play firing sound
