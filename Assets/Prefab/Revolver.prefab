@@ -506,7 +506,7 @@ MonoBehaviour:
   randomizePitch: 1
   pitchRandomRange: 0.2
   playDelay: 0
-  _clip: {fileID: 8300000, guid: 0b927cf8dcabedf499928e354fdc2dfa, type: 3}
+  _clip: {fileID: 8300000, guid: 39cb3772034d25241a1d82d5429d68d9, type: 3}
   clipAlias: bulletnone
 --- !u!114 &114807555616541122
 MonoBehaviour:
@@ -520,6 +520,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LaserPointer: {fileID: 1492633635811296}
+  m_BarrelSmokeParticle: {fileID: 1567273754686702, guid: 14e58013462ee604ca7872a8a29082a1,
+    type: 2}
+  m_BulletImpactParticle: {fileID: 0}
 --- !u!114 &114887302651445986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -534,5 +537,5 @@ MonoBehaviour:
   randomizePitch: 1
   pitchRandomRange: 0.2
   playDelay: 0
-  _clip: {fileID: 8300000, guid: 80a9203710668c741bd79086ccaec034, type: 3}
+  _clip: {fileID: 8300000, guid: ecd0c67e1a2f31e4d80aeed618b439c4, type: 3}
   clipAlias: bulletfire

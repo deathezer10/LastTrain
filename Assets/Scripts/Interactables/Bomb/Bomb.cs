@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Bomb : GrabbableObject
+public class Bomb : GrabbableObject, IShootable
 {
     public MeshRenderer phLightRenderer;
     public Color red, green;
@@ -149,4 +149,10 @@ public class Bomb : GrabbableObject
 
         rb.constraints = RigidbodyConstraints.None;
     }
+
+    public void OnShot(Revolver revolver)
+    {
+        TimerTimeOut();
+    }
+
 }
