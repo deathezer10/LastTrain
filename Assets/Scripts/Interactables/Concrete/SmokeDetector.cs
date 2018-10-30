@@ -24,7 +24,7 @@ public class SmokeDetector : MonoBehaviour , IShootable
         {
             currentSmoke++;
 
-            if (currentSmoke >= 40)
+            if (currentSmoke >= 50)
             {
                 currentSmoke = 0;
                 TriggerNextIndicator();
