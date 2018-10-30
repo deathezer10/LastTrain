@@ -137,7 +137,7 @@ public class PlayerTeleportation : MonoBehaviour
         }
 
         // 床の上の高さにする
-        data.height = hit.Value.collider.bounds.extents.y;
+        data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.extents.y;
         data.UpdateArrivalTime();
 
         // 設定
