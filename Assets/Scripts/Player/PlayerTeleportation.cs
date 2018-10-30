@@ -88,9 +88,6 @@ public class PlayerTeleportation : MonoBehaviour
 
     void Start()
     {
-        //デバイスの入力受け付け
-        var input = SteamVR_Input._default;
-
         this.UpdateAsObservable()
             .Where(_ => padAction.GetStateUp(handType)) //コントローラーのトリガーを離したとき
             .Subscribe(_ => moveToPoint());                                       //ターゲットマーカーの位置へ移動
