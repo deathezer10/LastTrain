@@ -14,7 +14,7 @@ public class PlayerTeleportation : MonoBehaviour
     /// </summary>
     class MoveData
     {
-        public float height;
+        public float h;
         public float v0;
         public float sin;
         public float cos;
@@ -24,18 +24,18 @@ public class PlayerTeleportation : MonoBehaviour
         {
             //コントローラの向いている角度(x軸回転)をラジアン角へ
             var angleFacing = -Mathf.Deg2Rad * trans.eulerAngles.x;
-            this.height = trans.position.y;
-            this.v0 = initialVelocity;
-            this.sin = Mathf.Sin(angleFacing);
-            this.cos = Mathf.Cos(angleFacing);
+            h = trans.position.y;
+            v0 = initialVelocity;
+            sin = Mathf.Sin(angleFacing);
+            cos = Mathf.Cos(angleFacing);
             var g = Gravity;
-            this.arrivalTime = (initialVelocity * sin) / g + Mathf.Sqrt((square(initialVelocity) * square(sin)) / square(g) + (2F * height) / g);
+            arrivalTime = (v0 * sin) / g + Mathf.Sqrt((square(v0) * square(sin)) / square(g) + (2F * h) / g);
         }
 
         public void UpdateArrivalTime()
         {
             var g = Gravity;
-            this.arrivalTime = (this.v0 * sin) / g + Mathf.Sqrt((square(this.v0) * square(sin)) / square(g) + (2F * height) / g);
+            arrivalTime = (v0 * sin) / g + Mathf.Sqrt((square(v0) * square(sin)) / square(g) + (2F * h) / g);
         }
     }
     [Tag,SerializeField]
@@ -137,7 +137,7 @@ public class PlayerTeleportation : MonoBehaviour
         }
 
         // 床の上の高さにする
-        data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.extents.y;
+        //data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.extents.y;
         data.UpdateArrivalTime();
 
         // 設定
