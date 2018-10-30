@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-public class KeyCardScanner : StationaryObject
+public class KeyCardScanner : StationaryObject, IShootable
 {
     [SerializeField]
     private AudioPlayer successAudio;
@@ -15,15 +15,16 @@ public class KeyCardScanner : StationaryObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isDone) return;
+        if (isDone) return;
 
         if (successAudio.IsPlaying()) return;
         if (FailedAudio.IsPlaying()) return;
 
         KeyCard card = other.GetComponent<KeyCard>();
 
-        if (card) {
-            if(card.IsSuccess()) ScanSuccess(card);
+        if (card)
+        {
+            if (card.IsSuccess()) ScanSuccess(card);
             else ScanFailed(card);
         }
     }
@@ -32,7 +33,8 @@ public class KeyCardScanner : StationaryObject
     {
         if (successAudio) successAudio.Play();
 
-        card.playerController.Vibration(0, 0.7f, 10, 1, card.playerHand.ToInputSource());
+        if (card != null)
+            card.playerController.Vibration(0, 0.7f, 10, 1, card.playerHand.ToInputSource());
 
         //Some green led indication perhaps?
         DriverCabinDoorLock.init();
@@ -90,5 +92,9 @@ public class KeyCardScanner : StationaryObject
     public override void OnUseUp()
     {
     }
-    
+
+    public void OnShot(Revolver revolver)
+    {
+        ScanSuccess(null);
+    }
 }
