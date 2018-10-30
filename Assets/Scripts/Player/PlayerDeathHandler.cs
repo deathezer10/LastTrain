@@ -19,7 +19,7 @@ public class PlayerDeathHandler : MonoBehaviour
 
     public void KillPlayer(string gameOverTextKey)
     {
-        m_DeathFader.FadeIn(1, () =>
+        m_DeathFader.FadeIn(2, () =>
          {
              m_GameOverTextKey = gameOverTextKey;
              SceneManager.LoadScene("GameOver");
