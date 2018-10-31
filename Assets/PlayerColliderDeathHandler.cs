@@ -20,7 +20,7 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
     {
         if (other.gameObject.name == "FullMergedTrain")
         {
-            if (!FindObjectOfType<TrainArriver>().HasArrived)
+            if (FindObjectOfType<TrainVelocity>().GetVelocity > 2)
                 FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainhit");
         }
     }
