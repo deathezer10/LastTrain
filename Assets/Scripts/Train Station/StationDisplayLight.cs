@@ -52,6 +52,8 @@ public class StationDisplayLight : MonoBehaviour
         transform.position = m_StationNodes[m_CurrentNodeIndex].position;
 
         m_MeshRenderer.enabled = true;
+
+        transform.parent.GetComponentInParent<StationDisplayUpdateSound>().PlayUpdateSound();
     }
 
     public void ToggleLights(bool enabled, bool enableBlink)
