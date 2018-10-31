@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using DG.Tweening;
 
-public class LightSwitch : GrabbableObject
+public class LightSwitch : GrabbableObject , IShootable
 {
     List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
@@ -111,4 +111,18 @@ public class LightSwitch : GrabbableObject
     {
     }
 
+    public void OnShot(Revolver revolver)
+    {
+        if(bSwitchIsOn)
+        {
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(false);
+            }
+        }
+
+        Destroy(transform.gameObject);
+        Destroy(this);
+
+    }
 }
