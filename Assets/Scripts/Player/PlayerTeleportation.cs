@@ -128,6 +128,7 @@ public class PlayerTeleportation : MonoBehaviour
             data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.size.y;
             _lineRenderer.startColor = _possibleColor;
             _lineRenderer.endColor = _possibleColor;
+            _targetMarker.SetActive(true);
         }
         else
         {
@@ -190,7 +191,7 @@ public class PlayerTeleportation : MonoBehaviour
             vertexes.Add(vertex);
         }
 
-        TeleportAssistActive(true);
+        _lineRenderer.enabled = true;
 
         //ターゲットマーカーを頂点の最終地点へ
         var last = vertexes.Last();
