@@ -14,7 +14,17 @@ public class EmergencyDoorHandle : GrabbableObject
         set { m_Inserted = value; }
     }
 
+    private bool m_Locked = false;
+    public bool locked {
+        get { return m_Locked; }
+        set { m_Locked = value; }
+    }
+
     private bool m_Grabbing = false;
+
+    const float m_ClickRotationThreshold = 90;
+    float m_TotalRotation = 0;
+
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -24,7 +34,7 @@ public class EmergencyDoorHandle : GrabbableObject
     public override void OnControllerStay()
     {
         if (m_Grabbing == false)
-            m_LastZRot = m_Controller.transform.rotation.z;
+            m_LastZRot = m_Controller.transform.localEulerAngles.z;
     }
 
     public override void OnGrab()
@@ -39,17 +49,26 @@ public class EmergencyDoorHandle : GrabbableObject
 
     public override void OnGrabStay()
     {
-        if (m_Inserted == true && m_Controller != null)
+        if (m_Locked == false && m_Inserted == true && m_Controller != null)
         {
-            float currentZRot = m_Controller.transform.rotation.z;
+            float currentZRot = m_Controller.transform.localEulerAngles.z;
             float rotationDelta = currentZRot - m_LastZRot;
 
             if (m_LastZRot != currentZRot)
             {
-                transform.Rotate(0, 0, rotationDelta);
-            }
+                transform.Rotate(rotationDelta, 0, 0);
+                m_LastZRot = currentZRot;
+                m_TotalRotation += rotationDelta;
 
-            Debug.LogFormat("Last Z: {0}\nCurrent Z: {1}\nDelta: {2}", m_LastZRot, currentZRot, rotationDelta);
+                // Emergency door unleashed
+                if (m_TotalRotation <= -m_ClickRotationThreshold || m_TotalRotation >= m_ClickRotationThreshold)
+                {
+                    m_Locked = true;
+                    GetComponent<AudioPlayer>().Play("leverlocked");
+                    FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
+                }
+
+            }
         }
     }
 

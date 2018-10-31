@@ -146,23 +146,14 @@ public class PlayerViveController : MonoBehaviour
         if (iObject != null)
         {
             iObject.OnControllerExit();
-
-            var grabbableObject = other.GetComponent<IGrabbable>();
-
-            if (grabbableObject != null && GetCurrentHandObject() == other.gameObject)
-            {
-                AssignObjectToHand(currentHand, null);
-                Destroy(other.GetComponent<FixedJoint>());
-
-                if (grabbableObject.hideControllerOnGrab)
-                    ToggleControllerModel(true);
-            }
+            DetachCurrentObject(false);
         }
     }
 
     private void OnJointBreak(float breakForce)
     {
         AssignObjectToHand(currentHand, null);
+        ToggleControllerModel(true);
     }
 
     public void ToggleControllerModel(bool toggle)
