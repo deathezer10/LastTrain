@@ -7,8 +7,7 @@ public class EmergencyDoorHandleHolder : MonoBehaviour
 
     [SerializeField]
     Transform m_HandleSnapPoint;
-
-
+    
     private void OnTriggerEnter(Collider other)
     {
         EmergencyDoorHandle holder = other.GetComponent<EmergencyDoorHandle>();
@@ -28,13 +27,15 @@ public class EmergencyDoorHandleHolder : MonoBehaviour
         if (controller != null)
             controller.DetachCurrentObject(false);
 
-        Destroy(handle.GetComponent<EmergencyDoorHandle>());
-        Destroy(handle.GetComponent<Rigidbody>());
-        Destroy(handle.GetComponent<Collider>());
+        handle.GetComponent<Rigidbody>().useGravity = false;
+        handle.GetComponent<Rigidbody>().isKinematic = true;
 
         handle.transform.position = m_HandleSnapPoint.position;
+        handle.transform.rotation = m_HandleSnapPoint.transform.rotation;
 
         GetComponent<AudioPlayer>().Play("handleclicked");
+
+        handle.inserted = true;
     }
 
 }
