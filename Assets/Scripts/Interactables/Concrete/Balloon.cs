@@ -5,10 +5,12 @@ using UnityEngine;
 public class Balloon : MonoBehaviour , IShootable
 {
     public Color[] colorArray;
-    public GameObject balloonParticle;
+    public GameObject balloonParticlePrefab;
 
     Vector3 upwardsMove;
     Vector3 initialPos, resetPos;
+    GameObject balloonParticle;
+    Color instanceColor;
 
     private void Start()
     {
@@ -16,7 +18,7 @@ public class Balloon : MonoBehaviour , IShootable
         initialPos = transform.position;
         resetPos = initialPos;
         resetPos.y = Random.Range(-4f, -2f);
-        GetComponent<MeshRenderer>().material.color = colorArray[Random.Range(0, colorArray.Length-1)];
+        instanceColor = GetComponent<MeshRenderer>().material.color = colorArray[Random.Range(0, colorArray.Length-1)];
     }
 
     void Update()
@@ -26,7 +28,8 @@ public class Balloon : MonoBehaviour , IShootable
 
     public void PopBalloon()
     {
-        Instantiate(balloonParticle, transform.position, transform.rotation);
+        balloonParticle = Instantiate(balloonParticlePrefab, transform.position, transform.rotation);
+        balloonParticle.GetComponent<BalloonParticleMat>().SetParticleColor(instanceColor);
         transform.position = resetPos;
         upwardsMove.y = Random.Range(0.3f, 0.6f);
     }

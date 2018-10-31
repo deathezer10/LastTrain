@@ -48,7 +48,7 @@ public class Toolbox : GrabbableObject
 
     IEnumerator ObjectActivateDelay()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.2f);
 
         sawBladeVisual.SetActive(false);
 
