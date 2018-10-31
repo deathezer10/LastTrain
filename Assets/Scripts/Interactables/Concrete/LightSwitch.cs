@@ -4,10 +4,11 @@ using UnityEngine;
 using Valve.VR;
 using DG.Tweening;
 
-public class LightSwitch : StationaryObject
+public class LightSwitch : GrabbableObject
 {
     List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
+    private bool bIsBroken = false;
     private int ActivateCount = 0;
     private int BreakAtCount = 3;
     private AudioPlayer Audio;
@@ -28,6 +29,9 @@ public class LightSwitch : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        if(bIsBroken)
+            return;
+
         if(ActivateCount >= BreakAtCount)
         {
             //Light break sound here?
@@ -35,9 +39,13 @@ public class LightSwitch : StationaryObject
             {
                 light.gameObject.SetActive(false);
             }
-            Destroy(this);
+            bIsBroken = true;
+            transform.GetComponent<Rigidbody>().useGravity = true;
+            transform.GetComponent<Rigidbody>().isKinematic = false;
+            transform.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
             return;
         }
+
 
 
         Audio.Play();
