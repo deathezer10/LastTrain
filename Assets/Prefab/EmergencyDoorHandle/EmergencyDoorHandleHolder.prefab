@@ -58,8 +58,8 @@ GameObject:
   - component: {fileID: 33439366417581688}
   - component: {fileID: 23501904497675810}
   - component: {fileID: 64392999564818256}
-  - component: {fileID: 54775574850925234}
-  - component: {fileID: 114861681039972418}
+  - component: {fileID: 54108598960191630}
+  - component: {fileID: 65525315046557026}
   m_Layer: 0
   m_Name: HandleRotator
   m_TagString: Untagged
@@ -192,14 +192,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1978634474597628}
   m_Mesh: {fileID: 4300000, guid: f9203d611b7f1a94ba17ef2ec88e6447, type: 3}
---- !u!54 &54775574850925234
+--- !u!54 &54108598960191630
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1978634474597628}
   serializedVersion: 2
-  m_Mass: 0.23
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -232,6 +232,18 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.37, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65525315046557026
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978634474597628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &82926454573504452
 AudioSource:
@@ -357,14 +369,3 @@ MonoBehaviour:
   playDelay: 0
   _clip: {fileID: 8300000, guid: 494696261d2956543be47fc570d1c28c, type: 3}
   clipAlias: handleclicked
---- !u!114 &114861681039972418
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1978634474597628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea27647bf012b3b48834946d4dc2302a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
