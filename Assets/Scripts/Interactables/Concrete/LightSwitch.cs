@@ -8,7 +8,8 @@ public class LightSwitch : StationaryObject
 {
     List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
-    
+    private int ActivateCount = 0;
+    private int BreakAtCount = 3;
     private AudioPlayer Audio;
     
 
@@ -27,6 +28,18 @@ public class LightSwitch : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        if(ActivateCount >= BreakAtCount)
+        {
+            //Light break sound here?
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(false);
+            }
+            Destroy(this);
+            return;
+        }
+
+
         Audio.Play();
 
         var source = currentController.GetCurrentHand().ToInputSource();
@@ -35,7 +48,7 @@ public class LightSwitch : StationaryObject
         if (bSwitchIsOn)
         {
             bSwitchIsOn = false;
-
+            
             transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             foreach (Light light in m_TrainLights)
@@ -46,7 +59,7 @@ public class LightSwitch : StationaryObject
         else
         {
             bSwitchIsOn = true;
-            
+            ActivateCount += 1;
             transform.localRotation = Quaternion.Euler(0, 0, -90);
 
             foreach (Light light in m_TrainLights)
