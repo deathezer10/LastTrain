@@ -58,10 +58,16 @@ public class EmergencyDoorHandle : GrabbableObject
             {
                 transform.Rotate(rotationDelta, 0, 0);
                 m_LastZRot = currentZRot;
+
+                if (currentZRot < 0 && m_LastZRot < 0)
+                    rotationDelta *= -1;
+
                 m_TotalRotation += rotationDelta;
 
+                Debug.Log(m_TotalRotation % 90);
+
                 // Emergency door unleashed
-                if (m_TotalRotation <= -m_ClickRotationThreshold || m_TotalRotation >= m_ClickRotationThreshold)
+                if ((m_TotalRotation % 90 <= -m_ClickRotationThreshold) || m_TotalRotation >= m_ClickRotationThreshold)
                 {
                     m_Locked = true;
                     GetComponent<AudioPlayer>().Play("leverlocked");

@@ -101,6 +101,12 @@ public class AcceleratorLever : StationaryObject
 
                     }
 
+                    else if(VectorEndPoint.transform.position.z  >= AcceleratorHandle.transform.position.z) 
+                    {
+                        return;
+                    }
+
+
                     else
                     {
                         PreviousTrainSpeed = stationMover.currentSpeed;
