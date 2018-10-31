@@ -84,7 +84,13 @@ public class AcceleratorLever : StationaryObject
             HandMovementDirection.Normalize();
             if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f)) //If player is trying to drag the handle towards the direction the handle can move
             {
-                if ((VectorEndPoint.transform.position.z + 0.025f) >= AcceleratorHandle.transform.position.z) //The accelerator has been put to 0, task complete
+
+                if (VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z)
+                {
+                    return;
+                }
+
+                else if ((VectorEndPoint.transform.position.z + 0.025f) >= AcceleratorHandle.transform.position.z) //The accelerator has been put to 0, task complete
                 {
                     if (!bDisableLever)
                     {
@@ -101,12 +107,7 @@ public class AcceleratorLever : StationaryObject
 
                     }
 
-                    else if(VectorEndPoint.transform.position.z  >= AcceleratorHandle.transform.position.z) 
-                    {
-                        return;
-                    }
-
-
+                    
                     else
                     {
                         PreviousTrainSpeed = stationMover.currentSpeed;
@@ -116,6 +117,9 @@ public class AcceleratorLever : StationaryObject
                     }
 
                 }
+
+                
+
 
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
 
@@ -134,7 +138,7 @@ public class AcceleratorLever : StationaryObject
             if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f)) //If player trying to move handle forward in the direction of the handle
             {
 
-                if (bDisableLever)
+                if (stationMover.currentMaxSpeed != 0)
                 {
                     bDisableLever = false;
                 }
