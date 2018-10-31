@@ -34,10 +34,10 @@ public class PlayerTeleportation : MonoBehaviour
         }
     }
 
-    [Tag,SerializeField]
+    [Tag, SerializeField]
     private List<string> _getOnTags;
 
-    [SerializeField] 
+    [SerializeField]
     private GameObject _targetMarker;
 
     [SerializeField]
@@ -51,7 +51,7 @@ public class PlayerTeleportation : MonoBehaviour
 
     static readonly float Gravity = 9.81f;
 
-    [SerializeField] 
+    [SerializeField]
     GameObject _ownPlayer;
 
     [SerializeField]
@@ -69,7 +69,13 @@ public class PlayerTeleportation : MonoBehaviour
     [SerializeField]
     private SteamVR_Action_Boolean _padAction;
 
-    private void Awake() {
+    [SerializeField]
+    private Color _possibleColor;
+    [SerializeField]
+    private Color _impossibleColor;
+
+    private void Awake()
+    {
         TeleportAssistActive(false);
     }
 
@@ -77,7 +83,7 @@ public class PlayerTeleportation : MonoBehaviour
     {
         this.UpdateAsObservable()
             .Where(_ => _padAction.GetStateUp(_handType))
-            .Subscribe(_ => MoveToPoint()); 
+            .Subscribe(_ => MoveToPoint());
 
         //コントローラの入力の後に読みたい
         this.LateUpdateAsObservable()
@@ -90,7 +96,7 @@ public class PlayerTeleportation : MonoBehaviour
     /// </summary>
     private void MoveToPoint()
     {
-        if (_lineRenderer.enabled)
+        if (_targetMarker.activeSelf)
         {
             FadeManager.Instance._fadeColor = _fadeColor;
             StartCoroutine(FadeManager.Instance.Fading(_fadeTime, _fadeTime, () =>
@@ -116,15 +122,22 @@ public class PlayerTeleportation : MonoBehaviour
 
         var hit = IsVisible(_camera.transform.position, vec);
 
-        if (hit == null)
+        if (hit != null)
         {
-            TeleportAssistActive(false);
-
-            return;
+            // 床の上の高さにする
+            data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.size.y;
+            _lineRenderer.startColor = _possibleColor;
+            _lineRenderer.endColor = _possibleColor;
+            _targetMarker.SetActive(true);
         }
-
-        // 床の上の高さにする
-        data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.size.y;
+        else
+        {
+            _targetMarker.SetActive(false);
+            _lineRenderer.startColor = _impossibleColor;
+            var end = _impossibleColor;
+            end.a = 0.0f;
+            _lineRenderer.endColor = end;
+        }
 
         // 設定
         SetLineMarker(data);
@@ -136,7 +149,7 @@ public class PlayerTeleportation : MonoBehaviour
     /// <param name="pos"></param>
     /// <param name="dir"></param>
     /// <returns></returns>
-    private RaycastHit? IsVisible(Vector3 pos,Vector3 dir)
+    private RaycastHit? IsVisible(Vector3 pos, Vector3 dir)
     {
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;
@@ -147,7 +160,7 @@ public class PlayerTeleportation : MonoBehaviour
         var colliderTag = hit.collider.tag;
         foreach (var tag in _getOnTags)
         {
-            if(colliderTag == tag)
+            if (colliderTag == tag)
             {
                 return hit;
             }
@@ -173,12 +186,12 @@ public class PlayerTeleportation : MonoBehaviour
             Vector3 vertex = transform.position + forward * x + Vector3.up * y;
             vertex.y += i * data.height / _vertexCount;
 
-            if(vertex.IsAnyNan()) return;
-            
+            if (vertex.IsAnyNan()) return;
+
             vertexes.Add(vertex);
         }
 
-        TeleportAssistActive(true);
+        _lineRenderer.enabled = true;
 
         //ターゲットマーカーを頂点の最終地点へ
         var last = vertexes.Last();
