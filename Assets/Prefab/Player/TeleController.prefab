@@ -71,8 +71,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4155187996451416}
   - component: {fileID: 114303057781543860}
-  - component: {fileID: 65497215115227898}
-  - component: {fileID: 54707847674120336}
   - component: {fileID: 114842611633260074}
   m_Layer: 0
   m_Name: TeleController
@@ -165,33 +163,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1524834267269072}
   m_Mesh: {fileID: 0}
---- !u!54 &54707847674120336
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1732568898872116}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &65497215115227898
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1732568898872116}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.05, z: 0.22}
-  m_Center: {x: 0, y: -0.02, z: -0.06}
 --- !u!114 &114303057781543860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -367,11 +338,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16380b475422ae74c9e24ee25629a74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetMarker: {fileID: 0}
-  lineRenderer: {fileID: 120350465857685910}
-  vertexCount: 25
-  initialVelocity: 5
-  ownPlayer: {fileID: 0}
+  _getOnTags:
+  - Floor
+  _targetMarker: {fileID: 0}
+  _lineRenderer: {fileID: 120350465857685910}
+  _vertexCount: 25
+  _initialVelocity: 10
+  _ownPlayer: {fileID: 0}
+  _fadeTime: 0.1
+  _fadeColor: {r: 0.06510325, g: 0.103773594, b: 0.08202152, a: 0}
+  _camera: {fileID: 0}
+  _handType: 0
+  _padAction: {fileID: 0}
+  _possibleColor: {r: 0.42815408, g: 1, b: 0.3820755, a: 0.7058824}
+  _impossibleColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 0.7058824}
 --- !u!120 &120350465857685910
 LineRenderer:
   m_ObjectHideFlags: 1

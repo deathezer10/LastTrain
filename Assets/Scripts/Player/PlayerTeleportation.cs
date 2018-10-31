@@ -96,7 +96,7 @@ public class PlayerTeleportation : MonoBehaviour
     /// </summary>
     private void MoveToPoint()
     {
-        if (_lineRenderer.enabled)
+        if (_targetMarker.activeSelf)
         {
             FadeManager.Instance._fadeColor = _fadeColor;
             StartCoroutine(FadeManager.Instance.Fading(_fadeTime, _fadeTime, () =>
@@ -131,6 +131,7 @@ public class PlayerTeleportation : MonoBehaviour
         }
         else
         {
+            _targetMarker.SetActive(false);
             _lineRenderer.startColor = _impossibleColor;
             var end = _impossibleColor;
             end.a = 0.0f;
