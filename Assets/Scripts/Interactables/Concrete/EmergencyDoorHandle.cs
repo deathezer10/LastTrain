@@ -34,7 +34,7 @@ public class EmergencyDoorHandle : GrabbableObject
     public override void OnControllerStay()
     {
         if (m_Grabbing == false)
-            m_LastZRot = m_Controller.transform.localEulerAngles.z;
+            m_LastZRot = m_Controller.transform.eulerAngles.z;
     }
 
     public override void OnGrab()
@@ -51,20 +51,17 @@ public class EmergencyDoorHandle : GrabbableObject
     {
         if (m_Locked == false && m_Inserted == true && m_Controller != null)
         {
-            float currentZRot = m_Controller.transform.localEulerAngles.z;
+            float currentZRot = m_Controller.transform.eulerAngles.z;
             float rotationDelta = currentZRot - m_LastZRot;
 
             if (m_LastZRot != currentZRot)
             {
                 transform.Rotate(rotationDelta, 0, 0);
                 m_LastZRot = currentZRot;
-
-                if (currentZRot < 0 && m_LastZRot < 0)
-                    rotationDelta *= -1;
-
+                
                 m_TotalRotation += rotationDelta;
 
-                Debug.Log(m_TotalRotation % 90);
+                Debug.Log(rotationDelta);
 
                 // Emergency door unleashed
                 if ((m_TotalRotation % 90 <= -m_ClickRotationThreshold) || m_TotalRotation >= m_ClickRotationThreshold)

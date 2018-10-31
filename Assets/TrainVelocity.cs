@@ -20,6 +20,6 @@ public class TrainVelocity : MonoBehaviour {
         velocity = ((transform.position - previous).magnitude) / Time.deltaTime;
         previous = transform.position;
 
-        print(velocity);
+        // print(velocity);
     }
 }
