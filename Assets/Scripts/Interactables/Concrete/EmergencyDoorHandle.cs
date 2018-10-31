@@ -6,7 +6,7 @@ public class EmergencyDoorHandle : GrabbableObject
 {
     private PlayerViveController m_Controller;
 
-    private float m_LastZRot;
+    private float m_LastZRot, m_OriginalZRot;
 
     private bool m_Inserted = false;
     public bool inserted {
@@ -24,6 +24,9 @@ public class EmergencyDoorHandle : GrabbableObject
 
     const float m_ClickRotationThreshold = 90;
 
+    float m_TotalRotation = 0;
+
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         m_Controller = currentController;
@@ -32,7 +35,7 @@ public class EmergencyDoorHandle : GrabbableObject
     public override void OnControllerStay()
     {
         if (m_Grabbing == false)
-            m_LastZRot = m_Controller.transform.eulerAngles.z;
+            m_LastZRot = m_OriginalZRot = m_Controller.transform.eulerAngles.z;
     }
 
     public override void OnGrab()
@@ -56,10 +59,13 @@ public class EmergencyDoorHandle : GrabbableObject
             {
                 transform.Rotate(rotationDelta, 0, 0);
                 m_LastZRot = currentZRot;
-                
+                m_TotalRotation += Mathf.DeltaAngle(rotationDelta, 0);
+
                 // Emergency door unleashed
-                if (transform.eulerAngles.x <= -m_ClickRotationThreshold || transform.eulerAngles.x >= m_ClickRotationThreshold)
+                if (m_TotalRotation >= 90 || m_TotalRotation <= -90)
                 {
+                    transform.eulerAngles = new Vector3((m_TotalRotation >= 90) ? 90 : -90, 0, 0);
+
                     m_Locked = true;
                     GetComponent<AudioPlayer>().Play("leverlocked");
                     FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
