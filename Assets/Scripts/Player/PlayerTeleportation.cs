@@ -12,14 +12,14 @@ public class PlayerTeleportation : MonoBehaviour
     /// <summary>
     /// 移動の際使用するデータ
     /// </summary>
-    class MoveData
+    private class MoveData
     {
-        public float h;
-        public float v0;
-        public float sin;
-        public float cos;
-        public float arrivalTime;
-        public float height;
+        public float h { get; private set; }
+        public float v0 { get; private set; }
+        public float sin { get; private set; }
+        public float cos { get; private set; }
+        public float arrivalTime { get; private set; }
+        public float height { get; set; }
 
         public MoveData(Transform trans, float initialVelocity)
         {
@@ -30,15 +30,10 @@ public class PlayerTeleportation : MonoBehaviour
             sin = Mathf.Sin(angleFacing);
             cos = Mathf.Cos(angleFacing);
             var g = Gravity;
-            arrivalTime = (v0 * sin) / g + Mathf.Sqrt((square(v0) * square(sin)) / square(g) + (2F * h) / g);
-        }
-
-        public void UpdateArrivalTime()
-        {
-            var g = Gravity;
-            arrivalTime = (v0 * sin) / g + Mathf.Sqrt((square(v0) * square(sin)) / square(g) + (2F * h) / g);
+            arrivalTime = (v0 * sin) / g + Mathf.Sqrt((Square(v0) * Square(sin)) / Square(g) + (2F * h) / g);
         }
     }
+
     [Tag,SerializeField]
     private List<string> _getOnTags;
 
@@ -54,7 +49,7 @@ public class PlayerTeleportation : MonoBehaviour
     [SerializeField]
     private float _initialVelocity = 1;
 
-    static readonly float Gravity = 9.81F;
+    static readonly float Gravity = 9.81f;
 
     [SerializeField] 
     GameObject _ownPlayer;
@@ -69,19 +64,10 @@ public class PlayerTeleportation : MonoBehaviour
     private Camera _camera;
 
     [SerializeField]
-    private SteamVR_Input_Sources handType;
-    [SerializeField]
-    private SteamVR_Action_Boolean padAction;
+    private SteamVR_Input_Sources _handType;
 
-    /// <summary>
-    /// テレポートのアシストに使用するものの表示設定関数
-    /// </summary>
-    /// <param name="active"></param>
-    private void TeleportAssistActive(bool active)
-    {
-        _targetMarker.SetActive(active);
-        _lineRenderer.enabled = active;
-    }
+    [SerializeField]
+    private SteamVR_Action_Boolean _padAction;
 
     private void Awake() {
         TeleportAssistActive(false);
@@ -90,19 +76,19 @@ public class PlayerTeleportation : MonoBehaviour
     void Start()
     {
         this.UpdateAsObservable()
-            .Where(_ => padAction.GetStateUp(handType)) //コントローラーのトリガーを離したとき
-            .Subscribe(_ => moveToPoint());                                       //ターゲットマーカーの位置へ移動
+            .Where(_ => _padAction.GetStateUp(_handType))
+            .Subscribe(_ => MoveToPoint()); 
 
         //コントローラの入力の後に読みたい
         this.LateUpdateAsObservable()
-            .Where(_ => padAction.GetState(handType)) // コントローラーのパッドを押している間
-            .Subscribe(_ => showOrbit());        //放物線を表示させる
+            .Where(_ => _padAction.GetState(_handType))
+            .Subscribe(_ => ShowOrbit());
     }
 
     /// <summary>
     /// 移動先の位置を調整して移動
     /// </summary>
-    void moveToPoint()
+    private void MoveToPoint()
     {
         if (_lineRenderer.enabled)
         {
@@ -119,13 +105,13 @@ public class PlayerTeleportation : MonoBehaviour
     /// <summary>
     /// 放物線を表示する関数
     /// </summary>
-    void showOrbit()
+    private void ShowOrbit()
     {
         //コントローラの向いている角度(x軸回転)をラジアン角へ
         var data = new MoveData(transform, _initialVelocity);
 
         // 目標地点の取得
-        var indicationPos = GetIndicationPos(data.v0, data.cos, data.sin, data.arrivalTime);
+        var indicationPos = GetIndicationPos(data);
         var vec = (indicationPos - this.transform.position).normalized;
 
         var hit = IsVisible(_camera.transform.position, vec);
@@ -139,7 +125,6 @@ public class PlayerTeleportation : MonoBehaviour
 
         // 床の上の高さにする
         data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.size.y;
-        //data.UpdateArrivalTime();
 
         // 設定
         SetLineMarker(data);
@@ -183,7 +168,7 @@ public class PlayerTeleportation : MonoBehaviour
             //delta時間あたりのワールド座標(ラインレンダラーの節)
             var delta = i * data.arrivalTime / _vertexCount;
             var x = data.v0 * data.cos * delta;
-            var y = data.v0 * data.sin * delta - 0.5F * Gravity * square(delta);
+            var y = data.v0 * data.sin * delta - 0.5f * Gravity * Square(delta);
             var forward = new Vector3(transform.forward.x, 0, transform.forward.z);
             Vector3 vertex = transform.position + forward * x + Vector3.up * y;
             vertex.y += i * data.height / _vertexCount;
@@ -211,7 +196,7 @@ public class PlayerTeleportation : MonoBehaviour
     /// 引数の2乗を返す関数
     /// </summary>
     /// <param name="num">Number.</param>
-    static float square(float num)
+    static float Square(float num)
     {
         return Mathf.Pow(num, 2);
     }
@@ -224,14 +209,24 @@ public class PlayerTeleportation : MonoBehaviour
     /// <param name="sin"></param>
     /// <param name="time"></param>
     /// <returns></returns>
-    private Vector3 GetIndicationPos(float v0, float cos, float sin, float time)
+    private Vector3 GetIndicationPos(MoveData data)
     {
         //delta時間あたりのワールド座標(ラインレンダラーの節)
-        var x = v0 * cos * time;
-        var y = v0 * sin * time - 0.5F * Gravity * square(time);
+        var x = data.v0 * data.cos * data.arrivalTime;
+        var y = data.v0 * data.sin * data.arrivalTime - 0.5F * Gravity * Square(data.arrivalTime);
         var forward = new Vector3(this.transform.forward.x, 0, this.transform.forward.z);
-        var IndicationPos = this.transform.position + forward * x + Vector3.up * y;
+        var indicationPos = this.transform.position + forward * x + Vector3.up * y;
 
-        return IndicationPos;
+        return indicationPos;
+    }
+
+    /// <summary>
+    /// テレポートのアシストに使用するものの表示設定関数
+    /// </summary>
+    /// <param name="active"></param>
+    private void TeleportAssistActive(bool active)
+    {
+        _targetMarker.SetActive(active);
+        _lineRenderer.enabled = active;
     }
 }
