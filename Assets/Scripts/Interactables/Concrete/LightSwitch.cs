@@ -4,7 +4,7 @@ using UnityEngine;
 using Valve.VR;
 using DG.Tweening;
 
-public class LightSwitch : StationaryObject
+public class LightSwitch : GrabbableObject
 {
     List<Light> m_TrainLights = new List<Light>();
     private bool bSwitchIsOn = false;
@@ -42,6 +42,7 @@ public class LightSwitch : StationaryObject
             bIsBroken = true;
             transform.GetComponent<Rigidbody>().useGravity = true;
             transform.GetComponent<Rigidbody>().isKinematic = false;
+            transform.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
             return;
         }
 
