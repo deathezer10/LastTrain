@@ -25,7 +25,6 @@ public class BrakeLever : StationaryObject
     private float PreviousTrainSpeed = 10.0f;
     private float NewTrainSpeed;
     private float rate = 0.3f;
-    private float time = 0.0f;
     private float i;
 
     public static bool IsTaskCompleted()

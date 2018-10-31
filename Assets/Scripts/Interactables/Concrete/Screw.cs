@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Screw : MonoBehaviour
 {
-    private BoxCollider ColliderTip;
     private ScrewDriver m_ScrewDriver;
 
     private float Turnspeed;
@@ -21,7 +20,6 @@ public class Screw : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ColliderTip = transform.GetComponent<BoxCollider>();
         m_ScrewDriver = FindObjectOfType<ScrewDriver>();
         OriginalPosition = transform.position;
     }
