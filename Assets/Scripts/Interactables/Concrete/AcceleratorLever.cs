@@ -149,7 +149,12 @@ public class AcceleratorLever : StationaryObject
                     return;
                 }
 
-
+                if(stationMover.currentSpeed < 1 || stationMover.currentMaxSpeed == 0 && BrakeLever.IsTaskCompleted())
+                {
+                    AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
+                    LastHandPosition = PlayerHand.transform.position;
+                    return;
+                }
 
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
                 PreviousTrainSpeed = stationMover.currentSpeed;
