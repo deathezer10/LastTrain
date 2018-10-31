@@ -12,12 +12,19 @@ public class TrainArriver : MonoBehaviour
 
     bool m_IsAudioFading = false;
 
+    private bool bHasArrived = false;
+    public bool HasArrived
+    {
+        get { return bHasArrived; }
+    }
+
     public void BeginArrival(System.Action onComplete = null)
     {
         GetComponent<AudioPlayer>().Play();
 
         var tweener = transform.DOMoveZ(m_TrainStoppingPoint, 10).SetEase(Ease.OutQuart).OnComplete(() =>
         {
+            bHasArrived = true;
             m_TrainDoor.ToggleDoors(true);
 
             if (onComplete != null)

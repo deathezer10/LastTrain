@@ -24,7 +24,7 @@ public class EmergencyDoorHandle : GrabbableObject
     public override void OnControllerStay()
     {
         if (m_Grabbing == false)
-            m_LastZRot = m_Controller.transform.localRotation.z;
+            m_LastZRot = m_Controller.transform.rotation.z;
     }
 
     public override void OnGrab()
@@ -39,14 +39,17 @@ public class EmergencyDoorHandle : GrabbableObject
 
     public override void OnGrabStay()
     {
-        if (m_Controller != null)
+        if (m_Inserted == true && m_Controller != null)
         {
-            float currentZRot = m_Controller.transform.localRotation.z;
+            float currentZRot = m_Controller.transform.rotation.z;
+            float rotationDelta = currentZRot - m_LastZRot;
 
             if (m_LastZRot != currentZRot)
             {
-                transform.Rotate(0, 0, currentZRot - m_LastZRot);
+                transform.Rotate(0, 0, rotationDelta);
             }
+
+            Debug.LogFormat("Last Z: {0}\nCurrent Z: {1}\nDelta: {2}", m_LastZRot, currentZRot, rotationDelta);
         }
     }
 

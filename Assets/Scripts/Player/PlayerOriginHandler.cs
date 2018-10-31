@@ -34,6 +34,8 @@ public class PlayerOriginHandler : MonoBehaviour
         }
     }
 
+   
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "HeadDisplay")
