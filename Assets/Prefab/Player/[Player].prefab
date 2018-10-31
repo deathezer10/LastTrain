@@ -1302,8 +1302,8 @@ MonoBehaviour:
   _fadeTime: 0.1
   _fadeColor: {r: 0.06510325, g: 0.103773594, b: 0.08202152, a: 0}
   _camera: {fileID: 20335114981071620}
-  handType: 2
-  padAction: {fileID: 11400000, guid: fb591c47e111f9f4ca9775e57aa4be1e, type: 2}
+  _handType: 0
+  _padAction: {fileID: 0}
 --- !u!114 &114795154303804116
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -11,12 +11,17 @@ public interface IGrabbable
     bool hideControllerOnGrab { get; }
 
     /// <summary>
-    /// Called when the player grabs the object using Trigger button
+    /// Called once when the player grabs the object using Trigger button
     /// </summary>
     void OnGrab();
 
     /// <summary>
-    /// Called when the player releases the Trigger button WHILE grabbing it
+    /// Called once every Update while the player is grabbing the object
+    /// </summary>
+    void OnGrabStay();
+
+    /// <summary>
+    /// Called once when the player releases the Trigger button WHILE grabbing it
     /// </summary>
     void OnGrabReleased();
 

@@ -8,13 +8,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
-    public abstract bool hideControllerOnGrab { get; }
-    public abstract void OnControllerExit();
-    public abstract void OnControllerEnter(PlayerViveController currentController);
-    public abstract void OnControllerStay();
-    public abstract void OnGrab();
-    public abstract void OnGrabReleased();
-    public abstract void OnUseDown();
-    public abstract void OnUse();
-    public abstract void OnUseUp();
+    public virtual bool hideControllerOnGrab { get { return true; } }
+    public virtual void OnControllerExit() { }
+    public virtual void OnControllerEnter(PlayerViveController currentController) { }
+    public virtual void OnControllerStay() { }
+    public virtual void OnGrab() { }
+    public virtual void OnGrabStay() { }
+    public virtual void OnGrabReleased() { }
+    public virtual void OnUseDown() { }
+    public virtual void OnUse() { }
+    public virtual void OnUseUp() { }
 }

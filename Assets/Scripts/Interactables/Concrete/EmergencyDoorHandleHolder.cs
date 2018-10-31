@@ -23,13 +23,18 @@ public class EmergencyDoorHandleHolder : MonoBehaviour
     {
         Debug.Log("Attached");
 
-        PlayerViveController.GetControllerThatHolds(handle.gameObject).DetachCurrentObject(false);
+        var controller = PlayerViveController.GetControllerThatHolds(handle.gameObject);
+
+        if (controller != null)
+            controller.DetachCurrentObject(false);
 
         Destroy(handle.GetComponent<EmergencyDoorHandle>());
-        handle.GetComponent<Rigidbody>().useGravity = false;
-        handle.GetComponent<Rigidbody>().isKinematic = true;
+        Destroy(handle.GetComponent<Rigidbody>());
+        Destroy(handle.GetComponent<Collider>());
 
         handle.transform.position = m_HandleSnapPoint.position;
+
+        GetComponent<AudioPlayer>().Play("handleclicked");
     }
 
 }
