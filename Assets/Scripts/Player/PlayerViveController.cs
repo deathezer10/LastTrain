@@ -20,11 +20,15 @@ public static partial class HandSourceEx
 [RequireComponent(typeof(Collider))]
 public class PlayerViveController : MonoBehaviour
 {
-    public HandSource m_CurrentHand;
+    [SerializeField]
+    private HandSource m_CurrentHand;
+    public HandSource currentHand { get { return m_CurrentHand; } }
+
+    public Vector3 controllerVelocity { get { return transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetVelocity()); } }
+    public Vector3 controllerAngularVelocity { get { return transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity()); } }
 
     private static GameObject m_CurrentLeftObject = null;
     private static GameObject m_CurrentRightObject = null;
-
 
     virtual protected void Update()
     {
@@ -45,9 +49,8 @@ public class PlayerViveController : MonoBehaviour
 
                 if (grabbableObject != null)
                 {
-
                     // On Grab (Trigger Down)
-                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(m_CurrentHand.ToInputSource()))
+                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(currentHand.ToInputSource()))
                     {
                         // If other hand is holding this object, unassign it
                         if (GetCurrentHandObject(true) != null && GetCurrentHandObject(true) == currentObject.gameObject)
@@ -61,7 +64,7 @@ public class PlayerViveController : MonoBehaviour
 
                         grabbableObject.OnGrab();
 
-                        AssignObjectToHand(m_CurrentHand, currentObject.gameObject);
+                        AssignObjectToHand(currentHand, currentObject.gameObject);
 
                         if (currentObject.GetComponent<IStationaryGrabbable>() == null)
                         {
@@ -75,26 +78,31 @@ public class PlayerViveController : MonoBehaviour
                         }
                     }
 
-                    // On Item Use (Grab)
-                    if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(m_CurrentHand.ToInputSource()))
+                    // On Item First Use
+                    if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(currentHand.ToInputSource()))
                     {
                         iObject.OnUse();
                     }
 
-                    // On Item Use (Grab Down)
-                    if (SteamVR_Input._default.inActions.GrabUse.GetState(m_CurrentHand.ToInputSource()))
+                    // On Item Holding Down Use 
+                    if (SteamVR_Input._default.inActions.GrabUse.GetState(currentHand.ToInputSource()))
                     {
                         iObject.OnUseDown();
                     }
 
-                    // On Item Use (Grab Up)
-                    if (SteamVR_Input._default.inActions.GrabUse.GetStateUp(m_CurrentHand.ToInputSource()))
+                    // On Item Use Released
+                    if (SteamVR_Input._default.inActions.GrabUse.GetStateUp(currentHand.ToInputSource()))
                     {
                         iObject.OnUseUp();
                     }
 
+                    // On Grab Use
+                    if (SteamVR_Input._default.inActions.GrabPinch.GetState(currentHand.ToInputSource()))
+                    {
+                        grabbableObject.OnGrabStay();
+                    }
                     // On Grab Released (Trigger Up)
-                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(m_CurrentHand.ToInputSource()))
+                    if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(currentHand.ToInputSource()))
                     {
                         DetachCurrentObject(true);
                     }
@@ -143,7 +151,7 @@ public class PlayerViveController : MonoBehaviour
 
             if (grabbableObject != null && GetCurrentHandObject() == other.gameObject)
             {
-                AssignObjectToHand(m_CurrentHand, null);
+                AssignObjectToHand(currentHand, null);
                 Destroy(other.GetComponent<FixedJoint>());
 
                 if (grabbableObject.hideControllerOnGrab)
@@ -154,7 +162,7 @@ public class PlayerViveController : MonoBehaviour
 
     private void OnJointBreak(float breakForce)
     {
-        AssignObjectToHand(m_CurrentHand, null);
+        AssignObjectToHand(currentHand, null);
     }
 
     public void ToggleControllerModel(bool toggle)
@@ -172,17 +180,17 @@ public class PlayerViveController : MonoBehaviour
 
     private HandSource GetOtherHand()
     {
-        return (m_CurrentHand == HandSource.LeftHand) ? HandSource.RightHand : HandSource.LeftHand;
+        return (currentHand == HandSource.LeftHand) ? HandSource.RightHand : HandSource.LeftHand;
     }
 
     public HandSource GetCurrentHand()
     {
-        return m_CurrentHand;
+        return currentHand;
     }
 
     private GameObject GetCurrentHandObject(bool otherHand = false)
     {
-        if (m_CurrentHand == HandSource.LeftHand)
+        if (currentHand == HandSource.LeftHand)
             return (otherHand) ? m_CurrentRightObject : m_CurrentLeftObject;
         else
             return (otherHand) ? m_CurrentLeftObject : m_CurrentRightObject;
@@ -220,7 +228,7 @@ public class PlayerViveController : MonoBehaviour
 
                 grabbableObject.OnGrabReleased();
 
-                AssignObjectToHand(m_CurrentHand, null);
+                AssignObjectToHand(currentHand, null);
 
                 if (currentObject.GetComponent<FixedJoint>() != null)
                     Destroy(currentObject.GetComponent<FixedJoint>());
@@ -228,8 +236,8 @@ public class PlayerViveController : MonoBehaviour
                 if (currentObject.GetComponent<IStationaryGrabbable>() == null && transferVelocity)
                 {
                     Rigidbody rb = currentObject.GetComponent<Rigidbody>();
-                    rb.velocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetVelocity());
-                    rb.angularVelocity = transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity());
+                    rb.velocity = controllerVelocity;
+                    rb.angularVelocity = controllerAngularVelocity;
                 }
             }
         }
@@ -251,7 +259,7 @@ public class PlayerViveController : MonoBehaviour
         float frequency,
         float amplitude)
     {
-        Vibration(secondsFromNow, durationSeconds, frequency, amplitude, m_CurrentHand.ToInputSource());
+        Vibration(secondsFromNow, durationSeconds, frequency, amplitude, currentHand.ToInputSource());
     }
 
 }
