@@ -27,11 +27,19 @@ public class StationDisplayLight : MonoBehaviour
             }
         }
 
-        m_MeshRenderer = GetComponent<MeshRenderer>();
+        m_MeshRenderer = GetComponentInChildren<MeshRenderer>();
 
         transform.position = m_StationNodes[0].position;
 
         ToggleLights(true, false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            CycleNodes();
+        }
     }
 
     public void CycleNodes()
