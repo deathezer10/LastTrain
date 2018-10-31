@@ -648,7 +648,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923492589533790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3085, y: -0.045, z: 0.0075}
+  m_LocalPosition: {x: -0.3085, y: -0.07, z: -0.0024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4984928285164228}
@@ -661,7 +661,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1418975350844258}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2374, y: -0.047, z: 0.008}
+  m_LocalPosition: {x: -0.2374, y: -0.072, z: -0.0019}
   m_LocalScale: {x: 0.9999996, y: 0.99999654, z: 1}
   m_Children: []
   m_Father: {fileID: 4984928285164228}
@@ -785,7 +785,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1988341210984990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.067, y: -0.049, z: 0.0079}
+  m_LocalPosition: {x: -0.067, y: -0.074, z: -0.002}
   m_LocalScale: {x: 0.9999996, y: 0.99999654, z: 1}
   m_Children: []
   m_Father: {fileID: 4984928285164228}
@@ -877,7 +877,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1701414675159772}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.012, y: -0.041, z: 0.0075}
+  m_LocalPosition: {x: 0.012, y: -0.058, z: -0.0026}
   m_LocalScale: {x: 1, y: 1.0000052, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 4984928285164228}
@@ -952,7 +952,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1944445119406938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.152, y: -0.054, z: 0.0076}
+  m_LocalPosition: {x: -0.152, y: -0.079, z: -0.0023}
   m_LocalScale: {x: 0.9999996, y: 0.99999654, z: 1}
   m_Children: []
   m_Father: {fileID: 4984928285164228}
@@ -1466,7 +1466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomizePitch: 1
-  pitchRandomRange: 0.1
+  pitchRandomRange: 0
   playDelay: 0
   _clip: {fileID: 8300000, guid: 1247f598724e9f640baaa9eab7726659, type: 3}
   clipAlias: 
