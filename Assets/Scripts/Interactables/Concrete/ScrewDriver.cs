@@ -31,7 +31,7 @@ public class ScrewDriver : GrabbableObject
         if (bIsGrabbing)
         {
             Quaternion temp = Quaternion.LookRotation(-Controller.transform.forward);
-            //ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
+            ScrewDriverClone.transform.position = m_ScrewDriver.transform.position;
             ScrewDriverClone.transform.rotation = Quaternion.Euler(temp.eulerAngles.x, temp.eulerAngles.y, RotationValue);
         }
 
