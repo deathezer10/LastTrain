@@ -23,8 +23,6 @@ public class EmergencyDoorHandle : GrabbableObject
     private bool m_Grabbing = false;
 
     const float m_ClickRotationThreshold = 90;
-    float m_TotalRotation = 0;
-
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -59,12 +57,8 @@ public class EmergencyDoorHandle : GrabbableObject
                 transform.Rotate(rotationDelta, 0, 0);
                 m_LastZRot = currentZRot;
                 
-                m_TotalRotation += rotationDelta;
-
-                Debug.Log(rotationDelta);
-
                 // Emergency door unleashed
-                if ((m_TotalRotation % 90 <= -m_ClickRotationThreshold) || m_TotalRotation >= m_ClickRotationThreshold)
+                if (transform.eulerAngles.x <= -m_ClickRotationThreshold || transform.eulerAngles.x >= m_ClickRotationThreshold)
                 {
                     m_Locked = true;
                     GetComponent<AudioPlayer>().Play("leverlocked");
