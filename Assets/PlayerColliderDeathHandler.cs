@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
-public class PlayerColliderDeathHandler : MonoBehaviour {
+public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
+{
 
 	// Use this for initialization
 	void Start () {
@@ -22,5 +23,10 @@ public class PlayerColliderDeathHandler : MonoBehaviour {
             if (!FindObjectOfType<TrainArriver>().HasArrived)
                 FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainhit");
         }
+    }
+
+    public void OnShot(Revolver revolver)
+    {
+        FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_gunsuicide");
     }
 }
