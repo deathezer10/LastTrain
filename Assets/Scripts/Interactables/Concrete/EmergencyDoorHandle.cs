@@ -49,7 +49,7 @@ public class EmergencyDoorHandle : GrabbableObject
 
     public override void OnGrabStay()
     {
-        if (locked == false && m_Inserted == true && m_Controller != null)
+        if (m_Locked == false && m_Inserted == true && m_Controller != null)
         {
             float currentZRot = m_Controller.transform.localEulerAngles.z;
             float rotationDelta = currentZRot - m_LastZRot;
@@ -61,7 +61,7 @@ public class EmergencyDoorHandle : GrabbableObject
                 m_TotalRotation += rotationDelta;
 
                 // Emergency door unleashed
-                if (m_TotalRotation >= m_ClickRotationThreshold || m_TotalRotation <= (-m_ClickRotationThreshold))
+                if (m_TotalRotation <= -m_ClickRotationThreshold || m_TotalRotation >= m_ClickRotationThreshold)
                 {
                     m_Locked = true;
                     GetComponent<AudioPlayer>().Play("leverlocked");
