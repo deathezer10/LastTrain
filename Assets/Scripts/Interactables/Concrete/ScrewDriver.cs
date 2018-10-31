@@ -6,8 +6,7 @@ public class ScrewDriver : GrabbableObject
 {
 
     private GameObject m_ScrewDriver;
-    private BoxCollider m_Tip;
-    GameObject ScrewDriverClone;
+    private GameObject ScrewDriverClone;
     private PlayerViveController Controller;
 
 
@@ -20,8 +19,6 @@ public class ScrewDriver : GrabbableObject
     void Start()
     {
         m_ScrewDriver = transform.gameObject;
-        m_Tip = transform.GetChild(0).GetComponent<BoxCollider>();
-
     }
 
     // Update is called once per frame

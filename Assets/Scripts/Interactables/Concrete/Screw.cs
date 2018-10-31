@@ -7,7 +7,7 @@ public class Screw : MonoBehaviour
     private BoxCollider ColliderTip;
     private ScrewDriver m_ScrewDriver;
 
-    public float Turnspeed = -3.0f;
+    private float Turnspeed;
     public float screwDistance = 0.03f;
     private Vector3 OriginalPosition;
     public int Axis;
@@ -45,6 +45,7 @@ public class Screw : MonoBehaviour
             {
                 if (m_ScrewDriver.bIsScrewing)
                 {
+                    Turnspeed = m_ScrewDriver.speed;
                     transform.Rotate(new Vector3(0, 0, -1), Turnspeed);
                     switch (Axis)
                     {
