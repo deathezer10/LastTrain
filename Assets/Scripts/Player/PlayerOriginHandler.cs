@@ -34,6 +34,15 @@ public class PlayerOriginHandler : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.name == "FullMergedTrain")
+        {
+            if(!FindObjectOfType<TrainArriver>().HasArrived)
+            FindObjectOfType<PlayerDeathHandler>().KillPlayer("Train comes, Train kills, The End");
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "HeadDisplay")
