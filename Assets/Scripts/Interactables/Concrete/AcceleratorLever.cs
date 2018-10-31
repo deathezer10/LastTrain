@@ -138,7 +138,7 @@ public class AcceleratorLever : StationaryObject
             if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f)) //If player trying to move handle forward in the direction of the handle
             {
 
-                if (stationMover.currentMaxSpeed != 0)
+                if ((VectorEndPoint.transform.position.z + 0.025f) < AcceleratorHandle.transform.position.z) //The accelerator has been activated again
                 {
                     bDisableLever = false;
                 }
@@ -148,6 +148,8 @@ public class AcceleratorLever : StationaryObject
                 {
                     return;
                 }
+
+
 
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
                 PreviousTrainSpeed = stationMover.currentSpeed;
