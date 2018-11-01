@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,11 +25,6 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
                playerDeathHandler.KillPlayer("death_trainhit");
         }
 
-        
-        //if(other.gameObject.name == "PlayerDeathCollider" && FindObjectOfType<SawBlade>().IsSpinning())
-        //{
-        //    playerDeathHandler.KillPlayer("death_sawblade");
-        //}
     }
 
     public void OnShot(Revolver revolver)
