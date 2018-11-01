@@ -16,6 +16,16 @@ public class BrakeLever : StationaryObject
     private bool bStopTrain = false;
     private bool bSlowDownTrain = false;
 
+    public bool GetbSlowDownTrain
+    {
+        get { return bSlowDownTrain; }
+    }
+
+    public bool GetbStopTrain
+    {
+        get { return bStopTrain; }
+    }
+
     private Vector3 HandOffsetStart;
     private Vector3 currentHandPosition;
     private float minXRotation = -0.45f;       //Setting lowest reachable rotation for the lever
@@ -50,19 +60,23 @@ public class BrakeLever : StationaryObject
     void Update()
     {
 
-        if(bStopTrain)
+        if (bStopTrain)
         {
             i += Time.deltaTime * rate;
             print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
             stationmover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
+            if (stationmover.currentSpeed == 0)
+                Destroy(this);
 
         }
 
-        if(bSlowDownTrain)
+        if (bSlowDownTrain)
         {
             i += Time.deltaTime * rate;
             print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
             stationmover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
+            if (stationmover.currentSpeed == 3)
+                Destroy(this);
         }
 
         if (!bDisableLever)
@@ -75,7 +89,7 @@ public class BrakeLever : StationaryObject
 
                 Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
                 if (cross.x < 0) angle = -angle;
-               
+
                 if (angle < 0)
                     if (currentXRotation <= minXRotation)
                     {
@@ -102,16 +116,16 @@ public class BrakeLever : StationaryObject
                             i = 0;
                             return;
                         }
-                            
+
                     }
-                    
-                
+
+
                 if (angle > 0)
                     if (currentXRotation >= maxXRotation)
                     {
                         return;
                     }
-                    
+
                 transform.Rotate(angle, 0, 0);
                 HandOffsetStart = currentHandPosition;
                 currentXRotation = transform.rotation.x;
@@ -123,12 +137,12 @@ public class BrakeLever : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
-        if(DriverCabinDoorLock.bIsUnlocked)
+        if (DriverCabinDoorLock.bIsUnlocked)
         {
             bCanGrab = true;
             PlayerHand = currentController.gameObject;
         }
-       
+
     }
 
     public override void OnControllerExit()
@@ -143,7 +157,7 @@ public class BrakeLever : StationaryObject
 
     public override void OnUse()
     {
-        
+
     }
 
     public override void OnUseDown()

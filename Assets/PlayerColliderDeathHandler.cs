@@ -5,11 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
 {
+    PlayerDeathHandler playerDeathHandler;
+    // Use this for initialization
+    void Start () {
+        playerDeathHandler = FindObjectOfType<PlayerDeathHandler>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,12 +22,18 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
         if (other.gameObject.name == "FullMergedTrain")
         {
             if (FindObjectOfType<TrainVelocity>().GetVelocity > 2 && !FindObjectOfType<TrainArriver>().HasArrived)
-                FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainhit");
+               playerDeathHandler.KillPlayer("death_trainhit");
+        }
+
+
+        if(other.gameObject.name == "SawBladeCollider" && FindObjectOfType<SawBlade>().IsSpinning())
+        {
+            playerDeathHandler.KillPlayer("death_sawblade");
         }
     }
 
     public void OnShot(Revolver revolver)
     {
-        FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_gunsuicide");
+        playerDeathHandler.KillPlayer("death_gunsuicide");
     }
 }

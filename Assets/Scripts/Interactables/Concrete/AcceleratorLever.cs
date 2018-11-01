@@ -138,7 +138,7 @@ public class AcceleratorLever : StationaryObject
             if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f)) //If player trying to move handle forward in the direction of the handle
             {
 
-                if ((VectorEndPoint.transform.position.z + 0.025f) < AcceleratorHandle.transform.position.z) //The accelerator has been activated again
+                if ((VectorEndPoint.transform.position.z + 0.025f) < AcceleratorHandle.transform.position.z && !BrakeLever.IsTaskCompleted()) //The accelerator has been activated again
                 {
                     bDisableLever = false;
                 }
