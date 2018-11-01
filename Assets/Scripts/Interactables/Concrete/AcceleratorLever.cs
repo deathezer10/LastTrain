@@ -15,10 +15,11 @@ public class AcceleratorLever : StationaryObject
     private Vector3 HandleMovementDirection;
     private Vector3 LastHandPosition;
 
+    public static bool bIsStopping = false;
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
-    private bool bIsActivating = false;
+    private bool bIsActivating = false; 
     private AudioPlayer Audio;
     public StationMover stationMover;
 
@@ -62,7 +63,8 @@ public class AcceleratorLever : StationaryObject
 
     void Update()
     {
-        if (bIsActivating)
+        
+        if (bIsActivating && !bIsStopping)
         {
             i += Time.deltaTime * rate;
             print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
