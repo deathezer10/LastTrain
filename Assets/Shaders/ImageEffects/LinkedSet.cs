@@ -6,45 +6,45 @@ namespace cakeslice
 	public class LinkedSet<T> : IEnumerable<T>
 	{
 
-		private LinkedList<T> list;
+		private LinkedList<T> _list;
 
-		private Dictionary<T, LinkedListNode<T>> dictionary;
+		private Dictionary<T, LinkedListNode<T>> _dictionary;
 
 		public LinkedSet()
 		{
-			list = new LinkedList<T>();
-			dictionary = new Dictionary<T, LinkedListNode<T>>();
+			_list = new LinkedList<T>();
+			_dictionary = new Dictionary<T, LinkedListNode<T>>();
 		}
 
 		public LinkedSet(IEqualityComparer<T> comparer)
 		{
-			list = new LinkedList<T>();
-			dictionary = new Dictionary<T, LinkedListNode<T>>(comparer);
+			_list = new LinkedList<T>();
+			_dictionary = new Dictionary<T, LinkedListNode<T>>(comparer);
 		}
 
 		public bool Contains(T t)
 		{
-			return dictionary.ContainsKey(t);
+			return _dictionary.ContainsKey(t);
 		}
 
 		public bool Add(T t)
 		{
 
-			if (dictionary.ContainsKey(t))
+			if (_dictionary.ContainsKey(t))
 			{
 				return false;
 			}
 
-			LinkedListNode<T> node = list.AddLast(t);
-			dictionary.Add(t, node);
+			LinkedListNode<T> node = _list.AddLast(t);
+			_dictionary.Add(t, node);
 			return true;
 
 		}
 
 		public void Clear()
 		{
-			list.Clear();
-			dictionary.Clear();
+			_list.Clear();
+			_dictionary.Clear();
 		}
 
 		public AddType AddOrMoveToEnd(T t)
@@ -52,21 +52,21 @@ namespace cakeslice
 
 			LinkedListNode<T> node;
 
-			if (dictionary.Comparer.Equals(t, list.Last.Value))
+			if (_dictionary.Comparer.Equals(t, _list.Last.Value))
 			{
 				return AddType.NO_CHANGE;
 			}
-			else if (dictionary.TryGetValue(t, out node))
+			else if (_dictionary.TryGetValue(t, out node))
 			{
-				list.Remove(node);
-				node = list.AddLast(t);
-				dictionary[t] = node;
+				_list.Remove(node);
+				node = _list.AddLast(t);
+				_dictionary[t] = node;
 				return AddType.MOVED;
 			}
 			else
 			{
-				node = list.AddLast(t);
-				dictionary[t] = node;
+				node = _list.AddLast(t);
+				_dictionary[t] = node;
 				return AddType.ADDED;
 			}
 
@@ -77,9 +77,9 @@ namespace cakeslice
 
 			LinkedListNode<T> node;
 
-			if (dictionary.TryGetValue(t, out node) && dictionary.Remove(t))
+			if (_dictionary.TryGetValue(t, out node) && _dictionary.Remove(t))
 			{
-				list.Remove(node);
+				_list.Remove(node);
 				return true;
 			}
 			else
@@ -99,12 +99,12 @@ namespace cakeslice
 
 		public IEnumerator<T> GetEnumerator ()
 		{
-			return list.GetEnumerator();
+			return _list.GetEnumerator();
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
 		{
-			return list.GetEnumerator();
+			return _list.GetEnumerator();
 		}
 
 		public enum AddType
