@@ -31,6 +31,19 @@ ModelImporter:
     100050: Handle_Tri_Top
     100052: //RootNode
     100054: LIghtSwitch
+    100056: DCabinDrButton1
+    100058: EBrake_Base_Rotate
+    100060: EBrake_Dr
+    100062: ElectricalBoxDr
+    100064: KeyCardScanner
+    100066: LightSwitch_01
+    100068: LightSwitch_02
+    100070: LightSwitch_03
+    100072: LightSwitch_04
+    100074: Screw_01
+    100076: Screw_02
+    100078: Screw_03
+    100080: Screw_04
     400000: Accelerator
     400002: Brake
     400004: BrokenDCWindow_01
@@ -59,10 +72,29 @@ ModelImporter:
     400050: Handle_Tri_Top
     400052: //RootNode
     400054: LIghtSwitch
+    400056: DCabinDrButton1
+    400058: EBrake_Base_Rotate
+    400060: EBrake_Dr
+    400062: ElectricalBoxDr
+    400064: KeyCardScanner
+    400066: LightSwitch_01
+    400068: LightSwitch_02
+    400070: LightSwitch_03
+    400072: LightSwitch_04
+    400074: Screw_01
+    400076: Screw_02
+    400078: Screw_03
+    400080: Screw_04
     2100000: PC_C_Shader
     2100002: Alpha2_Shader
     2100004: InnerShell_Shader
     2100006: DC_A_Shader
+    2100008: Props_B_Shader
+    2100010: PC_B_Shader
+    2100012: PC_A_Shader
+    2100014: EBrakes_Shader
+    2100016: Alpha_5_Shader
+    2100018: Alpha1_Shader
     2300000: Accelerator
     2300002: Brake
     2300004: BrokenDCWindow_01
@@ -90,6 +122,19 @@ ModelImporter:
     2300048: Handle_Tri_Mid
     2300050: Handle_Tri_Top
     2300052: LIghtSwitch
+    2300054: DCabinDrButton1
+    2300056: EBrake_Base_Rotate
+    2300058: EBrake_Dr
+    2300060: ElectricalBoxDr
+    2300062: KeyCardScanner
+    2300064: LightSwitch_01
+    2300066: LightSwitch_02
+    2300068: LightSwitch_03
+    2300070: LightSwitch_04
+    2300072: Screw_01
+    2300074: Screw_02
+    2300076: Screw_03
+    2300078: Screw_04
     3300000: Accelerator
     3300002: Brake
     3300004: BrokenDCWindow_01
@@ -117,6 +162,19 @@ ModelImporter:
     3300048: Handle_Tri_Mid
     3300050: Handle_Tri_Top
     3300052: LIghtSwitch
+    3300054: DCabinDrButton1
+    3300056: EBrake_Base_Rotate
+    3300058: EBrake_Dr
+    3300060: ElectricalBoxDr
+    3300062: KeyCardScanner
+    3300064: LightSwitch_01
+    3300066: LightSwitch_02
+    3300068: LightSwitch_03
+    3300070: LightSwitch_04
+    3300072: Screw_01
+    3300074: Screw_02
+    3300076: Screw_03
+    3300078: Screw_04
     4300000: LIghtSwitch
     4300002: DC_Window
     4300004: BrokenDCWindow_01
@@ -144,7 +202,25 @@ ModelImporter:
     4300048: Handle_CirShort_Top
     4300050: Handle_CirShort_Mid
     4300052: Handle_CirShort_Btm
+    4300054: Screw_02
+    4300056: Screw_01
+    4300058: EBrake_Dr
+    4300060: LightSwitch_02
+    4300062: LightSwitch_01
+    4300064: EBrake_Base_Rotate
+    4300066: DCabinDrButton1
+    4300068: Screw_04
+    4300070: KeyCardScanner
+    4300072: Screw_03
+    4300074: ElectricalBoxDr
+    4300076: LightSwitch_03
+    4300078: LightSwitch_04
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha1_Shader
+    second: {fileID: 2100000, guid: 41ec80cf11b96c14d9ed2a0fd316b371, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -153,8 +229,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Alpha_5_Shader
+    second: {fileID: 2100000, guid: 2e5394e38413b664b97cbe84de0918bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: DC_A_Shader
     second: {fileID: 2100000, guid: e5711bd843443a3429c334e40fbcc18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EBrakes_Shader
+    second: {fileID: 2100000, guid: 900239cb540e8f44aa77dbc783f987fb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -163,8 +249,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: PC_A_Shader
+    second: {fileID: 2100000, guid: 82902ac2ff2bc9f4e9bae62f85f5122d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_B_Shader
+    second: {fileID: 2100000, guid: d5e6e78a8a88c2645aea227a1cd3848b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: PC_C_Shader
     second: {fileID: 2100000, guid: e82791bfcc82df04f8362698f642aedc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props_B_Shader
+    second: {fileID: 2100000, guid: eccc4397154f41f47b8c3d16090af2cf, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

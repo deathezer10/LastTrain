@@ -5,8 +5,26 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: Train
+    100004: Decal
+    100006: EBrake_Base_Frame
+    100008: EBrake_Box
+    100010: Light_A_01
+    100012: Light_B_01
+    100014: LightFrame_A_01
+    100016: LightFrame_B_01
+    100018: SmokeDetectors
+    100020: Train_Floor
     400000: //RootNode
     400002: Train
+    400004: Decal
+    400006: EBrake_Base_Frame
+    400008: EBrake_Box
+    400010: Light_A_01
+    400012: Light_B_01
+    400014: LightFrame_A_01
+    400016: LightFrame_B_01
+    400018: SmokeDetectors
+    400020: Train_Floor
     2100000: PC_C_Shader
     2100002: PC_B_Shader
     2100004: PC_A_Shader
@@ -17,11 +35,43 @@ ModelImporter:
     2100014: Alpha1_Shader
     2100016: DC_A_Shader
     2100018: Alpha3_Shader
+    2100020: Decal_1
+    2100022: lambert2
+    2100024: Decal_3_Decal_3
+    2100026: Props_B_Shader
+    2100028: EBrakes_Shader
     2300000: //RootNode
     2300002: Train
+    2300004: Decal
+    2300006: EBrake_Base_Frame
+    2300008: EBrake_Box
+    2300010: Light_A_01
+    2300012: Light_B_01
+    2300014: LightFrame_A_01
+    2300016: LightFrame_B_01
+    2300018: SmokeDetectors
+    2300020: Train_Floor
     3300000: //RootNode
     3300002: Train
+    3300004: Decal
+    3300006: EBrake_Base_Frame
+    3300008: EBrake_Box
+    3300010: Light_A_01
+    3300012: Light_B_01
+    3300014: LightFrame_A_01
+    3300016: LightFrame_B_01
+    3300018: SmokeDetectors
+    3300020: Train_Floor
     4300000: Train
+    4300002: Decal
+    4300004: Light_B_01
+    4300006: LightFrame_B_01
+    4300008: Light_A_01
+    4300010: LightFrame_A_01
+    4300012: SmokeDetectors
+    4300014: Train_Floor
+    4300016: EBrake_Box
+    4300018: EBrake_Base_Frame
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -43,6 +93,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: DC_A_Shader
     second: {fileID: 2100000, guid: e5711bd843443a3429c334e40fbcc18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decal_1
+    second: {fileID: 2100000, guid: b49faba1a05b8e648945d0867ab64c79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decal_3_Decal_3
+    second: {fileID: 2100000, guid: f34a6f39b6d8a0944beb85cfc3f8ef8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EBrakes_Shader
+    second: {fileID: 2100000, guid: 900239cb540e8f44aa77dbc783f987fb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -71,8 +136,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Props_B_Shader
+    second: {fileID: 2100000, guid: eccc4397154f41f47b8c3d16090af2cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Props_Info_Shader
     second: {fileID: 2100000, guid: 903edc78b1403f24990292b476bbcaad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 48735582f689e9c43a2ad0b81a128906, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -116,7 +191,7 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
+    preserveHierarchy: 1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001

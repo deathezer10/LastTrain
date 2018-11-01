@@ -21,6 +21,33 @@ ModelImporter:
     100030: SlidingDoor_8
     100032: SlidingDoor_9
     100034: //RootNode
+    100036: BtwnCabinDr_01
+    100038: BtwnCabinDr_02
+    100040: ExitDoor
+    100042: SlidingDoor_01
+    100044: SlidingDoor_010
+    100046: SlidingDoor_011
+    100048: SlidingDoor_012
+    100050: SlidingDoor_013
+    100052: SlidingDoor_014
+    100054: SlidingDoor_015
+    100056: SlidingDoor_016
+    100058: SlidingDoor_017
+    100060: SlidingDoor_018
+    100062: SlidingDoor_019
+    100064: SlidingDoor_02
+    100066: SlidingDoor_020
+    100068: SlidingDoor_021
+    100070: SlidingDoor_022
+    100072: SlidingDoor_023
+    100074: SlidingDoor_024
+    100076: SlidingDoor_03
+    100078: SlidingDoor_04
+    100080: SlidingDoor_05
+    100082: SlidingDoor_06
+    100084: SlidingDoor_07
+    100086: SlidingDoor_08
+    100088: SlidingDoor_09
     400000: DCabinDr
     400002: SlidingDoor_1
     400004: SlidingDoor_10
@@ -39,8 +66,36 @@ ModelImporter:
     400030: SlidingDoor_8
     400032: SlidingDoor_9
     400034: //RootNode
+    400036: BtwnCabinDr_01
+    400038: BtwnCabinDr_02
+    400040: ExitDoor
+    400042: SlidingDoor_01
+    400044: SlidingDoor_010
+    400046: SlidingDoor_011
+    400048: SlidingDoor_012
+    400050: SlidingDoor_013
+    400052: SlidingDoor_014
+    400054: SlidingDoor_015
+    400056: SlidingDoor_016
+    400058: SlidingDoor_017
+    400060: SlidingDoor_018
+    400062: SlidingDoor_019
+    400064: SlidingDoor_02
+    400066: SlidingDoor_020
+    400068: SlidingDoor_021
+    400070: SlidingDoor_022
+    400072: SlidingDoor_023
+    400074: SlidingDoor_024
+    400076: SlidingDoor_03
+    400078: SlidingDoor_04
+    400080: SlidingDoor_05
+    400082: SlidingDoor_06
+    400084: SlidingDoor_07
+    400086: SlidingDoor_08
+    400088: SlidingDoor_09
     2100000: PC_A_Shader
     2100002: Alpha2_Shader
+    2100004: OuterShell_Shader
     2300000: DCabinDr
     2300002: SlidingDoor_1
     2300004: SlidingDoor_10
@@ -58,6 +113,33 @@ ModelImporter:
     2300028: SlidingDoor_7
     2300030: SlidingDoor_8
     2300032: SlidingDoor_9
+    2300034: BtwnCabinDr_01
+    2300036: BtwnCabinDr_02
+    2300038: ExitDoor
+    2300040: SlidingDoor_01
+    2300042: SlidingDoor_010
+    2300044: SlidingDoor_011
+    2300046: SlidingDoor_012
+    2300048: SlidingDoor_013
+    2300050: SlidingDoor_014
+    2300052: SlidingDoor_015
+    2300054: SlidingDoor_016
+    2300056: SlidingDoor_017
+    2300058: SlidingDoor_018
+    2300060: SlidingDoor_019
+    2300062: SlidingDoor_02
+    2300064: SlidingDoor_020
+    2300066: SlidingDoor_021
+    2300068: SlidingDoor_022
+    2300070: SlidingDoor_023
+    2300072: SlidingDoor_024
+    2300074: SlidingDoor_03
+    2300076: SlidingDoor_04
+    2300078: SlidingDoor_05
+    2300080: SlidingDoor_06
+    2300082: SlidingDoor_07
+    2300084: SlidingDoor_08
+    2300086: SlidingDoor_09
     3300000: DCabinDr
     3300002: SlidingDoor_1
     3300004: SlidingDoor_10
@@ -75,6 +157,33 @@ ModelImporter:
     3300028: SlidingDoor_7
     3300030: SlidingDoor_8
     3300032: SlidingDoor_9
+    3300034: BtwnCabinDr_01
+    3300036: BtwnCabinDr_02
+    3300038: ExitDoor
+    3300040: SlidingDoor_01
+    3300042: SlidingDoor_010
+    3300044: SlidingDoor_011
+    3300046: SlidingDoor_012
+    3300048: SlidingDoor_013
+    3300050: SlidingDoor_014
+    3300052: SlidingDoor_015
+    3300054: SlidingDoor_016
+    3300056: SlidingDoor_017
+    3300058: SlidingDoor_018
+    3300060: SlidingDoor_019
+    3300062: SlidingDoor_02
+    3300064: SlidingDoor_020
+    3300066: SlidingDoor_021
+    3300068: SlidingDoor_022
+    3300070: SlidingDoor_023
+    3300072: SlidingDoor_024
+    3300074: SlidingDoor_03
+    3300076: SlidingDoor_04
+    3300078: SlidingDoor_05
+    3300080: SlidingDoor_06
+    3300082: SlidingDoor_07
+    3300084: SlidingDoor_08
+    3300086: SlidingDoor_09
     4300000: SlidingDoor_2
     4300002: SlidingDoor_1
     4300004: SlidingDoor_4
@@ -92,12 +201,44 @@ ModelImporter:
     4300028: SlidingDoor_15
     4300030: SlidingDoor_3
     4300032: DCabinDr
+    4300034: SlidingDoor_01
+    4300036: SlidingDoor_02
+    4300038: SlidingDoor_04
+    4300040: SlidingDoor_03
+    4300042: SlidingDoor_05
+    4300044: SlidingDoor_06
+    4300046: SlidingDoor_07
+    4300048: SlidingDoor_08
+    4300050: SlidingDoor_09
+    4300052: SlidingDoor_010
+    4300054: SlidingDoor_011
+    4300056: SlidingDoor_012
+    4300058: SlidingDoor_013
+    4300060: SlidingDoor_014
+    4300062: SlidingDoor_015
+    4300064: SlidingDoor_016
+    4300066: ExitDoor
+    4300068: SlidingDoor_017
+    4300070: SlidingDoor_018
+    4300072: SlidingDoor_019
+    4300074: SlidingDoor_020
+    4300076: SlidingDoor_021
+    4300078: SlidingDoor_022
+    4300080: SlidingDoor_023
+    4300082: SlidingDoor_024
+    4300084: BtwnCabinDr_02
+    4300086: BtwnCabinDr_01
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Alpha2_Shader
     second: {fileID: 2100000, guid: 8c37932d874afab49bc2edd22c6ef773, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OuterShell_Shader
+    second: {fileID: 2100000, guid: 9e56860a5957ef14fbf064dd1e65b96e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
