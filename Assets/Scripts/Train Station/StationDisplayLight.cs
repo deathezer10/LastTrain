@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StationDisplayLight : MonoBehaviour
@@ -15,6 +16,10 @@ public class StationDisplayLight : MonoBehaviour
 
     bool m_IsLightBlinking = false;
 
+    TextMeshPro stationNameMesh;
+
+    string[] stationEnNameArray = { "Furuihashi", "Kiba", "Maiyama", "Nagashino", "Muridecho" };
+
     private void Start()
     {
         for (int i = 0; i < transform.parent.childCount; ++i)
@@ -27,11 +32,23 @@ public class StationDisplayLight : MonoBehaviour
             }
         }
 
+        stationNameMesh = transform.parent.GetComponentInChildren<TextMeshPro>();
+
         m_MeshRenderer = GetComponentInChildren<MeshRenderer>();
 
         transform.position = m_StationNodes[0].position;
 
+        stationNameMesh.text = stationEnNameArray[0];
+
         ToggleLights(true, false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            CycleNodes();
+        }
     }
 
     public void CycleNodes()
@@ -42,6 +59,8 @@ public class StationDisplayLight : MonoBehaviour
             m_CurrentNodeIndex = 0;
 
         transform.position = m_StationNodes[m_CurrentNodeIndex].position;
+
+        stationNameMesh.text = stationEnNameArray[m_CurrentNodeIndex];
 
         m_MeshRenderer.enabled = true;
 
