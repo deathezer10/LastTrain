@@ -16,9 +16,10 @@ public class StationDisplayLight : MonoBehaviour
 
     bool m_IsLightBlinking = false;
 
-    TextMeshPro stationNameMesh;
+    TextMeshPro StationNameEnTextMeshP, StationNameJpTextMeshP;
 
-    string[] stationEnNameArray = { "Furuihashi", "Kiba", "Maiyama", "Nagashino", "Muridecho" };
+    string[] stationEnNameArray = { "Furuihashi", "Kita", "Maiyama", "Nakashino", "Muriteho" };
+    string[] stationJpNameArray = { "boBZL", "GP", "eBje", "UFLY", "gnSd" };
 
     private void Start()
     {
@@ -30,15 +31,22 @@ public class StationDisplayLight : MonoBehaviour
             {
                 m_StationNodes.Add(child);
             }
+            else if (child.name.Contains("DisplayEN"))
+            {
+                StationNameEnTextMeshP = child.gameObject.GetComponent<TextMeshPro>();
+            }
+            else if (child.name.Contains("DisplayJP"))
+            {
+                StationNameJpTextMeshP = child.gameObject.GetComponent<TextMeshPro>();
+            }
         }
-
-        stationNameMesh = transform.parent.GetComponentInChildren<TextMeshPro>();
 
         m_MeshRenderer = GetComponentInChildren<MeshRenderer>();
 
         transform.position = m_StationNodes[0].position;
 
-        stationNameMesh.text = stationEnNameArray[0];
+        StationNameEnTextMeshP.text = stationEnNameArray[0];
+        StationNameJpTextMeshP.text = stationJpNameArray[0];
 
         ToggleLights(true, false);
     }
@@ -60,7 +68,8 @@ public class StationDisplayLight : MonoBehaviour
 
         transform.position = m_StationNodes[m_CurrentNodeIndex].position;
 
-        stationNameMesh.text = stationEnNameArray[m_CurrentNodeIndex];
+        StationNameEnTextMeshP.text = stationEnNameArray[m_CurrentNodeIndex];
+        StationNameJpTextMeshP.text = stationJpNameArray[m_CurrentNodeIndex];
 
         m_MeshRenderer.enabled = true;
 
