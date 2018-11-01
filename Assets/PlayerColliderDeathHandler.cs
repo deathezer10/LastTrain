@@ -26,7 +26,7 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
         }
 
 
-        if(other.gameObject.name == "SawBladeCollider" && FindObjectOfType<SawBlade>().IsSpinning())
+        if(other.gameObject.name == "PlayerDeathCollider" && FindObjectOfType<SawBlade>().IsSpinning())
         {
             playerDeathHandler.KillPlayer("death_sawblade");
         }

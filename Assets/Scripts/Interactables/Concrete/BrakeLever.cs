@@ -16,14 +16,9 @@ public class BrakeLever : StationaryObject
     private bool bStopTrain = false;
     private bool bSlowDownTrain = false;
 
-    public bool GetbSlowDownTrain
+   public static bool getIsStopTrain()
     {
-        get { return bSlowDownTrain; }
-    }
-
-    public bool GetbStopTrain
-    {
-        get { return bStopTrain; }
+        return instance.bStopTrain;
     }
 
     private Vector3 HandOffsetStart;
@@ -62,8 +57,8 @@ public class BrakeLever : StationaryObject
 
         if (bStopTrain)
         {
+            AcceleratorLever.bIsStopping = true;
             i += Time.deltaTime * rate;
-            print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
             stationmover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
             if (stationmover.currentSpeed == 0)
                 Destroy(this);
@@ -73,7 +68,6 @@ public class BrakeLever : StationaryObject
         if (bSlowDownTrain)
         {
             i += Time.deltaTime * rate;
-            print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
             stationmover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
             if (stationmover.currentSpeed == 3)
                 Destroy(this);
