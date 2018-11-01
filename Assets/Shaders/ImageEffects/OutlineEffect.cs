@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering;
 using UnityEngine.XR;
 
-namespace cakeslice
+namespace Negi
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]

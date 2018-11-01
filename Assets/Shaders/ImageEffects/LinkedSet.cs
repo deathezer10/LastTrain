@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace cakeslice
+namespace Negi
 {
 	public class LinkedSet<T> : IEnumerable<T>
 	{
