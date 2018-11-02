@@ -13,7 +13,7 @@ public class ElectricalBoxButton : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Audio = transform.GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -28,9 +28,10 @@ public class ElectricalBoxButton : MonoBehaviour
         if (!bDisable)
         { 
             bDisable = true;
-            //Audio.Play();
+            Audio.Play();
             transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
-        }
+            FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
+            }
     }
 
 }
