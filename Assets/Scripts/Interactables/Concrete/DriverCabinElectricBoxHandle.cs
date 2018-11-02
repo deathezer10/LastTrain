@@ -54,7 +54,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
                 ButtonBoxCollider.enabled = false;
             }
 
-            print(angle);
+
             if (angle < 0)
                 if (transform.rotation.eulerAngles.y <= DefaultYRotation || (transform.rotation.eulerAngles.y <= 360 && transform.rotation.eulerAngles.y >= (DefaultYRotation + 150)))
                 {
