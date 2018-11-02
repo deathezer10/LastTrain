@@ -5,10 +5,16 @@ using UnityEngine;
 public class ExtghsrCompartment : MonoBehaviour
 {
     public GameObject visualExtinguisher, physicsExtinguisher;
-
+    
     bool rotating;
     Quaternion finalRotation = new Quaternion(0.7f, 0, 0, 0.7f);
-    
+    private int screwCount = 2;
+
+    void Start()
+    {
+        Screw.OnLoose += UnScrewed;
+    }
+
     void Update()
     {
         if (rotating && transform.localRotation != finalRotation)
@@ -31,11 +37,26 @@ public class ExtghsrCompartment : MonoBehaviour
         GetComponent<CapsuleCollider>().enabled = false;
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
             OpenExCompartment();
         }
+    }
+    */
+
+    private void UnScrewed(string _screw)
+    {
+        if(_screw == "gun")
+        {
+            screwCount -= 1;
+
+            if(screwCount == 0)
+            OpenExCompartment();
+        }
+
+
     }
 }

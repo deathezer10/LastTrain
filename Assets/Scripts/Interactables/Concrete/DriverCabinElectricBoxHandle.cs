@@ -16,17 +16,20 @@ public class DriverCabinElectricBoxHandle : StationaryObject
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
 
+    private float maxYRotation;
+    private float DefaultYRotation;
+
     void Start()
     {
         Screw.OnLoose += UnScrewed;
+        DefaultYRotation = transform.rotation.eulerAngles.y;
+        maxYRotation = transform.rotation.eulerAngles.y + 120;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (!bDisableDoor)
-        {
             if (bIsGrabbing)
             {
                 Vector3 targetDir = PreviousHandPosition - transform.parent.position;
@@ -37,28 +40,26 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
                 if (cross.y < 0) angle = -angle;
 
-                /*
+                
                 if (angle < 0)
-                    if (CurrentYRotation <= MinYRotation)
+                    if (transform.rotation.eulerAngles.y <= DefaultYRotation)
                     {
                         bIsGrabbing = false;
-                        bDisableDoor = true;
-                        //TODO here: Activate the functions for engaging the brake/accelerator
                         return;
                     }
 
                 if (angle > 0)
-                    if (CurrentYRotation >= MaxYRotation)
+                    if (transform.rotation.eulerAngles.y >= maxYRotation)
                     {
                         bIsGrabbing = false;
                         return;
                     }
-                    */
+                    
 
                 transform.parent.Rotate(0, angle, 0);
                 PreviousHandPosition = CurrentHandPosition;
             }
-        }
+        
     }
 
     public override bool hideControllerOnGrab { get { return true; } }
