@@ -62,7 +62,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
                 }
 
             if (angle > 0)
-                if (transform.rotation.eulerAngles.y >= maxYRotation)
+                if (transform.rotation.eulerAngles.y >= maxYRotation && transform.rotation.eulerAngles.y <= (maxYRotation + 20))
                 {
                     return;
                 }

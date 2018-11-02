@@ -13,6 +13,7 @@ public class Screw : MonoBehaviour
     public float x, y, z;
     private bool bIsLoose = false;
     public string Origin;
+    public int rotateAroundAxis;
 
     public delegate void Unscrewed(string _object);
     public static event Unscrewed OnLoose;
@@ -44,7 +45,30 @@ public class Screw : MonoBehaviour
                 if (m_ScrewDriver.bIsScrewing)
                 {
                     Turnspeed = m_ScrewDriver.speed;
-                    transform.Rotate(new Vector3(0, 0, -1), Turnspeed);
+                    switch(rotateAroundAxis)
+                    {
+                        case 1:
+                            {
+                                transform.Rotate(new Vector3(-1, 0, 0), Turnspeed);
+                                break;
+                            }
+
+                        case 2:
+                            {
+                                transform.Rotate(new Vector3(0, -1, 0), Turnspeed);
+                                break;
+                            }
+
+                        case 3:
+                            {
+                                transform.Rotate(new Vector3(0, 0, -1), Turnspeed);
+                                break;
+                            }
+                    }
+
+
+
+                  
                     switch (Axis)
                     {
                         case 3:
@@ -144,8 +168,8 @@ public class Screw : MonoBehaviour
                             {
                                 if (x < 0)
                                 {
-                                    screwDistance *= -1;
-                                    if (OriginalPosition.x + screwDistance > transform.position.x)
+                                   
+                                    if (OriginalPosition.x - screwDistance > transform.position.x)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
