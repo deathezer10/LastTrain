@@ -42,4 +42,12 @@ public class TrainArriver : MonoBehaviour
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+
+        }
+    }
+
 }

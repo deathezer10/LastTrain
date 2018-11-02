@@ -81,6 +81,10 @@ public class PlayerTeleportation : MonoBehaviour
 
     void Start()
     {
+        var pMovement = FindObjectOfType<PlayerViveMovement>();
+        if (pMovement != null)
+            pMovement.enabled = false;
+
         this.UpdateAsObservable()
             .Where(_ => _padAction.GetStateUp(_handType))
             .Subscribe(_ => MoveToPoint());
