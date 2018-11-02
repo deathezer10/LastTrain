@@ -72,7 +72,6 @@ public class AcceleratorLever : StationaryObject
         if (bIsActivating && !bIsStopping)
         {
             i += Time.deltaTime * rate;
-            print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
         }
 

@@ -44,7 +44,7 @@ public class Screw : MonoBehaviour
             {
                 if (m_ScrewDriver.bIsScrewing)
                 {
-                    Turnspeed = m_ScrewDriver.speed;
+                    Turnspeed = m_ScrewDriver.speed * 0.7f;
                     switch(rotateAroundAxis)
                     {
                         case 1:
