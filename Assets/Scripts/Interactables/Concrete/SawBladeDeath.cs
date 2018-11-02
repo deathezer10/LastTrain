@@ -18,6 +18,7 @@ public class SawBladeDeath : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        print(other.name);
         if(other.name == "PlayerHeadCollision" && sawblade.IsSpinning())
         {
             playerdeathHandler.KillPlayer("death_sawblade");

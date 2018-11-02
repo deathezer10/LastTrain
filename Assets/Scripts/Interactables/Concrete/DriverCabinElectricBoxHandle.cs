@@ -32,8 +32,8 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
             if (bIsGrabbing)
             {
-                Vector3 targetDir = PreviousHandPosition - transform.parent.position;
-                Vector3 NewtargetDir = CurrentHandPosition - transform.parent.position;
+                Vector3 targetDir = PreviousHandPosition - transform.position;
+                Vector3 NewtargetDir = CurrentHandPosition - transform.position;
                 float angle = Vector3.Angle(targetDir, NewtargetDir);
 
                 Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
@@ -56,7 +56,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
                     }
                     
 
-                transform.parent.Rotate(0, angle, 0);
+                transform.Rotate(0, angle, 0);
                 PreviousHandPosition = CurrentHandPosition;
             }
         
