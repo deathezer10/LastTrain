@@ -44,8 +44,8 @@ public class TrainBetweenCabinDoors : MonoBehaviour
     IEnumerator OnDoorOpenFinish()
     {
         yield return new WaitForSeconds(2.05f);
+
         // Call for the next announcement
-        Debug.Log("Doors between the cabins are open.");
 
         foreach (GameObject door in betweenDoors)
         {
