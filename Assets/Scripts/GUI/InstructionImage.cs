@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class InstructionImage : MonoBehaviour
@@ -8,6 +9,7 @@ public class InstructionImage : MonoBehaviour
 
     public Vector2 m_ExpandedImageSize = new Vector2(1024, 720);
 
+    [SerializeField]
     private bool m_IsFacingPlayer = true;
     public bool facePlayer {
         get { return m_IsFacingPlayer; }
@@ -28,6 +30,11 @@ public class InstructionImage : MonoBehaviour
         {
             GetComponent<RectTransform>().LookAt(Camera.main.transform);
         }
+    }
+
+    public void SetImage(Sprite img)
+    {
+        transform.Find("Image").GetComponent<Image>().sprite = img;
     }
 
 }

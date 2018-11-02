@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using System;
 
 [RequireComponent(typeof(AudioSource))]
@@ -49,24 +50,24 @@ public class AudioPlayer : MonoBehaviour
         m_Audiosource.Stop();
     }
 
-    public void Play()
+    public void Play(Action onPlayFinished = null)
     {
-        InternalPlayClip();
+        InternalPlayClip(onPlayFinished);
     }
 
-    public void Play(string clipAlias)
+    public void Play(string clipAlias, Action onPlayFinished = null)
     {
         foreach (AudioPlayer player in transform.GetComponents<AudioPlayer>())
         {
             if (player.clipAlias == clipAlias)
             {
-                player.InternalPlayClip();
+                player.InternalPlayClip(onPlayFinished);
                 return;
             }
         }
     }
 
-    AudioClip InternalPlayClip()
+    AudioClip InternalPlayClip(Action onPlayFinished = null)
     {
         if (_clip == null) return null;
 
@@ -74,7 +75,18 @@ public class AudioPlayer : MonoBehaviour
         m_Audiosource.clip = clip;
         m_Audiosource.PlayDelayed(playDelay);
 
+        if (onPlayFinished != null)
+        {
+            StartCoroutine(WaitUntilAudioFinishes(onPlayFinished));
+        }
+
         return clip;
+    }
+
+    IEnumerator WaitUntilAudioFinishes(Action action)
+    {
+        yield return new WaitForSeconds(clip.length + playDelay);
+        action?.Invoke();
     }
 
     public bool IsPlaying() { return audioSource.isPlaying; }

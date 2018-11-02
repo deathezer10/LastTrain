@@ -106,7 +106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1270335290859366
 GameObject:
   m_ObjectHideFlags: 1
@@ -386,7 +386,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000708315405500}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 16.903, y: 1.672, z: -14.524}
+  m_LocalPosition: {x: -4.525, y: 1.672, z: -105.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396594326088306}
@@ -977,11 +977,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23778583517650074}
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   _fadeColor: {r: 0.06510325, g: 0.103773594, b: 0.08202152, a: 0}
   _camera: {fileID: 20335114981071620}
   _handType: 2
-  _padAction: {fileID: 11400000, guid: 4fff6e154ffab884a93f405a11d53201, type: 2}
+  _padAction: {fileID: 11400000, guid: fb591c47e111f9f4ca9775e57aa4be1e, type: 2}
   _possibleColor: {r: 0.42815408, g: 1, b: 0.3820755, a: 0.7058824}
   _impossibleColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 0.7058824}
 --- !u!114 &114795154303804116
