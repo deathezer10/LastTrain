@@ -156,6 +156,8 @@ public class Bomb : GrabbableObject, IShootable
                 break;
             }
         }
+
+        FindObjectOfType<TrainBetweenCabinDoors>().OpenBetweenDoors();
     }
 
     public void UnlockRigidbody()

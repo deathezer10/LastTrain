@@ -7,7 +7,21 @@ using System;
 public class TrainBetweenCabinDoors : MonoBehaviour
 {
     float offset = -1.1f;
-    public GameObject[] betweenDoors;
+
+    List<GameObject> betweenDoors = new List<GameObject>();
+
+    private void Start()
+    {
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            GameObject child = transform.GetChild(i).gameObject;
+
+            if (child.name.Contains("BtwnCabinDr"))
+            {
+                betweenDoors.Add(child);
+            }
+        }
+    }
 
     private void Update()
     {
@@ -32,5 +46,10 @@ public class TrainBetweenCabinDoors : MonoBehaviour
         yield return new WaitForSeconds(2.05f);
         // Call for the next announcement
         Debug.Log("Doors between the cabins are open.");
+
+        foreach (GameObject door in betweenDoors)
+        {
+            door.SetActive(false);
+        }
     }
 }
