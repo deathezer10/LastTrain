@@ -56,7 +56,7 @@ public class DriverCabinDoorLock : StationaryObject
                 
                 timer = Time.time;
 
-                if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.12f).x <= LeftDoorCorner.x)
+                if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.27f).x <= LeftDoorCorner.x)
                 {
                     if (doorBody.velocity.x < -0.01f)
                     {
@@ -67,7 +67,7 @@ public class DriverCabinDoorLock : StationaryObject
                     }
                 }
 
-                if (transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
+                if (transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.48f).x >= RightDoorCorner.x)
                 {
                     doorBody.velocity = Vector3.zero;
                 }
@@ -86,7 +86,7 @@ public class DriverCabinDoorLock : StationaryObject
 
                     if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f))
                     {
-                        if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f).x >= RightDoorCorner.x)
+                        if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.48f).x >= RightDoorCorner.x)
                         {
                             return;
                         }
@@ -109,7 +109,7 @@ public class DriverCabinDoorLock : StationaryObject
 
                     if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f))
                     {
-                        if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.12f).x <= LeftDoorCorner.x)
+                        if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.27f).x <= LeftDoorCorner.x)
                         {
                             return;
                         }
