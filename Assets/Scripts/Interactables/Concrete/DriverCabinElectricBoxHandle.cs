@@ -7,6 +7,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
 
     private GameObject PlayerHand;
+    private BoxCollider ButtonBoxCollider;
 
     private bool bIsGrabbing = false;
     private bool bCanGrab = false;
@@ -17,46 +18,60 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
     private float maxYRotation;
     private float DefaultYRotation;
+    private float CanPressButton;
+
 
     void Start()
     {
         Screw.OnLoose += UnScrewed;
         DefaultYRotation = transform.rotation.eulerAngles.y;
         maxYRotation = transform.rotation.eulerAngles.y + 120;
+        CanPressButton = transform.rotation.eulerAngles.y + 28;
+        ButtonBoxCollider = FindObjectOfType<ElectricalBoxButton>().GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-            if (bIsGrabbing)
+        if (bIsGrabbing)
+        {
+            Vector3 targetDir = PreviousHandPosition - transform.position;
+            Vector3 NewtargetDir = CurrentHandPosition - transform.position;
+            float angle = Vector3.Angle(targetDir, NewtargetDir);
+
+            Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
+
+            if (cross.y < 0) angle = -angle;
+
+            if (transform.rotation.eulerAngles.y >= CanPressButton && transform.rotation.eulerAngles.y <= DefaultYRotation + 150)
             {
-                Vector3 targetDir = PreviousHandPosition - transform.position;
-                Vector3 NewtargetDir = CurrentHandPosition - transform.position;
-                float angle = Vector3.Angle(targetDir, NewtargetDir);
-
-                Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
-
-                if (cross.y < 0) angle = -angle;
-
-                
-                if (angle < 0)
-                    if (transform.rotation.eulerAngles.y <= DefaultYRotation)
-                    {
-                        return;
-                    }
-
-                if (angle > 0)
-                    if (transform.rotation.eulerAngles.y >= maxYRotation)
-                    {
-                        return;
-                    }
-                    
-
-                transform.Rotate(0, angle, 0);
-                PreviousHandPosition = CurrentHandPosition;
+                ButtonBoxCollider.enabled = true;
             }
-        
+
+            else
+            {
+                ButtonBoxCollider.enabled = false;
+            }
+
+            print(angle);
+            if (angle < 0)
+                if (transform.rotation.eulerAngles.y <= DefaultYRotation)
+                {
+                    return;
+                }
+
+            if (angle > 0)
+                if (transform.rotation.eulerAngles.y >= maxYRotation)
+                {
+                    return;
+                }
+
+
+            transform.Rotate(0, angle, 0);
+            PreviousHandPosition = CurrentHandPosition;
+        }
+
     }
 
     public override bool hideControllerOnGrab { get { return true; } }
@@ -113,7 +128,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
     private void UnScrewed(string _object)
     {
-        if(_object == "Electric")
+        if (_object == "Electric")
         {
             ScrewCount -= 1;
             if (ScrewCount == 0)
