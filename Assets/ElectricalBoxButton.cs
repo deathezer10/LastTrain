@@ -30,7 +30,7 @@ public class ElectricalBoxButton : MonoBehaviour
             bDisable = true;
             Audio.Play();
             transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
-            FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
+            FindObjectOfType<TrainDoorHandler>().ToggleDriverDoor();
             }
     }
 

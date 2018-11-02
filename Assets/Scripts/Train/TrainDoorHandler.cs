@@ -71,4 +71,13 @@ public class TrainDoorHandler : MonoBehaviour
 
     }
 
+    public void ToggleDriverDoor()
+    {
+       transform.GetChild(3).gameObject.transform.DOLocalMoveZ(m_DoorOffset * -1, 2).SetRelative();
+    }
+           
+
+
 }
+
+
