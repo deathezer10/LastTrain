@@ -3725,7 +3725,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: boZL
+  m_text: bo ZL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5b564e70e7e9ae43b2226b7fef06093, type: 2}
   m_sharedMaterial: {fileID: 21692746415259892, guid: d5b564e70e7e9ae43b2226b7fef06093,
@@ -3794,10 +3794,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114285980757847984}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -3839,7 +3839,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: boZL
+  m_text: bo ZL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5b564e70e7e9ae43b2226b7fef06093, type: 2}
   m_sharedMaterial: {fileID: 21692746415259892, guid: d5b564e70e7e9ae43b2226b7fef06093,
@@ -3908,10 +3908,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114347775120490170}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -4066,7 +4066,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: boZL
+  m_text: bo ZL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5b564e70e7e9ae43b2226b7fef06093, type: 2}
   m_sharedMaterial: {fileID: 21692746415259892, guid: d5b564e70e7e9ae43b2226b7fef06093,
@@ -4135,10 +4135,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114408998500429184}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -4202,7 +4202,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: boZL
+  m_text: bo ZL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5b564e70e7e9ae43b2226b7fef06093, type: 2}
   m_sharedMaterial: {fileID: 21692746415259892, guid: d5b564e70e7e9ae43b2226b7fef06093,
@@ -4271,10 +4271,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114458609529408820}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -4429,7 +4429,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: boZL
+  m_text: bo ZL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5b564e70e7e9ae43b2226b7fef06093, type: 2}
   m_sharedMaterial: {fileID: 21692746415259892, guid: d5b564e70e7e9ae43b2226b7fef06093,
@@ -4498,10 +4498,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114566875978285132}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -4543,7 +4543,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: boZL
+  m_text: bo ZL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5b564e70e7e9ae43b2226b7fef06093, type: 2}
   m_sharedMaterial: {fileID: 21692746415259892, guid: d5b564e70e7e9ae43b2226b7fef06093,
@@ -4612,10 +4612,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114656065417078804}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -4883,7 +4883,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: boZL
+  m_text: bo ZL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5b564e70e7e9ae43b2226b7fef06093, type: 2}
   m_sharedMaterial: {fileID: 21692746415259892, guid: d5b564e70e7e9ae43b2226b7fef06093,
@@ -4952,10 +4952,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114683434979245664}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -4997,7 +4997,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: boZL
+  m_text: bo ZL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5b564e70e7e9ae43b2226b7fef06093, type: 2}
   m_sharedMaterial: {fileID: 21692746415259892, guid: d5b564e70e7e9ae43b2226b7fef06093,
@@ -5066,10 +5066,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114715533825205960}
-    characterCount: 4
+    characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1

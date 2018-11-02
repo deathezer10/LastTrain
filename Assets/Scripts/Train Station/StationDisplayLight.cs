@@ -18,8 +18,8 @@ public class StationDisplayLight : MonoBehaviour
 
     TextMeshPro StationNameEnTextMeshP, StationNameJpTextMeshP;
 
-    string[] stationEnNameArray = { "Furuihashi", "Shin-Kita", "Maiyama", "Nakashino", "Murihari" };
-    string[] stationJpNameArray = { "boBZL", "LtGP", "eBje", "UFLY", "gnZn" };
+    string[] stationEnNameArray = { "Furuhashi", "Shin-Kita", "Maiyama", "Nakashino", "Murihari" };
+    string[] stationJpNameArray = { "bo ZL", "LtGP", "eBje", "UFLY", "gnZn" };
 
     private void Start()
     {
