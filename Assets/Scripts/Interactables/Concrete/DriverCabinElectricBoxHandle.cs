@@ -9,7 +9,6 @@ public class DriverCabinElectricBoxHandle : StationaryObject
     private GameObject PlayerHand;
 
     private bool bIsGrabbing = false;
-    private bool bDisableDoor = false;
     private bool bCanGrab = false;
     private bool bIsLocked = true;
     private int ScrewCount = 2;
@@ -44,14 +43,12 @@ public class DriverCabinElectricBoxHandle : StationaryObject
                 if (angle < 0)
                     if (transform.rotation.eulerAngles.y <= DefaultYRotation)
                     {
-                        bIsGrabbing = false;
                         return;
                     }
 
                 if (angle > 0)
                     if (transform.rotation.eulerAngles.y >= maxYRotation)
                     {
-                        bIsGrabbing = false;
                         return;
                     }
                     
@@ -122,6 +119,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
             if (ScrewCount == 0)
             {
                 bIsLocked = false;
+                transform.Rotate(new Vector3(0, 9, 0));
             }
         }
     }
