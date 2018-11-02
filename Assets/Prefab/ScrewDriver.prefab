@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 54345559911721250}
   m_Layer: 14
   m_Name: Tip
-  m_TagString: Untagged
+  m_TagString: ScrewDriver
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774718936074742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.498, y: 0.8311032, z: -2.5428236}
+  m_LocalPosition: {x: -5.011, y: 1.501, z: -107.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4448246216312428}

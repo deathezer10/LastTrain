@@ -12,6 +12,26 @@ ModelImporter:
     100012: tracks
     100014: //RootNode
     100016: tunnel_bot
+    100018: cautiongate
+    100020: exit_signs
+    100022: floor
+    100024: gate1
+    100026: gate2
+    100028: lighter
+    100030: lights
+    100032: main_body
+    100034: pipe
+    100036: poles
+    100038: polySurface1490
+    100040: polySurface1494
+    100042: posters
+    100044: railings
+    100046: seats
+    100048: signboard1
+    100050: signboard2
+    100052: signboard3
+    100054: signboard4
+    100056: vendingmachines
     400000: button
     400002: gantry_gate1
     400004: gantry_gate2
@@ -21,8 +41,29 @@ ModelImporter:
     400012: tracks
     400014: //RootNode
     400016: tunnel_bot
+    400018: cautiongate
+    400020: exit_signs
+    400022: floor
+    400024: gate1
+    400026: gate2
+    400028: lighter
+    400030: lights
+    400032: main_body
+    400034: pipe
+    400036: poles
+    400038: polySurface1490
+    400040: polySurface1494
+    400042: posters
+    400044: railings
+    400046: seats
+    400048: signboard1
+    400050: signboard2
+    400052: signboard3
+    400054: signboard4
+    400056: vendingmachines
     2100000: StingrayPBS1
     2100002: lambert1
+    2100004: StingrayPBS3
     2300000: button
     2300002: gantry_gate1
     2300004: gantry_gate2
@@ -31,6 +72,26 @@ ModelImporter:
     2300010: secondary
     2300012: tracks
     2300014: tunnel_bot
+    2300016: cautiongate
+    2300018: exit_signs
+    2300020: floor
+    2300022: gate1
+    2300024: gate2
+    2300026: lighter
+    2300028: lights
+    2300030: main_body
+    2300032: pipe
+    2300034: poles
+    2300036: polySurface1490
+    2300038: polySurface1494
+    2300040: posters
+    2300042: railings
+    2300044: seats
+    2300046: signboard1
+    2300048: signboard2
+    2300050: signboard3
+    2300052: signboard4
+    2300054: vendingmachines
     3300000: button
     3300002: gantry_gate1
     3300004: gantry_gate2
@@ -39,6 +100,26 @@ ModelImporter:
     3300010: secondary
     3300012: tracks
     3300014: tunnel_bot
+    3300016: cautiongate
+    3300018: exit_signs
+    3300020: floor
+    3300022: gate1
+    3300024: gate2
+    3300026: lighter
+    3300028: lights
+    3300030: main_body
+    3300032: pipe
+    3300034: poles
+    3300036: polySurface1490
+    3300038: polySurface1494
+    3300040: posters
+    3300042: railings
+    3300044: seats
+    3300046: signboard1
+    3300048: signboard2
+    3300050: signboard3
+    3300052: signboard4
+    3300054: vendingmachines
     4300000: button
     4300002: platform_bot
     4300004: main
@@ -47,7 +128,42 @@ ModelImporter:
     4300010: secondary
     4300012: gantry_gate2
     4300014: gantry_gate1
-  externalObjects: {}
+    4300016: main_body
+    4300018: railings
+    4300020: signboard4
+    4300022: pipe
+    4300024: posters
+    4300026: exit_signs
+    4300028: signboard1
+    4300030: signboard2
+    4300032: lights
+    4300034: vendingmachines
+    4300036: seats
+    4300038: poles
+    4300040: signboard3
+    4300042: floor
+    4300044: lighter
+    4300046: cautiongate
+    4300048: polySurface1490
+    4300050: gate1
+    4300052: gate2
+    4300054: polySurface1494
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StingrayPBS1
+    second: {fileID: 2100000, guid: b0b1188157bba2c4b823f9e394a32736, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StingrayPBS3
+    second: {fileID: 2100000, guid: 822c775e7810ef9479075c1e99af1738, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 98ff023b27373d240af05b13f974f54f, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
