@@ -56,7 +56,7 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
             print(angle);
             if (angle < 0)
-                if (transform.rotation.eulerAngles.y <= DefaultYRotation)
+                if (transform.rotation.eulerAngles.y <= DefaultYRotation || (transform.rotation.eulerAngles.y <= 360 && transform.rotation.eulerAngles.y >= (DefaultYRotation + 150)))
                 {
                     return;
                 }
