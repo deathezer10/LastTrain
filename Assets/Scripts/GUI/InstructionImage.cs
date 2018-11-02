@@ -8,7 +8,7 @@ public class InstructionImage : MonoBehaviour
 
     public Vector2 m_ExpandedImageSize = new Vector2(1024, 720);
 
-    private bool m_IsFacingPlayer;
+    private bool m_IsFacingPlayer = true;
     public bool facePlayer {
         get { return m_IsFacingPlayer; }
         set { m_IsFacingPlayer = value; }
@@ -26,7 +26,7 @@ public class InstructionImage : MonoBehaviour
     {
         if (facePlayer)
         {
-            transform.rotation.SetLookRotation(Camera.main.transform.position - transform.position);
+            GetComponent<RectTransform>().LookAt(Camera.main.transform);
         }
     }
 
