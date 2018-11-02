@@ -8,13 +8,16 @@ public class TrainArriver : MonoBehaviour
 
     public TrainDoorHandler m_TrainDoor;
 
-    const float m_TrainStoppingPoint = -4;
+    const float m_TrainStoppingPoint = 2;
+
+    const float m_TrainArrivalDelay = 5;
+
+    bool m_ArrivalTriggered = false;
 
     bool m_IsAudioFading = false;
 
     private bool bHasArrived = false;
-    public bool HasArrived
-    {
+    public bool HasArrived {
         get { return bHasArrived; }
     }
 
@@ -26,9 +29,7 @@ public class TrainArriver : MonoBehaviour
         {
             bHasArrived = true;
             m_TrainDoor.ToggleDoors(true);
-
-            if (onComplete != null)
-                onComplete();
+            onComplete?.Invoke();
         });
 
         tweener.OnUpdate(() =>
@@ -42,11 +43,12 @@ public class TrainArriver : MonoBehaviour
 
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && m_ArrivalTriggered == false)
         {
-
+            m_ArrivalTriggered = true;
+            Invoke("BeginArrival", m_TrainArrivalDelay);
         }
     }
 
