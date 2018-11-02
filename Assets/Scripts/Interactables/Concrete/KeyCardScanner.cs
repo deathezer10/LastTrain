@@ -36,7 +36,7 @@ public class KeyCardScanner : StationaryObject, IShootable
 
         if (successAudio) successAudio.Play();
 
-        if (card != null)
+        if (card != null && card.playerController != null)
             card.playerController.Vibration(0, 0.7f, 10, 1, card.playerHand.ToInputSource());
 
         //Some green led indication perhaps?
@@ -48,7 +48,7 @@ public class KeyCardScanner : StationaryObject, IShootable
     private void ScanFailed(KeyCard card)
     {
         if (FailedAudio) FailedAudio.Play();
-
+        if(card.playerController != null)
         card.playerController.Vibration(0, 0.3f, 1, 1, card.playerHand.ToInputSource());
     }
 

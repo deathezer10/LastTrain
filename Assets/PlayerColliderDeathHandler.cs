@@ -9,7 +9,6 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
     // Use this for initialization
     void Start () {
         playerDeathHandler = FindObjectOfType<PlayerDeathHandler>();
-
     }
 	
 	// Update is called once per frame
@@ -19,6 +18,16 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
 
     private void OnTriggerEnter(Collider other)
     {
+        if (this.gameObject.name == "CameraFollower")
+        if (other.gameObject.name == "tunnel_bot")
+            {
+                if(FindObjectOfType<StationMover>().currentSpeed > 1.5)
+                {
+                    playerDeathHandler.KillPlayer("death_trainjump");
+                }
+            }
+
+        if (this.gameObject.name == "CameraFollower") return;
         if (other.gameObject.name == "FullMergedTrain")
         {
             if (FindObjectOfType<TrainVelocity>().GetVelocity > 2 && !FindObjectOfType<TrainArriver>().HasArrived)
@@ -29,6 +38,7 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
 
     public void OnShot(Revolver revolver)
     {
+        if (this.gameObject.name == "CameraFollower") return;
         playerDeathHandler.KillPlayer("death_gunsuicide");
     }
 }
