@@ -36,7 +36,7 @@ public class Wallet : GrabbableObject
         {
             m_TManagerAudioPlayer.Stop();
             m_TManagerAudioPlayer.Play("tutorial_ic_card");
-            Instantiate(m_ICCardPrefab);
+            Instantiate(m_ICCardPrefab,transform.position, Quaternion.identity);
             m_HasUsedOnce = true;
         }
     }

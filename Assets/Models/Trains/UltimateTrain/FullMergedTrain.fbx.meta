@@ -1,0 +1,288 @@
+fileFormatVersion: 2
+guid: 01c60e7b1882bd64f8a8d902524ed631
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Train
+    100004: Decal
+    100006: EBrake_Base_Frame
+    100008: EBrake_Box
+    100010: Light_A_01
+    100012: Light_B_01
+    100014: LightFrame_A_01
+    100016: LightFrame_B_01
+    100018: SmokeDetectors
+    100020: Train_Floor
+    100022: Shell
+    100024: SmokeDetector_01
+    100026: SmokeDetector_02
+    100028: SmokeDetector_03
+    100030: SmokeDetector_04
+    100032: SmokeDetector_05
+    100034: SmokeDetector_06
+    100036: SmokeDetector_07
+    100038: SmokeDetector_08
+    100040: SmokeDetector_09
+    400000: //RootNode
+    400002: Train
+    400004: Decal
+    400006: EBrake_Base_Frame
+    400008: EBrake_Box
+    400010: Light_A_01
+    400012: Light_B_01
+    400014: LightFrame_A_01
+    400016: LightFrame_B_01
+    400018: SmokeDetectors
+    400020: Train_Floor
+    400022: Shell
+    400024: SmokeDetector_01
+    400026: SmokeDetector_02
+    400028: SmokeDetector_03
+    400030: SmokeDetector_04
+    400032: SmokeDetector_05
+    400034: SmokeDetector_06
+    400036: SmokeDetector_07
+    400038: SmokeDetector_08
+    400040: SmokeDetector_09
+    2100000: PC_C_Shader
+    2100002: PC_B_Shader
+    2100004: PC_A_Shader
+    2100006: Props_Info_Shader
+    2100008: OuterShell_Shader
+    2100010: Alpha2_Shader
+    2100012: InnerShell_Shader
+    2100014: Alpha1_Shader
+    2100016: DC_A_Shader
+    2100018: Alpha3_Shader
+    2100020: Decal_1
+    2100022: lambert2
+    2100024: Decal_3_Decal_3
+    2100026: Props_B_Shader
+    2100028: EBrakes_Shader
+    2100030: Props_B_Shader1
+    2300000: //RootNode
+    2300002: Train
+    2300004: Decal
+    2300006: EBrake_Base_Frame
+    2300008: EBrake_Box
+    2300010: Light_A_01
+    2300012: Light_B_01
+    2300014: LightFrame_A_01
+    2300016: LightFrame_B_01
+    2300018: SmokeDetectors
+    2300020: Train_Floor
+    2300022: Shell
+    2300024: SmokeDetector_01
+    2300026: SmokeDetector_02
+    2300028: SmokeDetector_03
+    2300030: SmokeDetector_04
+    2300032: SmokeDetector_05
+    2300034: SmokeDetector_06
+    2300036: SmokeDetector_07
+    2300038: SmokeDetector_08
+    2300040: SmokeDetector_09
+    3300000: //RootNode
+    3300002: Train
+    3300004: Decal
+    3300006: EBrake_Base_Frame
+    3300008: EBrake_Box
+    3300010: Light_A_01
+    3300012: Light_B_01
+    3300014: LightFrame_A_01
+    3300016: LightFrame_B_01
+    3300018: SmokeDetectors
+    3300020: Train_Floor
+    3300022: Shell
+    3300024: SmokeDetector_01
+    3300026: SmokeDetector_02
+    3300028: SmokeDetector_03
+    3300030: SmokeDetector_04
+    3300032: SmokeDetector_05
+    3300034: SmokeDetector_06
+    3300036: SmokeDetector_07
+    3300038: SmokeDetector_08
+    3300040: SmokeDetector_09
+    4300000: Train
+    4300002: Decal
+    4300004: Light_B_01
+    4300006: LightFrame_B_01
+    4300008: Light_A_01
+    4300010: LightFrame_A_01
+    4300012: SmokeDetectors
+    4300014: Train_Floor
+    4300016: EBrake_Box
+    4300018: EBrake_Base_Frame
+    4300020: Shell
+    4300022: SmokeDetector_09
+    4300024: SmokeDetector_08
+    4300026: SmokeDetector_07
+    4300028: SmokeDetector_06
+    4300030: SmokeDetector_05
+    4300032: SmokeDetector_04
+    4300034: SmokeDetector_03
+    4300036: SmokeDetector_02
+    4300038: SmokeDetector_01
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha1_Shader
+    second: {fileID: 2100000, guid: 41ec80cf11b96c14d9ed2a0fd316b371, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha2_Shader
+    second: {fileID: 2100000, guid: 8c37932d874afab49bc2edd22c6ef773, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha3_Shader
+    second: {fileID: 2100000, guid: 37e813bb29969824ca72a452ca4a4500, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DC_A_Shader
+    second: {fileID: 2100000, guid: e5711bd843443a3429c334e40fbcc18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decal_1
+    second: {fileID: 2100000, guid: b49faba1a05b8e648945d0867ab64c79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decal_3_Decal_3
+    second: {fileID: 2100000, guid: f34a6f39b6d8a0944beb85cfc3f8ef8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EBrakes_Shader
+    second: {fileID: 2100000, guid: 900239cb540e8f44aa77dbc783f987fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: InnerShell_Shader
+    second: {fileID: 2100000, guid: 8bf25666015308b4f9a1bd9c1ca82764, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OuterShell_Shader
+    second: {fileID: 2100000, guid: 9e56860a5957ef14fbf064dd1e65b96e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_A_Shader
+    second: {fileID: 2100000, guid: 82902ac2ff2bc9f4e9bae62f85f5122d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_B_Shader
+    second: {fileID: 2100000, guid: d5e6e78a8a88c2645aea227a1cd3848b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_C_Shader
+    second: {fileID: 2100000, guid: e82791bfcc82df04f8362698f642aedc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props_B_Shader
+    second: {fileID: 2100000, guid: eccc4397154f41f47b8c3d16090af2cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props_B_Shader1
+    second: {fileID: 2100000, guid: eccc4397154f41f47b8c3d16090af2cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props_Info_Shader
+    second: {fileID: 2100000, guid: 903edc78b1403f24990292b476bbcaad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 48735582f689e9c43a2ad0b81a128906, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
