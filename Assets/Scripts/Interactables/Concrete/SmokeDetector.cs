@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class SmokeDetector : MonoBehaviour , IShootable
 {
-    public MeshRenderer[] indicatorArray;
-    public Color triggeredColor;
+    public Material[] indicatorMatArray;
 
+    MeshRenderer indicatorRenderer;
     AudioPlayer fireAlarmSound;
     int currentTriggeredIndex;
     float currentSmoke;
@@ -16,6 +16,7 @@ public class SmokeDetector : MonoBehaviour , IShootable
     private void Start()
     {
         fireAlarmSound = GetComponent<AudioPlayer>();
+        indicatorRenderer = GetComponent<MeshRenderer>();
     }
 
     void Update()
@@ -24,7 +25,7 @@ public class SmokeDetector : MonoBehaviour , IShootable
         {
             currentSmoke++;
 
-            if (currentSmoke >= 50)
+            if (currentSmoke >= 60)
             {
                 currentSmoke = 0;
                 TriggerNextIndicator();
@@ -34,10 +35,11 @@ public class SmokeDetector : MonoBehaviour , IShootable
 
     private void TriggerNextIndicator()
     {
-        indicatorArray[currentTriggeredIndex].material.color = triggeredColor;
+        indicatorRenderer.material = indicatorMatArray[currentTriggeredIndex];
+
         currentTriggeredIndex++;
 
-        if (currentTriggeredIndex >= indicatorArray.Length)
+        if (currentTriggeredIndex >= indicatorMatArray.Length)
         {
             TriggerAlarm();
         }

@@ -309,7 +309,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1734880286711484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.49822202, y: 1.28, z: 4.4480863}
+  m_LocalPosition: {x: 13.57268, y: 1.268, z: -13.178123}
   m_LocalScale: {x: 3, y: 3.5, z: 3.5}
   m_Children:
   - {fileID: 4845568814481272}
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldCutForce: 1
+  heldCutForce: 0.5
   correctWire: 0
 --- !u!114 &114181163675238230
 MonoBehaviour:
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldCutForce: 1
+  heldCutForce: 0.5
   correctWire: 0
 --- !u!114 &114509282248427570
 MonoBehaviour:
@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldCutForce: 1
+  heldCutForce: 0.5
   correctWire: 0
 --- !u!114 &114661502272051642
 MonoBehaviour:
@@ -1256,7 +1256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dae6ec0ed4c04495f4ef09730e362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldCutForce: 1
+  heldCutForce: 0.5
   correctWire: 1
 --- !u!222 &222533222526550672
 CanvasRenderer:
