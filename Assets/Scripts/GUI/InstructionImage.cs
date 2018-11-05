@@ -10,6 +10,9 @@ public class InstructionImage : MonoBehaviour
     public Vector2 m_ExpandedImageSize = new Vector2(1024, 720);
 
     [SerializeField]
+    private Transform m_HolderTransform;
+
+    [SerializeField]
     private bool m_IsFacingPlayer = true;
     public bool facePlayer {
         get { return m_IsFacingPlayer; }
@@ -35,6 +38,18 @@ public class InstructionImage : MonoBehaviour
     public void SetImage(Sprite img)
     {
         transform.Find("Image").GetComponent<Image>().sprite = img;
+    }
+
+    public void MoveToHolder()
+    {
+        facePlayer = false;
+
+        const float tweenDuration = 2;
+
+        RectTransform rTransform = GetComponent<RectTransform>();
+
+        transform.DOMove(m_HolderTransform.position, tweenDuration).SetEase(Ease.InBack);
+        rTransform.DORotate(m_HolderTransform.eulerAngles, tweenDuration);
     }
 
 }

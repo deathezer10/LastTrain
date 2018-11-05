@@ -19,7 +19,10 @@ public class ICCardScanner : MonoBehaviour {
 
     public void OpenGates()
     {
-        FindObjectOfType<TutorialManager>().GetComponent<AudioPlayer>().Play("tutorial_finale");
+        var tManager = FindObjectOfType<TutorialManager>();
+        tManager.GetComponent<AudioPlayer>().Play("tutorial_finale");
+        tManager.m_ImageUnlockGates.MoveToHolder();
+        // TODO change scanner color and rotate the gates
     }
 
 }
