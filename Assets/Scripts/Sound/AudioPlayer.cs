@@ -55,19 +55,19 @@ public class AudioPlayer : MonoBehaviour
         InternalPlayClip(onPlayFinished);
     }
 
-    public void Play(string clipAlias, Action onPlayFinished = null)
+    public void Play(string clipAlias, Action onPlayFinished = null, float delaySeconds = 0)
     {
         foreach (AudioPlayer player in transform.GetComponents<AudioPlayer>())
         {
             if (player.clipAlias == clipAlias)
             {
-                player.InternalPlayClip(onPlayFinished);
+                player.InternalPlayClip(onPlayFinished, delaySeconds);
                 return;
             }
         }
     }
-
-    AudioClip InternalPlayClip(Action onPlayFinished = null)
+    
+    AudioClip InternalPlayClip(Action onPlayFinished = null, float delaySeconds = 0)
     {
         if (_clip == null) return null;
 
@@ -77,15 +77,15 @@ public class AudioPlayer : MonoBehaviour
 
         if (onPlayFinished != null)
         {
-            StartCoroutine(WaitUntilAudioFinishes(onPlayFinished));
+            StartCoroutine(WaitUntilAudioFinishes(onPlayFinished, delaySeconds));
         }
 
         return clip;
     }
 
-    IEnumerator WaitUntilAudioFinishes(Action action)
+    IEnumerator WaitUntilAudioFinishes(Action action, float delaySeconds)
     {
-        yield return new WaitForSeconds(clip.length + playDelay);
+        yield return new WaitForSeconds(clip.length + playDelay + delaySeconds);
         action?.Invoke();
     }
 
