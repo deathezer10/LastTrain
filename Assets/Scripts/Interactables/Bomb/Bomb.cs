@@ -10,8 +10,8 @@ public class Bomb : GrabbableObject, IShootable
     public Color red, green;
     public GameObject explosionParticlePrefab;
 
-    Vector3 explosionOffset1 = new Vector3(0f, -0.1f, 0.3f);
-    Vector3 explosionOffset2 = new Vector3(0f, 0.2f, -0.4f);
+    Vector3 explosionOffset1 = new Vector3(0f, -0.2f, 0.4f);
+    Vector3 explosionOffset2 = new Vector3(0f, 0.3f, -0.5f);
 
     float timeRemaining = 180f;
     bool timerRunning;
