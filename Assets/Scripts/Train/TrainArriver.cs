@@ -8,7 +8,7 @@ public class TrainArriver : MonoBehaviour
 
     public TrainDoorHandler m_TrainDoor;
 
-    const float m_TrainStoppingPoint = 2;
+    const float m_TrainStoppingPoint = 3;
 
     const float m_TrainArrivalDelay = 5;
 
