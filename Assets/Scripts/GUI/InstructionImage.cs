@@ -48,7 +48,7 @@ public class InstructionImage : MonoBehaviour
 
         RectTransform rTransform = GetComponent<RectTransform>();
 
-        transform.DOMove(m_HolderTransform.position, tweenDuration).SetEase(Ease.InBack);
+        transform.DOMove(m_HolderTransform.position, tweenDuration);
         rTransform.DORotate(m_HolderTransform.eulerAngles, tweenDuration);
     }
 
