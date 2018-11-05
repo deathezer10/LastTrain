@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AcceleratorLever : StationaryObject
 {
+    private TrainSpeedHandler trainSpeedHandler;
     public static AcceleratorLever instance;
     private GameObject Accelerator;
     private GameObject AcceleratorHandle;
@@ -15,18 +16,12 @@ public class AcceleratorLever : StationaryObject
     private Vector3 HandleMovementDirection;
     private Vector3 LastHandPosition;
 
-    public static bool bIsStopping = false;
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
     private bool bIsActivating = false;
     private AudioPlayer Audio;
-    public StationMover stationMover;
-
-    private float PreviousTrainSpeed = 10.0f;
-    private float NewTrainSpeed = 10.0f;
-    private float rate = 0.3f;
-    private float i;
+    private float NewTrainSpeed;
 
     //Static function for brakelever to check if this AcceleratorLever is engaged.
     public static bool IsTaskCompleted()
@@ -42,7 +37,6 @@ public class AcceleratorLever : StationaryObject
     // Use this for initialization
     void Start()
     {
-        stationMover = FindObjectOfType<StationMover>();
         HandleCollider = GetComponent<BoxCollider>();
         Accelerator = gameObject;
         AcceleratorHandle = HandleCollider.gameObject;
@@ -57,25 +51,12 @@ public class AcceleratorLever : StationaryObject
         HandleMovementDirection.Normalize(); //The direction where Acceleratorhandle can be moved forth and back.
         Audio = GetComponent<AudioPlayer>();
 
-
+        trainSpeedHandler = FindObjectOfType<TrainSpeedHandler>();
 
     }
 
     void Update()
     {
-        if (bIsStopping)
-        {
-            stationMover.currentMaxSpeed = 0;
-        }
-
-
-        if (bIsActivating && !bIsStopping)
-        {
-            i += Time.deltaTime * rate;
-            stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
-        }
-
-
 
         if (bIsGrabbing) //Player is grabbing the acceleratorhandle
         {
@@ -85,9 +66,9 @@ public class AcceleratorLever : StationaryObject
             }
 
 
-
             Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition; //We get the small movement vector of player's hand
             HandMovementDirection.Normalize();
+
             if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f)) //If player is trying to drag the handle towards the direction the handle can move
             {
 
@@ -98,44 +79,35 @@ public class AcceleratorLever : StationaryObject
 
                 else if ((VectorEndPoint.transform.position.z + 0.025f) >= AcceleratorHandle.transform.position.z) //The accelerator has been put to 0, task complete
                 {
-                    if (!bDisableLever)
-                    {
-                        bDisableLever = true;
-                        //Audio.Play();
-                    }
+                    if (trainSpeedHandler.bCanAccelerate)
+                        if (!bDisableLever)
+                        {
+                            bDisableLever = true;
+                            //Audio.Play();
+                        }
 
-                    if (BrakeLever.IsTaskCompleted())
-                    {
-
-                        PreviousTrainSpeed = stationMover.currentSpeed;
-                        NewTrainSpeed = 0;
-                        i = 0;
-
-                    }
+                    if (trainSpeedHandler.bCanAccelerate)
+                        if (BrakeLever.IsTaskCompleted())
+                        {
+                            trainSpeedHandler.AcceleratorStop();
+                        }
 
 
-                    else
-                    {
-                        PreviousTrainSpeed = stationMover.currentSpeed;
-                        NewTrainSpeed = 3;
-                        if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
-                        i = 0.0f;
-                    }
+                        else
+                        {
+                            trainSpeedHandler.BrakeSlowDown();
+                        }
 
                 }
-
-
-
 
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
 
-                if (!bDisableLever)
-                {
-                    PreviousTrainSpeed = stationMover.currentSpeed;
-                    NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
-                    if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
-                    i = 0.0f;
-                }
+                if (trainSpeedHandler.bCanAccelerate)
+                    if (!bDisableLever)
+                    {
+                        NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f, VectorBeginPoint.transform.position.z));
+                        trainSpeedHandler.ChangeSpeed(NewTrainSpeed);
+                    }
 
                 LastHandPosition = PlayerHand.transform.position;
                 return;
@@ -155,31 +127,16 @@ public class AcceleratorLever : StationaryObject
                     return;
                 }
 
-                if (stationMover.currentSpeed < 1 || stationMover.currentMaxSpeed == 0 && BrakeLever.IsTaskCompleted())
-                {
-                    AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
-                    LastHandPosition = PlayerHand.transform.position;
-                    return;
-                }
 
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
-                PreviousTrainSpeed = stationMover.currentSpeed;
+
                 NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
-                if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
-                i = 0.0f;
+                if (trainSpeedHandler.bCanAccelerate)
+                    trainSpeedHandler.ChangeSpeed(NewTrainSpeed);
                 LastHandPosition = PlayerHand.transform.position;
                 return;
 
             }
-
-
-
-
-
-
-
-
-
         }
     }
 

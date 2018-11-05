@@ -9,6 +9,7 @@ public class ElectricalBoxButton : MonoBehaviour
     private const float m_ToggleOffset = 0.02f;
     private AudioPlayer Audio;
     private bool bDisable = false;
+    
 
     // Use this for initialization
     void Start()
@@ -24,14 +25,17 @@ public class ElectricalBoxButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name.Contains("Controller"))
-        if (!bDisable)
-        { 
-            bDisable = true;
-            Audio.Play();
-            transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
-            FindObjectOfType<TrainDoorHandler>().ToggleDriverDoor();
+        if (other.gameObject.name.Contains("Controller"))
+            if (!bDisable)
+            {
+                bDisable = true;
+                Audio.Play();
+                transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
+                FindObjectOfType<TrainDoorHandler>().ToggleDriverDoor();
+                FindObjectOfType<TrainDoorsOpenSound>().DriverDoorPlay();
             }
     }
 
+
 }
+

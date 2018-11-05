@@ -14,7 +14,10 @@ public class TrainDoorHandler : MonoBehaviour
 
     private List<KeyValuePair<DoorSide, Transform>> m_Doors = new List<KeyValuePair<DoorSide, Transform>>();
 
+    public bool bAreDoorsOpen { get; private set; } = false;
+    public bool bIsDriverDoorOpen { get; private set; } = false;
 
+    private TrainDoorsOpenSound doorsOpenSound;
     private void Start()
     {
         for (int i = 0; i < transform.childCount; ++i)
@@ -31,49 +34,56 @@ public class TrainDoorHandler : MonoBehaviour
             else
                 m_Doors.Add(new KeyValuePair<DoorSide, Transform>(DoorSide.Right, childTransform));
         }
+        doorsOpenSound = FindObjectOfType<TrainDoorsOpenSound>();
     }
 
     public void ToggleDoors(bool opened, System.Action onComplete = null)
     {
         int direction = (opened) ? 1 : -1;
 
-        for (int i = 0; i < m_Doors.Count; ++i)
-        {
-            var door = m_Doors[i];
+        if (opened) doorsOpenSound.CabinDoorsPlay();
 
-            if (door.Key == DoorSide.Left)
+        else doorsOpenSound.CabinDoorsStopPlay();
+
+            for (int i = 0; i < m_Doors.Count; ++i)
             {
-                var tweener = door.Value.DOLocalMoveZ(m_DoorOffset * direction, 2).SetRelative();
+                var door = m_Doors[i];
 
-                if (i == 0)
+                if (door.Key == DoorSide.Left)
                 {
-                    tweener.OnComplete(() =>
+                    var tweener = door.Value.DOLocalMoveZ(m_DoorOffset * direction, 2).SetRelative();
+
+                    if (i == 0)
                     {
-                        if (onComplete != null)
-                            onComplete();
-                    });
+                        tweener.OnComplete(() =>
+                        {
+
+                            if (onComplete != null)
+                                onComplete();
+                        });
+                    }
+                }
+                else
+                {
+                    var tweener = door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 2).SetRelative();
+
+                    if (i == 0)
+                    {
+                        tweener.OnComplete(() =>
+                        {
+                            if (onComplete != null)
+                                onComplete();
+                        });
+                    }
                 }
             }
-            else
-            {
-                var tweener = door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 2).SetRelative();
-
-                if (i == 0)
-                {
-                    tweener.OnComplete(() =>
-                    {
-                        if (onComplete != null)
-                            onComplete();
-                    });
-                }
-            }
-        }
 
     }
 
     public void ToggleDriverDoor()
     {
-       transform.GetChild(2).gameObject.transform.DOLocalMoveZ(m_DoorOffset * -1, 2).SetRelative();
+       transform.GetChild(2).gameObject.transform.DOLocalMoveZ(m_DoorOffset * 1, 2).SetRelative();
+       bIsDriverDoorOpen = true;
     }
            
 
