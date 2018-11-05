@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -32,25 +33,17 @@ public class Checkpoint : MonoBehaviour
         CHECKPOINT_ACTIVATED = false;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            GetComponent<BoxCollider>().enabled = false;
-            Debug.Log("Player hit the checkpoint.");
-            CheckpointActivated();
-            FindObjectOfType<TrainArriver>().CallTheTrain();
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             GetComponent<BoxCollider>().enabled = false;
-            Debug.Log("Player hit the checkpoint.");
             CheckpointActivated();
-            FindObjectOfType<TrainArriver>().CallTheTrain();
+
+            if (SceneManager.GetActiveScene().name == "TrainStation")
+            {
+                FindObjectOfType<TrainArriver>().CallTheTrain();
+            }
         }
     }
 }
