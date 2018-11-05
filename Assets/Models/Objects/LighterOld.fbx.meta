@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: ed0e909e784d7e5409cb296a05d6f4f9
+guid: 45784106073bed145a7fc4dd71f0fc6b
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Lighter_Shader
+    2100000: lambert1
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Lighter
+    4300000: lighter
   externalObjects: {}
   materials:
     importMaterials: 1

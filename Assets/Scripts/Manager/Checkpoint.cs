@@ -40,4 +40,14 @@ public class Checkpoint : MonoBehaviour
     {
         CHECKPOINT_ACTIVATED = false;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GetComponent<BoxCollider>().enabled = false;
+            Debug.Log("Player hit the checkpoint.");
+            CheckpointActivated();
+        }
+    }
 }

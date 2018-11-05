@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4736078552482898}
   - component: {fileID: 114705600300943472}
+  - component: {fileID: 65621044221056490}
   m_Layer: 0
   m_Name: CheckpointManager
   m_TagString: Untagged
@@ -34,12 +35,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1922801887691102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65621044221056490
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922801887691102}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 8, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114705600300943472
 MonoBehaviour:
   m_ObjectHideFlags: 1
