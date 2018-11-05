@@ -32,6 +32,17 @@ public class Checkpoint : MonoBehaviour
         CHECKPOINT_ACTIVATED = false;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            GetComponent<BoxCollider>().enabled = false;
+            Debug.Log("Player hit the checkpoint.");
+            CheckpointActivated();
+            FindObjectOfType<TrainArriver>().CallTheTrain();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

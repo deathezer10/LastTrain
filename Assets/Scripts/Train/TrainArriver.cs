@@ -8,7 +8,7 @@ public class TrainArriver : MonoBehaviour
 
     public TrainDoorHandler m_TrainDoor;
 
-    const float m_TrainStoppingPoint = 3;
+    const float m_TrainStoppingPoint = 4.5f;
 
     const float m_TrainArrivalDelay = 5;
 
@@ -21,8 +21,11 @@ public class TrainArriver : MonoBehaviour
         get { return bHasArrived; }
     }
 
-    public void BeginArrival(System.Action onComplete = null)
+    public IEnumerator BeginArrival(System.Action onComplete = null)
     {
+
+        yield return new WaitForSeconds(m_TrainArrivalDelay);
+
         GetComponent<AudioPlayer>().Play();
 
         var tweener = transform.DOMoveZ(m_TrainStoppingPoint, 10).SetEase(Ease.OutQuart).OnComplete(() =>
@@ -43,21 +46,12 @@ public class TrainArriver : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player" && m_ArrivalTriggered == false)
-        {
-            m_ArrivalTriggered = true;
-            Invoke("BeginArrival", m_TrainArrivalDelay);
-        }
-    }
-
     public void CallTheTrain()
     {
         if (m_ArrivalTriggered == false)
         {
             m_ArrivalTriggered = true;
-            Invoke("BeginArrival", m_TrainArrivalDelay);
+            StartCoroutine(BeginArrival());
         }
     }
 

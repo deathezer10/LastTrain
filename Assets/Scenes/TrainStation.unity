@@ -534,6 +534,39 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf8b7b52079bb847b72d2ae5537e93e, type: 2}
   m_IsPrefabAsset: 0
+--- !u!21 &31814526
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &35705254
 Prefab:
   m_ObjectHideFlags: 0
@@ -3183,15 +3216,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.529
+      value: 3.728
       objectReference: {fileID: 0}
     - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.672
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -101.03
+      value: -14.47
       objectReference: {fileID: 0}
     - target: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3222,7 +3255,7 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1794577395}
+      objectReference: {fileID: 1747259793}
     - target: {fileID: 33256893767373004, guid: e9acf5381f724c04ebf87853cc58efd1,
         type: 2}
       propertyPath: m_Mesh
@@ -3232,7 +3265,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 594006600}
+      objectReference: {fileID: 31814526}
     - target: {fileID: 114882103252363328, guid: e9acf5381f724c04ebf87853cc58efd1,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -3291,39 +3324,6 @@ Transform:
   m_Father: {fileID: 120376792}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &594006600
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &599797737
 Prefab:
   m_ObjectHideFlags: 0
@@ -5777,7 +5777,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!43 &1794577395
+--- !u!43 &1747259793
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6467,15 +6467,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4736078552482898, guid: 200c06a91b4b9814c8950e828663c258, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4736078552482898, guid: 200c06a91b4b9814c8950e828663c258, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4736078552482898, guid: 200c06a91b4b9814c8950e828663c258, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4736078552482898, guid: 200c06a91b4b9814c8950e828663c258, type: 2}
       propertyPath: m_LocalRotation.w
