@@ -8,7 +8,7 @@ public class TrainArriver : MonoBehaviour
 
     public TrainDoorHandler m_TrainDoor;
 
-    const float m_TrainStoppingPoint = 6f;
+    const float m_TrainStoppingPoint = 18f;
 
     const float m_TrainArrivalDelay = 3f;
 
@@ -27,7 +27,7 @@ public class TrainArriver : MonoBehaviour
 
         GetComponent<AudioPlayer>().Play();
 
-        var tweener = transform.DOMoveZ(m_TrainStoppingPoint, 8).SetEase(Ease.OutQuart).OnComplete(() =>
+        var tweener = transform.DOMoveZ(m_TrainStoppingPoint, 10).SetEase(Ease.OutQuart).OnComplete(() =>
         {
             bHasArrived = true;
             //m_TrainDoor.ToggleDoors(true);
