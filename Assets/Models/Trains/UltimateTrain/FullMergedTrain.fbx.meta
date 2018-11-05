@@ -14,6 +14,16 @@ ModelImporter:
     100016: LightFrame_B_01
     100018: SmokeDetectors
     100020: Train_Floor
+    100022: Shell
+    100024: SmokeDetector_01
+    100026: SmokeDetector_02
+    100028: SmokeDetector_03
+    100030: SmokeDetector_04
+    100032: SmokeDetector_05
+    100034: SmokeDetector_06
+    100036: SmokeDetector_07
+    100038: SmokeDetector_08
+    100040: SmokeDetector_09
     400000: //RootNode
     400002: Train
     400004: Decal
@@ -25,6 +35,16 @@ ModelImporter:
     400016: LightFrame_B_01
     400018: SmokeDetectors
     400020: Train_Floor
+    400022: Shell
+    400024: SmokeDetector_01
+    400026: SmokeDetector_02
+    400028: SmokeDetector_03
+    400030: SmokeDetector_04
+    400032: SmokeDetector_05
+    400034: SmokeDetector_06
+    400036: SmokeDetector_07
+    400038: SmokeDetector_08
+    400040: SmokeDetector_09
     2100000: PC_C_Shader
     2100002: PC_B_Shader
     2100004: PC_A_Shader
@@ -40,6 +60,7 @@ ModelImporter:
     2100024: Decal_3_Decal_3
     2100026: Props_B_Shader
     2100028: EBrakes_Shader
+    2100030: Props_B_Shader1
     2300000: //RootNode
     2300002: Train
     2300004: Decal
@@ -51,6 +72,16 @@ ModelImporter:
     2300016: LightFrame_B_01
     2300018: SmokeDetectors
     2300020: Train_Floor
+    2300022: Shell
+    2300024: SmokeDetector_01
+    2300026: SmokeDetector_02
+    2300028: SmokeDetector_03
+    2300030: SmokeDetector_04
+    2300032: SmokeDetector_05
+    2300034: SmokeDetector_06
+    2300036: SmokeDetector_07
+    2300038: SmokeDetector_08
+    2300040: SmokeDetector_09
     3300000: //RootNode
     3300002: Train
     3300004: Decal
@@ -62,6 +93,16 @@ ModelImporter:
     3300016: LightFrame_B_01
     3300018: SmokeDetectors
     3300020: Train_Floor
+    3300022: Shell
+    3300024: SmokeDetector_01
+    3300026: SmokeDetector_02
+    3300028: SmokeDetector_03
+    3300030: SmokeDetector_04
+    3300032: SmokeDetector_05
+    3300034: SmokeDetector_06
+    3300036: SmokeDetector_07
+    3300038: SmokeDetector_08
+    3300040: SmokeDetector_09
     4300000: Train
     4300002: Decal
     4300004: Light_B_01
@@ -72,6 +113,16 @@ ModelImporter:
     4300014: Train_Floor
     4300016: EBrake_Box
     4300018: EBrake_Base_Frame
+    4300020: Shell
+    4300022: SmokeDetector_09
+    4300024: SmokeDetector_08
+    4300026: SmokeDetector_07
+    4300028: SmokeDetector_06
+    4300030: SmokeDetector_05
+    4300032: SmokeDetector_04
+    4300034: SmokeDetector_03
+    4300036: SmokeDetector_02
+    4300038: SmokeDetector_01
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -137,6 +188,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Props_B_Shader
+    second: {fileID: 2100000, guid: eccc4397154f41f47b8c3d16090af2cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props_B_Shader1
     second: {fileID: 2100000, guid: eccc4397154f41f47b8c3d16090af2cf, type: 2}
   - first:
       type: UnityEngine:Material

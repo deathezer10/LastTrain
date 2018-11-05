@@ -5,10 +5,16 @@ using UnityEngine;
 public class Wallet : GrabbableObject
 {
 
+    private bool m_HasAnnounced = false;
+
     public override void OnGrab()
     {
-        TutorialManager tManager = FindObjectOfType<TutorialManager>();
-        tManager.GetComponent<AudioPlayer>().Play("tutorial_wallet_outro");
+        if (!m_HasAnnounced)
+        {
+            TutorialManager tManager = FindObjectOfType<TutorialManager>();
+            tManager.GetComponent<AudioPlayer>().Play("tutorial_wallet_outro");
+            m_HasAnnounced = true;
+        }
     }
     
 }
