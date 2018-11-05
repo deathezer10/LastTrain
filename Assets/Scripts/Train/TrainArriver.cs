@@ -52,4 +52,13 @@ public class TrainArriver : MonoBehaviour
         }
     }
 
+    public void CallTheTrain()
+    {
+        if (m_ArrivalTriggered == false)
+        {
+            m_ArrivalTriggered = true;
+            Invoke("BeginArrival", m_TrainArrivalDelay);
+        }
+    }
+
 }
