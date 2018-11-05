@@ -13,10 +13,15 @@ public class PlayerViveMovement : MonoBehaviour
     private const float m_PlayerMoveSpeed = 2;
     private const float m_ForwardTouchpadThreshold = 0.15f;
 
+    private bool m_IsTeleActive = false;
+
     private void Start()
     {
         m_CController = GetComponent<CharacterController>();
         m_CurrentCamera = GetComponentInChildren<Camera>();
+
+        if (FindObjectOfType<PlayerTeleportation>().gameObject.activeInHierarchy)
+            m_IsTeleActive = true;
     }
 
     private void FixedUpdate()
@@ -25,24 +30,27 @@ public class PlayerViveMovement : MonoBehaviour
 
         SteamVR_Input_Sources currentHand = SteamVR_Input_Sources.Any;
 
-        if (SteamVR_Input._default.inActions.Move.GetState(SteamVR_Input_Sources.LeftHand))
+        if (m_IsTeleActive == false)
         {
-            currentHand = SteamVR_Input_Sources.LeftHand;
-        }
-        else if (SteamVR_Input._default.inActions.Move.GetState(SteamVR_Input_Sources.RightHand))
-        {
-            currentHand = SteamVR_Input_Sources.RightHand;
-        }
-
-        if (currentHand != SteamVR_Input_Sources.Any)
-        {
-            if (SteamVR_Input._default.inActions.MoveDirectionPad.GetAxis(currentHand).y >= (m_ForwardTouchpadThreshold - 1))
+            if (SteamVR_Input._default.inActions.Move.GetState(SteamVR_Input_Sources.LeftHand))
             {
-                moveDir = m_CurrentCamera.transform.forward * m_PlayerMoveSpeed;
+                currentHand = SteamVR_Input_Sources.LeftHand;
             }
-            else
+            else if (SteamVR_Input._default.inActions.Move.GetState(SteamVR_Input_Sources.RightHand))
             {
-                moveDir = -m_CurrentCamera.transform.forward * (m_PlayerMoveSpeed * 0.2f);
+                currentHand = SteamVR_Input_Sources.RightHand;
+            }
+
+            if (currentHand != SteamVR_Input_Sources.Any)
+            {
+                if (SteamVR_Input._default.inActions.MoveDirectionPad.GetAxis(currentHand).y >= (m_ForwardTouchpadThreshold - 1))
+                {
+                    moveDir = m_CurrentCamera.transform.forward * m_PlayerMoveSpeed;
+                }
+                else
+                {
+                    moveDir = -m_CurrentCamera.transform.forward * (m_PlayerMoveSpeed * 0.2f);
+                }
             }
         }
 

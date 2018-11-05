@@ -35,7 +35,7 @@ public class TutorialManager : MonoBehaviour
 
             // Teleport intro
             padObserver = this.UpdateAsObservable()
-           .Where(_ => Input.GetKeyDown(KeyCode.A))
+           .Where(_ => _padAction.GetStateDown(SteamVR_Input_Sources.Any))// Input.GetKeyDown(KeyCode.A))
            .Subscribe(_ =>
            {
                padObserver.Dispose();
@@ -44,13 +44,13 @@ public class TutorialManager : MonoBehaviour
 
                // Teleport outro
                padObserver = this.UpdateAsObservable()
-               .Where(_1 => Input.GetKeyUp(KeyCode.A))
+               .Where(_1 => _padAction.GetStateUp(SteamVR_Input_Sources.Any)) // Input.GetKeyUp(KeyCode.A))
                .Subscribe(_1 =>
                {
                    padObserver.Dispose();
                    audioPlayer.Stop();
                    audioPlayer.Play("tutorial_wallet_intro");
-                   
+
                    // Wallet Intro will be in the Wallet.cs script
                });
            }

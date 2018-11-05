@@ -1,1 +1,1 @@
-{"key":["language","title","death_bomb","death_timeup","death_trainhit","death_bombwrongwire"],"value":["japan","終電","<Pending>","<Pending>","<Pending>","<Pending>"]}
+{"key":["language","title","death_bomb","death_timeup","death_trainhit","death_bombwrongwire","death_gunsuicide","death_sawblade","death_sawbladebomb","death_trainjump"],"value":["japan","終電","<Pending>","<Pending>","<Pending>","<Pending>","<Pending>","<Pending>","<Pending>","<Pending>"]}
