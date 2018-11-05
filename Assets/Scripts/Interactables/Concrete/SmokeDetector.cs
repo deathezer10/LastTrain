@@ -8,14 +8,13 @@ public class SmokeDetector : MonoBehaviour , IShootable
     public Material[] indicatorMatArray;
 
     MeshRenderer indicatorRenderer;
-    AudioPlayer fireAlarmSound;
+    
     int currentTriggeredIndex;
     float currentSmoke;
     bool detectingSmoke, alarmTriggered;
 
     private void Start()
     {
-        fireAlarmSound = GetComponent<AudioPlayer>();
         indicatorRenderer = GetComponent<MeshRenderer>();
     }
 
@@ -52,10 +51,8 @@ public class SmokeDetector : MonoBehaviour , IShootable
 
     private void TriggerAlarm()
     {
-        Debug.Log("Smoke alarm triggered, open doors.");
         alarmTriggered = true;
-        // Call door open
-        fireAlarmSound.Play();
+        FindObjectOfType<SmokeAlarm>().StartSmokeAlarm();
     }
 
     public void OnShot(Revolver revolver)
