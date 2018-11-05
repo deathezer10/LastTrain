@@ -13,6 +13,12 @@ public class KeyCardScanner : StationaryObject, IShootable
 
     private bool isDone = false;
 
+    void Start()
+    {
+        
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (isDone) return;
@@ -39,7 +45,9 @@ public class KeyCardScanner : StationaryObject, IShootable
         if (card != null && card.playerController != null)
             card.playerController.Vibration(0, 0.7f, 10, 1, card.playerHand.ToInputSource());
 
-        //Some green led indication perhaps?
+        transform.parent.GetComponent<Renderer>().materials[1].SetColor("_Color", Color.green);
+        transform.parent.GetComponent<Renderer>().materials[1].SetVector("_EmissionColor", Color.green * 100f);
+      
         DriverCabinDoorLock.init();
 
         isDone = true;
