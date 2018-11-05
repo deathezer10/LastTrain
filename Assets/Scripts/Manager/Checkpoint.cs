@@ -22,15 +22,6 @@ public class Checkpoint : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-        // Test PH
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            CheckpointActivated();
-        }
-    }
-
     public void CheckpointActivated()
     {
         CHECKPOINT_ACTIVATED = true;
@@ -48,6 +39,7 @@ public class Checkpoint : MonoBehaviour
             GetComponent<BoxCollider>().enabled = false;
             Debug.Log("Player hit the checkpoint.");
             CheckpointActivated();
+            FindObjectOfType<TrainArriver>().CallTheTrain();
         }
     }
 }
