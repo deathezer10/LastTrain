@@ -41,10 +41,6 @@ public class TrainDoorHandler : MonoBehaviour
     {
         int direction = (opened) ? 1 : -1;
 
-        if (opened) doorsOpenSound.CabinDoorsPlay();
-
-        else doorsOpenSound.CabinDoorsStopPlay();
-
             for (int i = 0; i < m_Doors.Count; ++i)
             {
                 var door = m_Doors[i];

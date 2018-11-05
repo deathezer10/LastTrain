@@ -23,10 +23,7 @@ public class TrainDoorsOpenSound : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		for(int i = 0; i < transform.childCount; i++)
-        {
-           audioPlayers.Add(transform.GetChild(i).GetComponent<AudioPlayer>());
-        }
+      audioPlayers.AddRange(GetComponentsInChildren<AudioPlayer>());
 	}
 	
 	// Update is called once per frame
