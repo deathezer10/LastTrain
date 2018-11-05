@@ -27,7 +27,9 @@ public class TutorialManager : MonoBehaviour
         if (tutorialEnabled)
         {
             m_PlayerTeleportation = FindObjectOfType<PlayerTeleportation>();
-            m_PlayerTeleportation.gameObject.SetActive(false);
+
+            if (m_PlayerTeleportation != null)
+                m_PlayerTeleportation.gameObject.SetActive(false);
 
             Invoke("StartTutorial", 1.5f);
         }
@@ -42,7 +44,8 @@ public class TutorialManager : MonoBehaviour
         {
             audioPlayer.Play("tutorial_trajectory_intro");
 
-            m_PlayerTeleportation.gameObject.SetActive(true);
+            if (m_PlayerTeleportation != null)
+                m_PlayerTeleportation.gameObject.SetActive(true);
 
             System.IDisposable padObserver = null;
 
