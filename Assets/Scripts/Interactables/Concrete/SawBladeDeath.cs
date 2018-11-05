@@ -26,7 +26,7 @@ public class SawBladeDeath : MonoBehaviour {
 
         else if(other.name == "Bomb" && sawblade.IsSpinning())
         {
-            playerdeathHandler.KillPlayer("death_sawbladebomb");
+            FindObjectOfType<Bomb>().TimerTimeOut();  
         }
     }
 

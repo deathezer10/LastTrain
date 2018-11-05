@@ -10,6 +10,7 @@ public class Lighter : GrabbableObject
     AudioPlayer useAudio;
     CapsuleCollider litCollider;
     bool lit;
+    private int count = 0;
 
     private void Start()
     {
@@ -67,12 +68,33 @@ public class Lighter : GrabbableObject
 
     private void OnTriggerStay(Collider other)
     {
+        if(other.name == "Bomb")
+        {
+            StartCoroutine(Counter());
+        }
+
         if (lit)
         {
             if (other.tag == "PaperBurnArea")
             {
                 other.GetComponent<NPBurnArea>().IncreaseHeat();
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.name == "Bomb")
+        count = 0;
+    }
+
+  private IEnumerator Counter()
+    {
+        yield return new WaitForSeconds(1);
+        count++;
+        if(count >= 3)
+        {
+            FindObjectOfType<Bomb>().TimerTimeOut();
         }
     }
 

@@ -99,7 +99,7 @@ public class Bomb : GrabbableObject, IShootable
     {
     }
 
-    private void TimerTimeOut()
+    public void TimerTimeOut()
     {
         phLightRenderer.material.color = red;
         FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_bomb");
