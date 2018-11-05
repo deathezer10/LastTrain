@@ -14,6 +14,7 @@ public class Lighter : GrabbableObject
     private void Start()
     {
         litCollider = GetComponent<CapsuleCollider>();
+        litCollider.enabled = false;
         useAudio = GetComponent<AudioPlayer>();
         m_particle.Stop();
     }
@@ -34,14 +35,11 @@ public class Lighter : GrabbableObject
 
     public override void OnGrab()
     {
-        Debug.Log("ライターを持ったよ");
-
         transform.eulerAngles = Vector3.zero;
     }
 
     public override void OnGrabReleased()
     {
-        Debug.Log("ライターを離したよ");
     }
 
     public override void OnUse()

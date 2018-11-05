@@ -10,6 +10,8 @@ public class TrainBetweenCabinDoors : MonoBehaviour
 
     List<GameObject> betweenDoors = new List<GameObject>();
 
+    BoxCollider betweenDoorsCollider;
+
     private void Start()
     {
         for (int i = 0; i < transform.childCount; ++i)
@@ -21,6 +23,10 @@ public class TrainBetweenCabinDoors : MonoBehaviour
                 betweenDoors.Add(child);
             }
         }
+
+        betweenDoorsCollider = gameObject.AddComponent<BoxCollider>();
+        betweenDoorsCollider.center = new Vector3(0f, 1.1f, -9.62f);
+        betweenDoorsCollider.size = new Vector3(1.25f, 2f, 1.25f);
     }
 
     private void Update()
@@ -43,9 +49,14 @@ public class TrainBetweenCabinDoors : MonoBehaviour
 
     IEnumerator OnDoorOpenFinish()
     {
-        yield return new WaitForSeconds(2.05f);
+        yield return new WaitForSeconds(1f);
 
+        Debug.Log("Play Announcement");
         // Call for the next announcement
+
+        yield return new WaitForSeconds(1.05f);
+
+        betweenDoorsCollider.enabled = false;
 
         foreach (GameObject door in betweenDoors)
         {

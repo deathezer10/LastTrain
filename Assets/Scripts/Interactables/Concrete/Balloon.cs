@@ -17,7 +17,7 @@ public class Balloon : MonoBehaviour , IShootable
         upwardsMove = new Vector3(0f, Random.Range(0.3f, 0.6f), 0f);
         initialPos = transform.position;
         resetPos = initialPos;
-        resetPos.y = Random.Range(-4f, -2f);
+        resetPos.y = Random.Range(-5.5f, -2.5f);
         instanceColor = GetComponent<MeshRenderer>().material.color = colorArray[Random.Range(0, colorArray.Length-1)];
     }
 
@@ -30,8 +30,13 @@ public class Balloon : MonoBehaviour , IShootable
     {
         balloonParticle = Instantiate(balloonParticlePrefab, transform.position, transform.rotation);
         balloonParticle.GetComponent<BalloonParticleMat>().SetParticleColor(instanceColor);
+
+        resetPos.y = Random.Range(-5.5f, -2.5f);
         transform.position = resetPos;
+
         upwardsMove.y = Random.Range(0.3f, 0.6f);
+
+        GetComponent<MeshRenderer>().material.color = colorArray[Random.Range(0, colorArray.Length - 1)];
     }
 
     public void OnShot(Revolver revolver)
