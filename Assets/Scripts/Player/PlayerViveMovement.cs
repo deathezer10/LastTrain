@@ -13,15 +13,12 @@ public class PlayerViveMovement : MonoBehaviour
     private const float m_PlayerMoveSpeed = 2;
     private const float m_ForwardTouchpadThreshold = 0.15f;
 
-    private bool m_IsTeleActive = false;
+    private bool m_MovementEnabled = false;
 
     private void Start()
     {
         m_CController = GetComponent<CharacterController>();
         m_CurrentCamera = GetComponentInChildren<Camera>();
-
-        if (FindObjectOfType<PlayerTeleportation>().gameObject.activeInHierarchy)
-            m_IsTeleActive = true;
     }
 
     private void FixedUpdate()
@@ -30,7 +27,7 @@ public class PlayerViveMovement : MonoBehaviour
 
         SteamVR_Input_Sources currentHand = SteamVR_Input_Sources.Any;
 
-        if (m_IsTeleActive == false)
+        if (m_MovementEnabled)
         {
             if (SteamVR_Input._default.inActions.Move.GetState(SteamVR_Input_Sources.LeftHand))
             {

@@ -10,16 +10,27 @@ public class TutorialManager : MonoBehaviour
 {
 
     [SerializeField]
-    private SteamVR_Action_Boolean _padAction;
+    private bool m_TutorialEnabled = true;
+    public bool tutorialEnabled {
+        get { return m_TutorialEnabled; }
+        set { m_TutorialEnabled = value; }
+    }
 
     [SerializeField]
-    private GameObject m_Wallet;
+    private SteamVR_Action_Boolean _padAction;
+
+    private PlayerTeleportation m_PlayerTeleportation;
 
     // Use this for initialization
     void Start()
     {
-        FindObjectOfType<PlayerTeleportation>().enabled = false;
-        Invoke("StartTutorial", 2);
+        if (tutorialEnabled)
+        {
+            m_PlayerTeleportation = FindObjectOfType<PlayerTeleportation>();
+            m_PlayerTeleportation.gameObject.SetActive(false);
+
+            Invoke("StartTutorial", 1.5f);
+        }
     }
 
     void StartTutorial()
@@ -30,6 +41,8 @@ public class TutorialManager : MonoBehaviour
         audioPlayer.Play("tutorial_greeting", () =>
         {
             audioPlayer.Play("tutorial_trajectory_intro");
+
+            m_PlayerTeleportation.gameObject.SetActive(true);
 
             System.IDisposable padObserver = null;
 
