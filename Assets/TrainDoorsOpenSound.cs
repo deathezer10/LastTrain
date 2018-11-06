@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrainDoorsOpenSound : MonoBehaviour {
-    List<AudioPlayer> audioPlayers;
+    public List<AudioPlayer> audioPlayers;
     public bool bIsCabinPlaying { get; private set; } = false;
     public bool bIsDriverPlaying { get; private set; } = false;
 
@@ -21,10 +21,16 @@ public class TrainDoorsOpenSound : MonoBehaviour {
         }
     }
 
+
+
 	// Use this for initialization
 	void Start () {
-      audioPlayers.AddRange(GetComponentsInChildren<AudioPlayer>());
-	}
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            audioPlayers.Add(transform.GetChild(i).GetComponent<AudioPlayer>());
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

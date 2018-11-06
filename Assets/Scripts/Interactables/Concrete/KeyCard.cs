@@ -26,13 +26,15 @@ public class KeyCard : GrabbableObject {
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+
         playerController = currentController;
         playerHand = playerController.GetCurrentHand();
     }
 
     public override void OnControllerExit()
     {
-
+        base.OnControllerExit();
     }
 
     public override void OnControllerStay()
