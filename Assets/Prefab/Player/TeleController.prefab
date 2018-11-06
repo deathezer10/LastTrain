@@ -348,8 +348,8 @@ MonoBehaviour:
   _fadeTime: 0.1
   _fadeColor: {r: 0.06510325, g: 0.103773594, b: 0.08202152, a: 0}
   _camera: {fileID: 0}
-  _handType: 0
-  _padAction: {fileID: 0}
+  _handType: 2
+  _padAction: {fileID: 11400000, guid: fb591c47e111f9f4ca9775e57aa4be1e, type: 2}
   _possibleColor: {r: 0.42815408, g: 1, b: 0.3820755, a: 0.7058824}
   _impossibleColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 0.7058824}
 --- !u!120 &120350465857685910

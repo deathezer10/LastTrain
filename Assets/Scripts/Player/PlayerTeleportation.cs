@@ -37,6 +37,9 @@ public class PlayerTeleportation : MonoBehaviour
     [Tag, SerializeField]
     private List<string> _getOnTags;
 
+    [Layer,SerializeField]
+    private int[] _ignoreLayers;
+
     [SerializeField]
     private GameObject _targetMarker;
 
@@ -125,7 +128,7 @@ public class PlayerTeleportation : MonoBehaviour
         if (hit != null)
         {
             // 床の上の高さにする
-            data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.size.y;
+            data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.extents.y;
             _lineRenderer.startColor = _possibleColor;
             _lineRenderer.endColor = _possibleColor;
             _targetMarker.SetActive(true);
@@ -155,7 +158,11 @@ public class PlayerTeleportation : MonoBehaviour
         RaycastHit hit;
         Debug.DrawLine(ray.origin, ray.direction * _initialVelocity, Color.green);
 
-        if (Physics.Raycast(ray, out hit, 20.0f) == false) return null;
+        var layers = GetIgnoreLayersName();
+        int layerMask = LayerMask.GetMask(layers);
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(ray, out hit, 20.0f, layerMask) == false) return null;
 
         var colliderTag = hit.collider.tag;
         foreach (var tag in _getOnTags)
@@ -166,6 +173,16 @@ public class PlayerTeleportation : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private string[] GetIgnoreLayersName()
+    {
+        List<string> tmp = new List<string>();
+        foreach (var layer in _ignoreLayers)
+        {
+            tmp.Add(LayerMask.LayerToName(layer));
+        }
+        return tmp.ToArray();
     }
 
     /// <summary>
