@@ -32,15 +32,4 @@ public class Checkpoint : MonoBehaviour
     {
         CHECKPOINT_ACTIVATED = false;
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player" && SceneManager.GetActiveScene().name == "TrainStation")
-        {
-            GetComponent<BoxCollider>().enabled = false;
-            CheckpointActivated();
-
-            FindObjectOfType<TrainArriver>().CallTheTrain();
-        }
-    }
 }

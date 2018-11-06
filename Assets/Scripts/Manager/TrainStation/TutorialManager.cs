@@ -22,7 +22,11 @@ public class TutorialManager : MonoBehaviour
     public InstructionImage m_ImageTeleport, m_ImageWallet, m_ImageGripButton, m_ImageUnlockGates;
 
     private PlayerTeleportation m_PlayerTeleportation;
-    
+
+    private Vector3 m_playerCheckpointPos = new Vector3(1f, 1.5f, -5f);
+    private Vector3 m_playerCheckpointRot = new Vector3(0, -90f, 0);
+
+
     void Start()
     {
         tutorialEnabled = Checkpoint.CHECKPOINT_ACTIVATED ? false : true;
@@ -47,6 +51,13 @@ public class TutorialManager : MonoBehaviour
             m_ImageUnlockGates.gameObject.SetActive(false);
 
             Invoke("StartTutorial", 1.5f);
+        }
+        else  // Skipping tutorial to checkpoint position * or just move this check to a seperate check script on the player object
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+            player.transform.position = m_playerCheckpointPos;
+            player.transform.eulerAngles = m_playerCheckpointRot;
         }
     }
 
