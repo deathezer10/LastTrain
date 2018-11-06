@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ICCard : GrabbableObject {
+public class ICCard : GrabbableObject
+{
 
 
 
