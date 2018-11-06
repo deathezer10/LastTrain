@@ -15,7 +15,7 @@ public class StationMover : MonoBehaviour
     float m_CurrentDistanceTraveled = 0;
     const float m_TunnelGapOffset = 20.24f;
     bool m_IsFirstTimeDestroy = true;
-
+    public TrainDoorsOpenSound trainSounds;
     // Movement variables
     bool m_IsMoving = false;
     public bool isMoving {
@@ -32,7 +32,9 @@ public class StationMover : MonoBehaviour
     float m_CurrentStationSpeed = 0;
     public float currentSpeed {
         get { return m_CurrentStationSpeed; }
-        set { m_CurrentStationSpeed = value; }
+        set { m_CurrentStationSpeed = value;
+            trainSounds.SetAudioLevelEngine(currentSpeed);
+        }
     }
 
     private void Start()
@@ -50,6 +52,8 @@ public class StationMover : MonoBehaviour
             if (transform.GetChild(i).tag != "TrainTunnel")
                 m_InitialRemovableObjects.Enqueue(transform.GetChild(i));
         }
+
+        trainSounds = FindObjectOfType<TrainDoorsOpenSound>();
     }
 
     private void Update()

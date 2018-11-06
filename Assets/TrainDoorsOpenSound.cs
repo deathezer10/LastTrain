@@ -9,6 +9,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
     public bool bIsDriverPlaying { get; private set; } = false;
 
     public AudioPlayer dingdongPlayer;
+    public AudioPlayer trainEngine;
 
     public float GetAudioLevel()
     {
@@ -25,7 +26,11 @@ public class TrainDoorsOpenSound : MonoBehaviour
         }
     }
 
-
+    public void SetAudioLevelEngine(float val)
+    {
+        val = val / 10;
+        trainEngine.audioSource.volume = val;
+    }
 
     // Use this for initialization
     void Start()
@@ -34,7 +39,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
         {
             audioPlayers.Add(transform.GetChild(i).GetComponent<AudioPlayer>());
         }
-
+        trainEngine = transform.Find("TrainEngine").GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
