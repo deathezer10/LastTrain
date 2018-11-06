@@ -35,7 +35,14 @@ public class EmergencyDoorHandle : GrabbableObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+
         m_Controller = currentController;
+    }
+
+    public override void OnControllerExit()
+    {
+        base.OnControllerExit();
     }
 
     public override void OnControllerStay()

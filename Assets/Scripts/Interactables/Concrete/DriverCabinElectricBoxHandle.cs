@@ -78,6 +78,8 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+
         if (!bIsLocked)
             bCanGrab = true;
         PlayerHand = currentController.gameObject;
@@ -85,6 +87,8 @@ public class DriverCabinElectricBoxHandle : StationaryObject
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
+        
         bCanGrab = false;
         bIsGrabbing = false;
     }

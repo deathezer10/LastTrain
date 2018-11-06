@@ -70,12 +70,12 @@ public class KeyCardScanner : StationaryObject, IShootable
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
-
+        base.OnControllerEnter(currentController);
     }
 
     public override void OnControllerExit()
     {
-
+        base.OnControllerExit();
     }
 
     public override void OnControllerStay()

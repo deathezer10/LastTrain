@@ -51,11 +51,14 @@ public class Revolver : GrabbableObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
         m_CurrentController = currentController;
     }
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
+        
         m_IsGrabbing = false;
         m_LaserPointer.SetActive(false);
         m_CurrentController.ToggleControllerModel(true);

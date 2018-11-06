@@ -29,6 +29,8 @@ public class LightSwitch : GrabbableObject , IShootable
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+
         if(bIsBroken)
             return;
 
@@ -80,7 +82,7 @@ public class LightSwitch : GrabbableObject , IShootable
 
     public override void OnControllerExit()
     {
-
+        base.OnControllerExit();
     }
 
     public override void OnControllerStay()

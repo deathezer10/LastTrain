@@ -24,10 +24,12 @@ public class Lighter : GrabbableObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
     }
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
     }
 
     public override void OnControllerStay()
