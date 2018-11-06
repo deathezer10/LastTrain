@@ -35,6 +35,27 @@ ModelImporter:
     100058: counter
     100060: polySurface1496
     100062: tap_plate
+    100064: connector
+    100066: polySurface1497
+    100068: polySurface1498
+    100070: polySurface1499
+    100072: polySurface1500
+    100074: polySurface1501
+    100076: polySurface1502
+    100078: polySurface1503
+    100080: polySurface1504
+    100082: polySurface1505
+    100084: polySurface1506
+    100086: polySurface1507
+    100088: polySurface1508
+    100090: polySurface1509
+    100092: polySurface1510
+    100094: polySurface1511
+    100096: small_tunnel
+    100098: Train_station
+    100100: tunnel
+    100102: connector1
+    100104: small_tunnel1
     400000: button
     400002: gantry_gate1
     400004: gantry_gate2
@@ -67,6 +88,27 @@ ModelImporter:
     400058: counter
     400060: polySurface1496
     400062: tap_plate
+    400064: connector
+    400066: polySurface1497
+    400068: polySurface1498
+    400070: polySurface1499
+    400072: polySurface1500
+    400074: polySurface1501
+    400076: polySurface1502
+    400078: polySurface1503
+    400080: polySurface1504
+    400082: polySurface1505
+    400084: polySurface1506
+    400086: polySurface1507
+    400088: polySurface1508
+    400090: polySurface1509
+    400092: polySurface1510
+    400094: polySurface1511
+    400096: small_tunnel
+    400098: Train_station
+    400100: tunnel
+    400102: connector1
+    400104: small_tunnel1
     2100000: StingrayPBS1
     2100002: lambert1
     2100004: StingrayPBS3
@@ -102,6 +144,25 @@ ModelImporter:
     2300056: counter
     2300058: polySurface1496
     2300060: tap_plate
+    2300062: connector
+    2300064: polySurface1497
+    2300066: polySurface1498
+    2300068: polySurface1499
+    2300070: polySurface1500
+    2300072: polySurface1501
+    2300074: polySurface1502
+    2300076: polySurface1503
+    2300078: polySurface1504
+    2300080: polySurface1505
+    2300082: polySurface1506
+    2300084: polySurface1507
+    2300086: polySurface1508
+    2300088: polySurface1509
+    2300090: polySurface1510
+    2300092: polySurface1511
+    2300094: small_tunnel
+    2300096: connector1
+    2300098: small_tunnel1
     3300000: button
     3300002: gantry_gate1
     3300004: gantry_gate2
@@ -133,6 +194,25 @@ ModelImporter:
     3300056: counter
     3300058: polySurface1496
     3300060: tap_plate
+    3300062: connector
+    3300064: polySurface1497
+    3300066: polySurface1498
+    3300068: polySurface1499
+    3300070: polySurface1500
+    3300072: polySurface1501
+    3300074: polySurface1502
+    3300076: polySurface1503
+    3300078: polySurface1504
+    3300080: polySurface1505
+    3300082: polySurface1506
+    3300084: polySurface1507
+    3300086: polySurface1508
+    3300088: polySurface1509
+    3300090: polySurface1510
+    3300092: polySurface1511
+    3300094: small_tunnel
+    3300096: connector1
+    3300098: small_tunnel1
     4300000: button
     4300002: platform_bot
     4300004: main
@@ -164,6 +244,25 @@ ModelImporter:
     4300056: counter
     4300058: polySurface1496
     4300060: tap_plate
+    4300062: polySurface1497
+    4300064: polySurface1498
+    4300066: polySurface1499
+    4300068: polySurface1500
+    4300070: polySurface1501
+    4300072: polySurface1502
+    4300074: polySurface1503
+    4300076: polySurface1504
+    4300078: polySurface1505
+    4300080: polySurface1506
+    4300082: polySurface1507
+    4300084: polySurface1508
+    4300086: polySurface1509
+    4300088: polySurface1510
+    4300090: polySurface1511
+    4300092: small_tunnel
+    4300094: connector
+    4300096: small_tunnel1
+    4300098: connector1
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -179,12 +278,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: StingrayPBS3
-    second: {fileID: 2100000, guid: 822c775e7810ef9479075c1e99af1738, type: 2}
+    second: {fileID: 2100000, guid: 98ff023b27373d240af05b13f974f54f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
-    second: {fileID: 2100000, guid: 98ff023b27373d240af05b13f974f54f, type: 2}
+    second: {fileID: 2100000, guid: 887abf3d5df69f4418e6bd3822694cc0, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
