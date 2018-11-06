@@ -49,12 +49,12 @@ public class TrainSpeedHandler : MonoBehaviour
         i = 0;
     }
 
-   
+
 
     public void ChangeSpeed(float val)
     {
         PreviousTrainSpeed = stationMover.currentSpeed;
-        NewTrainSpeed = Mathf.Lerp(3, 10,val );
+        NewTrainSpeed = val;
         if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
         i = 0.0f;
         bAc_SpeedChange = true;
@@ -76,9 +76,10 @@ public class TrainSpeedHandler : MonoBehaviour
             }
         }
 
-        if (bAc_StopTrain || bBr_StopTrain) return;
+
         if (bBr_SlowDown)
         {
+            if (bAc_StopTrain || bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
             if (stationMover.currentSpeed == 3)
@@ -101,9 +102,10 @@ public class TrainSpeedHandler : MonoBehaviour
             }
         }
 
-        if (bAc_StopTrain || bBr_StopTrain) return;
-        if(bAc_SlowDownTrain)
+
+        if (bAc_SlowDownTrain)
         {
+            if (bAc_StopTrain || bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
             if (stationMover.currentSpeed == 3)
@@ -114,13 +116,14 @@ public class TrainSpeedHandler : MonoBehaviour
             }
         }
 
-        if (bAc_StopTrain || bBr_StopTrain) return;
-        if(bAc_SpeedChange)
+
+        if (bAc_SpeedChange)
         {
+            if (bAc_StopTrain || bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
-            
-            if(stationMover.currentSpeed == NewTrainSpeed)
+
+            if (stationMover.currentSpeed == NewTrainSpeed)
             {
                 bAc_SpeedChange = false;
             }
