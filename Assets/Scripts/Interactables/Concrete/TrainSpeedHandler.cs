@@ -54,7 +54,7 @@ public class TrainSpeedHandler : MonoBehaviour
     public void ChangeSpeed(float val)
     {
         PreviousTrainSpeed = stationMover.currentSpeed;
-        NewTrainSpeed = Mathf.Lerp(3, 10,val );
+        NewTrainSpeed = val;
         if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
         i = 0.0f;
         bAc_SpeedChange = true;
