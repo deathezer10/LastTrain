@@ -38,7 +38,7 @@ public class PlayerTeleportation : MonoBehaviour
     private List<string> _getOnTags;
 
     [Layer,SerializeField]
-    private int[] _ignoreLayers;
+    private int[] _checkLayers;
 
     [SerializeField]
     private GameObject _targetMarker;
@@ -160,7 +160,6 @@ public class PlayerTeleportation : MonoBehaviour
 
         var layers = GetIgnoreLayersName();
         int layerMask = LayerMask.GetMask(layers);
-        layerMask = ~layerMask;
 
         if (Physics.Raycast(ray, out hit, 20.0f, layerMask) == false) return null;
 
@@ -178,7 +177,7 @@ public class PlayerTeleportation : MonoBehaviour
     private string[] GetIgnoreLayersName()
     {
         List<string> tmp = new List<string>();
-        foreach (var layer in _ignoreLayers)
+        foreach (var layer in _checkLayers)
         {
             tmp.Add(LayerMask.LayerToName(layer));
         }
