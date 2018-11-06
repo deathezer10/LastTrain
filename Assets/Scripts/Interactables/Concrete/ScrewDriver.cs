@@ -55,6 +55,7 @@ public class ScrewDriver : GrabbableObject
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = true;
         Destroy(ScrewDriverClone);
         bIsGrabbing = false;
+        bIsScrewing = false;
     }
 
     public override void OnControllerStay()

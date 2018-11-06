@@ -20,8 +20,6 @@ public class EmergencyDoorHandleHolder : MonoBehaviour
 
     public void InsertHandle(EmergencyDoorHandle handle)
     {
-        Debug.Log("Attached");
-
         var controller = PlayerViveController.GetControllerThatHolds(handle.gameObject);
 
         if (controller != null)
