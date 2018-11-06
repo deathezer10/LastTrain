@@ -3275,6 +3275,26 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1246355099846176, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33234344434425790, guid: e9acf5381f724c04ebf87853cc58efd1,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114750220432343124, guid: e9acf5381f724c04ebf87853cc58efd1,
+        type: 2}
+      propertyPath: _targetMarker
+      value: 
+      objectReference: {fileID: 1248194485}
+    - target: {fileID: 114750220432343124, guid: e9acf5381f724c04ebf87853cc58efd1,
+        type: 2}
+      propertyPath: _padAction
+      value: 
+      objectReference: {fileID: 11400000, guid: 4fff6e154ffab884a93f405a11d53201,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
   m_IsPrefabAsset: 0
@@ -5576,6 +5596,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4827a1f12fe0c4041b254ae57dfa05e1, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1248194485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 164764, guid: 4827a1f12fe0c4041b254ae57dfa05e1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1248194484}
 --- !u!1 &1261046046 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1881869659560630, guid: ab6175cf1c4e9944d850179cdca42337,
