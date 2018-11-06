@@ -15,8 +15,10 @@ public class TrainDoorsOpenSound : MonoBehaviour {
 
     public void SetAudioLevel(float val)
     {
+        val = val / 10;
         foreach(AudioPlayer audioplayer in audioPlayers)
         {
+            if (val > 0.8f) val = 0.8f;
             audioplayer.audioSource.volume = val;
         }
     }
@@ -43,6 +45,8 @@ public class TrainDoorsOpenSound : MonoBehaviour {
         foreach (AudioPlayer audioplayer in audioPlayers)
         {
             audioplayer.audioSource.volume = (FindObjectOfType<StationMover>().currentSpeed / 10);
+            if (audioplayer.audioSource.volume > 0.8f)
+                audioplayer.audioSource.volume = 0.8f;
         }
         audioPlayers[0].Play();
     }
@@ -53,6 +57,8 @@ public class TrainDoorsOpenSound : MonoBehaviour {
         foreach (AudioPlayer audioplayer in audioPlayers)
         {
             audioplayer.audioSource.volume = (FindObjectOfType<StationMover>().currentSpeed / 10);
+            if (audioplayer.audioSource.volume > 0.8f)
+                audioplayer.audioSource.volume = 0.8f;
         }
 
         for (int i = 1; i < audioPlayers.Capacity; i++)

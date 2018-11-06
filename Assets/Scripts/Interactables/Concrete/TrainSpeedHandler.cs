@@ -76,7 +76,8 @@ public class TrainSpeedHandler : MonoBehaviour
             }
         }
 
-        else if (bBr_SlowDown)
+        if (bAc_StopTrain || bBr_StopTrain) return;
+        if (bBr_SlowDown)
         {
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
@@ -100,8 +101,8 @@ public class TrainSpeedHandler : MonoBehaviour
             }
         }
 
-
-        else if(bAc_SlowDownTrain)
+        if (bAc_StopTrain || bBr_StopTrain) return;
+        if(bAc_SlowDownTrain)
         {
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
@@ -113,7 +114,7 @@ public class TrainSpeedHandler : MonoBehaviour
             }
         }
 
-
+        if (bAc_StopTrain || bBr_StopTrain) return;
         if(bAc_SpeedChange)
         {
             i += Time.deltaTime * rate;
