@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class GlassBox : MonoBehaviour, IShootable
 {
-    public float thrownBreakForce, heldBreakForce;
     public GameObject brokenGlassPrefab, initialBox;
-    
+
+    private float thrownBreakForce = 2.25f, heldBreakForce = 2.75f;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Extinguisher")

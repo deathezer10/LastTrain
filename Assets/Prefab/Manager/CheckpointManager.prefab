@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114705600300943472}
   - component: {fileID: 65621044221056490}
   m_Layer: 11
-  m_Name: CheckpointManager
+  m_Name: CheckpointDDOL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
