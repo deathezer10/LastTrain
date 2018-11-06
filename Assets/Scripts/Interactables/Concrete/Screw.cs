@@ -45,30 +45,30 @@ public class Screw : MonoBehaviour
                 if (m_ScrewDriver.bIsScrewing)
                 {
                     Turnspeed = m_ScrewDriver.speed * 0.7f;
-                    switch(rotateAroundAxis)
+                    switch (rotateAroundAxis)
                     {
                         case 1:
                             {
-                                transform.Rotate(new Vector3(-1, 0, 0), Turnspeed);
+                                transform.Rotate(new Vector3(-1, 0, 0), Turnspeed * Time.deltaTime);
                                 break;
                             }
 
                         case 2:
                             {
-                                transform.Rotate(new Vector3(0, -1, 0), Turnspeed);
+                                transform.Rotate(new Vector3(0, -1, 0), Turnspeed * Time.deltaTime);
                                 break;
                             }
 
                         case 3:
                             {
-                                transform.Rotate(new Vector3(0, 0, -1), Turnspeed);
+                                transform.Rotate(new Vector3(0, 0, -1), Turnspeed * Time.deltaTime);
                                 break;
                             }
                     }
 
 
 
-                  
+
                     switch (Axis)
                     {
                         case 3:
@@ -89,7 +89,7 @@ public class Screw : MonoBehaviour
 
                                     else
                                     {
-                                        transform.position += new Vector3(0, 0, z);
+                                        transform.position += new Vector3(0, 0, z * Time.deltaTime);
                                         break;
                                     }
 
@@ -110,7 +110,7 @@ public class Screw : MonoBehaviour
 
                                     else
                                     {
-                                        transform.position += new Vector3(0, 0, z);
+                                        transform.position += new Vector3(0, 0, z * Time.deltaTime);
                                         break;
                                     }
                                 }
@@ -136,7 +136,7 @@ public class Screw : MonoBehaviour
 
                                     else
                                     {
-                                        transform.position += new Vector3(0, y, 0);
+                                        transform.position += new Vector3(0, y * Time.deltaTime, 0);
                                         break;
                                     }
 
@@ -157,7 +157,7 @@ public class Screw : MonoBehaviour
 
                                     else
                                     {
-                                        transform.position += new Vector3(0, y, 0);
+                                        transform.position += new Vector3(0, y * Time.deltaTime, 0);
                                         break;
                                     }
                                 }
@@ -168,7 +168,7 @@ public class Screw : MonoBehaviour
                             {
                                 if (x < 0)
                                 {
-                                   
+
                                     if (OriginalPosition.x - screwDistance > transform.position.x)
                                     {
                                         bIsLoose = true;
@@ -182,7 +182,7 @@ public class Screw : MonoBehaviour
 
                                     else
                                     {
-                                        transform.position += new Vector3(x, 0, 0);
+                                        transform.position += new Vector3(x * Time.deltaTime, 0, 0);
                                         break;
                                     }
 
@@ -203,7 +203,7 @@ public class Screw : MonoBehaviour
 
                                     else
                                     {
-                                        transform.position += new Vector3(x, 0, 0);
+                                        transform.position += new Vector3(x * Time.deltaTime, 0, 0);
                                         break;
                                     }
                                 }
