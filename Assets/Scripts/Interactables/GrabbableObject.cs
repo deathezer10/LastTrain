@@ -8,9 +8,46 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
+    protected List<Negi.Outline> _outlines = null;
+    private void Awake()
+    {
+        _outlines = new List<Negi.Outline>();
+        var objects = this.gameObject.transform.GetAllChild();
+        foreach (var obj in objects)
+        {
+            var renderer = obj.GetComponent<Renderer>();
+            if (renderer == null) continue;
+
+            var outline = renderer.gameObject.AddComponent<Negi.Outline>();
+            _outlines.Add(outline);
+            outline.enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// アウトラインの有無設定
+    /// </summary>
+    /// <param name="active"></param>
+    private void SetEnableOutline(bool active)
+    {
+        foreach (var outline in _outlines)
+        {
+            outline.enabled = active;
+        }
+    }
+
     public virtual bool hideControllerOnGrab { get { return true; } }
-    public virtual void OnControllerExit() { }
-    public virtual void OnControllerEnter(PlayerViveController currentController) { }
+
+    public virtual void OnControllerEnter(PlayerViveController currentController)
+    {
+        SetEnableOutline(true);
+    }
+
+    public virtual void OnControllerExit()
+    {
+        SetEnableOutline(false);
+    }
+
     public virtual void OnControllerStay() { }
     public virtual void OnGrab() { }
     public virtual void OnGrabStay() { }

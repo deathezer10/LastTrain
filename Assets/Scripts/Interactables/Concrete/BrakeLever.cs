@@ -95,6 +95,8 @@ public class BrakeLever : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+
         if (DriverCabinDoorLock.bIsUnlocked)
         {
             bCanGrab = true;
@@ -105,6 +107,8 @@ public class BrakeLever : StationaryObject
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
+        
         bCanGrab = false;
     }
 
