@@ -32,6 +32,9 @@ ModelImporter:
     100052: signboard3
     100054: signboard4
     100056: vendingmachines
+    100058: counter
+    100060: polySurface1496
+    100062: tap_plate
     400000: button
     400002: gantry_gate1
     400004: gantry_gate2
@@ -61,9 +64,13 @@ ModelImporter:
     400052: signboard3
     400054: signboard4
     400056: vendingmachines
+    400058: counter
+    400060: polySurface1496
+    400062: tap_plate
     2100000: StingrayPBS1
     2100002: lambert1
     2100004: StingrayPBS3
+    2100006: StingrayPBS2
     2300000: button
     2300002: gantry_gate1
     2300004: gantry_gate2
@@ -92,6 +99,9 @@ ModelImporter:
     2300050: signboard3
     2300052: signboard4
     2300054: vendingmachines
+    2300056: counter
+    2300058: polySurface1496
+    2300060: tap_plate
     3300000: button
     3300002: gantry_gate1
     3300004: gantry_gate2
@@ -120,6 +130,9 @@ ModelImporter:
     3300050: signboard3
     3300052: signboard4
     3300054: vendingmachines
+    3300056: counter
+    3300058: polySurface1496
+    3300060: tap_plate
     4300000: button
     4300002: platform_bot
     4300004: main
@@ -148,12 +161,20 @@ ModelImporter:
     4300050: gate1
     4300052: gate2
     4300054: polySurface1494
+    4300056: counter
+    4300058: polySurface1496
+    4300060: tap_plate
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: StingrayPBS1
     second: {fileID: 2100000, guid: b0b1188157bba2c4b823f9e394a32736, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StingrayPBS2
+    second: {fileID: 2100000, guid: 887abf3d5df69f4418e6bd3822694cc0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
