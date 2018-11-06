@@ -25,6 +25,8 @@ public class EmergencyDoorHandleHolder : MonoBehaviour
         if (controller != null)
             controller.DetachCurrentObject(false);
 
+        handle.SetHolder(this);
+
         handle.GetComponent<Rigidbody>().useGravity = false;
         handle.GetComponent<Rigidbody>().isKinematic = true;
 

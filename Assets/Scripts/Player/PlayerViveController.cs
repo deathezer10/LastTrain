@@ -73,7 +73,7 @@ public class PlayerViveController : MonoBehaviour
                             joint.breakTorque = Mathf.Infinity;
                             joint.connectedBody = GetComponent<Rigidbody>();
                             joint.enablePreprocessing = false;
-
+                             
                             currentObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                         }
                     }

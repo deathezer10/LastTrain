@@ -6,7 +6,7 @@ public class EmergencyDoorHandle : GrabbableObject
 {
     private PlayerViveController m_Controller;
 
-    private float m_LastZRot, m_OriginalZRot;
+    private float m_LastZRot;
 
     private bool m_Inserted = false;
     public bool inserted {
@@ -26,6 +26,12 @@ public class EmergencyDoorHandle : GrabbableObject
 
     float m_TotalRotation = 0;
 
+    private EmergencyDoorHandleHolder m_HandleHolder;
+
+    public void SetHolder(EmergencyDoorHandleHolder holder)
+    {
+        m_HandleHolder = holder;
+    }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -35,7 +41,7 @@ public class EmergencyDoorHandle : GrabbableObject
     public override void OnControllerStay()
     {
         if (m_Grabbing == false)
-            m_LastZRot = m_OriginalZRot = m_Controller.transform.eulerAngles.z;
+            m_LastZRot = m_Controller.transform.eulerAngles.z;
     }
 
     public override void OnGrab()
@@ -58,6 +64,7 @@ public class EmergencyDoorHandle : GrabbableObject
             if (m_LastZRot != currentZRot)
             {
                 transform.Rotate(rotationDelta, 0, 0);
+                m_HandleHolder.transform.Rotate(rotationDelta, 0, 0);
                 m_LastZRot = currentZRot;
                 m_TotalRotation += Mathf.DeltaAngle(rotationDelta, 0);
 
