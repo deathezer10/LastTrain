@@ -14,6 +14,7 @@ public class StationMover : MonoBehaviour
     int m_CurrentTunnelIndex = 0;
     float m_CurrentDistanceTraveled = 0;
     const float m_TunnelGapOffset = 20.24f;
+    const float m_TunnelXOffset = -5.05f;
     bool m_IsFirstTimeDestroy = true;
     public TrainDoorsOpenSound trainSounds;
     // Movement variables
@@ -41,8 +42,8 @@ public class StationMover : MonoBehaviour
     {
         for (int i = 1; i <= m_InitialTunnelSpawnAmount; ++i)
         {
-            m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * m_TunnelGapOffset), Quaternion.identity, transform); // Right side
-            GameObject leftTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
+            m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, i * m_TunnelGapOffset), Quaternion.identity, transform); // Right side
+            GameObject leftTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
             m_InitialRemovableObjects.Enqueue(m_LastRightTunnel.transform);
             m_InitialRemovableObjects.Enqueue(leftTunnel.transform);
         }
@@ -84,7 +85,7 @@ public class StationMover : MonoBehaviour
                 Destroy(m_RemovableObjects.Dequeue().gameObject);
             }
 
-            m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+            m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
             m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
         }
     }
