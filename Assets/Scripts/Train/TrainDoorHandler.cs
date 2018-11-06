@@ -39,53 +39,55 @@ public class TrainDoorHandler : MonoBehaviour
 
     public void ToggleDoors(bool opened, System.Action onComplete = null)
     {
+        if (opened)
+            doorsOpenSound.PlayDingDong();
+
         int direction = (opened) ? 1 : -1;
 
-            for (int i = 0; i < m_Doors.Count; ++i)
+        for (int i = 0; i < m_Doors.Count; ++i)
+        {
+            var door = m_Doors[i];
+
+            if (door.Key == DoorSide.Left)
             {
-                var door = m_Doors[i];
+                var tweener = door.Value.DOLocalMoveZ(m_DoorOffset * direction, 2).SetRelative();
 
-                if (door.Key == DoorSide.Left)
+                if (i == 0)
                 {
-                    var tweener = door.Value.DOLocalMoveZ(m_DoorOffset * direction, 2).SetRelative();
-
-                    if (i == 0)
+                    tweener.OnComplete(() =>
                     {
-                        tweener.OnComplete(() =>
-                        {
-
-                            if (onComplete != null)
-                                onComplete();
-                        });
-                    }
-                }
-                else
-                {
-                    var tweener = door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 2).SetRelative();
-
-                    if (i == 0)
-                    {
-                        tweener.OnComplete(() =>
-                        {
-                            if (onComplete != null)
-                                onComplete();
-                        });
-                    }
+                        if (onComplete != null)
+                            onComplete();
+                    });
                 }
             }
+            else
+            {
+                var tweener = door.Value.DOLocalMoveZ(-m_DoorOffset * direction, 2).SetRelative();
+
+                if (i == 0)
+                {
+                    tweener.OnComplete(() =>
+                    {
+                        if (onComplete != null)
+                            onComplete();
+                    });
+                }
+            }
+        }
 
     }
 
     public void ToggleDriverDoor()
     {
-       transform.GetChild(2).gameObject.transform.DOLocalMoveZ(m_DoorOffset * 1, 2).SetRelative();
+        transform.GetChild(2).gameObject.transform.DOLocalMoveZ(m_DoorOffset * 1, 2).SetRelative();
         bIsDriverDoorOpen = true;
     }
-           
+
 
 
 }
 
 
 
-    
+
