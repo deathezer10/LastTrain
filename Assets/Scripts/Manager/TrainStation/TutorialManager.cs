@@ -22,10 +22,11 @@ public class TutorialManager : MonoBehaviour
     public InstructionImage m_ImageTeleport, m_ImageWallet, m_ImageGripButton, m_ImageUnlockGates;
 
     private PlayerTeleportation m_PlayerTeleportation;
-
-    // Use this for initialization
+    
     void Start()
     {
+        tutorialEnabled = Checkpoint.CHECKPOINT_ACTIVATED ? false : true;
+
         if (tutorialEnabled)
         {
             m_PlayerTeleportation = FindObjectOfType<PlayerTeleportation>();

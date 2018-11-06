@@ -6,7 +6,7 @@ using DG.Tweening;
 public class TrainArriver : MonoBehaviour
 {
 
-    public TrainDoorHandler m_TrainDoor;
+    //public TrainDoorHandler m_TrainDoor;
 
     const float m_TrainStoppingPoint = 18f;
 
