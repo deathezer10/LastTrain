@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4298654195588364}
   - component: {fileID: 65008420326528308}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BombStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1820,8 +1820,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839fbf8a737d7fd4590770cb6e71ef61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrownBreakForce: 2.5
-  heldBreakForce: 3
   brokenGlassPrefab: {fileID: 1296276093833850, guid: 5cf2b599c7824ef4db2cfd017e54dbe2,
     type: 2}
   initialBox: {fileID: 1803378410400688}

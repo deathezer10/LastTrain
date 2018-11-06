@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4500836342273548}
   - component: {fileID: 65159602802401380}
   - component: {fileID: 114868278001612538}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlatformEntryChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
