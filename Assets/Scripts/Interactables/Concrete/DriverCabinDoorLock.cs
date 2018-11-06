@@ -151,6 +151,8 @@ public class DriverCabinDoorLock : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+        
         Awaked = true;
         if (bIsUnlocked)
         {
@@ -161,6 +163,8 @@ public class DriverCabinDoorLock : StationaryObject
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
+        
         if (bIsGrabbing)
         {
             VelocityEnd = PlayerHand.transform.position;

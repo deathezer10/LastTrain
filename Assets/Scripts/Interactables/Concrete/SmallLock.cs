@@ -11,10 +11,12 @@ public class SmallLock : GrabbableObject, IShootable
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
     }
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
     }
 
     public override void OnControllerStay()

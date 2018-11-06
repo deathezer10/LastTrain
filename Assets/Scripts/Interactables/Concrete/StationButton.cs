@@ -20,6 +20,8 @@ public class StationButton : StationaryObject, IShootable
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+
         if (m_Toggled == false)
         {
             m_Toggled = true;
@@ -44,6 +46,7 @@ public class StationButton : StationaryObject, IShootable
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
     }
 
     public override void OnControllerStay()
@@ -72,7 +75,7 @@ public class StationButton : StationaryObject, IShootable
 
     public void OnShot(Revolver revolver)
     {
-        OnControllerEnter(null);
+        this.OnControllerEnter(null);
     }
 
 }

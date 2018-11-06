@@ -43,11 +43,15 @@ public class ScrewDriver : GrabbableObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+
         Controller = currentController;
     }
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
+        
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = true;
         Destroy(ScrewDriverClone);
         bIsGrabbing = false;
