@@ -37,9 +37,6 @@ public class PlayerTeleportation : MonoBehaviour
     [Tag, SerializeField]
     private List<string> _getOnTags;
 
-    [Layer,SerializeField]
-    private int[] _checkLayers;
-
     [SerializeField]
     private GameObject _targetMarker;
 
@@ -158,10 +155,9 @@ public class PlayerTeleportation : MonoBehaviour
         RaycastHit hit;
         Debug.DrawLine(ray.origin, ray.direction * _initialVelocity, Color.green);
 
-        var layers = GetIgnoreLayersName();
-        int layerMask = LayerMask.GetMask(layers);
+        if (Physics.Raycast(ray, out hit, 20.0f,-1,QueryTriggerInteraction.Ignore) == false) return null;
 
-        if (Physics.Raycast(ray, out hit, 20.0f, layerMask) == false) return null;
+        Debug.Log($"{hit.transform.gameObject}");
 
         var colliderTag = hit.collider.tag;
         foreach (var tag in _getOnTags)
@@ -172,16 +168,6 @@ public class PlayerTeleportation : MonoBehaviour
             }
         }
         return null;
-    }
-
-    private string[] GetIgnoreLayersName()
-    {
-        List<string> tmp = new List<string>();
-        foreach (var layer in _checkLayers)
-        {
-            tmp.Add(LayerMask.LayerToName(layer));
-        }
-        return tmp.ToArray();
     }
 
     /// <summary>
