@@ -67,6 +67,7 @@ public class TrainSpeedHandler : MonoBehaviour
         {
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
+            trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
             if (stationMover.currentSpeed == 0)
             {
                 bBr_StopTrain = false;
@@ -82,6 +83,7 @@ public class TrainSpeedHandler : MonoBehaviour
             if (bAc_StopTrain || bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
+            trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
             if (stationMover.currentSpeed == 3)
             {
                 stationMover.currentMaxSpeed = 3;
@@ -94,6 +96,7 @@ public class TrainSpeedHandler : MonoBehaviour
         {
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
+            trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
             if (stationMover.currentSpeed == 0)
             {
                 bAc_StopTrain = false;
@@ -108,11 +111,11 @@ public class TrainSpeedHandler : MonoBehaviour
             if (bAc_StopTrain || bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
+            trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
             if (stationMover.currentSpeed == 3)
             {
                 bAc_SlowDownTrain = false;
                 i = 0;
-                stationMover.currentMaxSpeed = 3;
             }
         }
 
@@ -122,6 +125,7 @@ public class TrainSpeedHandler : MonoBehaviour
             if (bAc_StopTrain || bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
+            trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
 
             if (stationMover.currentSpeed == NewTrainSpeed)
             {
