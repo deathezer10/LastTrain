@@ -11,7 +11,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     private float PreviousTrainSpeed = 10.0f;
     private float NewTrainSpeed;
-    private float rate = 0.1f;
+    private float rate = 0.25f;
     private float i = 0;
 
     private bool bBr_StopTrain = false;
@@ -72,15 +72,18 @@ public class TrainSpeedHandler : MonoBehaviour
                 bBr_StopTrain = false;
                 i = 0;
                 bCanAccelerate = false;
+                stationMover.currentMaxSpeed = 0;
             }
         }
 
-        else if (bBr_SlowDown)
+        if (bAc_StopTrain || bBr_StopTrain) return;
+        if (bBr_SlowDown)
         {
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
             if (stationMover.currentSpeed == 3)
             {
+                stationMover.currentMaxSpeed = 3;
                 bBr_SlowDown = false;
                 i = 0;
             }
@@ -94,11 +97,12 @@ public class TrainSpeedHandler : MonoBehaviour
             {
                 bAc_StopTrain = false;
                 bCanAccelerate = false;
+                stationMover.currentMaxSpeed = 0;
             }
         }
 
-
-        else if(bAc_SlowDownTrain)
+        if (bAc_StopTrain || bBr_StopTrain) return;
+        if(bAc_SlowDownTrain)
         {
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
@@ -106,10 +110,11 @@ public class TrainSpeedHandler : MonoBehaviour
             {
                 bAc_SlowDownTrain = false;
                 i = 0;
+                stationMover.currentMaxSpeed = 3;
             }
         }
 
-
+        if (bAc_StopTrain || bBr_StopTrain) return;
         if(bAc_SpeedChange)
         {
             i += Time.deltaTime * rate;
