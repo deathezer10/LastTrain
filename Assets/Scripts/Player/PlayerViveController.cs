@@ -63,6 +63,7 @@ public class PlayerViveController : MonoBehaviour
                             ToggleControllerModel(false);
 
                         grabbableObject.OnGrab();
+                        Debug.Log(currentObject.name);
 
                         AssignObjectToHand(currentHand, currentObject.gameObject);
 
@@ -72,8 +73,8 @@ public class PlayerViveController : MonoBehaviour
                             joint.breakForce = 7500;
                             joint.breakTorque = Mathf.Infinity;
                             joint.connectedBody = GetComponent<Rigidbody>();
-                            joint.enablePreprocessing = false;
-                             
+                            joint.enablePreprocessing = true;
+
                             currentObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                         }
                     }
@@ -146,7 +147,9 @@ public class PlayerViveController : MonoBehaviour
         if (iObject != null)
         {
             iObject.OnControllerExit();
-            DetachCurrentObject(false);
+
+            if (other.gameObject == GetCurrentHandObject())
+                DetachCurrentObject(false);
         }
     }
 
@@ -230,6 +233,7 @@ public class PlayerViveController : MonoBehaviour
                     rb.velocity = controllerVelocity;
                     rb.angularVelocity = controllerAngularVelocity;
                 }
+                Debug.LogFormat("Detached l {0}", currentObject.name);
             }
         }
     }

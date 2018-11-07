@@ -137,11 +137,7 @@
                   }
                },
                "mode" : "button",
-               "parameters" : {
-                  "click_activate_threshold" : "0.75",
-                  "click_deactivate_threshold" : "0.7",
-                  "force_input" : "value"
-               },
+               "parameters" : {},
                "path" : "/user/hand/left/input/trigger"
             },
             {
@@ -160,10 +156,7 @@
                   }
                },
                "mode" : "button",
-               "parameters" : {
-                  "click_activate_threshold" : "0.75",
-                  "click_deactivate_threshold" : "0.7"
-               },
+               "parameters" : {},
                "path" : "/user/hand/right/input/trigger"
             },
             {

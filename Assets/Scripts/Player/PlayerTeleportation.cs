@@ -155,7 +155,7 @@ public class PlayerTeleportation : MonoBehaviour
         RaycastHit hit;
         Debug.DrawLine(ray.origin, ray.direction * _initialVelocity, Color.green);
 
-        if (Physics.Raycast(ray, out hit, 20.0f,-1,QueryTriggerInteraction.Ignore) == false) return null;
+        if (Physics.Raycast(ray, out hit, 20.0f, -1, QueryTriggerInteraction.Ignore) == false) return null;
 
         Debug.Log($"{hit.transform.gameObject}");
 
