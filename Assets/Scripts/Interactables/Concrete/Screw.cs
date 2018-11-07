@@ -22,7 +22,7 @@ public class Screw : MonoBehaviour
     void Start()
     {
         m_ScrewDriver = FindObjectOfType<ScrewDriver>();
-        OriginalPosition = transform.position;
+        OriginalPosition = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -76,7 +76,7 @@ public class Screw : MonoBehaviour
                                 if (z < 0)
                                 {
                                     screwDistance *= -1;
-                                    if ((transform.localPosition.z + screwDistance) > transform.localPosition.z)
+                                    if ((OriginalPosition.z + screwDistance) > transform.localPosition.z)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().isKinematic = false;
@@ -98,7 +98,7 @@ public class Screw : MonoBehaviour
                                 else
                                 {
                                    
-                                    if ((transform.localPosition.z + screwDistance) < transform.localPosition.z)
+                                    if ((OriginalPosition.z + screwDistance) < transform.localPosition.z)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().isKinematic = false;
