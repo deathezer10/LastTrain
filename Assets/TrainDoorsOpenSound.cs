@@ -32,6 +32,11 @@ public class TrainDoorsOpenSound : MonoBehaviour
         trainEngine.audioSource.volume = val;
     }
 
+    public void SetAudioLevelPitch(float val)
+    {
+        trainEngine.audioSource.pitch = normalize13(val, 1, 3); 
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -94,5 +99,11 @@ public class TrainDoorsOpenSound : MonoBehaviour
         {
             audioPlayers[i].Stop();
         }
+    }
+
+    private float normalize13(float value, float min, float max)
+    {
+        float normalized = (value - min) / (max - min);
+        return normalized;
     }
 }

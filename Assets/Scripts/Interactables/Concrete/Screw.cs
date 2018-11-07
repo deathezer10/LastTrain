@@ -44,7 +44,7 @@ public class Screw : MonoBehaviour
             {
                 if (m_ScrewDriver.bIsScrewing)
                 {
-                    Turnspeed = m_ScrewDriver.speed * 0.7f;
+                    Turnspeed = m_ScrewDriver.speed;
                     switch (rotateAroundAxis)
                     {
                         case 1:
@@ -76,7 +76,7 @@ public class Screw : MonoBehaviour
                                 if (z < 0)
                                 {
                                     screwDistance *= -1;
-                                    if ((OriginalPosition.z + screwDistance) > transform.position.z)
+                                    if ((transform.localPosition.z + screwDistance) > transform.localPosition.z)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().isKinematic = false;
@@ -97,10 +97,9 @@ public class Screw : MonoBehaviour
 
                                 else
                                 {
-                                    if ((OriginalPosition.z + screwDistance) < transform.position.z)
+                                   
+                                    if ((transform.localPosition.z + screwDistance) < transform.localPosition.z)
                                     {
-                                        print(OriginalPosition.z + screwDistance);
-                                        print(transform.position.z);
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().isKinematic = false;
                                         transform.GetComponent<Rigidbody>().useGravity = true;

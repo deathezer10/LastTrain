@@ -25,15 +25,13 @@ public class TrainEscapeHandler : MonoBehaviour
         {
             Debug.Log("Player exited the train, train was moving at a speed of " + stationMover.currentSpeed);
 
-            if (stationMover.currentSpeed <= 1f)
+            if (stationMover.currentSpeed <= 2f)
             {
-                Debug.Log("Player victory.");
-                //FindObjectOfType<PlayerVictoryHandler>().PlayerVictory();
+                FindObjectOfType<PlayerVictoryHandler>().PlayerVictory();
             }
             else
             {
-                Debug.Log("Player death.");
-                //FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainjump");
+                FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainjump");
             }
         }
     }
