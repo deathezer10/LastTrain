@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TeleportPointVisible
+  m_Name: TutorialTeleportPoint
   m_Shader: {fileID: 4800000, guid: 787d7485aa6482341a9f55fa37fb84f1, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 5

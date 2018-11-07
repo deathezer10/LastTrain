@@ -50,7 +50,7 @@ public class TutorialManager : MonoBehaviour
             m_ImageUnlockGates = Instantiate(m_ImageUnlockGates);
             m_ImageUnlockGates.gameObject.SetActive(false);
 
-            Invoke("StartTutorial", 1.5f);
+            Invoke("StartTutorialVersion2", 1.5f);
         }
         else  // Skipping tutorial to checkpoint position * or just move this check to a seperate check script on the player object
         {
@@ -61,7 +61,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    void StartTutorial()
+    void StartTutorialVersion1()
     {
 
         var audioPlayer = GetComponent<AudioPlayer>();
@@ -105,6 +105,11 @@ public class TutorialManager : MonoBehaviour
            );
 
         }, 0.5f);
+
+    }
+
+    void StartTutorialVersion2()
+    {
 
     }
 
