@@ -13,7 +13,7 @@ public class PlayerViveMovement : MonoBehaviour
     private const float m_PlayerMoveSpeed = 2;
     private const float m_ForwardTouchpadThreshold = 0.15f;
 
-    private const bool m_MovementEnabled = true;
+    private const bool m_MovementEnabled = false;
 
     private void Start()
     {
