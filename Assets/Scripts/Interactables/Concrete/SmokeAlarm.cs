@@ -19,7 +19,7 @@ public class SmokeAlarm : MonoBehaviour
         {
             alarmStarted = true;
             fireAlarmSound.Play();
-            // Call to open doors.
+            FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
         }
     }
 }

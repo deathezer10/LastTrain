@@ -48,6 +48,7 @@ public class TrainBoardingDetector : MonoBehaviour
                     });
 
                     m_TrainTimeHandler.StartTrainTime();
+                    FindObjectOfType<TrainEscapeHandler>().TrainMoveStart();
                 });
             }
         }
