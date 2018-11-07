@@ -4,36 +4,45 @@ using UnityEngine;
 
 public class TrainEscapeHandler : MonoBehaviour
 {
-    bool trainHasStopped;
+    BoxCollider[] colliders;
+    StationMover stationMover;
 
     private void Start()
     {
-        GetComponent<BoxCollider>().enabled = false;
+        stationMover = FindObjectOfType<StationMover>();
+
+        colliders = GetComponents<BoxCollider>();
+
+        foreach (BoxCollider col in colliders)
+        {
+            col.enabled = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (trainHasStopped)
+            Debug.Log("Player exited the train, train was moving at a speed of " + stationMover.currentSpeed);
+
+            if (stationMover.currentSpeed <= 1f)
             {
-                FindObjectOfType<PlayerVictoryHandler>().PlayerVictory();
+                Debug.Log("Player victory.");
+                //FindObjectOfType<PlayerVictoryHandler>().PlayerVictory();
             }
             else
             {
-                FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainjump");
+                Debug.Log("Player death.");
+                //FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainjump");
             }
         }
     }
 
     public void TrainMoveStart()
     {
-        trainHasStopped = false;
-        GetComponent<BoxCollider>().enabled = true;
-    }
-
-    public void TrainMoveStop()
-    {
-        trainHasStopped = true;
+        foreach (BoxCollider col in colliders)
+        {
+            col.enabled = true;
+        }
     }
 }
