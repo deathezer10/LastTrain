@@ -42,7 +42,8 @@ public class TrainDoorsOpenSound : MonoBehaviour
         if (val > 0)
             newPitch = val / 10;
         else val = 0;
-        trainEngine.audioSource.pitch = newPitch;
+
+        trainEngine.audioSource.pitch = Mathf.Clamp(newPitch, 1, 2.3f); 
     }
 
     // Use this for initialization
