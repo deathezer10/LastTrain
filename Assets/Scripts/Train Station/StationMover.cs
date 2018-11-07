@@ -34,8 +34,7 @@ public class StationMover : MonoBehaviour
     public float currentSpeed {
         get { return m_CurrentStationSpeed; }
         set { m_CurrentStationSpeed = value;
-            trainSounds.SetAudioLevelEngine(currentSpeed);
-            trainSounds.SetAudioLevelSpeed(currentSpeed);
+            trainSounds.SetAudioLevelSpeed(value);
         }
     }
 

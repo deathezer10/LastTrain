@@ -34,7 +34,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
 
     public void SetAudioLevelSpeed(float val)
     {
-        trainEngine.audioSource.pitch = normalize13(val, 1, 3); 
+        trainEngine.audioSource.pitch = Mathf.Lerp(1, 2.3f, normalize13(val, 0, 10));
     }
 
     // Use this for initialization
