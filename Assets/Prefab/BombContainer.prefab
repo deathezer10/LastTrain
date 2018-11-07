@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 114494969716825540}
   - component: {fileID: 114227463429943816}
   - component: {fileID: 114529594900546162}
+  - component: {fileID: 114247832116597510}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -658,7 +659,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1753902074009712}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.027817726, y: -2, z: -17.2}
+  m_LocalPosition: {x: 13.940392, y: 1.3747396, z: -13.053285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4881257361497940}
@@ -1175,7 +1176,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1928453106798102}
-  m_Mesh: {fileID: 4300000, guid: 3352443c225df904785efb7e941c7ca7, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 7fca341f15140e943a5857f0b5fd392a, type: 3}
 --- !u!33 &33085514729456926
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1224,7 +1225,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1576550649037486}
-  m_Mesh: {fileID: 4300000, guid: 91f4ccc91fb6f7843a7309d9b14b38b3, type: 3}
+  m_Mesh: {fileID: 4300000, guid: b105e72ad75a48745a9f124ef72c6ded, type: 3}
 --- !u!33 &33629450415620294
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1252,14 +1253,14 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008456428898504}
-  m_Mesh: {fileID: 4300000, guid: 422589598a5ee174bbbcebc858dde495, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 4930746fd19332843af94274725e6456, type: 3}
 --- !u!33 &33934516624677600
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1105695215768366}
-  m_Mesh: {fileID: 4300000, guid: 62d2bb63f125007429592a2bd3dd8c57, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 712c75bf7e5222e45b60da09cb2e9cdd, type: 3}
 --- !u!54 &54376999192156490
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -1604,6 +1605,22 @@ MonoBehaviour:
   playDelay: 0
   _clip: {fileID: 8300000, guid: 7a0b1732f0ea7834191fe6d6fe09e53a, type: 3}
   clipAlias: 
+--- !u!114 &114247832116597510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033655420370026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2782a74d37cb4974c9ac2bee8d406729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizePitch: 0
+  pitchRandomRange: 0.2
+  playDelay: 0
+  _clip: {fileID: 8300000, guid: 2d2ca711934477b4bbacc860c70ed638, type: 3}
+  clipAlias: 
 --- !u!114 &114489620858957662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1701,11 +1718,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23361026223725846}

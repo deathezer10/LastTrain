@@ -148,9 +148,9 @@ public class Bomb : GrabbableObject, IShootable
 
         foreach (AudioPlayer player in audioPlayers)
         {
-            if (player.clip.name == "umbrella_unfolding_2")
+            if (player.clip.name == "bomb_defused")
             {
-                player.audioSource.volume = 0.5f;
+                player.audioSource.volume = 1f;
                 player.audioSource.loop = false;
                 player.Play();
                 break;
