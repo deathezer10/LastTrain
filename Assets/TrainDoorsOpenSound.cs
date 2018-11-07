@@ -10,7 +10,11 @@ public class TrainDoorsOpenSound : MonoBehaviour
 
     public AudioPlayer dingdongPlayer;
     public AudioPlayer trainEngine;
-
+    private float i = 0;
+    private float rate = 0.25f;
+    private bool bChangePitch = false;
+    private float newPitch;
+    private float PreviousPitch;
     public float GetAudioLevel()
     {
         return audioPlayers[0].audioSource.volume;
@@ -23,6 +27,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
         {
             if (val > 0.8f) val = 0.8f;
             audioplayer.audioSource.volume = val;
+            PreviousPitch = 1;
         }
     }
 
@@ -34,7 +39,9 @@ public class TrainDoorsOpenSound : MonoBehaviour
 
     public void SetAudioLevelSpeed(float val)
     {
-        trainEngine.audioSource.pitch = Mathf.Lerp(1, 2.3f, normalize13(val, 0, 10));
+        i = 0;
+        newPitch = val;
+        bChangePitch = true;
     }
 
     // Use this for initialization
@@ -51,7 +58,17 @@ public class TrainDoorsOpenSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(bChangePitch)
+        {
+            i += Time.deltaTime * rate;
+            trainEngine.audioSource.pitch = Mathf.Lerp(PreviousPitch, Mathf.Lerp(1, 2.3f, normalize13(newPitch, 0, 10)), i);
 
+            if (trainEngine.audioSource.pitch == Mathf.Lerp(1, 2.3f, normalize13(newPitch, 0, 10)))
+            {
+                bChangePitch = false;
+                i = 0;
+            }
+        }
     }
 
     public void PlayDingDong()
