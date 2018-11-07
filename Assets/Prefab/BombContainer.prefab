@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 114494969716825540}
   - component: {fileID: 114227463429943816}
   - component: {fileID: 114529594900546162}
+  - component: {fileID: 114247832116597510}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -1603,6 +1604,22 @@ MonoBehaviour:
   pitchRandomRange: 0.2
   playDelay: 0
   _clip: {fileID: 8300000, guid: 7a0b1732f0ea7834191fe6d6fe09e53a, type: 3}
+  clipAlias: 
+--- !u!114 &114247832116597510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033655420370026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2782a74d37cb4974c9ac2bee8d406729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizePitch: 0
+  pitchRandomRange: 0.2
+  playDelay: 0
+  _clip: {fileID: 8300000, guid: 2d2ca711934477b4bbacc860c70ed638, type: 3}
   clipAlias: 
 --- !u!114 &114489620858957662
 MonoBehaviour:
