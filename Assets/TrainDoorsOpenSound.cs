@@ -32,7 +32,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
         trainEngine.audioSource.volume = val;
     }
 
-    public void SetAudioLevelPitch(float val)
+    public void SetAudioLevelSpeed(float val)
     {
         trainEngine.audioSource.pitch = normalize13(val, 1, 3); 
     }
@@ -45,6 +45,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
             audioPlayers.Add(transform.GetChild(i).GetComponent<AudioPlayer>());
         }
         trainEngine = transform.Find("TrainEngine").GetComponent<AudioPlayer>();
+        trainEngine.Play();
     }
 
     // Update is called once per frame
