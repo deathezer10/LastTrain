@@ -28,7 +28,7 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
             }
 
         if (this.gameObject.name == "CameraFollower") return;
-        if (other.gameObject.name == "FullMergedTrain")
+        if (other.gameObject.name == "Shell")
         {
             if (FindObjectOfType<TrainVelocity>().GetVelocity > 2 && !FindObjectOfType<TrainArriver>().HasArrived)
                playerDeathHandler.KillPlayer("death_trainhit");

@@ -76,7 +76,7 @@ public class Screw : MonoBehaviour
                                 if (z < 0)
                                 {
                                     screwDistance *= -1;
-                                    if (OriginalPosition.z + screwDistance > transform.position.z)
+                                    if ((OriginalPosition.z + screwDistance) > transform.position.z)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().isKinematic = false;
@@ -97,8 +97,10 @@ public class Screw : MonoBehaviour
 
                                 else
                                 {
-                                    if (OriginalPosition.z + screwDistance < transform.position.z)
+                                    if ((OriginalPosition.z + screwDistance) < transform.position.z)
                                     {
+                                        print(OriginalPosition.z + screwDistance);
+                                        print(transform.position.z);
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().isKinematic = false;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
@@ -110,7 +112,7 @@ public class Screw : MonoBehaviour
 
                                     else
                                     {
-                                        transform.position += new Vector3(0, 0, z * Time.deltaTime);
+                                        transform.position += new Vector3(0, 0, (z * Time.deltaTime));
                                         break;
                                     }
                                 }
