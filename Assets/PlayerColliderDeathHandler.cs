@@ -6,18 +6,16 @@ using UnityEngine;
 public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
 {
     PlayerDeathHandler playerDeathHandler;
-    // Use this for initialization
+
     void Start () {
         playerDeathHandler = FindObjectOfType<PlayerDeathHandler>();
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     private void OnTriggerEnter(Collider other)
     {
+        // This block handled in TrainEscapeHandler, for now.
+
+        /*
         if (this.gameObject.name == "CameraFollower")
         if (other.gameObject.name == "tunnel_bot")
             {
@@ -26,6 +24,7 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
                     playerDeathHandler.KillPlayer("death_trainjump");
                 }
             }
+        */
 
         if (this.gameObject.name == "CameraFollower") return;
         if (other.gameObject.name == "FullMergedTrain")
