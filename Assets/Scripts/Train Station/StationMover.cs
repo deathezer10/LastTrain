@@ -33,9 +33,7 @@ public class StationMover : MonoBehaviour
     float m_CurrentStationSpeed = 0;
     public float currentSpeed {
         get { return m_CurrentStationSpeed; }
-        set { m_CurrentStationSpeed = value;
-            trainSounds.SetAudioLevelSpeed(value);
-        }
+        set { m_CurrentStationSpeed = value;}
     }
 
     private void Start()
@@ -61,7 +59,7 @@ public class StationMover : MonoBehaviour
     {
         m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * ((m_IsMoving) ? 1 : -1) * Time.deltaTime), 0, m_CurrentStationMaxSpeed);
         m_CurrentDistanceTraveled += m_CurrentStationSpeed * Time.deltaTime;
-
+        trainSounds.SetAudioLevelSpeed(m_CurrentStationSpeed);
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
         if (Mathf.Abs(m_CurrentDistanceTraveled) >= m_TunnelGapOffset)
