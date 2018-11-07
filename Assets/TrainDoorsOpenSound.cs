@@ -41,6 +41,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
     {
         i = 0;
         newPitch = val;
+        PreviousPitch = trainEngine.audioSource.pitch;
         bChangePitch = true;
     }
 
@@ -63,7 +64,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
             i += Time.deltaTime * rate;
             trainEngine.audioSource.pitch = Mathf.Lerp(PreviousPitch, Mathf.Lerp(1, 2.3f, normalize13(newPitch, 0, 10)), i);
 
-            if (trainEngine.audioSource.pitch == Mathf.Lerp(2.3f, 1, normalize13(newPitch, 0, 10)))
+            if (trainEngine.audioSource.pitch == Mathf.Lerp(1, 2.3f, normalize13(newPitch, 0, 10)))
             {
                 PreviousPitch = trainEngine.audioSource.pitch;
                 bChangePitch = false;
