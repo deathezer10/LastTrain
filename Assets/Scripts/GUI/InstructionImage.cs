@@ -13,20 +13,26 @@ public class InstructionImage : MonoBehaviour
     private Transform m_HolderTransform;
 
     [SerializeField]
+    private bool m_EnableBobbing = true;
+
+    [SerializeField]
     private bool m_IsFacingPlayer = true;
     public bool facePlayer {
         get { return m_IsFacingPlayer; }
         set { m_IsFacingPlayer = value; }
     }
-    
+
     private void OnEnable()
     {
-        RectTransform rTransform = GetComponent<RectTransform>();
-        rTransform.DOComplete();
-        rTransform.sizeDelta = Vector2.zero;
-        rTransform.DOSizeDelta(m_ExpandedImageSize, 1).SetEase(Ease.OutElastic);
+        if (m_EnableBobbing)
+        {
+            RectTransform rTransform = GetComponent<RectTransform>();
+            rTransform.DOComplete();
+            rTransform.sizeDelta = Vector2.zero;
+            rTransform.DOSizeDelta(m_ExpandedImageSize, 1).SetEase(Ease.OutElastic);
+        }
     }
-    
+
     private void Update()
     {
         if (facePlayer)

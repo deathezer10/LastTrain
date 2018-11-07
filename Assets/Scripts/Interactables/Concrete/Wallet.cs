@@ -26,10 +26,11 @@ public class Wallet : GrabbableObject
     {
         if (!m_HasAnnounced)
         {
-            m_TManager.m_ImageWallet.MoveToHolder();
-            m_TManager.m_ImageGripButton.gameObject.SetActive(true);
-            m_TManagerAudioPlayer.Stop();
-            m_TManagerAudioPlayer.Play("tutorial_wallet_outro");
+            //m_TManager.m_ImageWallet.MoveToHolder();
+            //m_TManager.m_ImageGripButton.gameObject.SetActive(true);
+            //m_TManagerAudioPlayer.Stop();
+            //m_TManagerAudioPlayer.Play("tutorial_wallet_outro");
+            m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
             m_HasAnnounced = true;
         }
     }
@@ -38,16 +39,16 @@ public class Wallet : GrabbableObject
     {
         if (!m_HasUsedOnce)
         {
-            m_TManager.m_ImageGripButton.MoveToHolder();
-            m_TManager.m_ImageUnlockGates.gameObject.SetActive(true);
-            m_TManagerAudioPlayer.Stop();
-            m_TManagerAudioPlayer.Play("tutorial_ic_card");
+            //m_TManager.m_ImageGripButton.MoveToHolder();
+            //m_TManager.m_ImageUnlockGates.gameObject.SetActive(true);
+            //m_TManagerAudioPlayer.Stop();
+            //m_TManagerAudioPlayer.Play("tutorial_ic_card");
 
             GetComponent<Animator>().Play("Open");
             m_colliders[1].enabled = true;
             m_colliders[0].enabled = false;
 
-            GameObject obj = Instantiate(m_ICCardPrefab,transform.position, Quaternion.identity);
+            GameObject obj = Instantiate(m_ICCardPrefab, transform.position, Quaternion.identity);
             Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
             m_HasUsedOnce = true;
         }
