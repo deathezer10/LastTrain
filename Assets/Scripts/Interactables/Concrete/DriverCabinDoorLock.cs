@@ -39,13 +39,13 @@ public class DriverCabinDoorLock : StationaryObject
     {
         if(transform.parent.name == "DCabinDr")
         {
-            doorBody = transform.parent.GetComponent<Rigidbody>();
+            doorBody = transform.parent.Find("DoorPhysics").GetComponent<Rigidbody>();
             DoorMesh = transform.parent.GetComponent<BoxCollider>();
         }
 
         else if(transform.parent.name == "DoorPhysics")
         {
-            doorBody = transform.parent.Find("DCabinDr").GetComponent<Rigidbody>();
+            doorBody = transform.parent.GetComponent<Rigidbody>();
             DoorMesh = transform.parent.GetChild(0).GetComponent<BoxCollider>();
         }
 
