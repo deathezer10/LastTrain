@@ -29,6 +29,7 @@ public class BombWire : MonoBehaviour
     private void WireCut()
     {
         GetComponent<BoxCollider>().enabled = false;
+        GetComponent<AudioPlayer>().Play();
 
         Bomb bomb = FindObjectOfType<Bomb>();
 
