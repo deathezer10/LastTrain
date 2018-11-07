@@ -48,7 +48,7 @@ public class Wallet : GrabbableObject
             m_colliders[1].enabled = true;
             m_colliders[0].enabled = false;
 
-            GameObject obj = Instantiate(m_ICCardPrefab, transform.position + new Vector3(0f, 0f, 1f), Quaternion.identity);
+            GameObject obj = Instantiate(m_ICCardPrefab, transform.position + new Vector3(0f, 0f, 0.15f), Quaternion.identity);
             Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
             m_HasUsedOnce = true;
         }
