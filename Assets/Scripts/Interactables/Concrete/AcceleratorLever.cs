@@ -19,8 +19,6 @@ public class AcceleratorLever : StationaryObject
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
-    private bool bIsActivating = false;
-    private AudioPlayer Audio;
     private float NewTrainSpeed;
 
     //Static function for brakelever to check if this AcceleratorLever is engaged.
@@ -49,7 +47,6 @@ public class AcceleratorLever : StationaryObject
 
         HandleMovementDirection = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
         HandleMovementDirection.Normalize(); //The direction where Acceleratorhandle can be moved forth and back.
-        Audio = GetComponent<AudioPlayer>();
 
         trainSpeedHandler = FindObjectOfType<TrainSpeedHandler>();
 
@@ -146,7 +143,6 @@ public class AcceleratorLever : StationaryObject
     {
         if (DriverCabinDoorLock.bIsUnlocked)
         {
-            bIsActivating = true;
             bCanGrab = true;
             PlayerHand = currentController.gameObject;
         }

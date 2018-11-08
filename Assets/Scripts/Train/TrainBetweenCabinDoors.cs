@@ -39,7 +39,7 @@ public class TrainBetweenCabinDoors : MonoBehaviour
         {
             foreach (GameObject door in betweenDoors)
             {
-                var tweener = door.transform.DOLocalMoveX(offset, 1.5f).SetRelative();
+                door.transform.DOLocalMoveX(offset, 1.5f).SetRelative();
             }
 
             //betweenDoorsAudio.Play();
@@ -54,7 +54,7 @@ public class TrainBetweenCabinDoors : MonoBehaviour
     {
         foreach (GameObject door in betweenDoors)
         {
-            var tweener = door.transform.DOLocalMoveX(-offset, 1.5f).SetRelative();
+            door.transform.DOLocalMoveX(-offset, 1.5f).SetRelative();
         }
 
         //betweenDoorsAudio.Play();

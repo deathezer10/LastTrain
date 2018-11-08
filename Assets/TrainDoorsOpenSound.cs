@@ -10,15 +10,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
 
     public AudioPlayer dingdongPlayer;
     public AudioPlayer trainEngine;
-    private float i = 0;
-    private float rate = 0.25f;
-    private bool bChangePitch = false;
     private float newPitch;
-    private float PreviousPitch;
-    public float GetAudioLevel()
-    {
-        return audioPlayers[0].audioSource.volume;
-    }
 
     public void SetAudioLevel(float val)
     {
@@ -27,7 +19,6 @@ public class TrainDoorsOpenSound : MonoBehaviour
         {
             if (val > 0.8f) val = 0.8f;
             audioplayer.audioSource.volume = val;
-            PreviousPitch = 1;
         }
     }
 

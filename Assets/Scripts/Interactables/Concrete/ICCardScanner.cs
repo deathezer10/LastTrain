@@ -27,7 +27,7 @@ public class ICCardScanner : MonoBehaviour
 
     public void OpenGates()
     {
-        var tManager = FindObjectOfType<TutorialManager>();
+        //var tManager = FindObjectOfType<TutorialManager>();
         //tManager.GetComponent<AudioPlayer>().Play("tutorial_finale");
         //tManager.m_ImageUnlockGates.MoveToHolder();
         var audioPlayer = GetComponent<AudioPlayer>();
