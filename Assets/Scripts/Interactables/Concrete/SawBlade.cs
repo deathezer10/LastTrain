@@ -6,7 +6,7 @@ using UnityEngine;
 public class SawBlade : GrabbableObject
 {
     PlayerViveController playerController;
-    HandSource playerHand;
+    SteamVR_Input_Sources playerHand;
     AudioPlayer spinAudio;
     
     bool spinning, held;
@@ -25,7 +25,7 @@ public class SawBlade : GrabbableObject
         {
             if (Time.time >= vibrationTimer)
             {
-                var source = playerHand.ToInputSource();
+                var source = playerHand;
                 playerController.Vibration(0, 0.2f, 0.2f, 0.7f, source);
                 vibrationTimer = Time.time + 0.2f;
             }

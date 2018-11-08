@@ -48,11 +48,9 @@ public class LightSwitch : GrabbableObject , IShootable
             return;
         }
 
-
-
         Audio.Play();
 
-        var source = currentController.GetCurrentHand().ToInputSource();
+        var source = currentController.GetCurrentHand();
         currentController.Vibration(0, 0.2f, 5, 1, source);
 
         if (bSwitchIsOn)

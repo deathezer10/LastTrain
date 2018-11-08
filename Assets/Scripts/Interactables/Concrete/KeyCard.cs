@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+
 
 public class KeyCard : GrabbableObject {
 	[SerializeField]
@@ -9,7 +11,7 @@ public class KeyCard : GrabbableObject {
 
     public PlayerViveController playerController { get; private set; }
 
-    public HandSource playerHand { get; private set; }
+    public SteamVR_Input_Sources playerHand { get; private set; }
 
     private void OnTriggerEnter(Collider other)
     {
