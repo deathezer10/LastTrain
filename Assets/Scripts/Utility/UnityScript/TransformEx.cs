@@ -18,4 +18,17 @@ public static class TransformEx {
         }
         return list.ToArray();
     }
+
+    public static Vector3 SetPositionGetDiff(this Transform trans,Vector3 vec)
+    {
+        var tmp = trans.position;
+        trans.position = vec;
+        return trans.position - tmp;
+    }
+
+    public static void AddPosition(this Transform trans, Vector3 vec)
+    {
+        var tmp = trans.position;
+        trans.position += vec;
+    }
 }

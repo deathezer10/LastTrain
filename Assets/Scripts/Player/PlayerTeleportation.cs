@@ -52,9 +52,6 @@ public class PlayerTeleportation : MonoBehaviour
     static readonly float Gravity = 9.81f;
 
     [SerializeField]
-    GameObject _ownPlayer;
-
-    [SerializeField]
     private float _fadeTime = 0.1f;
 
     [SerializeField]
@@ -63,8 +60,7 @@ public class PlayerTeleportation : MonoBehaviour
     [SerializeField]
     private Camera _camera;
 
-    [SerializeField]
-    private SteamVR_Input_Sources _handType;
+    private PlayerViveController _controller;
 
     [SerializeField]
     private SteamVR_Action_Boolean _padAction;
@@ -77,17 +73,18 @@ public class PlayerTeleportation : MonoBehaviour
     private void Awake()
     {
         TeleportAssistActive(false);
+        _controller = this.GetComponent<PlayerViveController>();
     }
 
     void Start()
     {
         this.UpdateAsObservable()
-            .Where(_ => _padAction.GetStateUp(_handType))
+            .Where(_ => _padAction.GetStateUp(_controller.CurrentHand))
             .Subscribe(_ => MoveToPoint());
 
         //コントローラの入力の後に読みたい
         this.LateUpdateAsObservable()
-            .Where(_ => _padAction.GetState(_handType))
+            .Where(_ => _padAction.GetState(_controller.CurrentHand))
             .Subscribe(_ => ShowOrbit());
     }
 
@@ -101,7 +98,7 @@ public class PlayerTeleportation : MonoBehaviour
             FadeManager.Instance._fadeColor = _fadeColor;
             StartCoroutine(FadeManager.Instance.Fading(_fadeTime, _fadeTime, () =>
             {
-                _ownPlayer.transform.position = _targetMarker.transform.position;
+                _controller.Teleport(_targetMarker.transform.position);
             }));
         }
 

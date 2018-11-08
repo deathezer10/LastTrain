@@ -15,6 +15,8 @@ public class PlayerViveController : MonoBehaviour
     [SerializeField]
     private SteamVR_Action_Boolean _useAction;
 
+    private Transform _ownPlayer;
+
     public SteamVR_Input_Sources CurrentHand { get { return _handType; } }
 
     public Vector3 controllerVelocity { get { return transform.root.TransformDirection(GetComponent<SteamVR_Behaviour_Pose>().GetVelocity()); } }
@@ -22,6 +24,11 @@ public class PlayerViveController : MonoBehaviour
 
     private static GameObject m_CurrentLeftObject = null;
     private static GameObject m_CurrentRightObject = null;
+
+    private void Awake()
+    {
+        _ownPlayer = this.transform.parent;
+    }
 
     virtual protected void Update()
     {
@@ -40,7 +47,7 @@ public class PlayerViveController : MonoBehaviour
 
         if (grabbableObject == null) return;
         // On Grab (Trigger Down)
-        if (SteamVR_Input._default.inActions.GrabPinch.GetStateDown(CurrentHand))
+        if (_grabAction.GetStateDown(CurrentHand))
         {
             // If other hand is holding this object, unassign it
             if (GetCurrentHandObject(true) != null && GetCurrentHandObject(true) == currentObject.gameObject)
@@ -70,30 +77,30 @@ public class PlayerViveController : MonoBehaviour
         }
 
         // On Item First Use
-        if (SteamVR_Input._default.inActions.GrabUse.GetStateDown(CurrentHand))
+        if (_useAction.GetStateDown(CurrentHand))
         {
             iObject.OnUse();
         }
 
         // On Item Holding Down Use 
-        if (SteamVR_Input._default.inActions.GrabUse.GetState(CurrentHand))
+        if (_useAction.GetState(CurrentHand))
         {
             iObject.OnUseDown();
         }
 
         // On Item Use Released
-        if (SteamVR_Input._default.inActions.GrabUse.GetStateUp(CurrentHand))
+        if (_useAction.GetStateUp(CurrentHand))
         {
             iObject.OnUseUp();
         }
 
         // On Grab Use
-        if (SteamVR_Input._default.inActions.GrabPinch.GetState(CurrentHand))
+        if (_grabAction.GetState(CurrentHand))
         {
             grabbableObject.OnGrabStay();
         }
         // On Grab Released (Trigger Up)
-        if (SteamVR_Input._default.inActions.GrabPinch.GetStateUp(CurrentHand))
+        if (_grabAction.GetStateUp(CurrentHand))
         {
             DetachCurrentObject(true);
         }
@@ -222,6 +229,14 @@ public class PlayerViveController : MonoBehaviour
                 Debug.LogFormat("Detached l {0}", currentObject.name);
             }
         }
+    }
+
+    public void Teleport(Vector3 targetPos)
+    {
+        var diff = _ownPlayer.SetPositionGetDiff(targetPos);
+
+        var obj = this.GetCurrentHandObject();
+        if (obj) obj.transform.AddPosition(diff);
     }
 
     virtual public void Vibration(
