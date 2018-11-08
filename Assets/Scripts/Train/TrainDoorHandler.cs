@@ -41,6 +41,8 @@ public class TrainDoorHandler : MonoBehaviour
     {
         if (opened)
             doorsOpenSound.PlayDingDong();
+        
+        bAreDoorsOpen = opened;
 
         int direction = (opened) ? 1 : -1;
 

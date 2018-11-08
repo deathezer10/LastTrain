@@ -12,6 +12,10 @@ public class TrainBetweenCabinDoors : MonoBehaviour
 
     BoxCollider betweenDoorsCollider;
 
+    AudioPlayer betweenDoorsAudio;
+
+    bool open;
+
     private void Start()
     {
         for (int i = 0; i < transform.childCount; ++i)
@@ -29,22 +33,35 @@ public class TrainBetweenCabinDoors : MonoBehaviour
         betweenDoorsCollider.size = new Vector3(1.25f, 2f, 1.25f);
     }
 
-    private void Update()
+    public void OpenBetweenDoors()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if (!open)
         {
-            OpenBetweenDoors();
+            foreach (GameObject door in betweenDoors)
+            {
+                var tweener = door.transform.DOLocalMoveX(offset, 1.5f).SetRelative();
+            }
+
+            //betweenDoorsAudio.Play();
+
+            StartCoroutine(OnDoorOpenFinish());
+
+            open = true;
         }
     }
 
-    public void OpenBetweenDoors()
+    public void CloseBetweenDoors()
     {
         foreach (GameObject door in betweenDoors)
         {
-            var tweener = door.transform.DOLocalMoveX(offset, 2).SetRelative();
+            var tweener = door.transform.DOLocalMoveX(-offset, 1.5f).SetRelative();
         }
 
-        StartCoroutine(OnDoorOpenFinish());
+        //betweenDoorsAudio.Play();
+
+        betweenDoorsCollider.enabled = true;
+
+        open = false;
     }
 
     IEnumerator OnDoorOpenFinish()
@@ -57,10 +74,5 @@ public class TrainBetweenCabinDoors : MonoBehaviour
         yield return new WaitForSeconds(1.05f);
 
         betweenDoorsCollider.enabled = false;
-
-        foreach (GameObject door in betweenDoors)
-        {
-            door.SetActive(false);
-        }
     }
 }

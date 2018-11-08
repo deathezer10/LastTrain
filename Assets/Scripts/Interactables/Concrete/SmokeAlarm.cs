@@ -6,11 +6,14 @@ public class SmokeAlarm : MonoBehaviour
 {
     AudioPlayer fireAlarmSound;
 
+    TrainDoorHandler trainDoorHandler;
+
     bool alarmStarted;
 
     void Start()
     {
         fireAlarmSound = GetComponent<AudioPlayer>();
+        trainDoorHandler = FindObjectOfType<TrainDoorHandler>();
     }
     
     public void StartSmokeAlarm()
@@ -19,7 +22,26 @@ public class SmokeAlarm : MonoBehaviour
         {
             alarmStarted = true;
             fireAlarmSound.Play();
-            FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
+
+            if (!trainDoorHandler.bAreDoorsOpen)
+            {
+                trainDoorHandler.ToggleDoors(true);
+            }
+        }
+    }
+
+    public void StopSmokeAlarm()
+    {
+        if (alarmStarted)
+        {
+            fireAlarmSound.Stop();
+
+            if (trainDoorHandler.bAreDoorsOpen)
+            {
+                trainDoorHandler.ToggleDoors(false);
+            }
+
+            alarmStarted = false;
         }
     }
 }

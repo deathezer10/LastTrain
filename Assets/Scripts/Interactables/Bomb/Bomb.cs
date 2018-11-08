@@ -160,6 +160,25 @@ public class Bomb : GrabbableObject, IShootable
         FindObjectOfType<TrainBetweenCabinDoors>().OpenBetweenDoors();
     }
 
+    public void ThrownOut()
+    {
+        timerRunning = false;
+        StopCoroutine(BombCountdown());
+
+        StartCoroutine(ThrownOutDelay());
+    }
+
+    IEnumerator ThrownOutDelay()
+    {
+        yield return new WaitForSeconds(2f);
+
+        FindObjectOfType<TrainBetweenCabinDoors>().OpenBetweenDoors();
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
+    }
+
     public void UnlockRigidbody()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
