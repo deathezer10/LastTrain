@@ -17,7 +17,6 @@ public class TrainSpeedHandler : MonoBehaviour
     private bool bBr_StopTrain = false;
     private bool bBr_SlowDown = false;
     private bool bAc_StopTrain = false;
-    private bool bAc_SlowDownTrain = false;
     private bool bAc_SpeedChange = false;
 
     public bool bCanAccelerate { get; private set; } = true;
@@ -102,20 +101,6 @@ public class TrainSpeedHandler : MonoBehaviour
                 bAc_StopTrain = false;
                 bCanAccelerate = false;
                 stationMover.currentMaxSpeed = 0;
-            }
-        }
-
-
-        if (bAc_SlowDownTrain)
-        {
-            if (bAc_StopTrain || bBr_StopTrain) return;
-            i += Time.deltaTime * rate;
-            stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
-            trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
-            if (stationMover.currentSpeed == 3)
-            {
-                bAc_SlowDownTrain = false;
-                i = 0;
             }
         }
 

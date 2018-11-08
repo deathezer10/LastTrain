@@ -43,7 +43,7 @@ public class KeyCardScanner : StationaryObject, IShootable
         if (successAudio) successAudio.Play();
 
         if (card != null && card.playerController != null)
-            card.playerController.Vibration(0, 0.7f, 10, 1, card.playerHand.ToInputSource());
+            card.playerController.Vibration(0, 0.7f, 10, 1, card.playerHand);
 
         transform.parent.GetComponent<Renderer>().materials[1].SetColor("_Color", Color.green);
         transform.parent.GetComponent<Renderer>().materials[1].SetVector("_EmissionColor", Color.green * 100f);
@@ -57,7 +57,7 @@ public class KeyCardScanner : StationaryObject, IShootable
     {
         if (FailedAudio) FailedAudio.Play();
         if(card.playerController != null)
-        card.playerController.Vibration(0, 0.3f, 1, 1, card.playerHand.ToInputSource());
+        card.playerController.Vibration(0, 0.3f, 1, 1, card.playerHand);
     }
 
 

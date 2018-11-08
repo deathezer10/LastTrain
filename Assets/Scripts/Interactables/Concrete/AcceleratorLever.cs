@@ -130,7 +130,7 @@ public class AcceleratorLever : StationaryObject
 
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
 
-                NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z, VectorBeginPoint.transform.position.z));
+                NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f , VectorBeginPoint.transform.position.z));
                 if (trainSpeedHandler.bCanAccelerate)
                     trainSpeedHandler.ChangeSpeed(NewTrainSpeed);
                 LastHandPosition = PlayerHand.transform.position;

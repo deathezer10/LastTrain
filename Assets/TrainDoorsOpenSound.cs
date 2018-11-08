@@ -39,11 +39,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
 
     public void SetAudioLevelSpeed(float val)
     {
-        if (val > 0)
-            newPitch = val / 10;
-        else val = 0;
-
-        trainEngine.audioSource.pitch = Mathf.Clamp(newPitch, 1, 2.3f); 
+        trainEngine.audioSource.pitch = Mathf.Lerp(1, 2.3f, normalize01(val, 0, 10));
     }
 
     // Use this for initialization
@@ -111,7 +107,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
         }
     }
 
-    private float normalize13(float value, float min, float max)
+    private float normalize01(float value, float min, float max)
     {
         float normalized = (value - min) / (max - min);
         return normalized;

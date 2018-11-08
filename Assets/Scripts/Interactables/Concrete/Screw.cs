@@ -49,19 +49,19 @@ public class Screw : MonoBehaviour
                     {
                         case 1:
                             {
-                                transform.Rotate(new Vector3(-1, 0, 0), Turnspeed * Time.deltaTime);
+                                transform.Rotate(new Vector3(-1, 0, 0), Turnspeed);
                                 break;
                             }
 
                         case 2:
                             {
-                                transform.Rotate(new Vector3(0, -1, 0), Turnspeed * Time.deltaTime);
+                                transform.Rotate(new Vector3(0, -1, 0), Turnspeed);
                                 break;
                             }
 
                         case 3:
                             {
-                                transform.Rotate(new Vector3(0, 0, -1), Turnspeed * Time.deltaTime);
+                                transform.Rotate(new Vector3(0, 0, -1), Turnspeed);
                                 break;
                             }
                     }

@@ -28,7 +28,7 @@ public class StationButton : StationaryObject, IShootable
 
             if (currentController != null)
             {
-                var source = currentController.GetCurrentHand().ToInputSource();
+                var source = currentController.GetCurrentHand();
                 currentController.Vibration(0, 0.7f, 10, 1, source);
             }
 
