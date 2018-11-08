@@ -20,8 +20,8 @@ public class EmergencyHandlePanel : StationaryObject {
 
     void Start()
     {
-        DefaultYRotation = transform.rotation.eulerAngles.y;
-        maxYRotation = transform.rotation.eulerAngles.y + 120;
+        DefaultYRotation = transform.parent.rotation.eulerAngles.y;
+        maxYRotation = transform.parent.rotation.eulerAngles.y + 120;
     }
 
     // Update is called once per frame
@@ -30,8 +30,8 @@ public class EmergencyHandlePanel : StationaryObject {
 
         if (bIsGrabbing)
         {
-            Vector3 targetDir = PreviousHandPosition - transform.position;
-            Vector3 NewtargetDir = CurrentHandPosition - transform.position;
+            Vector3 targetDir = PreviousHandPosition - transform.parent.position;
+            Vector3 NewtargetDir = CurrentHandPosition - transform.parent.position;
             float angle = Vector3.Angle(targetDir, NewtargetDir);
 
             Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
@@ -40,19 +40,19 @@ public class EmergencyHandlePanel : StationaryObject {
 
 
             if (angle < 0)
-                if (transform.rotation.eulerAngles.y <= DefaultYRotation || (transform.rotation.eulerAngles.y <= 360 && transform.rotation.eulerAngles.y >= (DefaultYRotation + 150)))
+                if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 150)))
                 {
                     return;
                 }
 
             if (angle > 0)
-                if (transform.rotation.eulerAngles.y >= maxYRotation && transform.rotation.eulerAngles.y <= (maxYRotation + 20))
+                if (transform.parent.rotation.eulerAngles.y >= maxYRotation && transform.parent.rotation.eulerAngles.y <= (maxYRotation + 20))
                 {
                     return;
                 }
 
 
-            transform.Rotate(0, angle, 0);
+            transform.parent.Rotate(0, angle, 0);
             PreviousHandPosition = CurrentHandPosition;
         }
 
