@@ -38,9 +38,9 @@ public class EmergencyHandlePanel : StationaryObject {
 
             if (cross.y < 0) angle = -angle;
 
-
+            print(angle);
             if (angle < 0)
-                if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 150)))
+                if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 121)))
                 {
                     return;
                 }
