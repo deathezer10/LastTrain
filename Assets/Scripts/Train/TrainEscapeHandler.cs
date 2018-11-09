@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TrainEscapeHandler : MonoBehaviour
 {
-    BoxCollider[] colliders;
     public BoxCollider wallCollider;
+
+    BoxCollider[] colliders;
+    
     StationMover stationMover;
 
     private void Start()
@@ -41,11 +43,11 @@ public class TrainEscapeHandler : MonoBehaviour
         {
             other.gameObject.GetComponent<Bomb>().ThrownOut();
 
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-1f, 2f, -15f), ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 2f, -10f), ForceMode.Impulse);
         }
         else if (other.gameObject.GetComponent<Rigidbody>() != null && other.gameObject.layer != 11)
         {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(-1f, 2f, -15f), ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 2f, -10f), ForceMode.Impulse);
         }
 
     }

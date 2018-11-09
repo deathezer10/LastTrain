@@ -14,7 +14,7 @@ public class LightSwitch : GrabbableObject , IShootable
     private int ActivateCount = 0;
     private int BreakAtCount;
     private AudioPlayer Audio;
-    private List<ToggleTrainLights> toggleTrainLights;
+    private List<ToggleTrainLights> toggleTrainLights = new List<ToggleTrainLights>();
     private ToggleTrainLights ownedLights;
 
     private void Start()
