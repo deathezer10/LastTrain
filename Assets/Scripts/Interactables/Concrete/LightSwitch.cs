@@ -99,7 +99,7 @@ public class LightSwitch : GrabbableObject, IShootable
     {
         if (bIsBroken)
         {
-            if (x < 2)
+            if (x > 2)
                 if (AlmostEqual(transform.localPosition, OriginalPosition, 0.05f))
                 {
                     transform.GetComponent<Rigidbody>().useGravity = false;
