@@ -21,7 +21,7 @@ public class EmergencyHandlePanel : StationaryObject {
     void Start()
     {
         DefaultYRotation = transform.parent.rotation.eulerAngles.y;
-        maxYRotation = transform.parent.rotation.eulerAngles.y + 120;
+        maxYRotation = transform.parent.rotation.eulerAngles.y + 140;
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class EmergencyHandlePanel : StationaryObject {
 
             print(angle);
             if (angle < 0)
-                if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 121)))
+                if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 151)))
                 {
                     return;
                 }
