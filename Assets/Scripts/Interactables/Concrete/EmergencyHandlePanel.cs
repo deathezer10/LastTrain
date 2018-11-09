@@ -8,7 +8,7 @@ public class EmergencyHandlePanel : StationaryObject {
   
     private bool bIsGrabbing = false;
     private bool bCanGrab = false;
-    private bool bIsLocked = false;
+    public bool bIsLocked = false;
     public bool bIsOpened = false;
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
