@@ -6,23 +6,29 @@ using DG.Tweening;
 
 public class LightSwitch : GrabbableObject , IShootable
 {
-    List<Light> m_TrainLights = new List<Light>();
+  
+
+    public string SwitchCabinsName;
     private bool bSwitchIsOn = false;
     private bool bIsBroken = false;
     private int ActivateCount = 0;
-    private int BreakAtCount = 3;
+    private int BreakAtCount;
     private AudioPlayer Audio;
-    
+    private List<ToggleTrainLights> toggleTrainLights;
+    private ToggleTrainLights ownedLights;
 
     private void Start()
     {
-        for (int i = 0; i < transform.childCount; ++i)
-        {
-            m_TrainLights.Add(transform.GetChild(i).GetComponent<Light>());
-        }
-
         Audio = GetComponent<AudioPlayer>();
-        
+        BreakAtCount = Mathf.RoundToInt(Random.Range(1, 4));
+        toggleTrainLights.AddRange(FindObjectsOfType<ToggleTrainLights>());
+        for(int i = 0; i < toggleTrainLights.Count; i++)
+        {
+            if(toggleTrainLights[i].SwitchCabinsName == SwitchCabinsName)
+            {
+                ownedLights = toggleTrainLights[i];
+            }
+        }
     }
 
     public override bool hideControllerOnGrab { get { return false; } }
@@ -37,10 +43,7 @@ public class LightSwitch : GrabbableObject , IShootable
         if(ActivateCount >= BreakAtCount)
         {
             //Light break sound here?
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(false);
-            }
+            ownedLights.LightsOff();
             bIsBroken = true;
             transform.GetComponent<Rigidbody>().useGravity = true;
             transform.GetComponent<Rigidbody>().isKinematic = false;
@@ -59,10 +62,7 @@ public class LightSwitch : GrabbableObject , IShootable
             
             transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(false);
-            }
+            ownedLights.LightsOff();
         }
         else
         {
@@ -70,10 +70,7 @@ public class LightSwitch : GrabbableObject , IShootable
             ActivateCount += 1;
             transform.localRotation = Quaternion.Euler(0, 0, -90);
 
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(true);
-            }
+            ownedLights.LightsOn();
         }
 
     }
@@ -115,10 +112,7 @@ public class LightSwitch : GrabbableObject , IShootable
     {
         if(bSwitchIsOn)
         {
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(false);
-            }
+            ownedLights.LightsOff();
         }
 
         Destroy(transform.gameObject);

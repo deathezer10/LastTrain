@@ -33,11 +33,6 @@ public class TutorialManager : MonoBehaviour
 
         if (tutorialEnabled)
         {
-            m_PlayerTeleportation = FindObjectOfType<PlayerTeleportation>();
-
-            if (m_PlayerTeleportation != null)
-                m_PlayerTeleportation.gameObject.SetActive(false);
-
             m_ImageTeleport = Instantiate(m_ImageTeleport);
             m_ImageTeleport.gameObject.SetActive(false);
 

@@ -12,35 +12,58 @@ public class ICCardScanner : MonoBehaviour
     [SerializeField]
     GameObject m_LeftGate, m_RightGate;
 
-    bool m_ScannerBypassed = false;
+    const float m_DoorSwingSpeed = 0.3f;
+
+    bool m_IsGateOpened = false;
 
     private void OnTriggerEnter(Collider other)
     {
         ICCard wallet = other.GetComponent<ICCard>();
 
-        if (wallet != null && m_ScannerBypassed == false)
+        if (wallet != null)
         {
-            m_ScannerBypassed = true;
             OpenGates();
         }
     }
 
     public void OpenGates()
     {
-        //var tManager = FindObjectOfType<TutorialManager>();
-        //tManager.GetComponent<AudioPlayer>().Play("tutorial_finale");
-        //tManager.m_ImageUnlockGates.MoveToHolder();
-        var audioPlayer = GetComponent<AudioPlayer>();
-        audioPlayer.Play("cardscanned", () =>
+        if (!m_IsGateOpened)
         {
-            audioPlayer.Play("gateopen");
-            m_GantryBarrier.SetActive(false);
-            m_LeftGate.transform.DOLocalRotate(new Vector3(0, -90, 0), 0.3f);
-            m_RightGate.transform.DOLocalRotate(new Vector3(0, 90, 0), 0.3f);
+            m_IsGateOpened = true;
 
-            // TODO change scanner color and rotate the gates
+            var audioPlayer = GetComponent<AudioPlayer>();
+            audioPlayer.Play("cardscanned", () =>
+            {
+                audioPlayer.Play("gateopen");
+                m_GantryBarrier.GetComponent<Collider>().isTrigger = true;
+                m_LeftGate.transform.DOLocalRotate(new Vector3(0, -90, 0), m_DoorSwingSpeed);
+                m_RightGate.transform.DOLocalRotate(new Vector3(0, 90, 0), m_DoorSwingSpeed);
 
-        });
+                // TODO change scanner color 
+
+            });
+        }
+    }
+
+    public void CloseGates()
+    {
+        if (m_IsGateOpened)
+        {
+            m_IsGateOpened = false;
+
+            var audioPlayer = GetComponent<AudioPlayer>();
+            audioPlayer.Play("cardscanned", () =>
+            {
+                audioPlayer.Play("gateclose");
+                m_GantryBarrier.GetComponent<Collider>().isTrigger = false;
+                m_LeftGate.transform.DOLocalRotate(new Vector3(0, 0, 0), m_DoorSwingSpeed);
+                m_RightGate.transform.DOLocalRotate(new Vector3(0, 0, 0), m_DoorSwingSpeed);
+
+                // TODO change scanner color
+
+            });
+        }
     }
 
 }

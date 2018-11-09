@@ -13,7 +13,7 @@ public class StationMover : MonoBehaviour
     int m_InitialTunnelSpawnAmount = 3;
     int m_CurrentTunnelIndex = 0;
     float m_CurrentDistanceTraveled = 0;
-    const float m_TunnelGapOffset = 20.24f;
+    const float m_TunnelGapOffset = 20.23f;
     const float m_TunnelXOffset = -5.05f;
     bool m_IsFirstTimeDestroy = true;
     public TrainDoorsOpenSound trainSounds;
@@ -38,7 +38,7 @@ public class StationMover : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 1; i <= m_InitialTunnelSpawnAmount; ++i)
+        for (int i = 3; i <= m_InitialTunnelSpawnAmount; ++i)
         {
             m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, i * m_TunnelGapOffset), Quaternion.identity, transform); // Right side
             GameObject leftTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
