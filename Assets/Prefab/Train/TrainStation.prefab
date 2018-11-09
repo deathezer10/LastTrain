@@ -4812,7 +4812,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GantryBarrier: {fileID: 1417482935174534}
-  m_TutorialBarrier: {fileID: 0}
   m_LeftGate: {fileID: 1914674248565026}
   m_RightGate: {fileID: 1360576289778836}
 --- !u!114 &114129108100385458
@@ -4885,7 +4884,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GantryBarrier: {fileID: 1417482935174534}
-  m_TutorialBarrier: {fileID: 0}
   m_LeftGate: {fileID: 1539203537608610}
   m_RightGate: {fileID: 1293391919432174}
 --- !u!114 &114252803565371212
@@ -4931,6 +4929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe764340bb331347b2b8a02ea36f2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TutorialBarrier: {fileID: 0}
 --- !u!114 &114415235206601812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5051,6 +5050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe764340bb331347b2b8a02ea36f2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TutorialBarrier: {fileID: 1710305645428516}
 --- !u!114 &114649118283516370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5122,7 +5122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GantryBarrier: {fileID: 1417482935174534}
-  m_TutorialBarrier: {fileID: 0}
   m_LeftGate: {fileID: 1512381650560144}
   m_RightGate: {fileID: 1617989481562132}
 --- !u!114 &114822428022374762
@@ -5201,7 +5200,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GantryBarrier: {fileID: 1417482935174534}
-  m_TutorialBarrier: {fileID: 0}
   m_LeftGate: {fileID: 1835596324667174}
   m_RightGate: {fileID: 1490831342753944}
 --- !u!114 &114909089866894074
