@@ -14,16 +14,16 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
         _outlines = new List<Negi.Outline>();
         var objects = this.gameObject.transform.GetAllChild();
         objects.Add(this.gameObject);
-        
+
         foreach (var obj in objects)
         {
             var renderer = obj.GetComponent<Renderer>();
             if (renderer == null) continue;
 
-            var outline = renderer.gameObject.AddComponent<Negi.Outline>();
+            var outline = renderer.gameObject.SafeAddComponent<Negi.Outline>();
             _outlines.Add(outline);
-            outline.enabled = false;
         }
+        SetEnableOutline(false);
     }
 
     /// <summary>
