@@ -13,6 +13,8 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     {
         _outlines = new List<Negi.Outline>();
         var objects = this.gameObject.transform.GetAllChild();
+        objects.Add(this.gameObject);
+        
         foreach (var obj in objects)
         {
             var renderer = obj.GetComponent<Renderer>();

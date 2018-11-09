@@ -9,14 +9,20 @@ public static class TransformEx {
     /// /// </summary>
     /// <param name="transform"></param>
     /// <returns></returns>
-    public static GameObject[] GetAllChild(this Transform transform)
+    public static List<GameObject> GetAllChild(this Transform transform, List<GameObject> objects = null)
     {
-        var list = new List<GameObject>();
+        List<GameObject> list;
+        if(objects == null) list = new List<GameObject>();
+        else list = objects;
+        
         for (int i = 0; i < transform.childCount; i++)
         {
-            list.Add(transform.GetChild(i).gameObject);
+            var child = transform.GetChild(i).gameObject;
+            list.Add(child);
+            var childs = child.transform.GetAllChild();
+            list.AddRange(childs);
         }
-        return list.ToArray();
+        return list;
     }
 
     public static Vector3 SetPositionGetDiff(this Transform trans,Vector3 vec)
