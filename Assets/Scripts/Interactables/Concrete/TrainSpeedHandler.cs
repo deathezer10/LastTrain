@@ -20,15 +20,18 @@ public class TrainSpeedHandler : MonoBehaviour
     private bool bAc_SpeedChange = false;
 
     public bool bCanAccelerate { get; private set; } = true;
-
+    private AudioPlayer audioscreech;
     void Start()
     {
         stationMover = FindObjectOfType<StationMover>();
         trainDoorsOpenSound = FindObjectOfType<TrainDoorsOpenSound>();
+        audioscreech = GetComponent<AudioPlayer>();
     }
 
     public void BrakeStop()
     {
+        audioscreech.audioSource.loop = true;
+        audioscreech.Play("screech");
         bBr_StopTrain = true;
         PreviousTrainSpeed = stationMover.currentSpeed;
         i = 0;
@@ -61,7 +64,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     void Update()
     {
-
+        
         if (bBr_StopTrain)
         {
             i += Time.deltaTime * rate;
@@ -69,6 +72,7 @@ public class TrainSpeedHandler : MonoBehaviour
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
             if (stationMover.currentSpeed == 0)
             {
+                audioscreech.Stop();
                 bBr_StopTrain = false;
                 i = 0;
                 bCanAccelerate = false;
@@ -98,6 +102,7 @@ public class TrainSpeedHandler : MonoBehaviour
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
             if (stationMover.currentSpeed == 0)
             {
+                audioscreech.Stop();
                 bAc_StopTrain = false;
                 bCanAccelerate = false;
                 stationMover.currentMaxSpeed = 0;

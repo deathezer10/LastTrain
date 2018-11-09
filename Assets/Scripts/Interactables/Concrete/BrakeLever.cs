@@ -62,11 +62,11 @@ public class BrakeLever : StationaryObject
                     {
                         bIsGrabbing = false;
                         bDisableLever = true;
-                        Audio.Play();
+                        Audio.Play("lever");
 
                         if (AcceleratorLever.IsTaskCompleted())
                         {
-                            trainSpeedHandler.BrakeStop();
+                            trainSpeedHandler.BrakeStop();                            
                             return;
                         }
 
