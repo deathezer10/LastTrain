@@ -154,7 +154,7 @@ public class PlayerTeleportation : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 20.0f, -1, QueryTriggerInteraction.Ignore) == false) return null;
 
-        Debug.Log($"{hit.transform.gameObject}");
+        //Debug.Log($"{hit.transform.gameObject}");
 
         var colliderTag = hit.collider.tag;
         foreach (var tag in _getOnTags)

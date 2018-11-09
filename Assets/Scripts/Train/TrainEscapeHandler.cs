@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class TrainEscapeHandler : MonoBehaviour
 {
+    public BoxCollider wallCollider;
+
     BoxCollider[] colliders;
+    
     StationMover stationMover;
 
     private void Start()
@@ -18,7 +21,7 @@ public class TrainEscapeHandler : MonoBehaviour
             col.enabled = false;
         }
 
-        GetComponentInChildren<BoxCollider>().enabled = false;
+        wallCollider.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,11 +43,11 @@ public class TrainEscapeHandler : MonoBehaviour
         {
             other.gameObject.GetComponent<Bomb>().ThrownOut();
 
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 20f, -100f), ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 2f, -10f), ForceMode.Impulse);
         }
         else if (other.gameObject.GetComponent<Rigidbody>() != null && other.gameObject.layer != 11)
         {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 20f, -100f), ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 2f, -10f), ForceMode.Impulse);
         }
 
     }
@@ -56,6 +59,6 @@ public class TrainEscapeHandler : MonoBehaviour
             col.enabled = true;
         }
 
-        GetComponentInChildren<BoxCollider>().enabled = false;
+        wallCollider.enabled = true;
     }
 }
