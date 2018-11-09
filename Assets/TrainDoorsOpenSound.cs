@@ -44,12 +44,6 @@ public class TrainDoorsOpenSound : MonoBehaviour
         trainEngine.Play();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void PlayDingDong()
     {
         dingdongPlayer.Play("dingdong");
