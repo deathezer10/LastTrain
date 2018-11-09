@@ -6,6 +6,9 @@ public class InvisibleGantryBarrier : MonoBehaviour {
 
     ICCardScanner[] m_CardScanners;
 
+    [SerializeField]
+    private GameObject m_TutorialBarrier;
+
     private void Start()
     {
         m_CardScanners = FindObjectsOfType<ICCardScanner>();
@@ -17,6 +20,7 @@ public class InvisibleGantryBarrier : MonoBehaviour {
         {
             foreach (var scanner in m_CardScanners)
             {
+                m_TutorialBarrier.SetActive(true);
                 scanner.CloseGates();
             }
         }

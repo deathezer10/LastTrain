@@ -20,9 +20,7 @@ public class TutorialManager : MonoBehaviour
     private SteamVR_Action_Boolean _padAction;
     
     public InstructionImage m_ImageTeleport, m_ImageWallet, m_ImageGripButton, m_ImageUnlockGates;
-
-    private PlayerTeleportation m_PlayerTeleportation;
-
+    
     private Vector3 m_playerCheckpointPos = new Vector3(1f, 1.5f, -5f);
     private Vector3 m_playerCheckpointRot = new Vector3(0, -90f, 0);
 
@@ -64,10 +62,7 @@ public class TutorialManager : MonoBehaviour
         audioPlayer.Play("tutorial_greeting", () =>
         {
             audioPlayer.Play("tutorial_trajectory_intro");
-
-            if (m_PlayerTeleportation != null)
-                m_PlayerTeleportation.gameObject.SetActive(true);
-
+            
             System.IDisposable padObserver = null;
 
             m_ImageTeleport.gameObject.SetActive(true);
