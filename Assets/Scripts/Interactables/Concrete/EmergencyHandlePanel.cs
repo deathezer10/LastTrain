@@ -9,7 +9,7 @@ public class EmergencyHandlePanel : StationaryObject {
     private bool bIsGrabbing = false;
     private bool bCanGrab = false;
     private bool bIsLocked = false;
-
+    public bool bIsOpened = false;
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
 
@@ -38,7 +38,14 @@ public class EmergencyHandlePanel : StationaryObject {
 
             if (cross.y < 0) angle = -angle;
 
-            print(angle);
+
+            if (transform.parent.rotation.eulerAngles.y >= maxYRotation - 35 && transform.parent.rotation.eulerAngles.y <= maxYRotation)
+            {
+                bIsOpened = true;
+            }
+
+            else bIsOpened = false;
+
             if (angle < 0)
                 if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 151)))
                 {

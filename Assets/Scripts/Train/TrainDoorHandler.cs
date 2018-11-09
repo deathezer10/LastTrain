@@ -18,6 +18,7 @@ public class TrainDoorHandler : MonoBehaviour
     public bool bIsDriverDoorOpen { get; private set; } = false;
 
     private TrainDoorsOpenSound doorsOpenSound;
+
     private void Start()
     {
         for (int i = 0; i < transform.childCount; ++i)
