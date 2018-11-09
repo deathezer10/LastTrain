@@ -61,7 +61,7 @@ public class Screw : MonoBehaviour
 
                         case 3:
                             {
-                                transform.Rotate(new Vector3(0, 0, -1), Turnspeed);
+                                transform.Rotate(new Vector3(0, 0, 1), Turnspeed);
                                 break;
                             }
                     }
@@ -124,7 +124,7 @@ public class Screw : MonoBehaviour
                                 if (y < 0)
                                 {
                                     screwDistance *= -1;
-                                    if (OriginalPosition.y + screwDistance > transform.position.y)
+                                    if (OriginalPosition.y + screwDistance > transform.localPosition.y)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
@@ -145,7 +145,7 @@ public class Screw : MonoBehaviour
 
                                 else
                                 {
-                                    if (OriginalPosition.y + screwDistance < transform.position.y)
+                                    if (OriginalPosition.y + screwDistance < transform.localPosition.y)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
@@ -170,7 +170,7 @@ public class Screw : MonoBehaviour
                                 if (x < 0)
                                 {
 
-                                    if (OriginalPosition.x - screwDistance > transform.position.x)
+                                    if (OriginalPosition.x - screwDistance > transform.localPosition.x)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;
@@ -191,7 +191,7 @@ public class Screw : MonoBehaviour
 
                                 else
                                 {
-                                    if (OriginalPosition.x + screwDistance < transform.position.x)
+                                    if (OriginalPosition.x + screwDistance < transform.localPosition.x)
                                     {
                                         bIsLoose = true;
                                         transform.GetComponent<Rigidbody>().useGravity = true;

@@ -23,13 +23,13 @@ public class StationMover : MonoBehaviour
         get { return m_IsMoving; }
     }
 
-    float m_CurrentStationMaxSpeed = 10;
+    float m_CurrentStationMaxSpeed = 20;
     public float currentMaxSpeed {
         get { return m_CurrentStationMaxSpeed; }
         set { m_CurrentStationMaxSpeed = value; }
     }
 
-    const float m_StationAcceleration = 0.5f;
+    const float m_StationAcceleration = 1.0f;
     float m_CurrentStationSpeed = 0;
     public float currentSpeed {
         get { return m_CurrentStationSpeed; }

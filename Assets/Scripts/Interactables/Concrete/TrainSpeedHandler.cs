@@ -10,9 +10,9 @@ public class TrainSpeedHandler : MonoBehaviour
     public bool bIsBrakeEngaged = false;
     public bool bIsAccelerator0 = false;
 
-    private float PreviousTrainSpeed = 10.0f;
+    private float PreviousTrainSpeed = 20.0f;
     private float NewTrainSpeed;
-    private float rate = 0.25f;
+    private float rate = 0.10f;
     private float i = 0;
 
     private bool bBr_StopTrain = false;
@@ -61,9 +61,13 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void ChangeSpeed(float val)
     {
+        if(val > stationMover.currentMaxSpeed)
+        {
+            stationMover.currentMaxSpeed = val;
+        }
+
         PreviousTrainSpeed = stationMover.currentSpeed;
-        NewTrainSpeed = val;
-        if (NewTrainSpeed > stationMover.currentMaxSpeed) NewTrainSpeed = stationMover.currentMaxSpeed;
+        NewTrainSpeed = val; 
         i = 0.0f;
         bAc_SpeedChange = true;
     }
@@ -73,6 +77,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
         if (bBr_StopTrain)
         {
+            if (bAc_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
@@ -82,13 +87,14 @@ public class TrainSpeedHandler : MonoBehaviour
                 {
                     bOnce = true;
                     audioscreech.Stop();
+                    audioscreech.audioSource.loop = false;
+                    audioscreech.audioSource.pitch = 1.0f;
                     audioscreech.Play("screech3");
                 }
 
             if (stationMover.currentSpeed == 0)
             {
                 audioscreech.Stop();
-                bBr_StopTrain = false;
                 i = 0;
                 bCanAccelerate = false;
                 stationMover.currentMaxSpeed = 0;
@@ -100,11 +106,11 @@ public class TrainSpeedHandler : MonoBehaviour
         {
             if (bAc_StopTrain || bBr_StopTrain) return;
             i += Time.deltaTime * rate;
-            stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 3, i);
+            stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 5, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
-            if (stationMover.currentSpeed == 3)
+            if (stationMover.currentSpeed == 5)
             {
-                stationMover.currentMaxSpeed = 3;
+                stationMover.currentMaxSpeed = 5;
                 bBr_SlowDown = false;
                 i = 0;
             }
@@ -112,6 +118,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
         if (bAc_StopTrain)
         {
+            if (bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
@@ -121,13 +128,14 @@ public class TrainSpeedHandler : MonoBehaviour
                 {
                     bOnce = true;
                     audioscreech.Stop();
+                    audioscreech.audioSource.loop = false;
+                    audioscreech.audioSource.pitch = 1.0f;
                     audioscreech.Play("screech3");
                 }
 
             if (stationMover.currentSpeed == 0)
             {
                 audioscreech.Stop();
-                bAc_StopTrain = false;
                 bCanAccelerate = false;
                 stationMover.currentMaxSpeed = 0;
             }
@@ -143,6 +151,8 @@ public class TrainSpeedHandler : MonoBehaviour
 
             if (stationMover.currentSpeed == NewTrainSpeed)
             {
+                stationMover.currentMaxSpeed = stationMover.currentSpeed;
+                PreviousTrainSpeed = stationMover.currentSpeed;
                 bAc_SpeedChange = false;
             }
         }
@@ -150,6 +160,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     private void PlayPart2()
     {
+        audioscreech.audioSource.pitch = 0.8f;
         audioscreech.audioSource.loop = true;
         audioscreech.Play("screech2");
     }

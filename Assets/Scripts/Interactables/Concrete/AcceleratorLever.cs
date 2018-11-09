@@ -92,7 +92,7 @@ public class AcceleratorLever : StationaryObject
 
                         else
                         {
-                            trainSpeedHandler.ChangeSpeed(3);
+                            trainSpeedHandler.ChangeSpeed(5);
                         }
 
                 }
@@ -102,7 +102,7 @@ public class AcceleratorLever : StationaryObject
                 if (trainSpeedHandler.bCanAccelerate)
                     if (!bDisableLever)
                     {
-                        NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f, VectorBeginPoint.transform.position.z));
+                        NewTrainSpeed = Mathf.Lerp(5, 20, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f, VectorBeginPoint.transform.position.z));
                         trainSpeedHandler.ChangeSpeed(NewTrainSpeed);
                     }
 
@@ -127,7 +127,7 @@ public class AcceleratorLever : StationaryObject
 
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
 
-                NewTrainSpeed = Mathf.Lerp(3, 10, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f , VectorBeginPoint.transform.position.z));
+                NewTrainSpeed = Mathf.Lerp(5, 20, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f , VectorBeginPoint.transform.position.z));
                 if (trainSpeedHandler.bCanAccelerate)
                     trainSpeedHandler.ChangeSpeed(NewTrainSpeed);
                 LastHandPosition = PlayerHand.transform.position;
