@@ -51,14 +51,6 @@ public class StationDisplayLight : MonoBehaviour
         ToggleLights(true, false);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            CycleNodes();
-        }
-    }
-
     public void CycleNodes()
     {
         m_CurrentNodeIndex++;
