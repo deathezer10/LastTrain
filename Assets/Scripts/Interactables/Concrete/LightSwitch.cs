@@ -59,6 +59,7 @@ public class LightSwitch : GrabbableObject, IShootable
             //Light break sound here?
             ownedLights.LightsOff();
             bIsBroken = true;
+            bSwitchIsOn = false;
             transform.GetComponent<Rigidbody>().useGravity = true;
             transform.GetComponent<Rigidbody>().isKinematic = false;
             transform.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
