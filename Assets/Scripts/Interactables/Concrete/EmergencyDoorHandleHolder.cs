@@ -7,14 +7,21 @@ public class EmergencyDoorHandleHolder : MonoBehaviour
 
     [SerializeField]
     Transform m_HandleSnapPoint;
-    
+    EmergencyHandlePanel panel;
+    void start()
+    {
+        panel = FindObjectOfType<EmergencyHandlePanel>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         EmergencyDoorHandle holder = other.GetComponent<EmergencyDoorHandle>();
 
+        if(panel.bIsOpened)
         if (holder != null)
         {
             InsertHandle(holder);
+            panel.bIsLocked = true;
         }
     }
 
