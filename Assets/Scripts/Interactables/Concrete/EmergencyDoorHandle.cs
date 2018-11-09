@@ -40,11 +40,6 @@ public class EmergencyDoorHandle : GrabbableObject
         m_Controller = currentController;
     }
 
-    public override void OnControllerExit()
-    {
-        base.OnControllerExit();
-    }
-
     public override void OnControllerStay()
     {
         if (m_Grabbing == false)
@@ -53,6 +48,8 @@ public class EmergencyDoorHandle : GrabbableObject
 
     public override void OnGrab()
     {
+        base.OnGrab();
+        
         m_Grabbing = true;
     }
 

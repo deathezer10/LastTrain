@@ -58,13 +58,10 @@ public class ScrewDriver : GrabbableObject
         bIsScrewing = false;
     }
 
-    public override void OnControllerStay()
-    {
-
-    }
-
     public override void OnGrab()
     {
+        base.OnGrab();
+
         m_ScrewDriver.transform.rotation = Quaternion.LookRotation(-Controller.transform.forward);
         ScrewDriverClone = (GameObject)Instantiate(m_ScrewDriver, transform.position, transform.rotation, m_ScrewDriver.transform);
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = false;
@@ -81,11 +78,6 @@ public class ScrewDriver : GrabbableObject
         bIsGrabbing = false;
     }
 
-    public override void OnUse()
-    {
-
-    }
-
     public override void OnUseDown()
     {
         if (bIsGrabbing)
@@ -96,5 +88,4 @@ public class ScrewDriver : GrabbableObject
     {
         bIsScrewing = false;
     }
-
 }

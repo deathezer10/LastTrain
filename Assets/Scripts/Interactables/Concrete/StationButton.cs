@@ -55,6 +55,8 @@ public class StationButton : StationaryObject, IShootable
 
     public override void OnGrab()
     {
+        base.OnGrab();
+
     }
 
     public override void OnGrabReleased()

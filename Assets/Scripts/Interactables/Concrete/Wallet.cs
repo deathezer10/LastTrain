@@ -24,6 +24,8 @@ public class Wallet : GrabbableObject
 
     public override void OnGrab()
     {
+        base.OnGrab();
+
         if (!m_HasAnnounced)
         {
             //m_TManager.m_ImageWallet.MoveToHolder();

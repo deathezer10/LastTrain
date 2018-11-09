@@ -13,17 +13,6 @@ public class KeyCard : GrabbableObject {
 
     public SteamVR_Input_Sources playerHand { get; private set; }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
-
-    private void OnTriggerLeave(Collider other)
-    {
-       
-    }
-
     public override bool hideControllerOnGrab { get { return true; } }
 
     public override void OnControllerEnter(PlayerViveController currentController)
@@ -33,38 +22,4 @@ public class KeyCard : GrabbableObject {
         playerController = currentController;
         playerHand = playerController.GetCurrentHand();
     }
-
-    public override void OnControllerExit()
-    {
-        base.OnControllerExit();
-    }
-
-    public override void OnControllerStay()
-    {
-
-    }
-
-    public override void OnGrab()
-    {
-
-    }
-
-    public override void OnGrabReleased()
-    {
-
-    }
-
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
 }

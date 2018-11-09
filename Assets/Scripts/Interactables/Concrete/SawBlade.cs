@@ -53,12 +53,10 @@ public class SawBlade : GrabbableObject
         spinAudio.Stop();
     }
 
-    public override void OnControllerStay()
-    {
-    }
-
     public override void OnGrab()
     {
+        base.OnGrab();
+
         held = true;
 
         transform.rotation = playerController.transform.rotation;
@@ -93,14 +91,6 @@ public class SawBlade : GrabbableObject
                 spinAudio.Stop();
             }
         }
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
     }
 
     public bool IsSpinning()

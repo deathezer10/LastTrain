@@ -160,6 +160,8 @@ public class AcceleratorLever : StationaryObject
 
     public override void OnGrab()
     {
+        base.OnGrab();
+        
         if (bCanGrab)
         {
             bIsGrabbing = true;

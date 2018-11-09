@@ -104,6 +104,8 @@ public class Revolver : GrabbableObject
 
     public override void OnGrab()
     {
+        base.OnGrab();
+
         m_IsGrabbing = true;
         m_LaserPointer.SetActive(true);
         transform.rotation = m_CurrentController.transform.rotation;
@@ -141,13 +143,5 @@ public class Revolver : GrabbableObject
             // Play no bullet sound
             GetComponent<AudioPlayer>().Play("bulletnone");
         }
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
     }
 }

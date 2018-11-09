@@ -88,7 +88,6 @@ public class LightSwitch : GrabbableObject, IShootable
 
             ownedLights.LightsOn();
         }
-
     }
 
     public override void OnControllerExit()
@@ -116,29 +115,6 @@ public class LightSwitch : GrabbableObject, IShootable
         }
     }
 
-    public override void OnGrab()
-    {
-
-    }
-
-    public override void OnGrabReleased()
-    {
-
-    }
-
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
     public void OnShot(Revolver revolver)
     {
         if (bSwitchIsOn)
@@ -161,5 +137,4 @@ public class LightSwitch : GrabbableObject, IShootable
 
         return equal;
     }
-
 }

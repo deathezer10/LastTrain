@@ -132,6 +132,8 @@ public class BrakeLever : StationaryObject
 
     public override void OnGrab()
     {
+        base.OnGrab();
+        
         if (bCanGrab)
         {
             bIsGrabbing = true;

@@ -49,7 +49,9 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     }
 
     public virtual void OnControllerStay() { }
-    public virtual void OnGrab() { }
+    public virtual void OnGrab() {
+        SetEnableOutline(false);
+    }
     public virtual void OnGrabStay() { }
     public virtual void OnGrabReleased() { }
     public virtual void OnUseDown() { }

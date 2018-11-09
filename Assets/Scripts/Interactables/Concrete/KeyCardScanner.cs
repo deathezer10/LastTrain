@@ -85,7 +85,7 @@ public class KeyCardScanner : StationaryObject, IShootable
 
     public override void OnGrab()
     {
-
+        base.OnGrab();
     }
 
     public override void OnGrabReleased()

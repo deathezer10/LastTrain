@@ -69,34 +69,12 @@ public class Bomb : GrabbableObject, IShootable
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
     }
 
     public override void OnControllerExit()
     {
-    }
-
-    public override void OnControllerStay()
-    {
-    }
-
-    public override void OnGrab()
-    {
-    }
-
-    public override void OnGrabReleased()
-    {
-    }
-
-    public override void OnUse()
-    {
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
+        base.OnControllerExit();
     }
 
     public void TimerTimeOut()

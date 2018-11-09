@@ -9,40 +9,6 @@ public class SmallLock : GrabbableObject, IShootable
 
     public override bool hideControllerOnGrab { get { return false; } }
 
-    public override void OnControllerEnter(PlayerViveController currentController)
-    {
-        base.OnControllerEnter(currentController);
-    }
-
-    public override void OnControllerExit()
-    {
-        base.OnControllerExit();
-    }
-
-    public override void OnControllerStay()
-    {
-    }
-
-    public override void OnGrab()
-    {
-    }
-
-    public override void OnGrabReleased()
-    {
-    }
-
-    public override void OnUse()
-    {
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())

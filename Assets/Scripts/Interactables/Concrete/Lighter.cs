@@ -22,27 +22,11 @@ public class Lighter : GrabbableObject
 
     public override bool hideControllerOnGrab { get { return true; } }
 
-    public override void OnControllerEnter(PlayerViveController currentController)
-    {
-        base.OnControllerEnter(currentController);
-    }
-
-    public override void OnControllerExit()
-    {
-        base.OnControllerExit();
-    }
-
-    public override void OnControllerStay()
-    {
-    }
-
     public override void OnGrab()
     {
-        transform.eulerAngles = Vector3.zero;
-    }
+        base.OnGrab();
 
-    public override void OnGrabReleased()
-    {
+        transform.eulerAngles = Vector3.zero;
     }
 
     public override void OnUse()
@@ -90,7 +74,7 @@ public class Lighter : GrabbableObject
         count = 0;
     }
 
-  private IEnumerator Counter()
+    private IEnumerator Counter()
     {
         yield return new WaitForSeconds(1);
         count++;
@@ -99,13 +83,4 @@ public class Lighter : GrabbableObject
             FindObjectOfType<Bomb>().TimerTimeOut();
         }
     }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
 }

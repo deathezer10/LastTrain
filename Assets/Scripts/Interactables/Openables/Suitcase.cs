@@ -57,28 +57,6 @@ public class Suitcase : GrabbableObject
 
     public override bool hideControllerOnGrab { get { return true; } }
 
-    public override void OnControllerEnter(PlayerViveController currentController)
-    {
-        base.OnControllerEnter(currentController);
-    }
-
-    public override void OnControllerExit()
-    {
-        base.OnControllerExit();
-    }
-
-    public override void OnControllerStay()
-    {
-    }
-
-    public override void OnGrab()
-    {
-    }
-
-    public override void OnGrabReleased()
-    {
-    }
-
     public override void OnUse()
     {
         if (!opened)
@@ -87,13 +65,4 @@ public class Suitcase : GrabbableObject
             opened = true;
         }
     }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
 }
