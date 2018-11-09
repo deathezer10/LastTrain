@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class TrainSpeedHandler : MonoBehaviour
 {
@@ -18,20 +19,24 @@ public class TrainSpeedHandler : MonoBehaviour
     private bool bBr_SlowDown = false;
     private bool bAc_StopTrain = false;
     private bool bAc_SpeedChange = false;
-
+    private bool bOnce = false;
     public bool bCanAccelerate { get; private set; } = true;
     private AudioPlayer audioscreech;
+    private Action Part1Complete;
+
+
     void Start()
     {
         stationMover = FindObjectOfType<StationMover>();
         trainDoorsOpenSound = FindObjectOfType<TrainDoorsOpenSound>();
         audioscreech = GetComponent<AudioPlayer>();
+        Part1Complete += PlayPart2;
+
     }
 
     public void BrakeStop()
     {
-        audioscreech.audioSource.loop = true;
-        audioscreech.Play("screech");
+        audioscreech.Play("screech1", Part1Complete, 0);
         bBr_StopTrain = true;
         PreviousTrainSpeed = stationMover.currentSpeed;
         i = 0;
@@ -39,8 +44,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void BrakeSlowDown()
     {
-        audioscreech.audioSource.loop = true;
-        audioscreech.Play("screech");
+        audioscreech.Play("screech1", Part1Complete, 0);
         bBr_SlowDown = true;
         PreviousTrainSpeed = stationMover.currentSpeed;
         i = 0;
@@ -66,12 +70,21 @@ public class TrainSpeedHandler : MonoBehaviour
 
     void Update()
     {
-        
+
         if (bBr_StopTrain)
         {
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
+
+            if (!bOnce)
+                if (stationMover.currentSpeed < 0.5)
+                {
+                    bOnce = true;
+                    audioscreech.Stop();
+                    audioscreech.Play("screech3");
+                }
+
             if (stationMover.currentSpeed == 0)
             {
                 audioscreech.Stop();
@@ -102,6 +115,15 @@ public class TrainSpeedHandler : MonoBehaviour
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
+
+            if (!bOnce)
+                if (stationMover.currentSpeed < 0.5)
+                {
+                    bOnce = true;
+                    audioscreech.Stop();
+                    audioscreech.Play("screech3");
+                }
+
             if (stationMover.currentSpeed == 0)
             {
                 audioscreech.Stop();
@@ -125,5 +147,12 @@ public class TrainSpeedHandler : MonoBehaviour
             }
         }
     }
+
+    private void PlayPart2()
+    {
+        audioscreech.audioSource.loop = true;
+        audioscreech.Play("screech2");
+    }
+
 
 }
