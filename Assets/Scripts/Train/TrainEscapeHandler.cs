@@ -21,6 +21,8 @@ public class TrainEscapeHandler : MonoBehaviour
             col.enabled = false;
         }
 
+        colliders[0].size = new Vector3(0.9f, 0.7f, 36f);
+
         wallCollider.enabled = false;
     }
 
