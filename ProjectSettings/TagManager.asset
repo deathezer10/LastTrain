@@ -24,6 +24,7 @@ TagManager:
   - Screw
   - ScrewDriver
   - Floor
+  - Bomb
   layers:
   - Default
   - TransparentFX

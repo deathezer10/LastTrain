@@ -17,6 +17,8 @@ public class TrainEscapeHandler : MonoBehaviour
         {
             col.enabled = false;
         }
+
+        GetComponentInChildren<BoxCollider>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,6 +36,17 @@ public class TrainEscapeHandler : MonoBehaviour
                 FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainjump");
             }
         }
+        else if (other.tag == "Bomb")
+        {
+            other.gameObject.GetComponent<Bomb>().ThrownOut();
+
+            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 5f, -10f));
+        }
+        else if (other.gameObject.GetComponent<Rigidbody>() != null && other.gameObject.layer != 11)
+        {
+            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 5f, -10f));
+        }
+
     }
 
     public void TrainMoveStart()
@@ -42,5 +55,7 @@ public class TrainEscapeHandler : MonoBehaviour
         {
             col.enabled = true;
         }
+
+        GetComponentInChildren<BoxCollider>().enabled = false;
     }
 }
