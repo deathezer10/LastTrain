@@ -20,7 +20,7 @@ public class LightSwitch : GrabbableObject , IShootable
     private void Start()
     {
         Audio = GetComponent<AudioPlayer>();
-        BreakAtCount = Mathf.RoundToInt(Random.Range(1, 4));
+        BreakAtCount = Mathf.RoundToInt(Random.Range(3, 8));
         toggleTrainLights.AddRange(FindObjectsOfType<ToggleTrainLights>());
         for(int i = 0; i < toggleTrainLights.Count; i++)
         {
