@@ -53,7 +53,7 @@ namespace Negi
         public bool flipY = false;
         public Camera _sourceCamera;
 
-        [HideInInspector]
+        [SerializeField]
         public Camera _outlineCamera;
         Material _outline1Material;
         Material _outline2Material;
@@ -214,17 +214,6 @@ namespace Negi
             }
 
             _outlineCamera.Render();
-        }
-
-        private void OnEnable()
-        {
-            Outline[] o = FindObjectsOfType<Outline>();
-
-            foreach(Outline oL in o)
-            {
-                oL.enabled = false;
-                oL.enabled = true;
-            }
         }
 
         void OnDestroy()
