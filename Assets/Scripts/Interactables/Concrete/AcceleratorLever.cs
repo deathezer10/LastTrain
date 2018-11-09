@@ -92,7 +92,7 @@ public class AcceleratorLever : StationaryObject
 
                         else
                         {
-                            trainSpeedHandler.BrakeSlowDown();
+                            trainSpeedHandler.ChangeSpeed(3);
                         }
 
                 }
