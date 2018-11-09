@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmergencyHandlePanel : StationaryObject {
+public class EmergencyHandlePanel : StationaryObject
+{
 
     private GameObject PlayerHand;
-  
+
     private bool bIsGrabbing = false;
     private bool bCanGrab = false;
-    private bool bIsLocked = false;
+    public bool bIsLocked = false;
     public bool bIsOpened = false;
     private Vector3 CurrentHandPosition;
     private Vector3 PreviousHandPosition;
 
     private float maxYRotation;
     private float DefaultYRotation;
-  
+
 
 
     void Start()
@@ -121,5 +122,5 @@ public class EmergencyHandlePanel : StationaryObject {
     {
     }
 
-   
+
 }
