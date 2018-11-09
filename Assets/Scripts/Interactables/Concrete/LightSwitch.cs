@@ -4,15 +4,17 @@ using UnityEngine;
 using Valve.VR;
 using DG.Tweening;
 
-public class LightSwitch : GrabbableObject , IShootable
+public class LightSwitch : GrabbableObject, IShootable
 {
-  
+
 
     public string SwitchCabinsName;
     private bool bSwitchIsOn = false;
     private bool bIsBroken = false;
     private int ActivateCount = 0;
     private int BreakAtCount;
+    private float x;
+    private bool bCount = false;
     private AudioPlayer Audio;
     private List<ToggleTrainLights> toggleTrainLights = new List<ToggleTrainLights>();
     private ToggleTrainLights ownedLights;
@@ -26,12 +28,20 @@ public class LightSwitch : GrabbableObject , IShootable
         OriginalRotation = transform.localRotation;
         BreakAtCount = Mathf.RoundToInt(Random.Range(3, 5));
         toggleTrainLights.AddRange(FindObjectsOfType<ToggleTrainLights>());
-        for(int i = 0; i < toggleTrainLights.Count; i++)
+        for (int i = 0; i < toggleTrainLights.Count; i++)
         {
-            if(toggleTrainLights[i].SwitchCabinsName == SwitchCabinsName)
+            if (toggleTrainLights[i].SwitchCabinsName == SwitchCabinsName)
             {
                 ownedLights = toggleTrainLights[i];
             }
+        }
+    }
+
+    void Update()
+    {
+        if (bCount)
+        {
+            x += Time.deltaTime;
         }
     }
 
@@ -41,10 +51,10 @@ public class LightSwitch : GrabbableObject , IShootable
     {
         base.OnControllerEnter(currentController);
 
-        if(bIsBroken)
+        if (bIsBroken)
             return;
 
-        if(ActivateCount >= BreakAtCount)
+        if (ActivateCount >= BreakAtCount)
         {
             //Light break sound here?
             ownedLights.LightsOff();
@@ -52,6 +62,7 @@ public class LightSwitch : GrabbableObject , IShootable
             transform.GetComponent<Rigidbody>().useGravity = true;
             transform.GetComponent<Rigidbody>().isKinematic = false;
             transform.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+            bCount = true;
             return;
         }
 
@@ -63,7 +74,7 @@ public class LightSwitch : GrabbableObject , IShootable
         if (bSwitchIsOn)
         {
             bSwitchIsOn = false;
-            
+
             transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             ownedLights.LightsOff();
@@ -86,17 +97,21 @@ public class LightSwitch : GrabbableObject , IShootable
 
     public override void OnControllerStay()
     {
-        if(bIsBroken)
+        if (bIsBroken)
         {
-            if (AlmostEqual(transform.localPosition, OriginalPosition, 0.05f))
-            {
-                transform.GetComponent<Rigidbody>().useGravity = false;
-                transform.GetComponent<Rigidbody>().isKinematic = true;
-                transform.localPosition = OriginalPosition;
-                transform.localRotation = OriginalRotation;
-                bIsBroken = false;
-                return;
-            }
+            if (x < 2)
+                if (AlmostEqual(transform.localPosition, OriginalPosition, 0.05f))
+                {
+                    transform.GetComponent<Rigidbody>().useGravity = false;
+                    transform.GetComponent<Rigidbody>().isKinematic = true;
+                    transform.localPosition = OriginalPosition;
+                    transform.localRotation = OriginalRotation;
+                    ActivateCount = 0;
+                    bCount = false;
+                    x = 0;
+                    bIsBroken = false;
+                    return;
+                }
         }
     }
 
@@ -125,7 +140,7 @@ public class LightSwitch : GrabbableObject , IShootable
 
     public void OnShot(Revolver revolver)
     {
-        if(bSwitchIsOn)
+        if (bSwitchIsOn)
         {
             ownedLights.LightsOff();
         }
