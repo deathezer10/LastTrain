@@ -26,11 +26,17 @@ public class TrainBetweenCabinDoors : MonoBehaviour
             {
                 betweenDoors.Add(child);
             }
+
+            if (child.name.Contains("BetweenDoorsSFX"))
+            {
+                betweenDoorsAudio = child.GetComponent<AudioPlayer>();
+            }
         }
 
         betweenDoorsCollider = gameObject.AddComponent<BoxCollider>();
         betweenDoorsCollider.center = new Vector3(0f, 1.1f, -9.62f);
         betweenDoorsCollider.size = new Vector3(1.25f, 2f, 1.25f);
+
     }
 
     public void OpenBetweenDoors()
@@ -42,7 +48,7 @@ public class TrainBetweenCabinDoors : MonoBehaviour
                 door.transform.DOLocalMoveX(offset, 1.5f).SetRelative();
             }
 
-            //betweenDoorsAudio.Play();
+            betweenDoorsAudio.Play();
 
             StartCoroutine(OnDoorOpenFinish());
 
@@ -57,7 +63,7 @@ public class TrainBetweenCabinDoors : MonoBehaviour
             door.transform.DOLocalMoveX(-offset, 1.5f).SetRelative();
         }
 
-        //betweenDoorsAudio.Play();
+        betweenDoorsAudio.Play();
 
         betweenDoorsCollider.enabled = true;
 
