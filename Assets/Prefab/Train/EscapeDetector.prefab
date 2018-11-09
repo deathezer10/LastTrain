@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5821a8f8df8cc41911cad4cbbcc614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallCollider: {fileID: 0}
+  wallCollider: {fileID: 65657587496872278}
