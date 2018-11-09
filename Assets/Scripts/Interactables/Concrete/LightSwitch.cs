@@ -11,6 +11,7 @@ public class LightSwitch : GrabbableObject, IShootable
     public string SwitchCabinsName;
     private bool bSwitchIsOn = false;
     private bool bIsBroken = false;
+    private bool bIsGrabbing = false;
     private int ActivateCount = 0;
     private int BreakAtCount;
     private float x;
@@ -97,10 +98,10 @@ public class LightSwitch : GrabbableObject, IShootable
 
     public override void OnControllerStay()
     {
-        if (bIsBroken)
+        if (bIsBroken && bIsGrabbing)
         {
             if (x > 2)
-                if (AlmostEqual(transform.localPosition, OriginalPosition, 0.05f))
+                if (AlmostEqual(transform.localPosition, OriginalPosition, 0.04f))
                 {
                     transform.GetComponent<Rigidbody>().useGravity = false;
                     transform.GetComponent<Rigidbody>().isKinematic = true;
@@ -113,6 +114,29 @@ public class LightSwitch : GrabbableObject, IShootable
                     return;
                 }
         }
+    }
+
+    public override void OnGrab()
+    {
+        bIsGrabbing = true;
+    }
+
+    public override void OnGrabReleased()
+    {
+        bIsGrabbing = false;
+    }
+
+    public override void OnUse()
+    {
+
+    }
+
+    public override void OnUseDown()
+    {
+    }
+
+    public override void OnUseUp()
+    {
     }
 
     public void OnShot(Revolver revolver)
