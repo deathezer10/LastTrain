@@ -119,19 +119,6 @@ public class DriverCabinElectricBoxHandle : StationaryObject
         bIsGrabbing = false;
     }
 
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
     private void UnScrewed(string _object)
     {
         if (_object == "Electric")

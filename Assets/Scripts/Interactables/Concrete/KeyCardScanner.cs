@@ -13,12 +13,6 @@ public class KeyCardScanner : StationaryObject, IShootable
 
     private bool isDone = false;
 
-    void Start()
-    {
-        
-    }
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (isDone) return;
@@ -60,51 +54,7 @@ public class KeyCardScanner : StationaryObject, IShootable
         card.playerController.Vibration(0, 0.3f, 1, 1, card.playerHand);
     }
 
-
-    private void OnTriggerLeave(Collider other)
-    {
-
-    }
-
     public override bool hideControllerOnGrab { get { return false; } }
-
-    public override void OnControllerEnter(PlayerViveController currentController)
-    {
-        base.OnControllerEnter(currentController);
-    }
-
-    public override void OnControllerExit()
-    {
-        base.OnControllerExit();
-    }
-
-    public override void OnControllerStay()
-    {
-
-    }
-
-    public override void OnGrab()
-    {
-        base.OnGrab();
-    }
-
-    public override void OnGrabReleased()
-    {
-
-    }
-
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
 
     public void OnShot(Revolver revolver)
     {

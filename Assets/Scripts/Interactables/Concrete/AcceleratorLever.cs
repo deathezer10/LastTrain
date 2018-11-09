@@ -153,11 +153,6 @@ public class AcceleratorLever : StationaryObject
         bCanGrab = false;
     }
 
-    public override void OnControllerStay()
-    {
-
-    }
-
     public override void OnGrab()
     {
         base.OnGrab();
@@ -174,19 +169,6 @@ public class AcceleratorLever : StationaryObject
         bIsGrabbing = false;
     }
 
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
     private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)
     {
         bool equal = true;
@@ -197,7 +179,6 @@ public class AcceleratorLever : StationaryObject
 
         return equal;
     }
-
 
     private float normalize01(float value, float min, float max)
     {
