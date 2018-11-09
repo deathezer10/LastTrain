@@ -8,7 +8,7 @@ public class EmergencyDoorHandleHolder : MonoBehaviour
     [SerializeField]
     Transform m_HandleSnapPoint;
     EmergencyHandlePanel panel;
-    void start()
+    void Awake()
     {
         panel = FindObjectOfType<EmergencyHandlePanel>();
     }
