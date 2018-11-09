@@ -7,10 +7,13 @@ public class ICCardScanner : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject m_GantryBarrier;
+    private GameObject m_GantryBarrier;
 
     [SerializeField]
-    GameObject m_LeftGate, m_RightGate;
+    private GameObject m_LeftGate;
+
+    [SerializeField]
+    private GameObject m_RightGate;
 
     const float m_DoorSwingSpeed = 0.3f;
 

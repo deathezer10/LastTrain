@@ -44,40 +44,8 @@ public class StationButton : StationaryObject, IShootable
         }
     }
 
-    public override void OnControllerExit()
-    {
-        base.OnControllerExit();
-    }
-
-    public override void OnControllerStay()
-    {
-    }
-
-    public override void OnGrab()
-    {
-        base.OnGrab();
-
-    }
-
-    public override void OnGrabReleased()
-    {
-    }
-
-    public override void OnUse()
-    {
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
     public void OnShot(Revolver revolver)
     {
         this.OnControllerEnter(null);
     }
-
 }

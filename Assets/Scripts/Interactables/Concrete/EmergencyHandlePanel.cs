@@ -17,8 +17,6 @@ public class EmergencyHandlePanel : StationaryObject
     private float maxYRotation;
     private float DefaultYRotation;
 
-
-
     void Start()
     {
         DefaultYRotation = transform.parent.rotation.eulerAngles.y;
@@ -63,7 +61,6 @@ public class EmergencyHandlePanel : StationaryObject
             transform.parent.Rotate(0, angle, 0);
             PreviousHandPosition = CurrentHandPosition;
         }
-
     }
 
     public override bool hideControllerOnGrab { get { return true; } }
@@ -102,7 +99,6 @@ public class EmergencyHandlePanel : StationaryObject
             bIsGrabbing = true;
             PreviousHandPosition = PlayerHand.transform.position;
             CurrentHandPosition = PlayerHand.transform.position;
-
         }
     }
 
@@ -110,19 +106,4 @@ public class EmergencyHandlePanel : StationaryObject
     {
         bIsGrabbing = false;
     }
-
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
-
 }

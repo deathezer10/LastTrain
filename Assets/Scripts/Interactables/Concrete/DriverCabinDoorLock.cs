@@ -195,11 +195,6 @@ public class DriverCabinDoorLock : StationaryObject
         bIsGrabbing = false;
     }
 
-    public override void OnControllerStay()
-    {
-
-    }
-
     public override void OnGrab()
     {
         base.OnGrab();
@@ -229,19 +224,6 @@ public class DriverCabinDoorLock : StationaryObject
                 doorBody.velocity = HandleMovementDirection * vel;
         }
         bIsGrabbing = false;
-    }
-
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
     }
 
     private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)

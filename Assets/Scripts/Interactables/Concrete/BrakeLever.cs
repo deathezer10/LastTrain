@@ -13,15 +13,12 @@ public class BrakeLever : StationaryObject
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
     private bool bCanGrab = false;
-
  
     private Vector3 HandOffsetStart;
     private Vector3 currentHandPosition;
     private float minXRotation = -0.45f;       //Setting lowest reachable rotation for the lever
     private float maxXRotation;               //Setting the max reachable rotation for the lever
     private float currentXRotation;
-
-   
 
     public static bool IsTaskCompleted()
     {
@@ -102,7 +99,6 @@ public class BrakeLever : StationaryObject
             bCanGrab = true;
             PlayerHand = currentController.gameObject;
         }
-
     }
 
     public override void OnControllerExit()
@@ -115,19 +111,6 @@ public class BrakeLever : StationaryObject
     public override void OnControllerStay()
     {
         currentHandPosition = PlayerHand.transform.position;
-    }
-
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
     }
 
     public override void OnGrab()
