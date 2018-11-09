@@ -39,6 +39,8 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void BrakeSlowDown()
     {
+        audioscreech.audioSource.loop = true;
+        audioscreech.Play("screech");
         bBr_SlowDown = true;
         PreviousTrainSpeed = stationMover.currentSpeed;
         i = 0;
