@@ -16,11 +16,15 @@ public class LightSwitch : GrabbableObject , IShootable
     private AudioPlayer Audio;
     private List<ToggleTrainLights> toggleTrainLights = new List<ToggleTrainLights>();
     private ToggleTrainLights ownedLights;
+    private Vector3 OriginalPosition;
+    private Quaternion OriginalRotation;
 
     private void Start()
     {
         Audio = GetComponent<AudioPlayer>();
-        BreakAtCount = Mathf.RoundToInt(Random.Range(3, 8));
+        OriginalPosition = transform.localPosition;
+        OriginalRotation = transform.localRotation;
+        BreakAtCount = Mathf.RoundToInt(Random.Range(3, 5));
         toggleTrainLights.AddRange(FindObjectsOfType<ToggleTrainLights>());
         for(int i = 0; i < toggleTrainLights.Count; i++)
         {
@@ -82,7 +86,18 @@ public class LightSwitch : GrabbableObject , IShootable
 
     public override void OnControllerStay()
     {
-
+        if(bIsBroken)
+        {
+            if (AlmostEqual(transform.localPosition, OriginalPosition, 0.05f))
+            {
+                transform.GetComponent<Rigidbody>().useGravity = false;
+                transform.GetComponent<Rigidbody>().isKinematic = true;
+                transform.localPosition = OriginalPosition;
+                transform.localRotation = OriginalRotation;
+                bIsBroken = false;
+                return;
+            }
+        }
     }
 
     public override void OnGrab()
@@ -119,4 +134,16 @@ public class LightSwitch : GrabbableObject , IShootable
         Destroy(this);
 
     }
+
+    private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)
+    {
+        bool equal = true;
+
+        if (Mathf.Abs(v1.x - v2.x) > precision) equal = false;
+        if (Mathf.Abs(v1.y - v2.y) > precision) equal = false;
+        if (Mathf.Abs(v1.z - v2.z) > precision) equal = false;
+
+        return equal;
+    }
+
 }
