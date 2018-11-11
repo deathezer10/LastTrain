@@ -6,7 +6,7 @@ public class Wallet : GrabbableObject
 {
 
     [SerializeField]
-    private GameObject m_ICCardPrefab;
+    private GameObject m_ICCardPrefab, m_TutorialPoster2, m_TutorialPoster3;
 
     private bool m_HasAnnounced = false;
     private bool m_HasUsedOnce = false;
@@ -20,6 +20,8 @@ public class Wallet : GrabbableObject
         m_TManager = FindObjectOfType<TutorialManager>();
         m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
         m_colliders = GetComponents<BoxCollider>();
+
+        transform.GetComponentInChildren<Negi.Outline>().enabled = true;
     }
 
     public override void OnGrab()
@@ -28,10 +30,10 @@ public class Wallet : GrabbableObject
 
         if (!m_HasAnnounced)
         {
-            //m_TManager.m_ImageWallet.MoveToHolder();
-            //m_TManager.m_ImageGripButton.gameObject.SetActive(true);
-            //m_TManagerAudioPlayer.Stop();
-            //m_TManagerAudioPlayer.Play("tutorial_wallet_outro");
+            transform.GetComponentInChildren<Negi.Outline>().enabled = false;
+            m_TutorialPoster2.GetComponent<Negi.Outline>().enabled = false;
+            m_TutorialPoster3.GetComponent<Negi.Outline>().enabled = true;
+
             m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
             m_HasAnnounced = true;
         }
@@ -41,10 +43,7 @@ public class Wallet : GrabbableObject
     {
         if (!m_HasUsedOnce)
         {
-            //m_TManager.m_ImageGripButton.MoveToHolder();
-            //m_TManager.m_ImageUnlockGates.gameObject.SetActive(true);
-            //m_TManagerAudioPlayer.Stop();
-            //m_TManagerAudioPlayer.Play("tutorial_ic_card");
+            m_TutorialPoster3.GetComponent<Negi.Outline>().enabled = false;
 
             GetComponent<Animator>().Play("Open");
             m_colliders[1].enabled = true;

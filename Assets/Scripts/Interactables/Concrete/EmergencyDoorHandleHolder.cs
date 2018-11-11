@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class EmergencyDoorHandleHolder : MonoBehaviour
 {
-
-    [SerializeField]
-    Transform m_HandleSnapPoint;
+    
     EmergencyHandlePanel panel;
     void Awake()
     {
@@ -37,8 +35,8 @@ public class EmergencyDoorHandleHolder : MonoBehaviour
         handle.GetComponent<Rigidbody>().useGravity = false;
         handle.GetComponent<Rigidbody>().isKinematic = true;
 
-        handle.transform.position = m_HandleSnapPoint.position;
-        handle.transform.rotation = m_HandleSnapPoint.transform.rotation;
+        handle.transform.position = transform.position;
+        handle.transform.rotation = transform.rotation;
 
         GetComponent<AudioPlayer>().Play("handleclicked");
 

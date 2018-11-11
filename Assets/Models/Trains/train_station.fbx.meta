@@ -56,6 +56,25 @@ ModelImporter:
     100100: tunnel
     100102: connector1
     100104: small_tunnel1
+    100106: cautiongate1
+    100108: cautiongate2
+    100110: cautiongate3
+    100112: gates
+    100114: polySurface1513
+    100116: polySurface1514
+    100118: polySurface1518
+    100120: polySurface1523
+    100122: polySurface1535
+    100124: polySurface1536
+    100126: polySurface1537
+    100128: polySurface1538
+    100130: polySurface1539
+    100132: polySurface1540
+    100134: polySurface1541
+    100136: polySurface1543
+    100138: polySurface1544
+    100140: poster
+    100142: tappy
     400000: button
     400002: gantry_gate1
     400004: gantry_gate2
@@ -109,10 +128,30 @@ ModelImporter:
     400100: tunnel
     400102: connector1
     400104: small_tunnel1
+    400106: cautiongate1
+    400108: cautiongate2
+    400110: cautiongate3
+    400112: gates
+    400114: polySurface1513
+    400116: polySurface1514
+    400118: polySurface1518
+    400120: polySurface1523
+    400122: polySurface1535
+    400124: polySurface1536
+    400126: polySurface1537
+    400128: polySurface1538
+    400130: polySurface1539
+    400132: polySurface1540
+    400134: polySurface1541
+    400136: polySurface1543
+    400138: polySurface1544
+    400140: poster
+    400142: tappy
     2100000: StingrayPBS1
     2100002: lambert1
     2100004: StingrayPBS3
     2100006: StingrayPBS2
+    2100008: pt4
     2300000: button
     2300002: gantry_gate1
     2300004: gantry_gate2
@@ -163,6 +202,22 @@ ModelImporter:
     2300094: small_tunnel
     2300096: connector1
     2300098: small_tunnel1
+    2300100: cautiongate1
+    2300102: cautiongate2
+    2300104: cautiongate3
+    2300106: polySurface1513
+    2300108: polySurface1514
+    2300110: polySurface1523
+    2300112: polySurface1535
+    2300114: polySurface1536
+    2300116: polySurface1537
+    2300118: polySurface1538
+    2300120: polySurface1539
+    2300122: polySurface1540
+    2300124: polySurface1541
+    2300126: polySurface1543
+    2300128: polySurface1544
+    2300130: poster
     3300000: button
     3300002: gantry_gate1
     3300004: gantry_gate2
@@ -213,6 +268,22 @@ ModelImporter:
     3300094: small_tunnel
     3300096: connector1
     3300098: small_tunnel1
+    3300100: cautiongate1
+    3300102: cautiongate2
+    3300104: cautiongate3
+    3300106: polySurface1513
+    3300108: polySurface1514
+    3300110: polySurface1523
+    3300112: polySurface1535
+    3300114: polySurface1536
+    3300116: polySurface1537
+    3300118: polySurface1538
+    3300120: polySurface1539
+    3300122: polySurface1540
+    3300124: polySurface1541
+    3300126: polySurface1543
+    3300128: polySurface1544
+    3300130: poster
     4300000: button
     4300002: platform_bot
     4300004: main
@@ -263,6 +334,22 @@ ModelImporter:
     4300094: connector
     4300096: small_tunnel1
     4300098: connector1
+    4300100: polySurface1514
+    4300102: polySurface1513
+    4300104: cautiongate1
+    4300106: cautiongate3
+    4300108: cautiongate2
+    4300110: polySurface1535
+    4300112: polySurface1536
+    4300114: polySurface1537
+    4300116: polySurface1538
+    4300118: polySurface1539
+    4300120: polySurface1540
+    4300122: polySurface1541
+    4300124: polySurface1543
+    4300126: polySurface1544
+    4300128: poster
+    4300130: polySurface1523
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -284,6 +371,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: lambert1
     second: {fileID: 2100000, guid: 887abf3d5df69f4418e6bd3822694cc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pt4
+    second: {fileID: 2100000, guid: 7a93c8db6699c8546a99a24568cbe793, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

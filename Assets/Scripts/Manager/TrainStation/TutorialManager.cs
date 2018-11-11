@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using Valve.VR;
 using DG.Tweening;
@@ -18,9 +17,10 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField]
     private SteamVR_Action_Boolean _padAction;
-    
-    public InstructionImage m_ImageTeleport, m_ImageWallet, m_ImageGripButton, m_ImageUnlockGates;
-    
+
+    [SerializeField]
+    private GameObject m_TutorialPoster1, m_TutorialPoster2;
+
     private Vector3 m_playerCheckpointPos = new Vector3(1f, 1.5f, -5f);
     private Vector3 m_playerCheckpointRot = new Vector3(0, -90f, 0);
 
@@ -31,19 +31,7 @@ public class TutorialManager : MonoBehaviour
 
         if (tutorialEnabled)
         {
-            m_ImageTeleport = Instantiate(m_ImageTeleport);
-            m_ImageTeleport.gameObject.SetActive(false);
-
-            m_ImageWallet = Instantiate(m_ImageWallet);
-            m_ImageWallet.gameObject.SetActive(false);
-
-            m_ImageGripButton = Instantiate(m_ImageGripButton);
-            m_ImageGripButton.gameObject.SetActive(false);
-
-            m_ImageUnlockGates = Instantiate(m_ImageUnlockGates);
-            m_ImageUnlockGates.gameObject.SetActive(false);
-
-            Invoke("StartTutorialVersion2", 1.5f);
+            StartTutorial();
         }
         else  // Skipping tutorial to checkpoint position * or just move this check to a seperate check script on the player object
         {
@@ -54,7 +42,8 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    void StartTutorialVersion1()
+    /*
+    private void StartTutorialOld()
     {
 
         var audioPlayer = GetComponent<AudioPlayer>();
@@ -62,8 +51,8 @@ public class TutorialManager : MonoBehaviour
         audioPlayer.Play("tutorial_greeting", () =>
         {
             audioPlayer.Play("tutorial_trajectory_intro");
-            
-            System.IDisposable padObserver = null;
+
+            IDisposable padObserver = null;
 
             m_ImageTeleport.gameObject.SetActive(true);
 
@@ -97,9 +86,23 @@ public class TutorialManager : MonoBehaviour
         }, 0.5f);
 
     }
+    */
 
-    void StartTutorialVersion2()
+    void StartTutorial()
     {
+
+        IDisposable padObserver = null;
+
+        // Teleport intro
+        padObserver = this.UpdateAsObservable()
+           .Where(_ => _padAction.GetStateUp(SteamVR_Input_Sources.RightHand)) // Input.GetKeyUp(KeyCode.A)
+           .Subscribe(_ =>
+           {
+               padObserver.Dispose();
+               m_TutorialPoster1.GetComponent<Negi.Outline>().enabled = false; // Remove outline from signboard
+               m_TutorialPoster2.GetComponent<Negi.Outline>().enabled = true;
+           }
+           );
 
     }
 

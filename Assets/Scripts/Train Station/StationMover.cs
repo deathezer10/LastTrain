@@ -10,7 +10,7 @@ public class StationMover : MonoBehaviour
     GameObject m_LastRightTunnel;
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
-    int m_InitialTunnelSpawnAmount = 3;
+    const int m_InitialTunnelSpawnAmount = 7;
     int m_CurrentTunnelIndex = 0;
     float m_CurrentDistanceTraveled = 0;
     const float m_TunnelGapOffset = 20.23f;
@@ -67,8 +67,8 @@ public class StationMover : MonoBehaviour
             m_CurrentDistanceTraveled = 0;
             m_CurrentTunnelIndex++;
 
-            // For the first time after spawning 5 tunnels, destroy all the initial objects
-            if (m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 5)
+            // For the first time after spawning X tunnels, destroy all the initial objects
+            if (m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= m_InitialTunnelSpawnAmount * 2)
             {
                 while (m_InitialRemovableObjects.Count > 0)
                 {
