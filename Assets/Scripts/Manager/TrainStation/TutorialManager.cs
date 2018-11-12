@@ -12,8 +12,6 @@ public class TutorialManager : MonoBehaviour
 
     public enum PosterState { None, Poster1, Poster2, Poster3 }
 
-    private PosterState m_PosterState = PosterState.Poster1;
-
     [SerializeField]
     private bool m_TutorialEnabled = true;
     public bool tutorialEnabled {
@@ -124,49 +122,52 @@ public class TutorialManager : MonoBehaviour
 
     public void SetPoster(PosterState poster)
     {
-        m_PosterState = poster;
-
         m_TutorialPoster1.enabled = false;
         m_TutorialPoster2.enabled = false;
         m_TutorialPoster3.enabled = false;
 
-        switch (m_PosterState)
+        StopAllCoroutines();
+
+        switch (poster)
         {
             case PosterState.None:
                 break;
             case PosterState.Poster1:
                 m_TutorialPoster1.enabled = true;
+                StartCoroutine(StartPosterAnimation(PosterState.Poster1));
                 break;
             case PosterState.Poster2:
                 m_TutorialPoster2.enabled = true;
+                StartCoroutine(StartPosterAnimation(PosterState.Poster1));
+                StartCoroutine(StartPosterAnimation(PosterState.Poster2));
                 break;
             case PosterState.Poster3:
                 m_TutorialPoster3.enabled = true;
+                StartCoroutine(StartPosterAnimation(PosterState.Poster1));
+                StartCoroutine(StartPosterAnimation(PosterState.Poster2));
+                StartCoroutine(StartPosterAnimation(PosterState.Poster3));
                 break;
             default:
                 Debug.LogError("Invalid poster assigned");
                 break;
         }
 
-        StopAllCoroutines();
-        StartCoroutine(StartPosterAnimation());
     }
 
-    IEnumerator StartPosterAnimation()
+    IEnumerator StartPosterAnimation(PosterState target)
     {
-        while (m_PosterState != PosterState.None)
+        while (target != PosterState.None)
         {
-            yield return new WaitForSeconds(0.5f);
-
-            m_CurrentPosterMaterialIndex = (int)Mathf.Repeat(++m_CurrentPosterMaterialIndex, m_TutorialPosterMaterials.Count);
-
+            yield return new WaitForSeconds(0.75f);
+            
             var posterMat = m_TutorialPosterMaterials[m_CurrentPosterMaterialIndex];
 
-            switch (m_PosterState)
+            switch (target)
             {
                 case PosterState.None:
                     break;
                 case PosterState.Poster1:
+                    m_CurrentPosterMaterialIndex = (int)Mathf.Repeat(++m_CurrentPosterMaterialIndex, m_TutorialPosterMaterials.Count);
                     m_TutorialPoster1.GetComponent<Renderer>().material = posterMat;
                     break;
                 case PosterState.Poster2:
