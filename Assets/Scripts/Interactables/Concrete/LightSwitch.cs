@@ -9,7 +9,7 @@ public class LightSwitch : GrabbableObject, IShootable
 
 
     public string SwitchCabinsName;
-    private bool bSwitchIsOn = false;
+    private bool bSwitchIsOn = true;
     private bool bIsBroken = false;
     private bool bIsGrabbing = false;
     private int ActivateCount = 0;
