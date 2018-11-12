@@ -38,20 +38,35 @@ public class EmergencyHandlePanel : StationaryObject
             if (cross.y < 0) angle = -angle;
 
 
-            if (transform.parent.rotation.eulerAngles.y >= maxYRotation - 35 && transform.parent.rotation.eulerAngles.y <= maxYRotation +10 )
+            if (transform.parent.rotation.eulerAngles.y >= maxYRotation - 85 && transform.parent.rotation.eulerAngles.y <= maxYRotation +10 )
             {
                 bIsOpened = true;
             }
 
             else bIsOpened = false;
 
-            if (angle < 0)
+
+
+            if (angle < 0 && !bIsLocked)
                 if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 151)))
                 {
                     return;
                 }
 
-            if (angle > 0)
+            if (angle > 0 && !bIsLocked)
+                if (transform.parent.rotation.eulerAngles.y >= maxYRotation && transform.parent.rotation.eulerAngles.y <= (maxYRotation + 20))
+                {
+                    return;
+                }
+
+
+            if (angle < 0 && bIsLocked)
+                if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation + 40 || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 151)))
+                {
+                    return;
+                }
+
+            if (angle > 0 && bIsLocked)
                 if (transform.parent.rotation.eulerAngles.y >= maxYRotation && transform.parent.rotation.eulerAngles.y <= (maxYRotation + 20))
                 {
                     return;
@@ -69,8 +84,8 @@ public class EmergencyHandlePanel : StationaryObject
     {
         base.OnControllerEnter(currentController);
 
-        if (!bIsLocked)
-            bCanGrab = true;
+        
+        bCanGrab = true;
         PlayerHand = currentController.gameObject;
     }
 
