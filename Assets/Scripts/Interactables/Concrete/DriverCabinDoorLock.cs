@@ -55,7 +55,7 @@ public class DriverCabinDoorLock : StationaryObject
     }
 
 
-        void Update()
+        void FixedUpdate()
     {
        
         if (!bDisableLever)
