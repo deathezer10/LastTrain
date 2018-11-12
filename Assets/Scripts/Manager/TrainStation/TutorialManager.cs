@@ -110,7 +110,7 @@ public class TutorialManager : MonoBehaviour
 
         // Teleport intro
         padObserver = this.UpdateAsObservable()
-           .Where(_ => _padAction.GetStateUp(SteamVR_Input_Sources.RightHand)) // Input.GetKeyUp(KeyCode.A)
+           .Where(_ => _padAction.GetStateUp(SteamVR_Input_Sources.Any)) // Input.GetKeyUp(KeyCode.A)
            .Subscribe(_ =>
            {
                padObserver.Dispose();
