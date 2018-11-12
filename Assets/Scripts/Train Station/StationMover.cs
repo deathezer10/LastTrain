@@ -29,7 +29,7 @@ public class StationMover : MonoBehaviour
         set { m_CurrentStationMaxSpeed = value; }
     }
 
-    const float m_StationAcceleration = 1.0f;
+    const float m_StationAcceleration = 2.0f;
     float m_CurrentStationSpeed = 0;
     public float currentSpeed {
         get { return m_CurrentStationSpeed; }
