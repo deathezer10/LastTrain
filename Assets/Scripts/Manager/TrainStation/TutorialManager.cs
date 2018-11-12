@@ -158,10 +158,8 @@ public class TutorialManager : MonoBehaviour
     {
         while (target != PosterState.None)
         {
-            yield return new WaitForSeconds(1);
-
-            m_CurrentPosterMaterialIndex = (int)Mathf.Repeat(++m_CurrentPosterMaterialIndex, m_TutorialPosterMaterials.Count);
-
+            yield return new WaitForSeconds(0.75f);
+            
             var posterMat = m_TutorialPosterMaterials[m_CurrentPosterMaterialIndex];
 
             switch (target)
@@ -169,6 +167,7 @@ public class TutorialManager : MonoBehaviour
                 case PosterState.None:
                     break;
                 case PosterState.Poster1:
+                    m_CurrentPosterMaterialIndex = (int)Mathf.Repeat(++m_CurrentPosterMaterialIndex, m_TutorialPosterMaterials.Count);
                     m_TutorialPoster1.GetComponent<Renderer>().material = posterMat;
                     break;
                 case PosterState.Poster2:
