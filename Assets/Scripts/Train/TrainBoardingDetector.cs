@@ -17,6 +17,13 @@ public class TrainBoardingDetector : MonoBehaviour
     private float m_PlayerTimeOnBoard;
 
     private bool m_HasMoved = false;
+
+    private ToggleTrainLights[] toggleTrainLights;
+
+    void Start()
+    {
+        toggleTrainLights = FindObjectsOfType<ToggleTrainLights>();
+    }
     
     private void OnTriggerStay(Collider other)
     {
@@ -27,6 +34,12 @@ public class TrainBoardingDetector : MonoBehaviour
             // After player stands in the train for X seconds, close the doors and move the train
             if (m_HasMoved == false && m_PlayerTimeOnBoard >= m_PlatformMoveDelay)
             {
+                
+                for(int lightsFound = 0; lightsFound < toggleTrainLights.Length; lightsFound++)
+                {
+                    toggleTrainLights[lightsFound].FlickerLights();
+                }
+
                 m_HasMoved = true;
                 m_TrainDoorHandler.ToggleDoors(false, () =>
                 {

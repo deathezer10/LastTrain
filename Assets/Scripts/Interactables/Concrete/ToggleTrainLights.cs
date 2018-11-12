@@ -5,6 +5,7 @@ using UnityEngine;
 public class ToggleTrainLights : MonoBehaviour {
     List<Light> m_TrainLights = new List<Light>();
     public string SwitchCabinsName;
+    bool bIsOn = true;
 
     // Use this for initialization
     void Start () {
@@ -19,11 +20,68 @@ public class ToggleTrainLights : MonoBehaviour {
 		
 	}
 
+    public void FlickerLights()
+    {
+        StartCoroutine(flicker());
+    }
+
+    private IEnumerator flicker()
+    {
+        if(!bIsOn)
+        {
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(true);
+            }
+
+            yield return new WaitForSeconds(1);
+
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(false);
+            }
+
+            yield return new WaitForSeconds(1);
+
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(true);
+            }
+            yield return true;
+        }
+
+        if (bIsOn)
+        {
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(false);
+            }
+
+            yield return new WaitForSeconds(1);
+
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(true);
+            }
+
+            yield return new WaitForSeconds(1);
+
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(false);
+            }
+            yield return true;
+        }
+
+
+        yield return true;
+    }
     public void LightsOn()
     {
         foreach (Light light in m_TrainLights)
         {
             light.gameObject.SetActive(true);
+            bIsOn = true;
         }
     }
 
@@ -32,6 +90,7 @@ public class ToggleTrainLights : MonoBehaviour {
         foreach (Light light in m_TrainLights)
         {
             light.gameObject.SetActive(false);
+            bIsOn = false;
         }
     }
 
