@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ToggleTrainLights : MonoBehaviour {
     List<Light> m_TrainLights = new List<Light>();
@@ -27,52 +28,21 @@ public class ToggleTrainLights : MonoBehaviour {
 
     private IEnumerator flicker()
     {
-        if(!bIsOn)
+        foreach (Light light in m_TrainLights)
         {
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(true);
-            }
-
-            yield return new WaitForSeconds(1);
-
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(false);
-            }
-
-            yield return new WaitForSeconds(1);
-
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(true);
-            }
-            yield return true;
+            light.DOIntensity(0.3f, 0.5f);
         }
-
-        if (bIsOn)
+        yield return new WaitForSeconds(0.5f);
+        foreach (Light light in m_TrainLights)
         {
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(false);
-            }
-
-            yield return new WaitForSeconds(1);
-
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(true);
-            }
-
-            yield return new WaitForSeconds(1);
-
-            foreach (Light light in m_TrainLights)
-            {
-                light.gameObject.SetActive(false);
-            }
-            yield return true;
+            light.DOIntensity(0.5f, 0.7f);
         }
+        yield return new WaitForSeconds(0.7f);
 
+        foreach (Light light in m_TrainLights)
+        {
+            light.DOIntensity(0.8f, 0.7f);
+        }
 
         yield return true;
     }
