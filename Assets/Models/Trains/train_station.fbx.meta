@@ -75,6 +75,24 @@ ModelImporter:
     100138: polySurface1544
     100140: poster
     100142: tappy
+    100144: other_stuff
+    100146: polySurface1524
+    100148: polySurface1525
+    100150: polySurface1526
+    100152: polySurface1527
+    100154: polySurface1528
+    100156: polySurface1529
+    100158: polySurface1530
+    100160: polySurface1531
+    100162: polySurface1532
+    100164: polySurface1533
+    100166: polySurface1534
+    100168: polySurface1542
+    100170: polySurface1545
+    100172: polySurface1546
+    100174: polySurface1547
+    100176: polySurface1548
+    100178: polySurface1549
     400000: button
     400002: gantry_gate1
     400004: gantry_gate2
@@ -147,6 +165,24 @@ ModelImporter:
     400138: polySurface1544
     400140: poster
     400142: tappy
+    400144: other_stuff
+    400146: polySurface1524
+    400148: polySurface1525
+    400150: polySurface1526
+    400152: polySurface1527
+    400154: polySurface1528
+    400156: polySurface1529
+    400158: polySurface1530
+    400160: polySurface1531
+    400162: polySurface1532
+    400164: polySurface1533
+    400166: polySurface1534
+    400168: polySurface1542
+    400170: polySurface1545
+    400172: polySurface1546
+    400174: polySurface1547
+    400176: polySurface1548
+    400178: polySurface1549
     2100000: StingrayPBS1
     2100002: lambert1
     2100004: StingrayPBS3
@@ -218,6 +254,23 @@ ModelImporter:
     2300126: polySurface1543
     2300128: polySurface1544
     2300130: poster
+    2300132: polySurface1524
+    2300134: polySurface1525
+    2300136: polySurface1526
+    2300138: polySurface1527
+    2300140: polySurface1528
+    2300142: polySurface1529
+    2300144: polySurface1530
+    2300146: polySurface1531
+    2300148: polySurface1532
+    2300150: polySurface1533
+    2300152: polySurface1534
+    2300154: polySurface1542
+    2300156: polySurface1545
+    2300158: polySurface1546
+    2300160: polySurface1547
+    2300162: polySurface1548
+    2300164: polySurface1549
     3300000: button
     3300002: gantry_gate1
     3300004: gantry_gate2
@@ -284,6 +337,23 @@ ModelImporter:
     3300126: polySurface1543
     3300128: polySurface1544
     3300130: poster
+    3300132: polySurface1524
+    3300134: polySurface1525
+    3300136: polySurface1526
+    3300138: polySurface1527
+    3300140: polySurface1528
+    3300142: polySurface1529
+    3300144: polySurface1530
+    3300146: polySurface1531
+    3300148: polySurface1532
+    3300150: polySurface1533
+    3300152: polySurface1534
+    3300154: polySurface1542
+    3300156: polySurface1545
+    3300158: polySurface1546
+    3300160: polySurface1547
+    3300162: polySurface1548
+    3300164: polySurface1549
     4300000: button
     4300002: platform_bot
     4300004: main
@@ -350,6 +420,23 @@ ModelImporter:
     4300126: polySurface1544
     4300128: poster
     4300130: polySurface1523
+    4300132: polySurface1524
+    4300134: polySurface1525
+    4300136: polySurface1526
+    4300138: polySurface1527
+    4300140: polySurface1528
+    4300142: polySurface1529
+    4300144: polySurface1530
+    4300146: polySurface1531
+    4300148: polySurface1532
+    4300150: polySurface1533
+    4300152: polySurface1534
+    4300154: polySurface1542
+    4300156: polySurface1545
+    4300158: polySurface1546
+    4300160: polySurface1547
+    4300162: polySurface1548
+    4300164: polySurface1549
   externalObjects:
   - first:
       type: UnityEngine:Material
