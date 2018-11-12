@@ -38,7 +38,7 @@ public class EmergencyHandlePanel : StationaryObject
             if (cross.y < 0) angle = -angle;
 
 
-            if (transform.parent.rotation.eulerAngles.y >= maxYRotation - 35 && transform.parent.rotation.eulerAngles.y <= maxYRotation)
+            if (transform.parent.rotation.eulerAngles.y >= maxYRotation - 35 && transform.parent.rotation.eulerAngles.y <= maxYRotation +10 )
             {
                 bIsOpened = true;
             }
