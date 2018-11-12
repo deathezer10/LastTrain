@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using DG.Tweening;
@@ -7,6 +9,10 @@ using UniRx.Triggers;
 
 public class TutorialManager : MonoBehaviour
 {
+
+    public enum PosterState { None, Poster1, Poster2, Poster3 }
+
+    private PosterState m_PosterState = PosterState.Poster1;
 
     [SerializeField]
     private bool m_TutorialEnabled = true;
@@ -19,7 +25,16 @@ public class TutorialManager : MonoBehaviour
     private SteamVR_Action_Boolean _padAction;
 
     [SerializeField]
-    private GameObject m_TutorialPoster1, m_TutorialPoster2;
+    private Negi.Outline m_TutorialPoster1;
+    [SerializeField]
+    private Negi.Outline m_TutorialPoster2;
+    [SerializeField]
+    private Negi.Outline m_TutorialPoster3;
+
+    [SerializeField]
+    private List<Material> m_TutorialPosterMaterials = new List<Material>();
+
+    private int m_CurrentPosterMaterialIndex = 0;
 
     private Vector3 m_playerCheckpointPos = new Vector3(1f, 1.5f, -5f);
     private Vector3 m_playerCheckpointRot = new Vector3(0, -90f, 0);
@@ -91,6 +106,8 @@ public class TutorialManager : MonoBehaviour
     void StartTutorial()
     {
 
+        SetPoster(PosterState.Poster1);
+
         IDisposable padObserver = null;
 
         // Teleport intro
@@ -99,11 +116,70 @@ public class TutorialManager : MonoBehaviour
            .Subscribe(_ =>
            {
                padObserver.Dispose();
-               m_TutorialPoster1.GetComponent<Negi.Outline>().enabled = false; // Remove outline from signboard
-               m_TutorialPoster2.GetComponent<Negi.Outline>().enabled = true;
+               SetPoster(PosterState.Poster2);
            }
            );
 
+    }
+
+    public void SetPoster(PosterState poster)
+    {
+        m_PosterState = poster;
+
+        m_TutorialPoster1.enabled = false;
+        m_TutorialPoster2.enabled = false;
+        m_TutorialPoster3.enabled = false;
+
+        switch (m_PosterState)
+        {
+            case PosterState.None:
+                break;
+            case PosterState.Poster1:
+                m_TutorialPoster1.enabled = true;
+                break;
+            case PosterState.Poster2:
+                m_TutorialPoster2.enabled = true;
+                break;
+            case PosterState.Poster3:
+                m_TutorialPoster3.enabled = true;
+                break;
+            default:
+                Debug.LogError("Invalid poster assigned");
+                break;
+        }
+
+        StopAllCoroutines();
+        StartCoroutine(StartPosterAnimation());
+    }
+
+    IEnumerator StartPosterAnimation()
+    {
+        while (m_PosterState != PosterState.None)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            m_CurrentPosterMaterialIndex = (int)Mathf.Repeat(++m_CurrentPosterMaterialIndex, m_TutorialPosterMaterials.Count);
+
+            var posterMat = m_TutorialPosterMaterials[m_CurrentPosterMaterialIndex];
+
+            switch (m_PosterState)
+            {
+                case PosterState.None:
+                    break;
+                case PosterState.Poster1:
+                    m_TutorialPoster1.GetComponent<Renderer>().material = posterMat;
+                    break;
+                case PosterState.Poster2:
+                    m_TutorialPoster2.GetComponent<Renderer>().material = posterMat;
+                    break;
+                case PosterState.Poster3:
+                    m_TutorialPoster3.GetComponent<Renderer>().material = posterMat;
+                    break;
+                default:
+                    Debug.LogError("Invalid poster assigned");
+                    break;
+            }
+        }
     }
 
 }

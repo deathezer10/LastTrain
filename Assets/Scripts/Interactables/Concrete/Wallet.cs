@@ -6,7 +6,7 @@ public class Wallet : GrabbableObject
 {
 
     [SerializeField]
-    private GameObject m_ICCardPrefab, m_TutorialPoster2, m_TutorialPoster3;
+    private GameObject m_ICCardPrefab;
 
     private bool m_HasAnnounced = false;
     private bool m_HasUsedOnce = false;
@@ -31,8 +31,7 @@ public class Wallet : GrabbableObject
         if (!m_HasAnnounced)
         {
             transform.GetComponentInChildren<Negi.Outline>().enabled = false;
-            m_TutorialPoster2.GetComponent<Negi.Outline>().enabled = false;
-            m_TutorialPoster3.GetComponent<Negi.Outline>().enabled = true;
+            m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
 
             m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
             m_HasAnnounced = true;
@@ -43,7 +42,7 @@ public class Wallet : GrabbableObject
     {
         if (!m_HasUsedOnce)
         {
-            m_TutorialPoster3.GetComponent<Negi.Outline>().enabled = false;
+            m_TManager.SetPoster(TutorialManager.PosterState.None);
 
             GetComponent<Animator>().Play("Open");
             m_colliders[1].enabled = true;
