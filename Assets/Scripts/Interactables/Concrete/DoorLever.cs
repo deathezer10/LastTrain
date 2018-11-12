@@ -31,6 +31,7 @@ public class DoorLever : MonoBehaviour
                 bDisable = true;
                 Audio.Play();
                 DriverCabinDoorLock.init();
+                FindObjectOfType<KeyCardScanner>().SetGreen();
                 transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
             }
     }

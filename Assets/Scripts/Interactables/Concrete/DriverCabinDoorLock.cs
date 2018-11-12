@@ -54,7 +54,7 @@ public class DriverCabinDoorLock : StationaryObject
        
     }
 
-   
+
         void Update()
     {
        
@@ -154,7 +154,10 @@ public class DriverCabinDoorLock : StationaryObject
 
     public static void init()
     {
+        if (bIsUnlocked) return;
+
         bIsUnlocked = true;
+        instance.transform.GetComponent<AudioPlayer>().Play();
     }
 
     public override bool hideControllerOnGrab { get { return false; } }

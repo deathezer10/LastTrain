@@ -29,6 +29,12 @@ public class KeyCardScanner : StationaryObject, IShootable
         }
     }
 
+    public void SetGreen()
+    {
+        transform.parent.GetComponent<Renderer>().materials[1].SetColor("_Color", Color.green);
+        transform.parent.GetComponent<Renderer>().materials[1].SetVector("_EmissionColor", Color.green * 100f);
+    }
+
     private void ScanSuccess(KeyCard card)
     {
         if (isDone)
