@@ -20,8 +20,6 @@ public class Wallet : GrabbableObject
         m_TManager = FindObjectOfType<TutorialManager>();
         m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
         m_colliders = GetComponents<BoxCollider>();
-
-        transform.GetComponentInChildren<Negi.Outline>().enabled = true;
     }
 
     public override void OnGrab()
@@ -30,7 +28,6 @@ public class Wallet : GrabbableObject
 
         if (!m_HasAnnounced)
         {
-            transform.GetComponentInChildren<Negi.Outline>().enabled = false;
             m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
 
             m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
