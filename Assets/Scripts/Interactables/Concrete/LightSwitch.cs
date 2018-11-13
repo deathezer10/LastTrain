@@ -61,9 +61,10 @@ public class LightSwitch : GrabbableObject, IShootable
             ownedLights.LightsOff();
             bIsBroken = true;
             bSwitchIsOn = false;
-            transform.GetComponent<Rigidbody>().useGravity = true;
-            transform.GetComponent<Rigidbody>().isKinematic = false;
-            transform.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+            var rigidbody = transform.GetComponent<Rigidbody>();
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+            rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             bCount = true;
             return;
         }
@@ -98,21 +99,21 @@ public class LightSwitch : GrabbableObject, IShootable
 
     public override void OnControllerStay()
     {
-        if (bIsBroken && bIsGrabbing)
+        if ((bIsBroken && bIsGrabbing) == false) return;
+        
+        if (x < 2) return;
+        
+        if (AlmostEqual(transform.localPosition, OriginalPosition, 0.04f))
         {
-            if (x > 2)
-                if (AlmostEqual(transform.localPosition, OriginalPosition, 0.04f))
-                {
-                    transform.GetComponent<Rigidbody>().useGravity = false;
-                    transform.GetComponent<Rigidbody>().isKinematic = true;
-                    transform.localPosition = OriginalPosition;
-                    transform.localRotation = OriginalRotation;
-                    ActivateCount = 0;
-                    bCount = false;
-                    x = 0;
-                    bIsBroken = false;
-                    return;
-                }
+            transform.GetComponent<Rigidbody>().useGravity = false;
+            transform.GetComponent<Rigidbody>().isKinematic = true;
+            transform.localPosition = OriginalPosition;
+            transform.localRotation = OriginalRotation;
+            ActivateCount = 0;
+            bCount = false;
+            x = 0;
+            bIsBroken = false;
+            return;
         }
     }
 
@@ -126,19 +127,6 @@ public class LightSwitch : GrabbableObject, IShootable
         bIsGrabbing = false;
     }
 
-    public override void OnUse()
-    {
-
-    }
-
-    public override void OnUseDown()
-    {
-    }
-
-    public override void OnUseUp()
-    {
-    }
-
     public void OnShot(Revolver revolver)
     {
         if (bSwitchIsOn)
@@ -148,7 +136,6 @@ public class LightSwitch : GrabbableObject, IShootable
 
         Destroy(transform.gameObject);
         Destroy(this);
-
     }
 
     private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)

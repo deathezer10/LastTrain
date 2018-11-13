@@ -5,8 +5,8 @@ using DG.Tweening;
 
 public class TrainArriver : MonoBehaviour
 {
-
-    //public TrainDoorHandler m_TrainDoor;
+    [SerializeField]
+    private TrainDoorHandler m_TrainDoor;
 
     const float m_TrainStoppingPoint = 18f;
 
@@ -30,20 +30,19 @@ public class TrainArriver : MonoBehaviour
         var tweener = transform.DOMoveZ(m_TrainStoppingPoint, 10).SetEase(Ease.OutQuart).OnComplete(() =>
         {
             bHasArrived = true;
-            //m_TrainDoor.ToggleDoors(true);
-            FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
+            m_TrainDoor.ToggleDoors(true);
             onComplete?.Invoke();
         });
 
+        var audio = GetComponent<AudioSource>();
         tweener.OnUpdate(() =>
         {
             if (tweener.ElapsedPercentage() >= 0.5f && !m_IsAudioFading)
             {
-                GetComponent<AudioSource>().DOFade(0, 3);
+                audio?.DOFade(0, 3);
                 m_IsAudioFading = true;
             }
         });
-
     }
 
     public void CallTheTrain()
@@ -54,5 +53,4 @@ public class TrainArriver : MonoBehaviour
             StartCoroutine(BeginArrival());
         }
     }
-
 }
