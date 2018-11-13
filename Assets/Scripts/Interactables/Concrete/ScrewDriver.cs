@@ -61,9 +61,9 @@ public class ScrewDriver : GrabbableObject
     public override void OnGrab()
     {
         base.OnGrab();
-
+        m_ScrewDriver.transform.position = Controller.transform.position;
         m_ScrewDriver.transform.rotation = Quaternion.LookRotation(-Controller.transform.forward);
-        ScrewDriverClone = (GameObject)Instantiate(m_ScrewDriver, transform.position, transform.rotation, m_ScrewDriver.transform);
+        ScrewDriverClone = Instantiate(m_ScrewDriver, transform.position, transform.rotation, m_ScrewDriver.transform);
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = false;
         Destroy(ScrewDriverClone.GetComponent("ScrewDriver"));
         ScrewDriverClone.GetComponent<Rigidbody>().useGravity = false;

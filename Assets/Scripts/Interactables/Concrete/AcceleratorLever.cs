@@ -66,7 +66,7 @@ public class AcceleratorLever : StationaryObject
             Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition; //We get the small movement vector of player's hand
             HandMovementDirection.Normalize();
 
-            if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.40015f)) //If player is trying to drag the handle towards the direction the handle can move
+            if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.60015f)) //If player is trying to drag the handle towards the direction the handle can move
             {
 
                 if (VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z)
@@ -110,7 +110,7 @@ public class AcceleratorLever : StationaryObject
                 return;
             }
 
-            if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.40015f)) //If player trying to move handle forward in the direction of the handle
+            if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.60015f)) //If player trying to move handle forward in the direction of the handle
             {
 
                 if ((VectorEndPoint.transform.position.z + 0.025f) < AcceleratorHandle.transform.position.z && !BrakeLever.IsTaskCompleted()) //The accelerator has been activated again
