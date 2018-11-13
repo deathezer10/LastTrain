@@ -36,14 +36,22 @@ public class Screw : MonoBehaviour
 
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "ScrewDriver")
+        {
+            other.GetComponent<ScrewDriver>().bIsScrewing = false;
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (!bIsLoose)
         {
             if (other.tag == "ScrewDriver")
             {
-                if (m_ScrewDriver.bIsScrewing)
-                {
+                other.GetComponent<ScrewDriver>().bIsScrewing = true;
+
                     Turnspeed = m_ScrewDriver.speed * 0.6f;
                     switch (rotateAroundAxis)
                     {
@@ -217,4 +225,4 @@ public class Screw : MonoBehaviour
 
 
 
-}
+

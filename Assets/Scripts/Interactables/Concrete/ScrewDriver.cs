@@ -80,12 +80,11 @@ public class ScrewDriver : GrabbableObject
 
     public override void OnUseDown()
     {
-        if (bIsGrabbing)
-            bIsScrewing = true;
+        
     }
 
     public override void OnUseUp()
     {
-        bIsScrewing = false;
+       
     }
 }
