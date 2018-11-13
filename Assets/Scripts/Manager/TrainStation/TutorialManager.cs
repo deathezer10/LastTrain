@@ -156,7 +156,7 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator StartPosterAnimation(PosterState target)
     {
-        while (target != PosterState.None && m_TutorialPoster1 != null)
+        while (target != PosterState.None)
         {
             yield return new WaitForSeconds(0.75f);
             
@@ -167,13 +167,22 @@ public class TutorialManager : MonoBehaviour
                 case PosterState.None:
                     break;
                 case PosterState.Poster1:
+                    if (m_TutorialPoster1 == null)
+                        break;
+
                     m_CurrentPosterMaterialIndex = (int)Mathf.Repeat(++m_CurrentPosterMaterialIndex, m_TutorialPosterMaterials.Count);
                     m_TutorialPoster1.GetComponent<Renderer>().material = posterMat;
                     break;
                 case PosterState.Poster2:
+                    if (m_TutorialPoster2 == null)
+                        break;
+
                     m_TutorialPoster2.GetComponent<Renderer>().material = posterMat;
                     break;
                 case PosterState.Poster3:
+                    if (m_TutorialPoster3 == null)
+                        break;
+
                     m_TutorialPoster3.GetComponent<Renderer>().material = posterMat;
                     break;
                 default:

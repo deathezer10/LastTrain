@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
+    [SerializeField]
     protected List<Negi.Outline> _outlines = null;
     private void Awake()
     {
