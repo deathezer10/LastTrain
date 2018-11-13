@@ -766,7 +766,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!54 &54220034373576296
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -781,7 +781,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!54 &54474140178335708
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -837,8 +837,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.05, z: 0.22}
-  m_Center: {x: 0, y: -0.02, z: -0.06}
+  m_Size: {x: 0.12366528, y: 0.09369318, z: 0.080976985}
+  m_Center: {x: -0.0029835268, y: -0.029409328, z: 0.013677706}
 --- !u!65 &65386326522250894
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -849,8 +849,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.09, y: 0.05, z: 0.22}
-  m_Center: {x: 0, y: -0.02, z: -0.06}
+  m_Size: {x: 0.12366528, y: 0.09369318, z: 0.080976985}
+  m_Center: {x: -0.0029835268, y: -0.029409328, z: 0.013677706}
 --- !u!81 &81908034855392552
 AudioListener:
   m_ObjectHideFlags: 1
