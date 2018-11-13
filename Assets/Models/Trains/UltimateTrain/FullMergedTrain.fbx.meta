@@ -61,6 +61,20 @@ ModelImporter:
     2100026: Props_B_Shader
     2100028: EBrakes_Shader
     2100030: Props_B_Shader1
+    2100032: Alpha2_Shader1
+    2100034: InnerShell_Shader1
+    2100036: PC_B_Shader1
+    2100038: PC_A_Shader1
+    2100040: PC_C_Shader1
+    2100042: Props_Info_Shader1
+    2100044: DC_A_Shader1
+    2100046: OuterShell_Shader1
+    2100048: Alpha1_Shader1
+    2100050: Alpha3_Shader1
+    2100052: Decal_4
+    2100054: lambert3
+    2100056: Decal_3_Decal_4
+    2100058: EBrakes_Shader1
     2300000: //RootNode
     2300002: Train
     2300004: Decal
@@ -132,7 +146,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Alpha1_Shader1
+    second: {fileID: 2100000, guid: 41ec80cf11b96c14d9ed2a0fd316b371, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Alpha2_Shader
+    second: {fileID: 2100000, guid: 8c37932d874afab49bc2edd22c6ef773, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha2_Shader1
     second: {fileID: 2100000, guid: 8c37932d874afab49bc2edd22c6ef773, type: 2}
   - first:
       type: UnityEngine:Material
@@ -142,7 +166,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Alpha3_Shader1
+    second: {fileID: 2100000, guid: 37e813bb29969824ca72a452ca4a4500, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: DC_A_Shader
+    second: {fileID: 2100000, guid: e5711bd843443a3429c334e40fbcc18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DC_A_Shader1
     second: {fileID: 2100000, guid: e5711bd843443a3429c334e40fbcc18b, type: 2}
   - first:
       type: UnityEngine:Material
@@ -157,7 +191,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Decal_3_Decal_4
+    second: {fileID: 2100000, guid: f34a6f39b6d8a0944beb85cfc3f8ef8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Decal_4
+    second: {fileID: 2100000, guid: b49faba1a05b8e648945d0867ab64c79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: EBrakes_Shader
+    second: {fileID: 2100000, guid: 900239cb540e8f44aa77dbc783f987fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EBrakes_Shader1
     second: {fileID: 2100000, guid: 900239cb540e8f44aa77dbc783f987fb, type: 2}
   - first:
       type: UnityEngine:Material
@@ -167,7 +216,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: InnerShell_Shader1
+    second: {fileID: 2100000, guid: 8bf25666015308b4f9a1bd9c1ca82764, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: OuterShell_Shader
+    second: {fileID: 2100000, guid: 9e56860a5957ef14fbf064dd1e65b96e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OuterShell_Shader1
     second: {fileID: 2100000, guid: 9e56860a5957ef14fbf064dd1e65b96e, type: 2}
   - first:
       type: UnityEngine:Material
@@ -177,12 +236,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: PC_A_Shader1
+    second: {fileID: 2100000, guid: 82902ac2ff2bc9f4e9bae62f85f5122d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: PC_B_Shader
     second: {fileID: 2100000, guid: d5e6e78a8a88c2645aea227a1cd3848b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: PC_B_Shader1
+    second: {fileID: 2100000, guid: d5e6e78a8a88c2645aea227a1cd3848b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: PC_C_Shader
+    second: {fileID: 2100000, guid: e82791bfcc82df04f8362698f642aedc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PC_C_Shader1
     second: {fileID: 2100000, guid: e82791bfcc82df04f8362698f642aedc, type: 2}
   - first:
       type: UnityEngine:Material
@@ -202,7 +276,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Props_Info_Shader1
+    second: {fileID: 2100000, guid: 903edc78b1403f24990292b476bbcaad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lambert2
+    second: {fileID: 2100000, guid: 48735582f689e9c43a2ad0b81a128906, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
     second: {fileID: 2100000, guid: 48735582f689e9c43a2ad0b81a128906, type: 2}
   materials:
     importMaterials: 1
