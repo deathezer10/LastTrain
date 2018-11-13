@@ -14,6 +14,8 @@ public class TrainSecondCabinEntry : MonoBehaviour
             FindObjectOfType<TrainBetweenCabinDoors>().CloseBetweenDoors();
 
             FindObjectOfType<SmokeAlarm>().StopSmokeAlarm();
+
+            Destroy(gameObject);
         }
     }
 }

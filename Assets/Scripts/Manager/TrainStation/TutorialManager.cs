@@ -156,7 +156,7 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator StartPosterAnimation(PosterState target)
     {
-        while (target != PosterState.None)
+        while (target != PosterState.None && m_TutorialPoster1 != null)
         {
             yield return new WaitForSeconds(0.75f);
             
