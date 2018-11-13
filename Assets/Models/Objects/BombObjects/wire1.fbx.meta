@@ -4,10 +4,15 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: wire1
     400000: //RootNode
+    400002: wire1
     2100000: StingrayPBS1
+    2100002: Bomb_Shader
     2300000: //RootNode
+    2300002: wire1
     3300000: //RootNode
+    3300002: wire1
     4300000: wire1
   externalObjects: {}
   materials:
