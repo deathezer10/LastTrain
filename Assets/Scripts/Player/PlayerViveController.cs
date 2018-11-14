@@ -36,7 +36,11 @@ public class PlayerViveController : MonoBehaviour
 
         if (currentObject == null) return;
 
-        if (PlayerOriginHandler.IsOutsideOrigin) return;
+        if (PlayerOriginHandler.IsOutsideOrigin)
+        {
+            DetachCurrentObject(false);
+            return;
+        }
 
         var iObject = currentObject.GetComponent<IInteractable>();
 
@@ -114,7 +118,7 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = other.GetComponent<IInteractable>();
 
-        if (GetCurrentHandObject() == null && iObject != null)
+        if (GetCurrentHandObject() == null && iObject != null && other.GetComponent<FixedJoint>() == null)
         {
             AssignObjectToHand(GetCurrentHand(), other.gameObject);
             iObject.OnControllerEnter(this);
