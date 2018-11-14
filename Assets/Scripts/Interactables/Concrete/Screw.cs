@@ -87,7 +87,7 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<Rigidbody>().useGravity = true;
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
-                                    other.transform.parent.GetComponent<ScrewDriver>().bIsScrewing = false;
+                                    m_ScrewDriver.bIsScrewing = false;
                                     Destroy(this);
                                     break;
                                 }
@@ -110,7 +110,7 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<Rigidbody>().useGravity = true;
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
-                                    other.transform.parent.GetComponent<ScrewDriver>().bIsScrewing = false;
+                                    m_ScrewDriver.bIsScrewing = false;
                                     Destroy(this);
                                     break;
                                 }
@@ -137,7 +137,7 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<Rigidbody>().isKinematic = false;
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
-                                    other.transform.parent.GetComponent<ScrewDriver>().bIsScrewing = false;
+                                    m_ScrewDriver.bIsScrewing = false;
                                     Destroy(this);
                                     break;
                                 }
@@ -159,7 +159,7 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<Rigidbody>().isKinematic = false;
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
-                                    other.transform.parent.GetComponent<ScrewDriver>().bIsScrewing = false;
+                                    m_ScrewDriver.bIsScrewing = false;
                                     Destroy(this);
                                     break;
                                 }
@@ -185,7 +185,7 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<Rigidbody>().isKinematic = false;
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
-                                    other.transform.parent.GetComponent<ScrewDriver>().bIsScrewing = false;
+                                    m_ScrewDriver.bIsScrewing = false;
                                     Destroy(this);
                                     break;
                                 }
@@ -207,7 +207,7 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<Rigidbody>().isKinematic = false;
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
-                                    other.transform.parent.GetComponent<ScrewDriver>().bIsScrewing = false;
+                                    m_ScrewDriver.bIsScrewing = false;
                                     Destroy(this);
                                     break;
                                 }
