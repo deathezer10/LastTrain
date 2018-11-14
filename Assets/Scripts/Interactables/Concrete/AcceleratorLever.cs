@@ -21,6 +21,8 @@ public class AcceleratorLever : StationaryObject
     private bool bDisableLever = false;
     private float NewTrainSpeed;
 
+    private AudioPlayer audio;
+
     //Static function for brakelever to check if this AcceleratorLever is engaged.
     public static bool IsTaskCompleted()
     {
@@ -49,7 +51,7 @@ public class AcceleratorLever : StationaryObject
         HandleMovementDirection.Normalize(); //The direction where Acceleratorhandle can be moved forth and back.
 
         trainSpeedHandler = FindObjectOfType<TrainSpeedHandler>();
-
+        audio = GetComponent<AudioPlayer>();
     }
 
     void Update()
@@ -76,11 +78,13 @@ public class AcceleratorLever : StationaryObject
 
                 else if ((VectorEndPoint.transform.position.z + 0.025f) >= AcceleratorHandle.transform.position.z) //The accelerator has been put to 0, task complete
                 {
+                    if(!audio.IsPlaying())
+                    audio.Play("lever");
+
                     if (trainSpeedHandler.bCanAccelerate)
                         if (!bDisableLever)
                         {
                             bDisableLever = true;
-                            //Audio.Play();
                         }
 
                     if (trainSpeedHandler.bCanAccelerate)
@@ -112,6 +116,8 @@ public class AcceleratorLever : StationaryObject
 
             if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.60015f)) //If player trying to move handle forward in the direction of the handle
             {
+                if (!audio.IsPlaying())
+                    audio.Play("lever");
 
                 if ((VectorEndPoint.transform.position.z + 0.025f) < AcceleratorHandle.transform.position.z && !BrakeLever.IsTaskCompleted()) //The accelerator has been activated again
                 {
