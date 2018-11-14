@@ -18,7 +18,7 @@ public class Banana : GrabbableObject
     void Start()
     {
         halfRenderers = GetComponentsInChildren<MeshRenderer>();
-        halfColliders = GetComponents<MeshCollider>();
+        halfColliders = GetComponentsInChildren<MeshCollider>();
         banana_ChompSound = GetComponent<AudioPlayer>();
     }
 
@@ -31,7 +31,7 @@ public class Banana : GrabbableObject
             banana_ChompSound.Play();
 
             halfRenderers[1].enabled = false;
-            halfColliders[0].enabled = false;
+            halfColliders[1].enabled = false;
 
             return;
         }
@@ -39,14 +39,14 @@ public class Banana : GrabbableObject
         banana_ChompSound.Play();
 
         halfRenderers[0].enabled = false;
-        halfColliders[1].enabled = false;
+        halfColliders[0].enabled = false;
 
         StartCoroutine(BananaDestroy());
     }
 
     private IEnumerator BananaDestroy()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.55f);
 
         OnGrabReleased();
         Destroy(gameObject);
@@ -69,13 +69,17 @@ public class Banana : GrabbableObject
     {
         base.OnGrab();
 
-        transform.rotation = m_CurrentController.transform.rotation;
-        transform.Rotate(new Vector3(0, -90, 0));
-        transform.position = m_CurrentController.transform.position;
+        if (m_CurrentController != null)
+        {
+            transform.rotation = m_CurrentController.transform.rotation;
+            transform.Rotate(new Vector3(0, 90, -60));
+            transform.position = m_CurrentController.transform.position;
+        }
     }
 
     public override void OnGrabReleased()
     {
         base.OnGrabReleased();
     }
+
 }
