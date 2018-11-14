@@ -43,28 +43,17 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 
     public virtual void OnControllerEnter(PlayerViveController currentController)
     {
+        SetEnableOutline(true);
     }
 
     public virtual void OnControllerExit()
     {
         SetEnableOutline(false);
     }
-
-    public virtual void OnControllerStay()
-    {
-        SetEnableOutline(true);
-    }
-
-    public virtual void OnGrab()
-    {
-        SetEnableOutline(false);
-    }
-
-    public virtual void OnGrabStay()
-    {
-        SetEnableOutline(false);
-    }
-
+    
+    public virtual void OnControllerStay() { }
+    public virtual void OnGrab() { }
+    public virtual void OnGrabStay() { }
     public virtual void OnGrabReleased() { }
     public virtual void OnUseDown() { }
     public virtual void OnUse() { }
