@@ -65,7 +65,11 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
         SetEnableOutline(false);
     }
 
-    public virtual void OnGrabReleased() { }
+    public virtual void OnGrabReleased()
+    {
+        SetEnableOutline(false);
+    }
+
     public virtual void OnUseDown() { }
     public virtual void OnUse() { }
     public virtual void OnUseUp() { }
