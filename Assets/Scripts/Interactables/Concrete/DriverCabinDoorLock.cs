@@ -86,7 +86,7 @@ public class DriverCabinDoorLock : StationaryObject
                 {
                     if (FastApproximately(0, velocity, 0.2f))
                     {
-                        print("Velocity almost zero");
+                      
                         TimefromGrab = Time.time;
                         Velocitystart = PlayerHand.transform.position;
                     }
