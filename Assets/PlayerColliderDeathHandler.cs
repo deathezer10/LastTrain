@@ -27,8 +27,9 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
         */
 
         if (this.gameObject.name == "CameraFollower") return;
-        if (other.gameObject.name == "Banana")
+        if (other.tag == "Banana")
         {
+            Debug.Log("Banana bite!");
             other.GetComponent<Banana>().BiteBanana();
         }
 
