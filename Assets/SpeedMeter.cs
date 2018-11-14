@@ -14,16 +14,15 @@ public class SpeedMeter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        DefaultRotation = transform.rotation.eulerAngles.z;
+        DefaultRotation = transform.localRotation.eulerAngles.y - 100;
         stationMover = FindObjectOfType<StationMover>();
+        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, DefaultRotation, transform.localRotation.eulerAngles.z);
 	}
 	
 	private void Update()
     {
         //temp pivot therefore parent
-        transform.SetPositionAndRotation(transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y,
-            Mathf.Lerp(DefaultRotation, MaxRotation, normalize01(stationMover.currentSpeed, 0, 20))));
-        
+        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation, normalize01(stationMover.currentSpeed, 0, 20)), transform.localRotation.eulerAngles.z);  
     }
 
 
