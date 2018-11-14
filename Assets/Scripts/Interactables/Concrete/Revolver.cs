@@ -61,7 +61,6 @@ public class Revolver : GrabbableObject
         
         m_IsGrabbing = false;
         m_LaserPointer.SetActive(false);
-        m_CurrentController.ToggleControllerModel(true);
     }
 
     public override void OnControllerStay()

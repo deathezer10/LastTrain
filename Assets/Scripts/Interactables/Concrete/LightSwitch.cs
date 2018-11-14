@@ -78,7 +78,7 @@ public class LightSwitch : GrabbableObject, IShootable
         {
             bSwitchIsOn = false;
 
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
+            transform.localRotation = Quaternion.Euler(0, 0, -90);
 
             ownedLights.LightsOff();
         }
@@ -86,7 +86,8 @@ public class LightSwitch : GrabbableObject, IShootable
         {
             bSwitchIsOn = true;
             ActivateCount += 1;
-            transform.localRotation = Quaternion.Euler(0, 0, -90);
+
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             ownedLights.LightsOn();
         }
@@ -99,6 +100,8 @@ public class LightSwitch : GrabbableObject, IShootable
 
     public override void OnControllerStay()
     {
+        base.OnControllerStay();
+
         if ((bIsBroken && bIsGrabbing) == false) return;
         
         if (x < 2) return;
@@ -108,7 +111,7 @@ public class LightSwitch : GrabbableObject, IShootable
             transform.GetComponent<Rigidbody>().useGravity = false;
             transform.GetComponent<Rigidbody>().isKinematic = true;
             transform.localPosition = OriginalPosition;
-            transform.localRotation = OriginalRotation;
+            transform.localRotation = Quaternion.Euler(0, 0, -90);
             ActivateCount = 0;
             bCount = false;
             x = 0;
@@ -119,11 +122,15 @@ public class LightSwitch : GrabbableObject, IShootable
 
     public override void OnGrab()
     {
+        base.OnGrab();
+
         bIsGrabbing = true;
     }
 
     public override void OnGrabReleased()
     {
+        base.OnGrabReleased();
+
         bIsGrabbing = false;
     }
 

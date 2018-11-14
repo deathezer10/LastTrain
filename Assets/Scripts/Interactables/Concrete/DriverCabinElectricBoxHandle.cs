@@ -30,6 +30,11 @@ public class DriverCabinElectricBoxHandle : StationaryObject
         ButtonBoxCollider = FindObjectOfType<ElectricalBoxButton>().GetComponent<BoxCollider>();
     }
 
+    private void OnDestroy()
+    {
+        Screw.OnLoose -= UnScrewed;
+    }
+
     // Update is called once per frame
     void Update()
     {

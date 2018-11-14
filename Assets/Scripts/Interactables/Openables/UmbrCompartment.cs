@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UmbrCompartment : MonoBehaviour
+public class UmbrCompartment : MonoBehaviour, IShootable
 {
     public GameObject visualLockBottom, visualLockTop, physicsLockBottom, physicsLockTop, umbrella, umbrellaVisual;
 
@@ -54,4 +54,10 @@ public class UmbrCompartment : MonoBehaviour
 
         rotating = true;
     }
+
+    public void OnShot(Revolver revolver)
+    {
+        OpenCompartment();
+    }
+
 }
