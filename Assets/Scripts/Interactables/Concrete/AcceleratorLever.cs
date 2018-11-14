@@ -150,6 +150,8 @@ public class AcceleratorLever : StationaryObject
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
+        base.OnControllerEnter(currentController);
+
         if (DriverCabinDoorLock.bIsUnlocked)
         {
             bCanGrab = true;
@@ -159,6 +161,8 @@ public class AcceleratorLever : StationaryObject
 
     public override void OnControllerExit()
     {
+        base.OnControllerExit();
+
         bCanGrab = false;
         audio.Stop();
     }
@@ -176,6 +180,8 @@ public class AcceleratorLever : StationaryObject
 
     public override void OnGrabReleased()
     {
+        base.OnGrabReleased();
+
         bIsGrabbing = false;
     }
 

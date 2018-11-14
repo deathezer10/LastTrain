@@ -11,6 +11,8 @@ public class PartyGrenade : GrabbableObject, IShootable
 
     private void Explode()
     {
+        base.OnGrabReleased();
+        m_CurrentController.ToggleControllerModel(true);
         Instantiate(grenadeParticlePrefab, transform.position, transform.rotation, null);
         Destroy(gameObject);
     }

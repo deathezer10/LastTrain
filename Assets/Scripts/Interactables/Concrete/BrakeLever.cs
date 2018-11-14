@@ -13,7 +13,7 @@ public class BrakeLever : StationaryObject
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
     private bool bCanGrab = false;
- 
+
     private Vector3 HandOffsetStart;
     private Vector3 currentHandPosition;
     private float minXRotation = -0.45f;       //Setting lowest reachable rotation for the lever
@@ -34,7 +34,7 @@ public class BrakeLever : StationaryObject
     // Use this for initialization
     void Start()
     {
-        
+
         currentXRotation = transform.rotation.x;
         maxXRotation = currentXRotation;
         trainSpeedHandler = FindObjectOfType<TrainSpeedHandler>();
@@ -63,7 +63,7 @@ public class BrakeLever : StationaryObject
 
                         if (AcceleratorLever.IsTaskCompleted())
                         {
-                            trainSpeedHandler.BrakeStop();                            
+                            trainSpeedHandler.BrakeStop();
                             return;
                         }
 
@@ -104,19 +104,22 @@ public class BrakeLever : StationaryObject
     public override void OnControllerExit()
     {
         base.OnControllerExit();
-        
+
         bCanGrab = false;
     }
 
     public override void OnControllerStay()
     {
-        currentHandPosition = PlayerHand.transform.position;
+        base.OnControllerStay();
+
+        if (PlayerHand != null)
+            currentHandPosition = PlayerHand.transform.position;
     }
 
     public override void OnGrab()
     {
         base.OnGrab();
-        
+
         if (bCanGrab)
         {
             bIsGrabbing = true;
@@ -127,6 +130,8 @@ public class BrakeLever : StationaryObject
 
     public override void OnGrabReleased()
     {
+        base.OnGrabReleased();
+
         bIsGrabbing = false;
     }
 }

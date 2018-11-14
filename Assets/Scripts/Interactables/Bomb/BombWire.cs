@@ -28,7 +28,7 @@ public class BombWire : MonoBehaviour
 
     private void WireCut()
     {
-        GetComponent<BoxCollider>().enabled = false;
+        GetComponent<Collider>().enabled = false;
         GetComponent<AudioPlayer>().Play();
 
         Bomb bomb = FindObjectOfType<Bomb>();
@@ -49,7 +49,7 @@ public class BombWire : MonoBehaviour
 
     private void SwapWireModel()
     {
-        MeshRenderer[] wireRenderers = GetComponentsInChildren<MeshRenderer>();
+        MeshRenderer[] wireRenderers = transform.parent.GetComponentsInChildren<MeshRenderer>();
 
         foreach (MeshRenderer mR in wireRenderers)
         {
