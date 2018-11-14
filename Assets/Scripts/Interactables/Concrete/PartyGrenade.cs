@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PartyGrenade : GrabbableObject, IShootable
 {
-    GameObject grenadeParticlePrefab;
+    public GameObject grenadeParticlePrefab;
+    public GameObject pinVisual, ringVisual, pinPhysics, ringPhysics;
 
     PlayerViveController m_CurrentController;
 
     private void Explode()
     {
-        // Boom?
+        Instantiate(grenadeParticlePrefab, transform.position, transform.rotation, null);
+        Destroy(gameObject);
     }
 
     private void PullPin()
     {
+        pinVisual.SetActive(false);
+        ringVisual.SetActive(false);
+
+        pinPhysics.SetActive(true);
+        ringPhysics.SetActive(true);
+
         StartCoroutine(PinPullTimer());
     }
 
@@ -42,7 +50,7 @@ public class PartyGrenade : GrabbableObject, IShootable
         base.OnGrab();
 
         transform.rotation = m_CurrentController.transform.rotation;
-        transform.Rotate(new Vector3(0, -90, 0));
+        transform.Rotate(new Vector3(0, 0, -15f));
         transform.position = m_CurrentController.transform.position;
     }
 

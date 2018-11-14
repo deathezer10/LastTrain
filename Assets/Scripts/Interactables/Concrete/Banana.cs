@@ -72,7 +72,7 @@ public class Banana : GrabbableObject
         if (m_CurrentController != null)
         {
             transform.rotation = m_CurrentController.transform.rotation;
-            transform.Rotate(new Vector3(0, 90, -60));
+            transform.Rotate(new Vector3(0, 90, -50));
             transform.position = m_CurrentController.transform.position;
         }
     }
