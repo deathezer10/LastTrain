@@ -25,196 +25,206 @@ public class Screw : MonoBehaviour
         OriginalPosition = transform.localPosition;
     }
 
-    // Update is called once per frame
-    void Update()
+ 
+    private void OnTriggerExit(Collider other)
     {
-
+        if (other.name == "Tip" || other.tag == "ScrewDriver")
+        {
+            m_ScrewDriver.bIsScrewing = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
+        if(other.name == "Tip")
+        {
+            m_ScrewDriver.bIsScrewing = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (!bIsLoose)
         {
-            if (other.tag == "ScrewDriver")
+            if (other.name == "Tip")
             {
-                if (m_ScrewDriver.bIsScrewing)
+                Turnspeed = m_ScrewDriver.speed * 0.6f;
+                switch (rotateAroundAxis)
                 {
-                    Turnspeed = m_ScrewDriver.speed;
-                    switch (rotateAroundAxis)
-                    {
-                        case 1:
+                    case 1:
+                        {
+                            transform.Rotate(new Vector3(-1, 0, 0), Turnspeed);
+                            break;
+                        }
+
+                    case 2:
+                        {
+                            transform.Rotate(new Vector3(0, -1, 0), Turnspeed);
+                            break;
+                        }
+
+                    case 3:
+                        {
+                            transform.Rotate(new Vector3(0, 0, 1), Turnspeed);
+                            break;
+                        }
+                }
+
+
+
+
+                switch (Axis)
+                {
+                    case 3:
+                        {
+                            if (z < 0)
                             {
-                                transform.Rotate(new Vector3(-1, 0, 0), Turnspeed);
-                                break;
-                            }
-
-                        case 2:
-                            {
-                                transform.Rotate(new Vector3(0, -1, 0), Turnspeed);
-                                break;
-                            }
-
-                        case 3:
-                            {
-                                transform.Rotate(new Vector3(0, 0, 1), Turnspeed);
-                                break;
-                            }
-                    }
-
-
-
-
-                    switch (Axis)
-                    {
-                        case 3:
-                            {
-                                if (z < 0)
+                                screwDistance *= -1;
+                                if ((OriginalPosition.z + screwDistance) > transform.localPosition.z)
                                 {
-                                    screwDistance *= -1;
-                                    if ((OriginalPosition.z + screwDistance) > transform.localPosition.z)
-                                    {
-                                        bIsLoose = true;
-                                        transform.GetComponent<Rigidbody>().isKinematic = false;
-                                        transform.GetComponent<Rigidbody>().useGravity = true;
-                                        transform.GetComponent<BoxCollider>().isTrigger = false;
-                                        OnLoose(Origin);
-                                        Destroy(this);
-                                        break;
-                                    }
-
-                                    else
-                                    {
-                                        transform.position += new Vector3(0, 0, z * Time.deltaTime);
-                                        break;
-                                    }
-
+                                    bIsLoose = true;
+                                    transform.GetComponent<Rigidbody>().isKinematic = false;
+                                    transform.GetComponent<Rigidbody>().useGravity = true;
+                                    transform.GetComponent<BoxCollider>().isTrigger = false;
+                                    OnLoose(Origin);
+                                    m_ScrewDriver.bIsScrewing = false;
+                                    Destroy(this);
+                                    break;
                                 }
 
                                 else
                                 {
-                                   
-                                    if ((OriginalPosition.z + screwDistance) < transform.localPosition.z)
-                                    {
-                                        bIsLoose = true;
-                                        transform.GetComponent<Rigidbody>().isKinematic = false;
-                                        transform.GetComponent<Rigidbody>().useGravity = true;
-                                        transform.GetComponent<BoxCollider>().isTrigger = false;
-                                        OnLoose(Origin);
-                                        Destroy(this);
-                                        break;
-                                    }
-
-                                    else
-                                    {
-                                        transform.position += new Vector3(0, 0, (z * Time.deltaTime));
-                                        break;
-                                    }
+                                    transform.position += new Vector3(0, 0, z * Time.deltaTime);
+                                    break;
                                 }
+
                             }
 
-
-
-                        case 2:
+                            else
                             {
-                                if (y < 0)
+
+                                if ((OriginalPosition.z + screwDistance) < transform.localPosition.z)
                                 {
-                                    screwDistance *= -1;
-                                    if (OriginalPosition.y + screwDistance > transform.localPosition.y)
-                                    {
-                                        bIsLoose = true;
-                                        transform.GetComponent<Rigidbody>().useGravity = true;
-                                        transform.GetComponent<Rigidbody>().isKinematic = false;
-                                        transform.GetComponent<BoxCollider>().isTrigger = false;
-                                        OnLoose(Origin);
-                                        Destroy(this);
-                                        break;
-                                    }
-
-                                    else
-                                    {
-                                        transform.position += new Vector3(0, y * Time.deltaTime, 0);
-                                        break;
-                                    }
-
+                                    bIsLoose = true;
+                                    transform.GetComponent<Rigidbody>().isKinematic = false;
+                                    transform.GetComponent<Rigidbody>().useGravity = true;
+                                    transform.GetComponent<BoxCollider>().isTrigger = false;
+                                    OnLoose(Origin);
+                                    m_ScrewDriver.bIsScrewing = false;
+                                    Destroy(this);
+                                    break;
                                 }
 
                                 else
                                 {
-                                    if (OriginalPosition.y + screwDistance < transform.localPosition.y)
-                                    {
-                                        bIsLoose = true;
-                                        transform.GetComponent<Rigidbody>().useGravity = true;
-                                        transform.GetComponent<Rigidbody>().isKinematic = false;
-                                        transform.GetComponent<BoxCollider>().isTrigger = false;
-                                        OnLoose(Origin);
-                                        Destroy(this);
-                                        break;
-                                    }
-
-                                    else
-                                    {
-                                        transform.position += new Vector3(0, y * Time.deltaTime, 0);
-                                        break;
-                                    }
+                                    transform.position += new Vector3(0, 0, (z * Time.deltaTime));
+                                    break;
                                 }
                             }
+                        }
 
 
-                        case 1:
+
+                    case 2:
+                        {
+                            if (y < 0)
                             {
-                                if (x < 0)
+                                screwDistance *= -1;
+                                if (OriginalPosition.y + screwDistance > transform.localPosition.y)
                                 {
-
-                                    if (OriginalPosition.x - screwDistance > transform.localPosition.x)
-                                    {
-                                        bIsLoose = true;
-                                        transform.GetComponent<Rigidbody>().useGravity = true;
-                                        transform.GetComponent<Rigidbody>().isKinematic = false;
-                                        transform.GetComponent<BoxCollider>().isTrigger = false;
-                                        OnLoose(Origin);
-                                        Destroy(this);
-                                        break;
-                                    }
-
-                                    else
-                                    {
-                                        transform.position += new Vector3(x * Time.deltaTime, 0, 0);
-                                        break;
-                                    }
-
+                                    bIsLoose = true;
+                                    transform.GetComponent<Rigidbody>().useGravity = true;
+                                    transform.GetComponent<Rigidbody>().isKinematic = false;
+                                    transform.GetComponent<BoxCollider>().isTrigger = false;
+                                    OnLoose(Origin);
+                                    m_ScrewDriver.bIsScrewing = false;
+                                    Destroy(this);
+                                    break;
                                 }
 
                                 else
                                 {
-                                    if (OriginalPosition.x + screwDistance < transform.localPosition.x)
-                                    {
-                                        bIsLoose = true;
-                                        transform.GetComponent<Rigidbody>().useGravity = true;
-                                        transform.GetComponent<Rigidbody>().isKinematic = false;
-                                        transform.GetComponent<BoxCollider>().isTrigger = false;
-                                        OnLoose(Origin);
-                                        Destroy(this);
-                                        break;
-                                    }
+                                    transform.position += new Vector3(0, y * Time.deltaTime, 0);
+                                    break;
+                                }
 
-                                    else
-                                    {
-                                        transform.position += new Vector3(x * Time.deltaTime, 0, 0);
-                                        break;
-                                    }
+                            }
+
+                            else
+                            {
+                                if (OriginalPosition.y + screwDistance < transform.localPosition.y)
+                                {
+                                    bIsLoose = true;
+                                    transform.GetComponent<Rigidbody>().useGravity = true;
+                                    transform.GetComponent<Rigidbody>().isKinematic = false;
+                                    transform.GetComponent<BoxCollider>().isTrigger = false;
+                                    OnLoose(Origin);
+                                    m_ScrewDriver.bIsScrewing = false;
+                                    Destroy(this);
+                                    break;
+                                }
+
+                                else
+                                {
+                                    transform.position += new Vector3(0, y * Time.deltaTime, 0);
+                                    break;
                                 }
                             }
-                    }
+                        }
+
+
+                    case 1:
+                        {
+                            if (x < 0)
+                            {
+
+                                if (OriginalPosition.x - screwDistance > transform.localPosition.x)
+                                {
+                                    bIsLoose = true;
+                                    transform.GetComponent<Rigidbody>().useGravity = true;
+                                    transform.GetComponent<Rigidbody>().isKinematic = false;
+                                    transform.GetComponent<BoxCollider>().isTrigger = false;
+                                    OnLoose(Origin);
+                                    m_ScrewDriver.bIsScrewing = false;
+                                    Destroy(this);
+                                    break;
+                                }
+
+                                else
+                                {
+                                    transform.position += new Vector3(x * Time.deltaTime, 0, 0);
+                                    break;
+                                }
+
+                            }
+
+                            else
+                            {
+                                if (OriginalPosition.x + screwDistance < transform.localPosition.x)
+                                {
+                                    bIsLoose = true;
+                                    transform.GetComponent<Rigidbody>().useGravity = true;
+                                    transform.GetComponent<Rigidbody>().isKinematic = false;
+                                    transform.GetComponent<BoxCollider>().isTrigger = false;
+                                    OnLoose(Origin);
+                                    m_ScrewDriver.bIsScrewing = false;
+                                    Destroy(this);
+                                    break;
+                                }
+
+                                else
+                                {
+                                    transform.position += new Vector3(x * Time.deltaTime, 0, 0);
+                                    break;
+                                }
+                            }
+                        }
                 }
             }
         }
     }
-
-
-
 }
+
+
+
+

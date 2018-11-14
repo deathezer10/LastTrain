@@ -17,7 +17,7 @@ public class Toolbox : GrabbableObject
         toolboxAnimator = GetComponent<Animator>();
         openAudio = GetComponent<AudioPlayer>();
     }
-    
+
     // Re-arrange colliders on the main object body for Grab rigidbody to reflect the new model state.
     private void ReArrangeColliders()
     {
@@ -48,7 +48,7 @@ public class Toolbox : GrabbableObject
 
     IEnumerator ObjectActivateDelay()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.5f);
 
         sawBladeVisual.SetActive(false);
 

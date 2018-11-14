@@ -7,7 +7,6 @@ public class ToggleTrainLights : MonoBehaviour
 {
     List<Light> m_TrainLights = new List<Light>();
     public string SwitchCabinsName;
-    bool bIsOn = true;
 
     // Use this for initialization
     void Start()
@@ -16,12 +15,6 @@ public class ToggleTrainLights : MonoBehaviour
         {
             m_TrainLights.Add(transform.GetChild(i).GetComponent<Light>());
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void FlickerLights()
@@ -62,7 +55,6 @@ public class ToggleTrainLights : MonoBehaviour
         foreach (Light light in m_TrainLights)
         {
             light.gameObject.SetActive(true);
-            bIsOn = true;
         }
     }
 
@@ -71,8 +63,6 @@ public class ToggleTrainLights : MonoBehaviour
         foreach (Light light in m_TrainLights)
         {
             light.gameObject.SetActive(false);
-            bIsOn = false;
         }
     }
-
 }

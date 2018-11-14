@@ -110,7 +110,7 @@ public class TutorialManager : MonoBehaviour
 
         // Teleport intro
         padObserver = this.UpdateAsObservable()
-           .Where(_ => _padAction.GetStateUp(SteamVR_Input_Sources.RightHand)) // Input.GetKeyUp(KeyCode.A)
+           .Where(_ => _padAction.GetStateUp(SteamVR_Input_Sources.Any)) // Input.GetKeyUp(KeyCode.A)
            .Subscribe(_ =>
            {
                padObserver.Dispose();
@@ -167,13 +167,22 @@ public class TutorialManager : MonoBehaviour
                 case PosterState.None:
                     break;
                 case PosterState.Poster1:
+                    if (m_TutorialPoster1 == null)
+                        break;
+
                     m_CurrentPosterMaterialIndex = (int)Mathf.Repeat(++m_CurrentPosterMaterialIndex, m_TutorialPosterMaterials.Count);
                     m_TutorialPoster1.GetComponent<Renderer>().material = posterMat;
                     break;
                 case PosterState.Poster2:
+                    if (m_TutorialPoster2 == null)
+                        break;
+
                     m_TutorialPoster2.GetComponent<Renderer>().material = posterMat;
                     break;
                 case PosterState.Poster3:
+                    if (m_TutorialPoster3 == null)
+                        break;
+
                     m_TutorialPoster3.GetComponent<Renderer>().material = posterMat;
                     break;
                 default:

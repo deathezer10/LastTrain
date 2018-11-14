@@ -20,8 +20,6 @@ public class Wallet : GrabbableObject
         m_TManager = FindObjectOfType<TutorialManager>();
         m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
         m_colliders = GetComponents<BoxCollider>();
-
-        transform.GetComponentInChildren<Negi.Outline>().enabled = true;
     }
 
     public override void OnGrab()
@@ -30,7 +28,6 @@ public class Wallet : GrabbableObject
 
         if (!m_HasAnnounced)
         {
-            transform.GetComponentInChildren<Negi.Outline>().enabled = false;
             m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
 
             m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
@@ -49,7 +46,12 @@ public class Wallet : GrabbableObject
             m_colliders[0].enabled = false;
 
             GameObject obj = Instantiate(m_ICCardPrefab, transform.position + new Vector3(0f, 0f, 0.15f), Quaternion.identity);
-            Physics.IgnoreCollision(GetComponent<Collider>(), obj.GetComponent<Collider>());
+
+            foreach (Collider col in GetComponents<Collider>())
+            {
+                Physics.IgnoreCollision(col, obj.GetComponent<Collider>());
+            }
+
             m_HasUsedOnce = true;
         }
     }

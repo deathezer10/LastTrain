@@ -42,6 +42,8 @@ public class EmergencyDoorHandle : GrabbableObject
 
     public override void OnControllerStay()
     {
+        base.OnControllerStay();
+
         if (m_Grabbing == false)
             m_LastZRot = m_Controller.transform.eulerAngles.z;
     }
@@ -55,11 +57,15 @@ public class EmergencyDoorHandle : GrabbableObject
 
     public override void OnGrabReleased()
     {
+        base.OnGrabReleased();
+
         m_Grabbing = false;
     }
 
     public override void OnGrabStay()
     {
+        base.OnGrabStay();
+
         if (m_Locked == false && m_Inserted == true && m_Controller != null)
         {
             float currentZRot = m_Controller.transform.eulerAngles.z;

@@ -215,6 +215,41 @@ ModelImporter:
     4300074: ElectricalBoxDr
     4300076: LightSwitch_03
     4300078: LightSwitch_04
+    6400000: Accelerator
+    6400002: Brake
+    6400004: BrokenDCWindow_01
+    6400006: BrokenDCWindow_02
+    6400008: BrokenDCWindow_03
+    6400010: BrokenDCWindow_04
+    6400012: BrokenDCWindow_05
+    6400014: BrokenDCWindow_06
+    6400016: BrokenDCWindow_07
+    6400018: BrokenDCWindow_08
+    6400020: Cmpt_FireEx_Dr
+    6400022: Cmpt_Umbrella_Dr
+    6400024: Cmpt_Umbrella_LockA
+    6400026: Cmpt_Umbrella_LockB
+    6400028: DC_Window
+    6400030: DCabinDrButton
+    6400032: DCabinDrButton1
+    6400034: EBrake_Base_Rotate
+    6400036: EBrake_Dr
+    6400038: ElectricalBoxDr
+    6400040: Handle_CirLong_End
+    6400042: Handle_CirLong_Mid
+    6400044: Handle_CirLong_Top
+    6400046: Handle_Tri_Btm
+    6400048: Handle_Tri_Mid
+    6400050: Handle_Tri_Top
+    6400052: KeyCardScanner
+    6400054: LightSwitch_01
+    6400056: LightSwitch_02
+    6400058: LightSwitch_03
+    6400060: LightSwitch_04
+    6400062: Screw_01
+    6400064: Screw_02
+    6400066: Screw_03
+    6400068: Screw_04
   externalObjects:
   - first:
       type: UnityEngine:Material

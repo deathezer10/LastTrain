@@ -15,6 +15,11 @@ public class ExtghsrCompartment : MonoBehaviour
         Screw.OnLoose += UnScrewed;
     }
 
+    private void OnDestroy()
+    {
+        Screw.OnLoose -= UnScrewed;
+    }
+
     void Update()
     {
         if (rotating && transform.localRotation != finalRotation)

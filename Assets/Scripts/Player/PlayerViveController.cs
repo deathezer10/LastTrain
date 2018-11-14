@@ -36,16 +36,22 @@ public class PlayerViveController : MonoBehaviour
 
         if (currentObject == null) return;
 
-        if (PlayerOriginHandler.IsOutsideOrigin) return;
+        if (PlayerOriginHandler.IsOutsideOrigin)
+        {
+            DetachCurrentObject(false);
+            return;
+        }
 
         var iObject = currentObject.GetComponent<IInteractable>();
 
         if (iObject == null) return;
+
         iObject.OnControllerStay();
 
         var grabbableObject = currentObject.GetComponent<IGrabbable>();
 
         if (grabbableObject == null) return;
+
         // On Grab (Trigger Down)
         if (_grabAction.GetStateDown(CurrentHand))
         {
@@ -60,19 +66,18 @@ public class PlayerViveController : MonoBehaviour
                 ToggleControllerModel(false);
 
             grabbableObject.OnGrab();
-            Debug.Log(currentObject.name);
 
             AssignObjectToHand(CurrentHand, currentObject.gameObject);
 
             if (currentObject.GetComponent<IStationaryGrabbable>() == null)
             {
-                FixedJoint joint = currentObject.AddComponent<FixedJoint>();
-                joint.breakForce = 7500;
-                joint.breakTorque = Mathf.Infinity;
-                joint.connectedBody = GetComponent<Rigidbody>();
-                joint.enablePreprocessing = true;
-
                 currentObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                FixedJoint joint = currentObject.AddComponent<FixedJoint>();
+                joint.connectedBody = GetComponent<Rigidbody>();
+                joint.breakForce = 1000;
+                joint.breakTorque = Mathf.Infinity;
+                joint.enablePreprocessing = false;
             }
         }
 
@@ -113,10 +118,11 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = other.GetComponent<IInteractable>();
 
-        if (GetCurrentHandObject() == null && iObject != null)
+        if (GetCurrentHandObject() == null && iObject != null && other.GetComponent<FixedJoint>() == null)
         {
             AssignObjectToHand(GetCurrentHand(), other.gameObject);
             iObject.OnControllerEnter(this);
+            Debug.Log("Enter");
         }
     }
 
@@ -127,9 +133,10 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = other.GetComponent<IInteractable>();
 
-        if (GetCurrentHandObject() == null && iObject != null && GetCurrentHandObject(true) != other.gameObject)
+        if (GetCurrentHandObject() == null && iObject != null && GetCurrentHandObject(true) != other.gameObject && GetCurrentHandObject() != other.gameObject)
         {
             AssignObjectToHand(GetCurrentHand(), other.gameObject);
+            Debug.Log("Stay");
         }
     }
 
@@ -139,17 +146,15 @@ public class PlayerViveController : MonoBehaviour
 
         if (iObject != null)
         {
-            iObject.OnControllerExit();
 
             if (other.gameObject == GetCurrentHandObject())
+            {
+                iObject.OnControllerExit();
                 DetachCurrentObject(false);
-        }
-    }
+            }
 
-    private void OnJointBreak(float breakForce)
-    {
-        AssignObjectToHand(CurrentHand, null);
-        ToggleControllerModel(true);
+            Debug.Log("Exit");
+        }
     }
 
     public void ToggleControllerModel(bool toggle)
@@ -226,6 +231,7 @@ public class PlayerViveController : MonoBehaviour
                     rb.velocity = controllerVelocity;
                     rb.angularVelocity = controllerAngularVelocity;
                 }
+
                 Debug.LogFormat("Detached l {0}", currentObject.name);
             }
         }
