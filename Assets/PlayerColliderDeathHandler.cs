@@ -27,6 +27,12 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
         */
 
         if (this.gameObject.name == "CameraFollower") return;
+        if (other.gameObject.name == "Banana")
+        {
+            other.GetComponent<Banana>().BiteBanana();
+        }
+
+        if (this.gameObject.name == "CameraFollower") return;
         if (other.gameObject.name == "Shell")
         {
             if (FindObjectOfType<TrainVelocity>().GetVelocity > 2 && !FindObjectOfType<TrainArriver>().HasArrived)
