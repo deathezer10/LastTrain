@@ -44,6 +44,8 @@ public class TrainArriver : MonoBehaviour
             {
                 audio?.DOFade(0, 3);
                 m_IsAudioFading = true;
+
+                this.DisabledCollider();
             }
         });
     }
