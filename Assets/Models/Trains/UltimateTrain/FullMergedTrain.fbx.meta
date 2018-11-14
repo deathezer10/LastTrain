@@ -24,6 +24,30 @@ ModelImporter:
     100036: SmokeDetector_07
     100038: SmokeDetector_08
     100040: SmokeDetector_09
+    100042: Wheel_01
+    100044: Wheel_02
+    100046: Wheel_03
+    100048: Wheel_04
+    100050: Wheel_05
+    100052: Wheel_06
+    100054: Wheel_07
+    100056: Wheel_08
+    100058: Wheel_09
+    100060: Wheel_10
+    100062: Wheel_11
+    100064: Wheel_12
+    100066: Wheel_13
+    100068: Wheel_14
+    100070: Wheel_15
+    100072: Wheel_16
+    100074: Wheel_17
+    100076: Wheel_18
+    100078: Wheel_19
+    100080: Wheel_20
+    100082: Wheel_21
+    100084: Wheel_22
+    100086: Wheel_23
+    100088: Wheel_24
     400000: //RootNode
     400002: Train
     400004: Decal
@@ -45,6 +69,30 @@ ModelImporter:
     400036: SmokeDetector_07
     400038: SmokeDetector_08
     400040: SmokeDetector_09
+    400042: Wheel_01
+    400044: Wheel_02
+    400046: Wheel_03
+    400048: Wheel_04
+    400050: Wheel_05
+    400052: Wheel_06
+    400054: Wheel_07
+    400056: Wheel_08
+    400058: Wheel_09
+    400060: Wheel_10
+    400062: Wheel_11
+    400064: Wheel_12
+    400066: Wheel_13
+    400068: Wheel_14
+    400070: Wheel_15
+    400072: Wheel_16
+    400074: Wheel_17
+    400076: Wheel_18
+    400078: Wheel_19
+    400080: Wheel_20
+    400082: Wheel_21
+    400084: Wheel_22
+    400086: Wheel_23
+    400088: Wheel_24
     2100000: PC_C_Shader
     2100002: PC_B_Shader
     2100004: PC_A_Shader
@@ -75,6 +123,7 @@ ModelImporter:
     2100054: lambert3
     2100056: Decal_3_Decal_4
     2100058: EBrakes_Shader1
+    2100060: Props_B_Shader2
     2300000: //RootNode
     2300002: Train
     2300004: Decal
@@ -96,6 +145,30 @@ ModelImporter:
     2300036: SmokeDetector_07
     2300038: SmokeDetector_08
     2300040: SmokeDetector_09
+    2300042: Wheel_01
+    2300044: Wheel_02
+    2300046: Wheel_03
+    2300048: Wheel_04
+    2300050: Wheel_05
+    2300052: Wheel_06
+    2300054: Wheel_07
+    2300056: Wheel_08
+    2300058: Wheel_09
+    2300060: Wheel_10
+    2300062: Wheel_11
+    2300064: Wheel_12
+    2300066: Wheel_13
+    2300068: Wheel_14
+    2300070: Wheel_15
+    2300072: Wheel_16
+    2300074: Wheel_17
+    2300076: Wheel_18
+    2300078: Wheel_19
+    2300080: Wheel_20
+    2300082: Wheel_21
+    2300084: Wheel_22
+    2300086: Wheel_23
+    2300088: Wheel_24
     3300000: //RootNode
     3300002: Train
     3300004: Decal
@@ -117,6 +190,30 @@ ModelImporter:
     3300036: SmokeDetector_07
     3300038: SmokeDetector_08
     3300040: SmokeDetector_09
+    3300042: Wheel_01
+    3300044: Wheel_02
+    3300046: Wheel_03
+    3300048: Wheel_04
+    3300050: Wheel_05
+    3300052: Wheel_06
+    3300054: Wheel_07
+    3300056: Wheel_08
+    3300058: Wheel_09
+    3300060: Wheel_10
+    3300062: Wheel_11
+    3300064: Wheel_12
+    3300066: Wheel_13
+    3300068: Wheel_14
+    3300070: Wheel_15
+    3300072: Wheel_16
+    3300074: Wheel_17
+    3300076: Wheel_18
+    3300078: Wheel_19
+    3300080: Wheel_20
+    3300082: Wheel_21
+    3300084: Wheel_22
+    3300086: Wheel_23
+    3300088: Wheel_24
     4300000: Train
     4300002: Decal
     4300004: Light_B_01
@@ -137,6 +234,30 @@ ModelImporter:
     4300034: SmokeDetector_03
     4300036: SmokeDetector_02
     4300038: SmokeDetector_01
+    4300040: Wheel_01
+    4300042: Wheel_02
+    4300044: Wheel_04
+    4300046: Wheel_03
+    4300048: Wheel_05
+    4300050: Wheel_06
+    4300052: Wheel_07
+    4300054: Wheel_08
+    4300056: Wheel_09
+    4300058: Wheel_10
+    4300060: Wheel_11
+    4300062: Wheel_12
+    4300064: Wheel_13
+    4300066: Wheel_14
+    4300068: Wheel_16
+    4300070: Wheel_15
+    4300072: Wheel_17
+    4300074: Wheel_18
+    4300076: Wheel_19
+    4300078: Wheel_20
+    4300080: Wheel_21
+    4300082: Wheel_22
+    4300084: Wheel_23
+    4300086: Wheel_24
   externalObjects:
   - first:
       type: UnityEngine:Material

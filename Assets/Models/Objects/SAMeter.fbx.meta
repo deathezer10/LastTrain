@@ -1,0 +1,126 @@
+fileFormatVersion: 2
+guid: 6da96ae26f159c74484da307cade58e7
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: AcceleratorMeter
+    100002: AcceleratorMeter_Body
+    100004: AcceleratorMeter_Pointer
+    100006: //RootNode
+    100008: SpeedMeter
+    100010: SpeedMeter_Body
+    100012: SpeedMeter_Pointer
+    400000: AcceleratorMeter
+    400002: AcceleratorMeter_Body
+    400004: AcceleratorMeter_Pointer
+    400006: //RootNode
+    400008: SpeedMeter
+    400010: SpeedMeter_Body
+    400012: SpeedMeter_Pointer
+    2100000: SAMeter_Shader
+    2100002: SAMeter_Alpha_Shader
+    2300000: AcceleratorMeter_Body
+    2300002: AcceleratorMeter_Pointer
+    2300004: SpeedMeter_Body
+    2300006: SpeedMeter_Pointer
+    3300000: AcceleratorMeter_Body
+    3300002: AcceleratorMeter_Pointer
+    3300004: SpeedMeter_Body
+    3300006: SpeedMeter_Pointer
+    4300000: SpeedMeter_Pointer
+    4300002: SpeedMeter_Body
+    4300004: AcceleratorMeter_Pointer
+    4300006: AcceleratorMeter_Body
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SAMeter_Alpha_Shader
+    second: {fileID: 2100000, guid: 01155f2a6a7c80e4fa33b08f556155fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SAMeter_Shader
+    second: {fileID: 2100000, guid: f4dd633b62f8ea44fb0277a36793a292, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
