@@ -78,8 +78,8 @@ public class AcceleratorLever : StationaryObject
 
                 else if ((VectorEndPoint.transform.position.z + 0.025f) >= AcceleratorHandle.transform.position.z) //The accelerator has been put to 0, task complete
                 {
-                    if(!audio.IsPlaying())
-                    audio.Play("lever");
+                    if (!audio.IsPlaying())
+                        audio.Play("lever");
 
                     if (trainSpeedHandler.bCanAccelerate)
                         if (!bDisableLever)
@@ -114,7 +114,7 @@ public class AcceleratorLever : StationaryObject
                 return;
             }
 
-            if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.60015f)) //If player trying to move handle forward in the direction of the handle
+            else if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.60015f)) //If player trying to move handle forward in the direction of the handle
             {
                 if (!audio.IsPlaying())
                     audio.Play("lever");
@@ -133,13 +133,16 @@ public class AcceleratorLever : StationaryObject
 
                 AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
 
-                NewTrainSpeed = Mathf.Lerp(5, 20, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f , VectorBeginPoint.transform.position.z));
+                NewTrainSpeed = Mathf.Lerp(5, 20, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f, VectorBeginPoint.transform.position.z));
                 if (trainSpeedHandler.bCanAccelerate)
                     trainSpeedHandler.ChangeSpeed(NewTrainSpeed);
                 LastHandPosition = PlayerHand.transform.position;
                 return;
 
             }
+
+            else
+                audio.Stop();
         }
     }
 
@@ -157,6 +160,7 @@ public class AcceleratorLever : StationaryObject
     public override void OnControllerExit()
     {
         bCanGrab = false;
+        audio.Stop();
     }
 
     public override void OnGrab()
