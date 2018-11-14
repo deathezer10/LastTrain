@@ -25,22 +25,20 @@ public class Screw : MonoBehaviour
         OriginalPosition = transform.localPosition;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-    }
-
+ 
     private void OnTriggerExit(Collider other)
     {
         if (other.name == "Tip" || other.tag == "ScrewDriver")
         {
-            other.transform.parent.GetComponent<ScrewDriver>().bIsScrewing = false;
+            m_ScrewDriver.bIsScrewing = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "Tip")
+        {
+            m_ScrewDriver.bIsScrewing = true;
         }
     }
 
@@ -50,8 +48,6 @@ public class Screw : MonoBehaviour
         {
             if (other.name == "Tip")
             {
-                other.transform.parent.GetComponent<ScrewDriver>().bIsScrewing = true;
-
                 Turnspeed = m_ScrewDriver.speed * 0.6f;
                 switch (rotateAroundAxis)
                 {
