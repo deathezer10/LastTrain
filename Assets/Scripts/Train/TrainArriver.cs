@@ -8,6 +8,9 @@ public class TrainArriver : MonoBehaviour
     [SerializeField]
     private TrainDoorHandler m_TrainDoor;
 
+    [SerializeField]
+    private List<Collider> _colliders = new List<Collider>();
+
     const float m_TrainStoppingPoint = 18f;
 
     const float m_TrainArrivalDelay = 3f;
@@ -51,6 +54,14 @@ public class TrainArriver : MonoBehaviour
         {
             m_ArrivalTriggered = true;
             StartCoroutine(BeginArrival());
+        }
+    }
+
+    private void DisabledCollider()
+    {
+        foreach (var collider in _colliders)
+        {
+            collider.enabled = false;
         }
     }
 }
