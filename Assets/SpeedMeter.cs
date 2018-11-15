@@ -17,6 +17,8 @@ public class SpeedMeter : MonoBehaviour
     [SerializeField]
     private float MaxRotation;
 
+    private Quaternion lastRotation;
+
     private StationMover stationMover;
 
     // Use this for initialization
@@ -29,12 +31,13 @@ public class SpeedMeter : MonoBehaviour
     private void Update()
     {
         if (transform.gameObject.name == "SpeedMeter_Pointer")
+        {
             if (previousSpeed == stationMover.currentSpeed)
             {
                 timeAtSameSpeed += Time.deltaTime;
             }
 
-      
+
 
             else
             {
@@ -42,13 +45,13 @@ public class SpeedMeter : MonoBehaviour
                 bLeftSwivel = false;
                 bRightSwivel = false;
             }
+        }
 
-
-        else if (stationMover.currentSpeed >= 4)
+        else if(stationMover.currentSpeed >= 4)
         {
             timeAtSameSpeed += Time.deltaTime;
         }
-
+         
         else
         {
             timeAtSameSpeed = 0;
@@ -93,15 +96,25 @@ public class SpeedMeter : MonoBehaviour
 
         else
         {
-            
-            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation,normalize01(Remap(stationMover.currentSpeed, 0, 20, 0, 4),0,4)), transform.localRotation.eulerAngles.z);
+            if(previousSpeed < stationMover.currentSpeed)
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation,normalize01(stationMover.currentSpeed,0,4)), transform.localRotation.eulerAngles.z);
+
+            if(previousSpeed > stationMover.currentSpeed)
+                transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation, normalize01(stationMover.currentSpeed, 0, 20)), transform.localRotation.eulerAngles.z);
+
+            if(previousSpeed == stationMover.currentSpeed)
+            {
+                transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation, normalize01(stationMover.currentSpeed, 0, 4)), transform.localRotation.eulerAngles.z);
+            }
+
             if (bLeftSwivel)
                 transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y - 0.5f, transform.localRotation.eulerAngles.z);
 
-            else if (bRightSwivel)
+            if (bRightSwivel)
                 transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + 0.5f, transform.localRotation.eulerAngles.z);
 
             previousSpeed = stationMover.currentSpeed;
+            lastRotation = transform.localRotation;
 
         }
     }
