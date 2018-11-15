@@ -39,6 +39,24 @@ public class UmbrCompartment : MonoBehaviour, IShootable
             //lockBreakAudio.Play();
             GetComponent<CapsuleCollider>().enabled = false;
         }
+        else if (other.tag == "SmallKey")
+        {
+            GameObject key = other.gameObject;
+
+            key.transform.parent = physicsLockBottom.transform;
+            key.transform.localPosition = new Vector3(-0.015f, 0, 0);
+            key.transform.eulerAngles = new Vector3(0, 180f, 0);
+            key.transform.localScale = new Vector3(0.4f, 0.5f, 0.5f);
+
+            key.GetComponent<BoxCollider>().enabled = false;
+            key.GetComponent<Ball>().OnGrabReleased();
+            key.GetComponent<Ball>().enabled = false;
+
+            OpenCompartment();
+            GetComponent<CapsuleCollider>().enabled = false;
+
+            // Play lock key sound.
+        }
     }
 
     public void OpenCompartment()

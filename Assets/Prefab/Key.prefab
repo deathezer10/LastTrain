@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 65979950121136772}
   m_Layer: 0
   m_Name: Key
-  m_TagString: Untagged
+  m_TagString: SmallKey
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.061705712, y: 0.025045361, z: 0.0027641598}
+  m_Size: {x: 0.07, y: 0.025045361, z: 0.01}
   m_Center: {x: -0.016802846, y: 0, z: 0.0006985883}
 --- !u!114 &114798930448902666
 MonoBehaviour:
@@ -124,4 +124,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c55740830c19004dae3ea955400fb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outlines: []
