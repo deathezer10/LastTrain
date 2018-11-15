@@ -124,7 +124,7 @@ public class TrainSpeedHandler : MonoBehaviour
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
 
             if (!bOnce)
-                if (stationMover.currentSpeed < 0.7)
+                if (stationMover.currentSpeed < 1)
                 {
                     bOnce = true;
                     audioscreech.Stop();
