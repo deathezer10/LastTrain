@@ -21,6 +21,10 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
             var renderer = obj.GetComponent<Renderer>();
             if (renderer == null) continue;
 
+            // particle ignore
+            var pRenderer = renderer as ParticleSystemRenderer;
+            if(pRenderer) continue;
+
             var outline = renderer.gameObject.SafeAddComponent<Negi.Outline>();
             _outlines.Add(outline);
         }
