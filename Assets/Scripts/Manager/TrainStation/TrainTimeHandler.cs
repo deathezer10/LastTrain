@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrainTimeHandler : MonoBehaviour {
-    
+public class TrainTimeHandler : MonoBehaviour
+{
+
+    const float m_TimeBetweenEachStation = 30;
+
     int m_CurrentAnnouncementCount = 0;
 
     StationDisplayLight[] m_DisplayLights;
@@ -24,18 +27,11 @@ public class TrainTimeHandler : MonoBehaviour {
         StartCoroutine(CycleDisplayLights());
     }
 
-    public void StopTrainTime()
-    {
-        StopAllCoroutines();
-
-        // Victory here
-    }
-
     IEnumerator CycleDisplayLights()
     {
-        while (m_CurrentAnnouncementCount < StationDisplayLight.STATIONNODE_AMOUNT - 1)
+        while (m_CurrentAnnouncementCount < StationDisplayLight.STATIONNODE_AMOUNT)
         {
-            yield return new WaitForSeconds(60);
+            yield return new WaitForSeconds(m_TimeBetweenEachStation);
 
             m_CurrentAnnouncementCount++;
 
@@ -43,12 +39,11 @@ public class TrainTimeHandler : MonoBehaviour {
             {
                 displayLight.CycleNodes();
             }
-
             // TODO play announcement
         }
 
         GameObject.FindWithTag("Player").GetComponent<PlayerDeathHandler>().KillPlayer("death_timeup");
     }
-   
+
 
 }

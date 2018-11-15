@@ -5,19 +5,35 @@ using UnityEngine;
 public class StationMover : MonoBehaviour
 {
 
-    // Tiling variables
-    public GameObject m_TunnelPrefab;
+    #region Tiling variables
     GameObject m_LastRightTunnel;
+
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
+
     const int m_InitialTunnelSpawnAmount = 7;
-    int m_CurrentTunnelIndex = 0;
-    float m_CurrentDistanceTraveled = 0;
     const float m_TunnelGapOffset = 20.23f;
     const float m_TunnelXOffset = -5.05f;
+
+    int m_CurrentTunnelIndex = 0;
+    float m_CurrentDistanceTraveled = 0;
     bool m_IsFirstTimeDestroy = true;
-    public TrainDoorsOpenSound trainSounds;
-    // Movement variables
+    bool m_SpawnStationNext = false;
+
+    [SerializeField]
+    private GameObject m_TunnelPrefab;
+
+    [SerializeField]
+    private GameObject m_FakeStationPrefab;
+
+    [SerializeField]
+    private TrainDoorsOpenSound trainSounds;
+
+    [SerializeField]
+    private StationDisplayLight m_StationDisplayLight;
+    #endregion
+
+    #region Movement Variables
     bool m_IsMoving = false;
     public bool isMoving {
         get { return m_IsMoving; }
@@ -33,8 +49,9 @@ public class StationMover : MonoBehaviour
     float m_CurrentStationSpeed = 0;
     public float currentSpeed {
         get { return m_CurrentStationSpeed; }
-        set { m_CurrentStationSpeed = value;}
+        set { m_CurrentStationSpeed = value; }
     }
+    #endregion
 
     private void Start()
     {
@@ -53,6 +70,8 @@ public class StationMover : MonoBehaviour
         }
 
         trainSounds = FindObjectOfType<TrainDoorsOpenSound>();
+
+        m_StationDisplayLight.OnStationChanged.AddListener(OnStationChanged);
     }
 
     private void Update()
@@ -83,14 +102,29 @@ public class StationMover : MonoBehaviour
                 Destroy(m_RemovableObjects.Dequeue().gameObject);
             }
 
-            m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
-            m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+            if (m_SpawnStationNext)
+            {
+                m_SpawnStationNext = false;
+                m_LastRightTunnel = Instantiate(m_FakeStationPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+                m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+            }
+            else
+            {
+                m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+                m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+            }
         }
     }
 
     public void ToggleMovement(bool moving)
     {
         m_IsMoving = moving;
+    }
+
+    private void OnStationChanged(int stationNumber, string stationNameEN, string stationNameJP)
+    {
+        m_SpawnStationNext = true;
+        // Debug.LogFormat("Station Index: {0}, EN Name: {1}, JP Name: {2}", stationNumber, stationNameEN, stationNameJP);
     }
 
 }
