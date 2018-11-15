@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Screw : MonoBehaviour
+public class Screw : GrabbableObject
 {
     private ScrewDriver m_ScrewDriver;
-
+    public GameObject grenadeParticlePrefab;
     private float Turnspeed;
     public float screwDistance = 0.03f;
     private Vector3 OriginalPosition;
@@ -14,6 +14,10 @@ public class Screw : MonoBehaviour
     private bool bIsLoose = false;
     public string Origin;
     public int rotateAroundAxis;
+    private RaycastHit[] rayCastHits;
+    private int screwhits;
+ 
+    public override bool hideControllerOnGrab => base.hideControllerOnGrab;
 
     public delegate void Unscrewed(string _object);
     public static event Unscrewed OnLoose;
@@ -36,7 +40,8 @@ public class Screw : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Tip")
+        if (!bIsLoose)
+            if (other.name == "Tip")
         {
             m_ScrewDriver.bIsScrewing = true;
         }
@@ -88,7 +93,6 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
                                     m_ScrewDriver.bIsScrewing = false;
-                                    Destroy(this);
                                     break;
                                 }
 
@@ -111,7 +115,6 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
                                     m_ScrewDriver.bIsScrewing = false;
-                                    Destroy(this);
                                     break;
                                 }
 
@@ -138,7 +141,6 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
                                     m_ScrewDriver.bIsScrewing = false;
-                                    Destroy(this);
                                     break;
                                 }
 
@@ -159,8 +161,7 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<Rigidbody>().isKinematic = false;
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
-                                    m_ScrewDriver.bIsScrewing = false;
-                                    Destroy(this);
+                                    m_ScrewDriver.bIsScrewing = false;  
                                     break;
                                 }
 
@@ -186,7 +187,6 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
                                     m_ScrewDriver.bIsScrewing = false;
-                                    Destroy(this);
                                     break;
                                 }
 
@@ -208,7 +208,6 @@ public class Screw : MonoBehaviour
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
                                     m_ScrewDriver.bIsScrewing = false;
-                                    Destroy(this);
                                     break;
                                 }
 
@@ -222,6 +221,45 @@ public class Screw : MonoBehaviour
                 }
             }
         }
+    }
+
+    public override void OnGrab()
+    {
+        base.OnGrab();
+    }
+
+    public override void OnGrabStay()
+    {
+        base.OnGrabStay();
+    }
+
+    public override void OnGrabReleased()
+    {
+        base.OnGrabReleased();
+        StartCoroutine(secret());
+    }
+
+    private IEnumerator secret()
+    {
+        yield return new WaitForSeconds(2);
+        rayCastHits = Physics.RaycastAll(transform.position, Vector3.down, 0.2f);
+
+        for (int hits = 0; hits < rayCastHits.Length; hits++)
+        {
+            if (rayCastHits[hits].transform.gameObject.GetComponent<Screw>() != null)
+            {
+                if(transform.position.y > rayCastHits[hits].transform.position.y)
+                screwhits += 1;
+                print("screwhit");
+            }
+        }
+
+        if(screwhits == 3)
+        {
+            Instantiate(grenadeParticlePrefab, transform.position, grenadeParticlePrefab.transform.rotation, null);
+        }
+
+        yield return true;
     }
 }
 
