@@ -11,7 +11,7 @@ public class GlassBox : MonoBehaviour, IShootable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Extinguisher")
+        if (other.tag == "Extinguisher" || other.tag == "BaseballBat" || other.tag == "BowlingBall")
         {
             var controller = PlayerViveController.GetControllerThatHolds(other.gameObject);
 
