@@ -107,7 +107,7 @@ public class SpeedMeter : MonoBehaviour
     }
 
 
-    public float Remap(this float from, float fromMin, float fromMax, float toMin, float toMax)
+    public float Remap(float from, float fromMin, float fromMax, float toMin, float toMax)
     {
         var fromAbs = from - fromMin;
         var fromMaxAbs = fromMax - fromMin;
