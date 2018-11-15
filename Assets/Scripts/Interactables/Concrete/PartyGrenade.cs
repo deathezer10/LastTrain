@@ -23,14 +23,17 @@ public class PartyGrenade : GrabbableObject, IShootable
         ringVisual.SetActive(false);
 
         pinPhysics.SetActive(true);
+        pinPhysics.transform.SetParent(null);
+
         ringPhysics.SetActive(true);
+        ringPhysics.transform.SetParent(null);
 
         StartCoroutine(PinPullTimer());
     }
 
     private IEnumerator PinPullTimer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         Explode();
     }
 
