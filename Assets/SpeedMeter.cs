@@ -96,17 +96,9 @@ public class SpeedMeter : MonoBehaviour
 
         else
         {
-            if(previousSpeed < stationMover.currentSpeed)
-            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation,normalize01(stationMover.currentSpeed,0,4)), transform.localRotation.eulerAngles.z);
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation,normalize01(stationMover.currentSpeed,0,20) *3), transform.localRotation.eulerAngles.z);
 
-            if(previousSpeed > stationMover.currentSpeed)
-                transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation, normalize01(stationMover.currentSpeed, 0, 20)), transform.localRotation.eulerAngles.z);
-
-            if(previousSpeed == stationMover.currentSpeed)
-            {
-                transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, Mathf.Lerp(DefaultRotation, MaxRotation, normalize01(stationMover.currentSpeed, 0, 4)), transform.localRotation.eulerAngles.z);
-            }
-
+             
             if (bLeftSwivel)
                 transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y - 0.5f, transform.localRotation.eulerAngles.z);
 
