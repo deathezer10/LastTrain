@@ -7,7 +7,14 @@ public class PartyGrenade : GrabbableObject, IShootable
     public GameObject grenadeParticlePrefab;
     public GameObject pinVisual, ringVisual, pinPhysics, ringPhysics;
 
+    AudioPlayer[] grenadeSounds;
+
     PlayerViveController m_CurrentController;
+
+    private void Start()
+    {
+        grenadeSounds = GetComponents<AudioPlayer>();
+    }
 
     private void Explode()
     {
@@ -33,6 +40,10 @@ public class PartyGrenade : GrabbableObject, IShootable
 
     private IEnumerator PinPullTimer()
     {
+        yield return new WaitForSeconds(0.15f);
+        grenadeSounds[1].Play();
+        GetComponent<AudioSource>().volume = 0.5f;
+        GetComponent<AudioSource>().loop = true;
         yield return new WaitForSeconds(2.5f);
         Explode();
     }
