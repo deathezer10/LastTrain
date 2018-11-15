@@ -10,7 +10,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
 
     public AudioPlayer dingdongPlayer;
     public AudioPlayer trainEngine;
-    private float newPitch;
+    
 
     public void SetAudioLevel(float val)
     {
@@ -30,7 +30,11 @@ public class TrainDoorsOpenSound : MonoBehaviour
 
     public void SetAudioLevelSpeed(float val)
     {
-        trainEngine.audioSource.pitch = Mathf.Lerp(1, 2.3f, normalize01(val, 0, 10));
+        if(val <= 10)
+        trainEngine.audioSource.pitch = Mathf.Lerp(1, 1.8f, normalize01(val, 0, 10));
+
+        else if(val > 10)
+            trainEngine.audioSource.pitch = Mathf.Lerp(1.8f, 2.5f, normalize01(val, 10, 20));
     }
 
     // Use this for initialization
