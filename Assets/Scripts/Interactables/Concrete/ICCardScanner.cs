@@ -7,7 +7,7 @@ public class ICCardScanner : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject m_GantryBarrier;
+    private Collider m_GantryBarrier;
 
     [SerializeField]
     private GameObject m_LeftGate;
@@ -19,54 +19,51 @@ public class ICCardScanner : MonoBehaviour
 
     bool m_IsGateOpened = false;
 
+    private AudioPlayer _audioPlayer;
+
+    readonly private string colliderTag = "ICCard";
+
+    private void Awake() {
+        _audioPlayer = this.GetComponent<AudioPlayer>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        ICCard wallet = other.GetComponent<ICCard>();
-
-        if (wallet != null)
+        if (other.tag == colliderTag)
         {
             OpenGates();
         }
     }
 
-    public void OpenGates()
+    private void OpenGates()
     {
-        if (!m_IsGateOpened)
+        if (m_IsGateOpened) return;
+        m_IsGateOpened = true;
+
+        _audioPlayer.Play("cardscanned", () =>
         {
-            m_IsGateOpened = true;
+            _audioPlayer.Play("gateopen");
+            m_GantryBarrier.isTrigger = true;
+            m_LeftGate.transform.DOLocalRotate(new Vector3(0, -90, 0), m_DoorSwingSpeed);
+            m_RightGate.transform.DOLocalRotate(new Vector3(0, 90, 0), m_DoorSwingSpeed);
 
-            var audioPlayer = GetComponent<AudioPlayer>();
-            audioPlayer.Play("cardscanned", () =>
-            {
-                audioPlayer.Play("gateopen");
-                m_GantryBarrier.GetComponent<Collider>().isTrigger = true;
-                m_LeftGate.transform.DOLocalRotate(new Vector3(0, -90, 0), m_DoorSwingSpeed);
-                m_RightGate.transform.DOLocalRotate(new Vector3(0, 90, 0), m_DoorSwingSpeed);
-
-                // TODO change scanner color 
-
-            });
-        }
+            // TODO change scanner color 
+        });
     }
 
     public void CloseGates()
     {
-        if (m_IsGateOpened)
+        if (!m_IsGateOpened) return;
+        m_IsGateOpened = false;
+
+        _audioPlayer.Play("cardscanned", () =>
         {
-            m_IsGateOpened = false;
+            _audioPlayer.Play("gateclose");
+            m_GantryBarrier.isTrigger = false;
+            m_LeftGate.transform.DOLocalRotate(new Vector3(0, 0, 0), m_DoorSwingSpeed);
+            m_RightGate.transform.DOLocalRotate(new Vector3(0, 0, 0), m_DoorSwingSpeed);
 
-            var audioPlayer = GetComponent<AudioPlayer>();
-            audioPlayer.Play("cardscanned", () =>
-            {
-                audioPlayer.Play("gateclose");
-                m_GantryBarrier.GetComponent<Collider>().isTrigger = false;
-                m_LeftGate.transform.DOLocalRotate(new Vector3(0, 0, 0), m_DoorSwingSpeed);
-                m_RightGate.transform.DOLocalRotate(new Vector3(0, 0, 0), m_DoorSwingSpeed);
-
-                // TODO change scanner color
-
-            });
-        }
+            // TODO change scanner color
+        });
     }
-
 }

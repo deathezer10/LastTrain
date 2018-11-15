@@ -6,11 +6,15 @@ using UnityEngine;
 /// Useful for dynamic objects such as balls, fire extinguisher, keycard
 /// </summary>
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
-public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
+public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
-    [SerializeField]
     protected List<Negi.Outline> _outlines = null;
     private void Awake()
+    {
+        this.SetOutline();
+    }
+
+    private void SetOutline()
     {
         _outlines = new List<Negi.Outline>();
         var objects = this.gameObject.transform.GetAllChild();
@@ -23,12 +27,12 @@ public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 
             // particle ignore
             var pRenderer = renderer as ParticleSystemRenderer;
-            if(pRenderer) continue;
+            if (pRenderer) continue;
 
             var outline = renderer.gameObject.SafeAddComponent<Negi.Outline>();
+            outline.enabled = false;
             _outlines.Add(outline);
         }
-        SetEnableOutline(false);
     }
 
     /// <summary>
