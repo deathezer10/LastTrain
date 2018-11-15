@@ -6,7 +6,7 @@ using UnityEngine;
 /// Useful for dynamic objects such as balls, fire extinguisher, keycard
 /// </summary>
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
-public abstract class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
+public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
     protected List<Negi.Outline> _outlines = null;
     private void Awake()
