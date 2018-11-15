@@ -20,12 +20,14 @@ public class PartyGrenade : GrabbableObject, IShootable
     {
         base.OnGrabReleased();
         m_CurrentController.ToggleControllerModel(true);
-        Instantiate(grenadeParticlePrefab, transform.position, transform.rotation, null);
+        Instantiate(grenadeParticlePrefab, transform.position, grenadeParticlePrefab.transform.rotation, null);
         Destroy(gameObject);
     }
 
     private void PullPin()
     {
+        grenadeSounds[0].Play();
+
         pinVisual.SetActive(false);
         ringVisual.SetActive(false);
 
@@ -42,9 +44,9 @@ public class PartyGrenade : GrabbableObject, IShootable
     {
         yield return new WaitForSeconds(0.15f);
         grenadeSounds[1].Play();
-        GetComponent<AudioSource>().volume = 0.5f;
         GetComponent<AudioSource>().loop = true;
-        yield return new WaitForSeconds(2.5f);
+        GetComponent<AudioSource>().volume = 0.3f;
+        yield return new WaitForSeconds(3.15f);
         Explode();
     }
 
@@ -65,9 +67,12 @@ public class PartyGrenade : GrabbableObject, IShootable
     {
         base.OnGrab();
 
-        transform.rotation = m_CurrentController.transform.rotation;
-        transform.Rotate(new Vector3(0, 0, -15f));
-        transform.position = m_CurrentController.transform.position;
+        if (m_CurrentController != null)
+        {
+            transform.rotation = m_CurrentController.transform.rotation;
+            transform.Rotate(new Vector3(0, 0, 0f));
+            transform.position = m_CurrentController.transform.position;
+        }
     }
 
     public override void OnUse()
