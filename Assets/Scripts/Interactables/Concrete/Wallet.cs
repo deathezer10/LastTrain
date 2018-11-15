@@ -82,6 +82,8 @@ public class Wallet : GrabbableObject
 
     private async void Use()
     {
+        m_HasUsedOnce = true;
+
         await Task.Run(()=>{
             m_TManager.SetPoster(TutorialManager.PosterState.None);
 
