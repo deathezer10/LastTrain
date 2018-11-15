@@ -20,13 +20,12 @@ public class LightSwitch : GrabbableObject, IShootable
     private List<ToggleTrainLights> toggleTrainLights = new List<ToggleTrainLights>();
     private ToggleTrainLights ownedLights;
     private Vector3 OriginalPosition;
-    private Quaternion OriginalRotation;
+   
 
     private void Start()
     {
         Audio = GetComponent<AudioPlayer>();
         OriginalPosition = transform.localPosition;
-        OriginalRotation = transform.localRotation;
         BreakAtCount = Mathf.RoundToInt(Random.Range(3, 5));
         toggleTrainLights.AddRange(FindObjectsOfType<ToggleTrainLights>());
         for (int i = 0; i < toggleTrainLights.Count; i++)
