@@ -18,10 +18,7 @@ public class TrainSecondCabinEntry : MonoBehaviour
             Destroy(gameObject);
         }
 
-        else if(other.tag == "DummyTrain")
-        {
-            FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_timeup");
-        }
+      
 
     }
 }
