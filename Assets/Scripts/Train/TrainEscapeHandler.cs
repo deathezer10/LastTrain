@@ -45,11 +45,11 @@ public class TrainEscapeHandler : MonoBehaviour
         {
             other.gameObject.GetComponent<Bomb>().ThrownOut();
 
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, -15f), ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, -2f * stationMover.currentSpeed), ForceMode.Impulse);
         }
         else if (other.gameObject.GetComponent<Rigidbody>() != null && other.gameObject.layer != 11)
         {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, -15f), ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, -2f * stationMover.currentSpeed), ForceMode.Impulse);
         }
 
     }
