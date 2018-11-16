@@ -91,9 +91,9 @@ public class StationMover : MonoBehaviour
 
         if(bMoveDummyTrain)
         {
-            m_DummyTrain.transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime * 1.2f);
-            if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 50 )
-            {
+            m_DummyTrain.transform.Translate(Vector3.forward * m_CurrentStationSpeed * Time.deltaTime * 1.27f);
+            if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 60 )
+            {               
                 if (bPlayOnce)
                 {
                     FindObjectOfType<DummyTrain>().GetComponent<AudioPlayer>().Play();
@@ -135,6 +135,7 @@ public class StationMover : MonoBehaviour
                 if (bSpawnDummyTrain)
                 {
                     m_DummyTrain = Instantiate(m_DummyTrainPrefab, m_LastRightTunnel.transform.position, m_LastRightTunnel.transform.rotation);
+                    m_DummyTrain.transform.Rotate(new Vector3(0,180,0));
                     bSpawnDummyTrain = false;
                     bMoveDummyTrain = true;
                 }

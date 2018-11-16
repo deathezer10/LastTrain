@@ -93,6 +93,7 @@ ModelImporter:
     100174: polySurface1547
     100176: polySurface1548
     100178: polySurface1549
+    100180: polySurface1550
     400000: button
     400002: gantry_gate1
     400004: gantry_gate2
@@ -183,6 +184,7 @@ ModelImporter:
     400174: polySurface1547
     400176: polySurface1548
     400178: polySurface1549
+    400180: polySurface1550
     2100000: StingrayPBS1
     2100002: lambert1
     2100004: StingrayPBS3
@@ -271,6 +273,7 @@ ModelImporter:
     2300160: polySurface1547
     2300162: polySurface1548
     2300164: polySurface1549
+    2300166: polySurface1550
     3300000: button
     3300002: gantry_gate1
     3300004: gantry_gate2
@@ -354,6 +357,7 @@ ModelImporter:
     3300160: polySurface1547
     3300162: polySurface1548
     3300164: polySurface1549
+    3300166: polySurface1550
     4300000: button
     4300002: platform_bot
     4300004: main
@@ -437,6 +441,7 @@ ModelImporter:
     4300160: polySurface1547
     4300162: polySurface1548
     4300164: polySurface1549
+    4300166: polySurface1550
   externalObjects:
   - first:
       type: UnityEngine:Material
