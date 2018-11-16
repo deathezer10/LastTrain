@@ -22,7 +22,8 @@ public class StationMover : MonoBehaviour
     bool m_SpawnStationNext = false;
     private bool bSpawnDummyTrain = false;
     private bool bMoveDummyTrain = false;
-
+    private bool bPlayOnce = true;
+    private BoxCollider CrashChecker;
     [SerializeField]
     private GameObject m_TunnelPrefab;
 
@@ -78,6 +79,7 @@ public class StationMover : MonoBehaviour
         trainSounds = FindObjectOfType<TrainDoorsOpenSound>();
 
         m_StationDisplayLight.OnStationChanged.AddListener(OnStationChanged);
+        CrashChecker = FindObjectOfType<TrainCrashChecker>().GetComponent<BoxCollider>();
     }
 
     private void Update()
@@ -90,6 +92,14 @@ public class StationMover : MonoBehaviour
         if(bMoveDummyTrain)
         {
             m_DummyTrain.transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime * 1.2f);
+            if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 50 )
+            {
+                if (bPlayOnce)
+                {
+                    FindObjectOfType<DummyTrain>().GetComponent<AudioPlayer>().Play();
+                    bPlayOnce = false;
+                }
+            }
         }
 
         if (Mathf.Abs(m_CurrentDistanceTraveled) >= m_TunnelGapOffset)
