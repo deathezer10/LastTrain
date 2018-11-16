@@ -43,7 +43,8 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     {
         foreach (var outline in _outlines)
         {
-            outline.enabled = active;
+            if (active && outline.gameObject.activeInHierarchy)
+                outline.enabled = active;
         }
     }
 
@@ -51,7 +52,6 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 
     public virtual void OnControllerEnter(PlayerViveController currentController)
     {
-        SetEnableOutline(true);
     }
 
     public virtual void OnControllerExit()
@@ -59,7 +59,11 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
         SetEnableOutline(false);
     }
 
-    public virtual void OnControllerStay() { }
+    public virtual void OnControllerStay()
+    {
+        SetEnableOutline(true);
+    }
+
     public virtual void OnGrab() { }
     public virtual void OnGrabStay() { }
     public virtual void OnGrabReleased() { }
