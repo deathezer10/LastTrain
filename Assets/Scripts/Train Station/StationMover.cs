@@ -92,8 +92,8 @@ public class StationMover : MonoBehaviour
         if(bMoveDummyTrain)
         {
             m_DummyTrain.transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime * 1.2f);
-            if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 50 )
-            {
+            if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 60 )
+            {               
                 if (bPlayOnce)
                 {
                     FindObjectOfType<DummyTrain>().GetComponent<AudioPlayer>().Play();

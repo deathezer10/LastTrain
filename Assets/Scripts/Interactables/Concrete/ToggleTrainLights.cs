@@ -8,6 +8,8 @@ public class ToggleTrainLights : MonoBehaviour
     List<Light> m_TrainLights = new List<Light>();
     public string SwitchCabinsName;
 
+    public bool bIsOn = true;
+
     // Use this for initialization
     void Start()
     {
@@ -49,20 +51,26 @@ public class ToggleTrainLights : MonoBehaviour
         yield return true;
     }
 
-
-    public void LightsOn()
+    public void ToggleLights()
     {
-        foreach (Light light in m_TrainLights)
+        if(bIsOn)
         {
-            light.gameObject.SetActive(true);
+            bIsOn = false;
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(false);
+            }
+        }
+
+        else
+        {
+            bIsOn = true;
+            foreach (Light light in m_TrainLights)
+            {
+                light.gameObject.SetActive(true);
+            }
         }
     }
 
-    public void LightsOff()
-    {
-        foreach (Light light in m_TrainLights)
-        {
-            light.gameObject.SetActive(false);
-        }
-    }
+
 }
