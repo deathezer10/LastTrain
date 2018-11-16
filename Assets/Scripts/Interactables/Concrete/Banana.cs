@@ -15,6 +15,8 @@ public class Banana : GrabbableObject
 
     bool bittenOnce;
 
+    bool isGrabbed = false;
+
     void Start()
     {
         halfRenderers = GetComponentsInChildren<MeshRenderer>();
@@ -24,6 +26,9 @@ public class Banana : GrabbableObject
 
     public void BiteBanana()
     {
+        if (isGrabbed == false)
+            return;
+
         if (!bittenOnce)
         {
             bittenOnce = true;
@@ -41,6 +46,7 @@ public class Banana : GrabbableObject
         halfRenderers[0].enabled = false;
         halfColliders[0].enabled = false;
 
+        m_CurrentController.ToggleControllerModel(true);
         StartCoroutine(BananaDestroy());
     }
 
@@ -75,11 +81,14 @@ public class Banana : GrabbableObject
             transform.Rotate(new Vector3(0, 90, -50));
             transform.position = m_CurrentController.transform.position;
         }
+
+        isGrabbed = true;
     }
 
     public override void OnGrabReleased()
     {
         base.OnGrabReleased();
+        isGrabbed = false;
     }
 
 }
