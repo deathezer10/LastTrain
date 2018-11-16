@@ -48,6 +48,51 @@ ModelImporter:
     100084: Wheel_22
     100086: Wheel_23
     100088: Wheel_24
+    100090: Train_Headlights
+    100092: Light_A_010
+    100094: Light_A_011
+    100096: Light_A_012
+    100098: Light_A_02
+    100100: Light_A_03
+    100102: Light_A_04
+    100104: Light_A_05
+    100106: Light_A_06
+    100108: Light_A_07
+    100110: Light_A_08
+    100112: Light_A_09
+    100114: Light_B_010
+    100116: Light_B_011
+    100118: Light_B_012
+    100120: Light_B_02
+    100122: Light_B_03
+    100124: Light_B_04
+    100126: Light_B_05
+    100128: Light_B_06
+    100130: Light_B_07
+    100132: Light_B_08
+    100134: Light_B_09
+    100136: LightFrame_A_01 1
+    100138: LightFrame_A_01 10
+    100140: LightFrame_A_01 11
+    100142: LightFrame_A_01 2
+    100144: LightFrame_A_01 3
+    100146: LightFrame_A_01 4
+    100148: LightFrame_A_01 5
+    100150: LightFrame_A_01 6
+    100152: LightFrame_A_01 7
+    100154: LightFrame_A_01 8
+    100156: LightFrame_A_01 9
+    100158: LightFrame_B_01 1
+    100160: LightFrame_B_01 10
+    100162: LightFrame_B_01 11
+    100164: LightFrame_B_01 2
+    100166: LightFrame_B_01 3
+    100168: LightFrame_B_01 4
+    100170: LightFrame_B_01 5
+    100172: LightFrame_B_01 6
+    100174: LightFrame_B_01 7
+    100176: LightFrame_B_01 8
+    100178: LightFrame_B_01 9
     400000: //RootNode
     400002: Train
     400004: Decal
@@ -93,6 +138,51 @@ ModelImporter:
     400084: Wheel_22
     400086: Wheel_23
     400088: Wheel_24
+    400090: Train_Headlights
+    400092: Light_A_010
+    400094: Light_A_011
+    400096: Light_A_012
+    400098: Light_A_02
+    400100: Light_A_03
+    400102: Light_A_04
+    400104: Light_A_05
+    400106: Light_A_06
+    400108: Light_A_07
+    400110: Light_A_08
+    400112: Light_A_09
+    400114: Light_B_010
+    400116: Light_B_011
+    400118: Light_B_012
+    400120: Light_B_02
+    400122: Light_B_03
+    400124: Light_B_04
+    400126: Light_B_05
+    400128: Light_B_06
+    400130: Light_B_07
+    400132: Light_B_08
+    400134: Light_B_09
+    400136: LightFrame_A_01 1
+    400138: LightFrame_A_01 10
+    400140: LightFrame_A_01 11
+    400142: LightFrame_A_01 2
+    400144: LightFrame_A_01 3
+    400146: LightFrame_A_01 4
+    400148: LightFrame_A_01 5
+    400150: LightFrame_A_01 6
+    400152: LightFrame_A_01 7
+    400154: LightFrame_A_01 8
+    400156: LightFrame_A_01 9
+    400158: LightFrame_B_01 1
+    400160: LightFrame_B_01 10
+    400162: LightFrame_B_01 11
+    400164: LightFrame_B_01 2
+    400166: LightFrame_B_01 3
+    400168: LightFrame_B_01 4
+    400170: LightFrame_B_01 5
+    400172: LightFrame_B_01 6
+    400174: LightFrame_B_01 7
+    400176: LightFrame_B_01 8
+    400178: LightFrame_B_01 9
     2100000: PC_C_Shader
     2100002: PC_B_Shader
     2100004: PC_A_Shader
@@ -124,6 +214,8 @@ ModelImporter:
     2100056: Decal_3_Decal_4
     2100058: EBrakes_Shader1
     2100060: Props_B_Shader2
+    2100062: Headlights_Shader
+    2100064: Headlights_Alpha_Shader
     2300000: //RootNode
     2300002: Train
     2300004: Decal
@@ -169,6 +261,51 @@ ModelImporter:
     2300084: Wheel_22
     2300086: Wheel_23
     2300088: Wheel_24
+    2300090: Train_Headlights
+    2300092: Light_A_010
+    2300094: Light_A_011
+    2300096: Light_A_012
+    2300098: Light_A_02
+    2300100: Light_A_03
+    2300102: Light_A_04
+    2300104: Light_A_05
+    2300106: Light_A_06
+    2300108: Light_A_07
+    2300110: Light_A_08
+    2300112: Light_A_09
+    2300114: Light_B_010
+    2300116: Light_B_011
+    2300118: Light_B_012
+    2300120: Light_B_02
+    2300122: Light_B_03
+    2300124: Light_B_04
+    2300126: Light_B_05
+    2300128: Light_B_06
+    2300130: Light_B_07
+    2300132: Light_B_08
+    2300134: Light_B_09
+    2300136: LightFrame_A_01 1
+    2300138: LightFrame_A_01 10
+    2300140: LightFrame_A_01 11
+    2300142: LightFrame_A_01 2
+    2300144: LightFrame_A_01 3
+    2300146: LightFrame_A_01 4
+    2300148: LightFrame_A_01 5
+    2300150: LightFrame_A_01 6
+    2300152: LightFrame_A_01 7
+    2300154: LightFrame_A_01 8
+    2300156: LightFrame_A_01 9
+    2300158: LightFrame_B_01 1
+    2300160: LightFrame_B_01 10
+    2300162: LightFrame_B_01 11
+    2300164: LightFrame_B_01 2
+    2300166: LightFrame_B_01 3
+    2300168: LightFrame_B_01 4
+    2300170: LightFrame_B_01 5
+    2300172: LightFrame_B_01 6
+    2300174: LightFrame_B_01 7
+    2300176: LightFrame_B_01 8
+    2300178: LightFrame_B_01 9
     3300000: //RootNode
     3300002: Train
     3300004: Decal
@@ -214,6 +351,51 @@ ModelImporter:
     3300084: Wheel_22
     3300086: Wheel_23
     3300088: Wheel_24
+    3300090: Train_Headlights
+    3300092: Light_A_010
+    3300094: Light_A_011
+    3300096: Light_A_012
+    3300098: Light_A_02
+    3300100: Light_A_03
+    3300102: Light_A_04
+    3300104: Light_A_05
+    3300106: Light_A_06
+    3300108: Light_A_07
+    3300110: Light_A_08
+    3300112: Light_A_09
+    3300114: Light_B_010
+    3300116: Light_B_011
+    3300118: Light_B_012
+    3300120: Light_B_02
+    3300122: Light_B_03
+    3300124: Light_B_04
+    3300126: Light_B_05
+    3300128: Light_B_06
+    3300130: Light_B_07
+    3300132: Light_B_08
+    3300134: Light_B_09
+    3300136: LightFrame_A_01 1
+    3300138: LightFrame_A_01 10
+    3300140: LightFrame_A_01 11
+    3300142: LightFrame_A_01 2
+    3300144: LightFrame_A_01 3
+    3300146: LightFrame_A_01 4
+    3300148: LightFrame_A_01 5
+    3300150: LightFrame_A_01 6
+    3300152: LightFrame_A_01 7
+    3300154: LightFrame_A_01 8
+    3300156: LightFrame_A_01 9
+    3300158: LightFrame_B_01 1
+    3300160: LightFrame_B_01 10
+    3300162: LightFrame_B_01 11
+    3300164: LightFrame_B_01 2
+    3300166: LightFrame_B_01 3
+    3300168: LightFrame_B_01 4
+    3300170: LightFrame_B_01 5
+    3300172: LightFrame_B_01 6
+    3300174: LightFrame_B_01 7
+    3300176: LightFrame_B_01 8
+    3300178: LightFrame_B_01 9
     4300000: Train
     4300002: Decal
     4300004: Light_B_01
@@ -258,6 +440,51 @@ ModelImporter:
     4300082: Wheel_22
     4300084: Wheel_23
     4300086: Wheel_24
+    4300088: Train_Headlights
+    4300090: Light_B_02
+    4300092: LightFrame_B_01
+    4300094: Light_A_02
+    4300096: LightFrame_A_01
+    4300098: Light_A_03
+    4300100: LightFrame_A_01
+    4300102: Light_B_03
+    4300104: LightFrame_B_01
+    4300106: Light_A_04
+    4300108: LightFrame_A_01
+    4300110: Light_B_04
+    4300112: LightFrame_B_01
+    4300114: Light_B_05
+    4300116: LightFrame_B_01
+    4300118: Light_B_06
+    4300120: LightFrame_B_01
+    4300122: Light_A_05
+    4300124: LightFrame_A_01
+    4300126: Light_A_06
+    4300128: LightFrame_A_01
+    4300130: Light_B_07
+    4300132: LightFrame_B_01
+    4300134: Light_A_07
+    4300136: LightFrame_A_01
+    4300138: Light_B_08
+    4300140: LightFrame_B_01
+    4300142: Light_A_08
+    4300144: LightFrame_A_01
+    4300146: Light_B_09
+    4300148: LightFrame_B_01
+    4300150: Light_B_010
+    4300152: LightFrame_B_01
+    4300154: Light_A_09
+    4300156: LightFrame_A_01
+    4300158: Light_A_010
+    4300160: LightFrame_A_01
+    4300162: Light_B_011
+    4300164: LightFrame_B_01
+    4300166: Light_A_011
+    4300168: LightFrame_A_01
+    4300170: Light_B_012
+    4300172: LightFrame_B_01
+    4300174: Light_A_012
+    4300176: LightFrame_A_01
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -329,6 +556,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: EBrakes_Shader1
     second: {fileID: 2100000, guid: 900239cb540e8f44aa77dbc783f987fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Headlights_Alpha_Shader
+    second: {fileID: 2100000, guid: 54a2a3c154d97ed459cc8f0ccb9d08fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Headlights_Shader
+    second: {fileID: 2100000, guid: c25f0a08db280c9438b61a86ce81a852, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

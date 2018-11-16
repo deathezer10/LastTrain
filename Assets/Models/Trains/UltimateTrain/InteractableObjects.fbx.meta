@@ -95,6 +95,12 @@ ModelImporter:
     2100014: EBrakes_Shader
     2100016: Alpha_5_Shader
     2100018: Alpha1_Shader
+    2100020: Props_B_Shader3
+    2100022: PC_C_Shader1
+    2100024: EBrakes_Shader1
+    2100026: Alpha2_Shader1
+    2100028: DC_A_Shader1
+    2100030: InnerShell_Shader1
     2300000: Accelerator
     2300002: Brake
     2300004: BrokenDCWindow_01
@@ -264,6 +270,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Alpha2_Shader1
+    second: {fileID: 2100000, guid: 8c37932d874afab49bc2edd22c6ef773, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Alpha_5_Shader
     second: {fileID: 2100000, guid: 2e5394e38413b664b97cbe84de0918bb, type: 2}
   - first:
@@ -274,12 +285,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: DC_A_Shader1
+    second: {fileID: 2100000, guid: e5711bd843443a3429c334e40fbcc18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: EBrakes_Shader
     second: {fileID: 2100000, guid: 900239cb540e8f44aa77dbc783f987fb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: EBrakes_Shader1
+    second: {fileID: 2100000, guid: 900239cb540e8f44aa77dbc783f987fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: InnerShell_Shader
+    second: {fileID: 2100000, guid: 8bf25666015308b4f9a1bd9c1ca82764, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: InnerShell_Shader1
     second: {fileID: 2100000, guid: 8bf25666015308b4f9a1bd9c1ca82764, type: 2}
   - first:
       type: UnityEngine:Material
@@ -299,8 +325,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: PC_C_Shader1
+    second: {fileID: 2100000, guid: e82791bfcc82df04f8362698f642aedc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Props_B_Shader
     second: {fileID: 2100000, guid: eccc4397154f41f47b8c3d16090af2cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props_B_Shader3
+    second: {fileID: 2100000, guid: ba6dcf944a8f98e498ada2e885b4a923, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
