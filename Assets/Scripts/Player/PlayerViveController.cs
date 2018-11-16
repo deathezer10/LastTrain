@@ -180,6 +180,19 @@ public class PlayerViveController : MonoBehaviour
         return CurrentHand;
     }
 
+    public PlayerViveController GetOtherController()
+    {
+        var controllers = FindObjectsOfType<PlayerViveController>();
+
+        foreach (PlayerViveController controller in controllers)
+        {
+            if (controller.CurrentHand == GetOtherHand())
+                return controller;
+        }
+
+        return null;
+    }
+
     public GameObject GetCurrentHandObject(bool otherHand = false)
     {
         if (CurrentHand == SteamVR_Input_Sources.LeftHand)

@@ -6,11 +6,8 @@ public class ICCard : GrabbableObject
 {
     private Negi.Outline _outline;
 
-    [SerializeField]
-    private int _outlineColor = 1;
     private void Awake() {
-        _outline = this.GetComponent<Negi.Outline>();
-        _outline._color = _outlineColor;
+        _outline = GetComponent<Negi.Outline>();
     }
 
     private void LateUpdate()

@@ -11,20 +11,32 @@ public class Wallet : GrabbableObject
     private bool m_HasAnnounced = false;
     private bool m_HasUsedOnce = false;
 
-    BoxCollider[] m_colliders;
     TutorialManager m_TManager;
     AudioPlayer m_TManagerAudioPlayer;
+
+    PlayerViveController m_Controller;
+
+    Collider[] m_Colliders;
 
     private void Start()
     {
         m_TManager = FindObjectOfType<TutorialManager>();
         m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
-        m_colliders = GetComponents<BoxCollider>();
+        m_Colliders = GetComponents<Collider>();
+    }
+
+    public override void OnControllerEnter(PlayerViveController currentController)
+    {
+        base.OnControllerEnter(currentController);
+        m_Controller = currentController;
     }
 
     public override void OnGrab()
     {
         base.OnGrab();
+
+        transform.position = m_Controller.transform.position;
+        transform.rotation = m_Controller.transform.rotation;
 
         if (!m_HasAnnounced)
         {
@@ -42,8 +54,9 @@ public class Wallet : GrabbableObject
             m_TManager.SetPoster(TutorialManager.PosterState.None);
 
             GetComponent<Animator>().Play("Open");
-            m_colliders[1].enabled = true;
-            m_colliders[0].enabled = false;
+            
+            m_Colliders[0].enabled = false;
+            m_Colliders[1].enabled = true;
 
             GameObject obj = Instantiate(m_ICCardPrefab, transform.position + new Vector3(0f, 0f, 0.15f), Quaternion.identity);
 

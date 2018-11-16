@@ -9,9 +9,10 @@ using UnityEngine;
 public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
     protected List<Negi.Outline> _outlines = null;
+
     private void Awake()
     {
-        this.SetOutline();
+        SetOutline();
     }
 
     private void SetOutline()
@@ -41,17 +42,19 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     /// <param name="active"></param>
     private void SetEnableOutline(bool active)
     {
-        foreach (var outline in _outlines)
-        {
-            if (active && outline.gameObject.activeInHierarchy)
-                outline.enabled = active;
-        }
+        if (_outlines != null)
+            foreach (var outline in _outlines)
+            {
+                if (outline.Renderer != null && outline.Renderer.enabled)
+                    outline.enabled = active;
+            }
     }
 
     public virtual bool hideControllerOnGrab { get { return true; } }
 
     public virtual void OnControllerEnter(PlayerViveController currentController)
     {
+        SetEnableOutline(true);
     }
 
     public virtual void OnControllerExit()
@@ -64,8 +67,15 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
         SetEnableOutline(true);
     }
 
-    public virtual void OnGrab() { }
-    public virtual void OnGrabStay() { }
+    public virtual void OnGrab()
+    {
+    }
+
+    public virtual void OnGrabStay()
+    {
+        SetEnableOutline(false);
+    }
+
     public virtual void OnGrabReleased() { }
     public virtual void OnUseDown() { }
     public virtual void OnUse() { }
