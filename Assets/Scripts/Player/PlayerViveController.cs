@@ -254,8 +254,8 @@ public class PlayerViveController : MonoBehaviour
     {
         var diff = _ownPlayer.SetPositionGetDiff(targetPos);
 
-        var obj = this.GetCurrentHandObject();
-        if (obj) obj.transform.AddPosition(diff);
+        var obj = GetCurrentHandObject();
+        if (obj && obj.GetComponent<IStationaryGrabbable>() == null) obj.transform.AddPosition(diff);
     }
 
     virtual public void Vibration(

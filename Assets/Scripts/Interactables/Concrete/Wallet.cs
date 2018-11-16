@@ -49,13 +49,15 @@ public class Wallet : GrabbableObject
 
     public override void OnUse()
     {
+        base.OnUse();
+
         if (!m_HasUsedOnce)
         {
             m_TManager.SetPoster(TutorialManager.PosterState.None);
 
             GetComponent<Animator>().Play("Open");
             
-            m_Colliders[0].enabled = false;
+            //m_Colliders[0].enabled = false;
             m_Colliders[1].enabled = true;
 
             GameObject obj = Instantiate(m_ICCardPrefab, transform.position + new Vector3(0f, 0f, 0.15f), Quaternion.identity);

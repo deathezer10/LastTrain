@@ -12,6 +12,8 @@ public class Lighter : GrabbableObject
     bool lit;
     private int count = 0;
 
+    PlayerViveController m_CurrentController;
+
     private void Start()
     {
         litCollider = GetComponent<CapsuleCollider>();
@@ -20,17 +22,26 @@ public class Lighter : GrabbableObject
         m_particle.Stop();
     }
 
-    public override bool hideControllerOnGrab { get { return true; } }
+    public override void OnControllerEnter(PlayerViveController currentController)
+    {
+        base.OnControllerEnter(currentController);
+
+        m_CurrentController = currentController;
+    }
 
     public override void OnGrab()
     {
         base.OnGrab();
 
-        transform.eulerAngles = Vector3.zero;
+        transform.position = m_CurrentController.transform.position;
+        transform.rotation = m_CurrentController.transform.rotation;
+        transform.Rotate(new Vector3(90, 0, 0), Space.Self);
     }
 
     public override void OnUse()
     {
+        base.OnUse();
+
         Debug.Log("ライターを使ったよ");
         if (lit)
         {
@@ -54,7 +65,7 @@ public class Lighter : GrabbableObject
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.name == "Bomb")
+        if (other.name == "Bomb")
         {
             StartCoroutine(Counter());
         }
@@ -70,15 +81,15 @@ public class Lighter : GrabbableObject
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.name == "Bomb")
-        count = 0;
+        if (other.name == "Bomb")
+            count = 0;
     }
 
     private IEnumerator Counter()
     {
         yield return new WaitForSeconds(1);
         count++;
-        if(count >= 3)
+        if (count >= 3)
         {
             FindObjectOfType<Bomb>().TimerTimeOut();
         }

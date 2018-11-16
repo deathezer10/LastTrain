@@ -122,6 +122,9 @@ public class TutorialManager : MonoBehaviour
 
     public void SetPoster(PosterState poster)
     {
+        if (m_TutorialPoster1 == null)
+            return;
+
         m_TutorialPoster1.enabled = false;
         m_TutorialPoster2.enabled = false;
         m_TutorialPoster3.enabled = false;
