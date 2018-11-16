@@ -91,7 +91,7 @@ public class StationMover : MonoBehaviour
 
         if(bMoveDummyTrain)
         {
-            m_DummyTrain.transform.Translate(Vector3.forward * m_CurrentStationSpeed * Time.deltaTime * 1.21f);
+            m_DummyTrain.transform.Translate(Vector3.forward * m_CurrentStationSpeed * Time.deltaTime * 1.27f);
             if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 60 )
             {               
                 if (bPlayOnce)
