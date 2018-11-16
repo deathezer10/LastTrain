@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class BombWire : MonoBehaviour
 {
-    public float heldCutForce;
+    float heldCutForce;
     public bool correctWire;
+
+    private void Start()
+    {
+        heldCutForce = 0.8f;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

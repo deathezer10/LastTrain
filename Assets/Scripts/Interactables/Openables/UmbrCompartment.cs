@@ -45,6 +45,8 @@ public class UmbrCompartment : MonoBehaviour, IShootable
 
             // Play lock key sound.
 
+            OpenCompartment();
+
             key.GetComponent<Ball>().OnGrabReleased();
             key.GetComponent<Ball>().enabled = false;
             key.GetComponent<BoxCollider>().enabled = false;
@@ -53,8 +55,6 @@ public class UmbrCompartment : MonoBehaviour, IShootable
             key.transform.localPosition = new Vector3(-0.015f, 0, 0);
             key.transform.eulerAngles = new Vector3(0, 180f, 0);
             key.transform.localScale = new Vector3(0.4f, 0.5f, 0.5f);
-
-            OpenCompartment();
 
             GetComponent<CapsuleCollider>().enabled = false;
         }
