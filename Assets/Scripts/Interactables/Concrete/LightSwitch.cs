@@ -56,8 +56,8 @@ public class LightSwitch : GrabbableObject, IShootable
 
         if (ActivateCount >= BreakAtCount)
         {
-            //Light break sound here?
-            ownedLights.LightsOff();
+            ownedLights.bIsOn = true;
+            ownedLights.ToggleLights();
             bIsBroken = true;
             bSwitchIsOn = false;
             var rigidbody = transform.GetComponent<Rigidbody>();
@@ -79,7 +79,7 @@ public class LightSwitch : GrabbableObject, IShootable
 
             transform.localRotation = Quaternion.Euler(0, 0, -90);
 
-            ownedLights.LightsOff();
+            ownedLights.ToggleLights();
         }
         else
         {
@@ -88,7 +88,7 @@ public class LightSwitch : GrabbableObject, IShootable
 
             transform.localRotation = Quaternion.Euler(0, 0, 0);
 
-            ownedLights.LightsOn();
+            ownedLights.ToggleLights();
         }
     }
 
@@ -137,7 +137,8 @@ public class LightSwitch : GrabbableObject, IShootable
     {
         if (bSwitchIsOn)
         {
-            ownedLights.LightsOff();
+            ownedLights.bIsOn = true;
+            ownedLights.ToggleLights();
         }
 
         Destroy(transform.gameObject);

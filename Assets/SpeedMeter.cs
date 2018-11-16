@@ -17,7 +17,7 @@ public class SpeedMeter : MonoBehaviour
     [SerializeField]
     private float MaxRotation;
 
-    private Quaternion lastRotation;
+
 
     private StationMover stationMover;
 
@@ -106,7 +106,7 @@ public class SpeedMeter : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y + 0.5f, transform.localRotation.eulerAngles.z);
 
             previousSpeed = stationMover.currentSpeed;
-            lastRotation = transform.localRotation;
+           
 
         }
     }
