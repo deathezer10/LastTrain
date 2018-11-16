@@ -7,6 +7,7 @@ public class StationMover : MonoBehaviour
 
     #region Tiling variables
     GameObject m_LastRightTunnel;
+    public GameObject m_DummyTrain;
 
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
@@ -19,12 +20,17 @@ public class StationMover : MonoBehaviour
     float m_CurrentDistanceTraveled = 0;
     bool m_IsFirstTimeDestroy = true;
     bool m_SpawnStationNext = false;
+    private bool bSpawnDummyTrain = false;
+    private bool bMoveDummyTrain = false;
 
     [SerializeField]
     private GameObject m_TunnelPrefab;
 
     [SerializeField]
     private GameObject m_FakeStationPrefab;
+
+    [SerializeField]
+    private GameObject m_DummyTrainPrefab;
 
     [SerializeField]
     private TrainDoorsOpenSound trainSounds;
@@ -81,6 +87,11 @@ public class StationMover : MonoBehaviour
         trainSounds.SetAudioLevelSpeed(m_CurrentStationSpeed);
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
+        if(bMoveDummyTrain)
+        {
+            m_DummyTrain.transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime * 1.2f);
+        }
+
         if (Mathf.Abs(m_CurrentDistanceTraveled) >= m_TunnelGapOffset)
         {
             m_CurrentDistanceTraveled = 0;
@@ -111,7 +122,14 @@ public class StationMover : MonoBehaviour
             else
             {
                 m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+                if (bSpawnDummyTrain)
+                {
+                    m_DummyTrain = Instantiate(m_DummyTrainPrefab, m_LastRightTunnel.transform.position, m_LastRightTunnel.transform.rotation);
+                    bSpawnDummyTrain = false;
+                    bMoveDummyTrain = true;
+                }
                 m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+               
             }
         }
     }
@@ -127,4 +145,10 @@ public class StationMover : MonoBehaviour
         // Debug.LogFormat("Station Index: {0}, EN Name: {1}, JP Name: {2}", stationNumber, stationNameEN, stationNameJP);
     }
 
+    public void OnShouldSpawnDummyTrain()
+    {
+        bSpawnDummyTrain = true;
+    }
+
+   
 }

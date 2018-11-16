@@ -1,9 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TrainTimeHandler : MonoBehaviour
 {
+    private StationMover stationMover;
 
     const float m_TimeBetweenEachStation = 90;
 
@@ -14,6 +15,7 @@ public class TrainTimeHandler : MonoBehaviour
     private void Start()
     {
         m_DisplayLights = FindObjectsOfType<StationDisplayLight>();
+        stationMover = FindObjectOfType<StationMover>();
     }
 
     public void StartTrainTime()
@@ -41,8 +43,8 @@ public class TrainTimeHandler : MonoBehaviour
             }
             // TODO play announcement
         }
-
-        GameObject.FindWithTag("Player").GetComponent<PlayerDeathHandler>().KillPlayer("death_timeup");
+        stationMover.OnShouldSpawnDummyTrain();
+        //GameObject.FindWithTag("Player").GetComponent<PlayerDeathHandler>().KillPlayer("death_timeup");
     }
 
 

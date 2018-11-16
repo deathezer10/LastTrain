@@ -16,7 +16,7 @@ public class Screw : GrabbableObject
     public int rotateAroundAxis;
     private RaycastHit[] rayCastHits;
     private int screwhits;
- 
+    private AudioPlayer audioPlayer;
     public override bool hideControllerOnGrab => base.hideControllerOnGrab;
 
     public delegate void Unscrewed(string _object);
@@ -27,14 +27,16 @@ public class Screw : GrabbableObject
     {
         m_ScrewDriver = FindObjectOfType<ScrewDriver>();
         OriginalPosition = transform.localPosition;
+        audioPlayer = GetComponent<AudioPlayer>();
     }
 
- 
+
     private void OnTriggerExit(Collider other)
     {
         if (other.name == "Tip" || other.tag == "ScrewDriver")
         {
             m_ScrewDriver.bIsScrewing = false;
+            audioPlayer.Stop();
         }
     }
 
@@ -42,9 +44,10 @@ public class Screw : GrabbableObject
     {
         if (!bIsLoose)
             if (other.name == "Tip")
-        {
-            m_ScrewDriver.bIsScrewing = true;
-        }
+            {
+                m_ScrewDriver.bIsScrewing = true;
+                audioPlayer.Play();
+            }
     }
 
     private void OnTriggerStay(Collider other)
@@ -161,7 +164,7 @@ public class Screw : GrabbableObject
                                     transform.GetComponent<Rigidbody>().isKinematic = false;
                                     transform.GetComponent<BoxCollider>().isTrigger = false;
                                     OnLoose(Origin);
-                                    m_ScrewDriver.bIsScrewing = false;  
+                                    m_ScrewDriver.bIsScrewing = false;
                                     break;
                                 }
 
@@ -248,13 +251,13 @@ public class Screw : GrabbableObject
         {
             if (rayCastHits[hits].transform.gameObject.GetComponent<Screw>() != null)
             {
-                if(transform.position.y > rayCastHits[hits].transform.position.y)
-                screwhits += 1;
+                if (transform.position.y > rayCastHits[hits].transform.position.y)
+                    screwhits += 1;
                 print("screwhit");
             }
         }
 
-        if(screwhits == 3)
+        if (screwhits == 3)
         {
             Instantiate(grenadeParticlePrefab, transform.position, grenadeParticlePrefab.transform.rotation, null);
         }
