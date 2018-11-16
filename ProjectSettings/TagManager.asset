@@ -28,6 +28,8 @@ TagManager:
   - Banana
   - ICCard
   - SmallKey
+  - DummyTrain
+  - BowlingBall
   layers:
   - Default
   - TransparentFX
