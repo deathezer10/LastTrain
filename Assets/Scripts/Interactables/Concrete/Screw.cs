@@ -246,14 +246,14 @@ public class Screw : GrabbableObject
     {
         yield return new WaitForSeconds(2);
         rayCastHits = Physics.RaycastAll(transform.position, Vector3.down, 0.2f);
-
+       
         for (int hits = 0; hits < rayCastHits.Length; hits++)
         {
             if (rayCastHits[hits].transform.gameObject.GetComponent<Screw>() != null)
             {
                 if (transform.position.y > rayCastHits[hits].transform.position.y)
                     screwhits += 1;
-                print("screwhit");
+               
             }
         }
 
@@ -262,6 +262,11 @@ public class Screw : GrabbableObject
             Instantiate(grenadeParticlePrefab, transform.position, grenadeParticlePrefab.transform.rotation, null);
         }
 
+        else
+        {
+            screwhits = 0;
+        }
+      
         yield return true;
     }
 }
