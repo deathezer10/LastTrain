@@ -121,7 +121,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
         if (bAc_StopTrain)
         {
-            if (bBr_StopTrain || bBr_SlowDown) return;
+            if (bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
