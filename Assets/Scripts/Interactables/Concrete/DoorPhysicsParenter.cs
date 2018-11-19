@@ -6,8 +6,6 @@ public class DoorPhysicsParenter : MonoBehaviour {
     private GameObject DoorPhysics;
     private GameObject DoorHandle;
 
-
-
 	// Use this for initialization
 	void Start () {
         DoorPhysics = transform.GetChild(1).gameObject;
@@ -16,10 +14,5 @@ public class DoorPhysicsParenter : MonoBehaviour {
         DoorPhysics.transform.parent = transform.parent;
         this.transform.parent = DoorPhysics.transform;
         DoorHandle.transform.parent = DoorPhysics.transform;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	}	
 }
