@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 198091435804695254}
   m_Layer: 0
   m_Name: BurnArea (3)
-  m_TagString: PaperBurnArea
+  m_TagString: DollBurnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 198522799504596294}
   m_Layer: 0
   m_Name: BurnArea (1)
-  m_TagString: PaperBurnArea
+  m_TagString: DollBurnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 198217407711932138}
   m_Layer: 0
   m_Name: BurnArea
-  m_TagString: PaperBurnArea
+  m_TagString: DollBurnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 198201691731080248}
   m_Layer: 0
   m_Name: BurnArea (2)
-  m_TagString: PaperBurnArea
+  m_TagString: DollBurnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,9 +376,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544388027822132}
-  m_LocalRotation: {x: -0, y: 0.57328254, z: -0, w: 0.8193578}
-  m_LocalPosition: {x: 7.978, y: 2, z: -14.554}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
+  m_LocalRotation: {x: -0, y: -0.7661326, z: -0, w: 0.6426826}
+  m_LocalPosition: {x: 1.1429999, y: 0.69, z: -16.120636}
+  m_LocalScale: {x: 0.08000002, y: 0.08, z: 0.08000002}
   m_Children:
   - {fileID: 4283382247764522}
   - {fileID: 4668882484904466}
@@ -389,7 +389,7 @@ Transform:
   - {fileID: 4557490559843246}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 69.959, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -100.01601, z: 0}
 --- !u!4 &4080301309298538
 Transform:
   m_ObjectHideFlags: 1
