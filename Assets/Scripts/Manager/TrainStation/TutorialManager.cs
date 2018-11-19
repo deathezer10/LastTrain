@@ -34,7 +34,7 @@ public class TutorialManager : MonoBehaviour
 
     private int m_CurrentPosterMaterialIndex = 0;
 
-    private Vector3 m_playerCheckpointPos = new Vector3(1f, 1.5f, -5f);
+    private Vector3 m_playerCheckpointPos = new Vector3(1f, 0.83f, -5f);
     private Vector3 m_playerCheckpointRot = new Vector3(0, -90f, 0);
 
 

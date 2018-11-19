@@ -9,6 +9,7 @@ public class Doll : GrabbableObject, IShootable
     public Transform head;
     public Material dollEyeMat;
     public Color initialColor, flashColor;
+    public ParticleSystem dollDeathParticle;
 
     Transform playerHeadTrans;
 
@@ -16,12 +17,17 @@ public class Doll : GrabbableObject, IShootable
 
     float flashEndTime;
     bool playerWithinRange;
+    bool death;
+
+    AudioPlayer deathAudio;
 
     void Start()
     {
         playerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
         dollEyeMat.SetColor("_EmissionColor", initialColor);
         headInitRot = head.localEulerAngles;
+
+        deathAudio = GetComponent<AudioPlayer>();
     }
 
     private void Update()
@@ -87,8 +93,12 @@ public class Doll : GrabbableObject, IShootable
 
     private void DestroyDoll()
     {
-        // Doll death sound / Announcement?
-        // Particle effect?
-        // Destroy(gameObject);
+        if (!death)
+        {
+            death = true;
+            // Doll death Announcement?
+            Instantiate(dollDeathParticle, transform.position, transform.rotation, null);
+            Destroy(gameObject);
+        }
     }
 }
