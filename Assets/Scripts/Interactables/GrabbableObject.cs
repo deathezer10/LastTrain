@@ -8,12 +8,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 {
-    protected List<Negi.Outline> _outlines = null;
 
-    private void Awake()
-    {
-        SetOutline();
-    }
+    #region Outline
+    protected List<Negi.Outline> _outlines = null;
 
     private void SetOutline()
     {
@@ -49,12 +46,27 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
                     outline.enabled = active;
             }
     }
+    #endregion
+
+    #region DropSound
+    protected DropSoundHandler m_DropSoundHandler;
+    #endregion
+
+    #region Misc
+    protected Collider m_Collider;
+    #endregion
+
+    private void Awake()
+    {
+        m_DropSoundHandler = new DropSoundHandler(gameObject);
+        SetOutline();
+        m_Collider = GetComponent<Collider>();
+    }
 
     public virtual bool hideControllerOnGrab { get { return true; } }
 
     public virtual void OnControllerEnter(PlayerViveController currentController)
     {
-        SetEnableOutline(true);
     }
 
     public virtual void OnControllerExit()
@@ -76,8 +88,25 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
         SetEnableOutline(false);
     }
 
-    public virtual void OnGrabReleased() { }
+    public virtual void OnGrabReleased()
+    {
+        SetEnableOutline(false);
+    }
+
     public virtual void OnUseDown() { }
     public virtual void OnUse() { }
     public virtual void OnUseUp() { }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (m_DropSoundHandler != null)
+            m_DropSoundHandler.PlayDropSound(collision.relativeVelocity);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (m_DropSoundHandler != null)
+            m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
+    }
+
 }
