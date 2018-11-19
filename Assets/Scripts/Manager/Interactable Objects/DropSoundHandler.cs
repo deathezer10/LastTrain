@@ -86,9 +86,7 @@ public class DropSoundHandler
 
             // Higher velocity = louder
             float volumeScale = (Mathf.Clamp(relativeVelocity.magnitude, minMagnitude, maxMagnitude) / maxMagnitude);
-
-            Debug.LogFormat("{0} : {1} ", m_Source.name, relativeVelocity.magnitude);
-
+            
             m_AudioSource.PlayOneShot(m_AudioSource.clip, volumeScale);
         }
     }
