@@ -65,6 +65,7 @@ public class ScrewDriver : GrabbableObject
         m_ScrewDriver.transform.position = Controller.transform.position;
         m_ScrewDriver.transform.rotation = Quaternion.LookRotation(-Controller.transform.forward);
         ScrewDriverClone = Instantiate(m_ScrewDriver, transform.position, transform.rotation, m_ScrewDriver.transform);
+        base.OnGrabStay();
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = false;
         Destroy(ScrewDriverClone.GetComponent("ScrewDriver"));
         ScrewDriverClone.GetComponent<Rigidbody>().useGravity = false;

@@ -245,8 +245,9 @@ public class Screw : GrabbableObject
     private IEnumerator secret()
     {
         yield return new WaitForSeconds(2);
-        rayCastHits = Physics.RaycastAll(transform.position, Vector3.down, 0.2f);
-       
+        
+        rayCastHits = Physics.SphereCastAll(transform.position, 0.01f, Vector3.down, 0.2f);
+
         for (int hits = 0; hits < rayCastHits.Length; hits++)
         {
             if (rayCastHits[hits].transform.gameObject.GetComponent<Screw>() != null)
@@ -257,7 +258,7 @@ public class Screw : GrabbableObject
             }
         }
 
-        if (screwhits == 3)
+        if (screwhits >= 3)
         {
             Instantiate(grenadeParticlePrefab, transform.position, grenadeParticlePrefab.transform.rotation, null);
         }
