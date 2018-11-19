@@ -61,6 +61,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void ChangeSpeed(float val)
     {
+        if (bBr_SlowDown || bBr_StopTrain || bAc_StopTrain) return;
         if(val > stationMover.currentMaxSpeed)
         {
             stationMover.currentMaxSpeed = val;
@@ -118,7 +119,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
         if (bAc_StopTrain)
         {
-            if (bBr_StopTrain) return;
+            if (bBr_StopTrain || bBr_SlowDown) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
