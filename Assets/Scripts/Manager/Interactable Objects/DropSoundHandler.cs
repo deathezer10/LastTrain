@@ -19,7 +19,7 @@ public class DropSoundHandler
         public DropSoundType soundType = DropSoundType.Generic;
 
         // 0-1
-        public float volume = 0.3f;
+        public float volume = 1;
 
         // 0-1
         public float randomPitchRange = 0.2f;
@@ -40,6 +40,8 @@ public class DropSoundHandler
 
     private bool m_IsSetup = false;
 
+    private bool m_IsEnabled = true;
+
     public DropSoundHandler(GameObject obj)
     {
         m_Source = obj;
@@ -53,15 +55,22 @@ public class DropSoundHandler
             SetupAudioSource();
     }
 
+    public void SetActive(bool active)
+    {
+        m_IsEnabled = active;
+    }
+
     public void PlayDropSound(Vector3 relativeVelocity)
     {
         // Ignore empty sounds
-        if (m_ImpactNoiseData.soundType == DropSoundType.None)
+        if (m_ImpactNoiseData.soundType == DropSoundType.None || m_IsEnabled == false)
             return;
 
         if (m_IsSetup == false)
         {
-            GameObject obj = Object.Instantiate(new GameObject(), m_Source.transform);
+            GameObject obj = new GameObject();
+            obj.transform.parent = m_Source.transform;
+            obj.transform.position = Vector3.zero;
             obj.name = "[DropSoundAudioSource]";
             m_AudioSource = obj.AddComponent<AudioSource>();
             SetupAudioSource();

@@ -67,7 +67,6 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 
     public virtual void OnControllerEnter(PlayerViveController currentController)
     {
-        SetEnableOutline(true);
     }
 
     public virtual void OnControllerExit()
@@ -100,12 +99,14 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 
     private void OnCollisionEnter(Collision collision)
     {
-        m_DropSoundHandler.PlayDropSound(collision.relativeVelocity);
+        if (m_DropSoundHandler != null)
+            m_DropSoundHandler.PlayDropSound(collision.relativeVelocity);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
+        if (m_DropSoundHandler != null)
+            m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
     }
 
 }
