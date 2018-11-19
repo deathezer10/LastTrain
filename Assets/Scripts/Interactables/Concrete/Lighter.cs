@@ -76,6 +76,10 @@ public class Lighter : GrabbableObject
             {
                 other.GetComponent<NPBurnArea>().IncreaseHeat();
             }
+            else if (other.tag == "DollBurnArea")
+            {
+                other.GetComponent<DollBurnArea>().IncreaseHeat();
+            }
         }
     }
 
