@@ -17,6 +17,7 @@ public class Doll : GrabbableObject, IShootable
     void Start()
     {
         playerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        dollEyeMat.SetColor("_EmissionColor", initialColor);
     }
 
     private void Update()
