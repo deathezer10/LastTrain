@@ -20,7 +20,6 @@ public class TrainSpeedHandler : MonoBehaviour
     private bool bAc_StopTrain = false;
     private bool bAc_SpeedChange = false;
     private bool bOnce = false;
-    private bool bFullBreak = false;
     public bool bCanAccelerate { get; private set; } = true;
     private AudioPlayer audioscreech;
     private Action Part1Complete;
@@ -71,7 +70,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void ChangeSpeed(float val)
     {
-        if (bBr_StopTrain || bAc_StopTrain) return;
+        if (bBr_StopTrain || bAc_StopTrain || bBr_SlowDown) return;
 
         if (val > stationMover.currentMaxSpeed)
         {

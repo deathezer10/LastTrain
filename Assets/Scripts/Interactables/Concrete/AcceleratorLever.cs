@@ -225,6 +225,7 @@ public class AcceleratorLever : StationaryObject
         base.OnGrabReleased();
 
         bIsGrabbing = false;
+        Audio.Stop();
     }
 
     private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)
