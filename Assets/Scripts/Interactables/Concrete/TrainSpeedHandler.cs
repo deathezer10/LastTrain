@@ -131,7 +131,6 @@ public class TrainSpeedHandler : MonoBehaviour
                 {
                     bOnce = true;
                     audioscreech.Stop();
-                    print("LESS THAN 1");
                     audioscreech.audioSource.loop = false;
                     audioscreech.audioSource.pitch = 0.9f;
                     audioscreech.Play("screech3");
@@ -140,7 +139,6 @@ public class TrainSpeedHandler : MonoBehaviour
             if (stationMover.currentSpeed == 0)
             {
                 audioscreech.Stop();
-                print("SPEED IS ZERO");
                 bCanAccelerate = false;
                 stationMover.currentMaxSpeed = 0;
             }

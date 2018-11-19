@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TrainCrashChecker : MonoBehaviour
 {
-
+    public PlayerDeathHandler deathHandler;
     // Use this for initialization
     void Start()
     {
-
+       deathHandler = FindObjectOfType<PlayerDeathHandler>();
     }
 
     // Update is called once per frame
@@ -21,7 +21,8 @@ public class TrainCrashChecker : MonoBehaviour
     {
        if (other.tag == "DummyTrain")
         {
-            FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_timeup");
+          deathHandler.FadeTime = 1;
+          deathHandler.KillPlayer("death_timeup");
         }
 
     }

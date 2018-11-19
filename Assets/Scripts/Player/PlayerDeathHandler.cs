@@ -10,6 +10,7 @@ public class PlayerDeathHandler : MonoBehaviour
 {
 
     public ImageFader m_DeathFader;
+    public float FadeTime = 2;
 
     private static string m_GameOverTextKey = "death_timeup";
 
@@ -19,7 +20,7 @@ public class PlayerDeathHandler : MonoBehaviour
 
     public void KillPlayer(string gameOverTextKey)
     {
-        m_DeathFader.FadeIn(2, () =>
+        m_DeathFader.FadeIn(FadeTime, () =>
          {
              m_GameOverTextKey = gameOverTextKey;
              SceneManager.LoadScene("GameOver");

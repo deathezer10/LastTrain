@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TrainTimeHandler : MonoBehaviour
 {
-    private StationMover stationMover;
 
     const float m_TimeBetweenEachStation = 90;
 
@@ -14,8 +13,7 @@ public class TrainTimeHandler : MonoBehaviour
 
     private void Start()
     {
-        m_DisplayLights = FindObjectsOfType<StationDisplayLight>();
-        stationMover = FindObjectOfType<StationMover>();
+        m_DisplayLights = FindObjectsOfType<StationDisplayLight>();  
     }
 
     public void StartTrainTime()

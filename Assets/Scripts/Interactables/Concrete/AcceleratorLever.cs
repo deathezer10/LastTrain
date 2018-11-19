@@ -19,6 +19,7 @@ public class AcceleratorLever : StationaryObject
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private bool bDisableLever = false;
+    private bool bOnce = true;
     private float NewTrainSpeed;
 
     private AudioPlayer Audio;
@@ -68,6 +69,29 @@ public class AcceleratorLever : StationaryObject
             Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition; //We get the small movement vector of player's hand
             HandMovementDirection.Normalize();
 
+            if(!bOnce)
+            {
+                if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.60015f))
+                {
+                    AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
+                    LastHandPosition = PlayerHand.transform.position;
+                    return;
+                }
+
+                else if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.60015f))
+                {
+                    AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
+                    LastHandPosition = PlayerHand.transform.position;
+                    return;
+                }
+
+
+                else
+                    Audio.Stop();
+                return;
+            }
+
+
             if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.60015f)) //If player is trying to drag the handle towards the direction the handle can move
             {
                 if (!Audio.IsPlaying())
@@ -94,6 +118,7 @@ public class AcceleratorLever : StationaryObject
                             trainSpeedHandler.AcceleratorStop();
                             AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
                             LastHandPosition = PlayerHand.transform.position;
+                            bOnce = false;
                             return;
                         }
 
