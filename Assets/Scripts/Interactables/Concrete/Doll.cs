@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Doll : GrabbableObject, IShootable
 {
@@ -13,6 +14,9 @@ public class Doll : GrabbableObject, IShootable
 
     float flashEndTime;
     bool playerWithinRange;
+
+    Vector3 newHeadEuler = new Vector3();
+    Vector3 unclampedHead = new Vector3();
 
     void Start()
     {
@@ -26,6 +30,15 @@ public class Doll : GrabbableObject, IShootable
         {
             // Clamp this to a reasonable range based on body transform rotations
             head.LookAt(playerHeadTrans);
+
+            unclampedHead = head.localEulerAngles;
+
+            newHeadEuler.x = Mathf.Clamp(unclampedHead.x, -55, 45);
+            newHeadEuler.y = Mathf.Clamp(unclampedHead.y, -85, 85);
+            newHeadEuler.z = Mathf.Clamp(unclampedHead.z, -40, 40);
+
+            // Debug.Log("Unclamped euler: " + unclampedHead + " Clamped euler: " + newHeadEuler);
+            head.localEulerAngles = newHeadEuler;
         }
 
         // Debug
