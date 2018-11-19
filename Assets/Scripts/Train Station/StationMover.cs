@@ -21,7 +21,7 @@ public class StationMover : MonoBehaviour
     bool m_IsFirstTimeDestroy = true;
     bool m_SpawnStationNext = false;
     private bool bSpawnDummyTrain = false;
-    private bool bMoveDummyTrain = false;
+    private bool bTrackDummyTrain = false;
     private bool bPlayOnce = true;
     private BoxCollider CrashChecker;
     [SerializeField]
@@ -89,9 +89,8 @@ public class StationMover : MonoBehaviour
         trainSounds.SetAudioLevelSpeed(m_CurrentStationSpeed);
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
-        if(bMoveDummyTrain)
+        if(bTrackDummyTrain)
         {
-            m_DummyTrain.transform.Translate(Vector3.forward * m_CurrentStationSpeed * Time.deltaTime * 1.27f);
             if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 60 )
             {               
                 if (bPlayOnce)
@@ -127,18 +126,18 @@ public class StationMover : MonoBehaviour
             {
                 m_SpawnStationNext = false;
                 m_LastRightTunnel = Instantiate(m_FakeStationPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+                if (bSpawnDummyTrain)
+                {
+                    m_DummyTrain = m_LastRightTunnel.transform.Find("DummyTrain").gameObject;
+                    m_DummyTrain.gameObject.SetActive(true);
+                    bTrackDummyTrain = true;
+                }
                 m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
             }
             else
             {
                 m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
-                if (bSpawnDummyTrain)
-                {
-                    m_DummyTrain = Instantiate(m_DummyTrainPrefab, m_LastRightTunnel.transform.position, m_LastRightTunnel.transform.rotation);
-                    m_DummyTrain.transform.Rotate(new Vector3(0,180,0));
-                    bSpawnDummyTrain = false;
-                    bMoveDummyTrain = true;
-                }
+                
                 m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
                
             }
@@ -152,14 +151,13 @@ public class StationMover : MonoBehaviour
 
     private void OnStationChanged(int stationNumber, string stationNameEN, string stationNameJP)
     {
+        if(stationNumber == 5)
+        {
+            bSpawnDummyTrain = true;
+        }
         m_SpawnStationNext = true;
         // Debug.LogFormat("Station Index: {0}, EN Name: {1}, JP Name: {2}", stationNumber, stationNameEN, stationNameJP);
     }
 
-    public void OnShouldSpawnDummyTrain()
-    {
-        bSpawnDummyTrain = true;
-    }
 
-   
 }
