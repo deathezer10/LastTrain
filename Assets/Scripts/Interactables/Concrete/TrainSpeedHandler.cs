@@ -20,6 +20,7 @@ public class TrainSpeedHandler : MonoBehaviour
     private bool bAc_StopTrain = false;
     private bool bAc_SpeedChange = false;
     private bool bOnce = false;
+    private bool bFullBreak = false;
     public bool bCanAccelerate { get; private set; } = true;
     private AudioPlayer audioscreech;
     private Action Part1Complete;
@@ -36,7 +37,6 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void BrakeStop()
     {
-        if (bAc_StopTrain) return;
         audioscreech.Play("screech1", Part1Complete, 0);
         bBr_StopTrain = true;
         PreviousTrainSpeed = stationMover.currentSpeed;
@@ -54,6 +54,14 @@ public class TrainSpeedHandler : MonoBehaviour
     public void AcceleratorStop()
     {
         if (bBr_StopTrain) return;
+        if (bBr_SlowDown)
+        {
+            bBr_SlowDown = false;
+            bBr_StopTrain = true;
+            PreviousTrainSpeed = stationMover.currentSpeed;
+            i = 0;
+            return;
+        }
         bAc_StopTrain = true;
         PreviousTrainSpeed = stationMover.currentSpeed;
         i = 0;
@@ -63,14 +71,15 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void ChangeSpeed(float val)
     {
-        if (bBr_SlowDown || bBr_StopTrain || bAc_StopTrain) return;
-        if(val > stationMover.currentMaxSpeed)
+        if (bBr_StopTrain || bAc_StopTrain) return;
+
+        if (val > stationMover.currentMaxSpeed)
         {
             stationMover.currentMaxSpeed = val;
         }
 
         PreviousTrainSpeed = stationMover.currentSpeed;
-        NewTrainSpeed = val; 
+        NewTrainSpeed = val;
         i = 0.0f;
         bAc_SpeedChange = true;
     }
@@ -80,7 +89,6 @@ public class TrainSpeedHandler : MonoBehaviour
 
         if (bBr_StopTrain)
         {
-            if (bAc_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
@@ -107,7 +115,6 @@ public class TrainSpeedHandler : MonoBehaviour
 
         if (bBr_SlowDown)
         {
-            if (bAc_StopTrain || bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 5, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
@@ -121,7 +128,6 @@ public class TrainSpeedHandler : MonoBehaviour
 
         if (bAc_StopTrain)
         {
-            if (bBr_StopTrain) return;
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, 0, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
@@ -147,7 +153,9 @@ public class TrainSpeedHandler : MonoBehaviour
 
         if (bAc_SpeedChange)
         {
-            if (bAc_StopTrain || bBr_StopTrain) return;
+            if (bAc_StopTrain || bBr_SlowDown || bBr_StopTrain)
+                return;
+
             i += Time.deltaTime * rate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
             trainDoorsOpenSound.SetAudioLevel(stationMover.currentSpeed);
