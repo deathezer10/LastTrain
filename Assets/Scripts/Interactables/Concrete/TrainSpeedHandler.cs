@@ -36,6 +36,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void BrakeStop()
     {
+        if (bAc_StopTrain) return;
         audioscreech.Play("screech1", Part1Complete, 0);
         bBr_StopTrain = true;
         PreviousTrainSpeed = stationMover.currentSpeed;
@@ -52,6 +53,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     public void AcceleratorStop()
     {
+        if (bBr_StopTrain) return;
         bAc_StopTrain = true;
         PreviousTrainSpeed = stationMover.currentSpeed;
         i = 0;
