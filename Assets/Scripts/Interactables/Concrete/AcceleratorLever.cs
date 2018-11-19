@@ -73,6 +73,11 @@ public class AcceleratorLever : StationaryObject
             {
                 if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.60015f))
                 {
+                    if (VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z)
+                    {
+                        return;
+                    }
+
                     AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
                     LastHandPosition = PlayerHand.transform.position;
                     return;
@@ -80,6 +85,11 @@ public class AcceleratorLever : StationaryObject
 
                 else if (AlmostEqual(HandMovementDirection, -HandleMovementDirection, 0.60015f))
                 {
+                    if (VectorBeginPoint.transform.position.z <= AcceleratorHandle.transform.position.z) //Max point reached can't push it out of bounds
+                    {
+                        return;
+                    }
+
                     AcceleratorHandle.transform.position -= HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Moving handle forward
                     LastHandPosition = PlayerHand.transform.position;
                     return;
@@ -215,6 +225,7 @@ public class AcceleratorLever : StationaryObject
         base.OnGrabReleased();
 
         bIsGrabbing = false;
+        Audio.Stop();
     }
 
     private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)
