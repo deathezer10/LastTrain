@@ -19,15 +19,13 @@ public class Doll : GrabbableObject, IShootable
     bool playerWithinRange;
     bool death;
 
-    AudioPlayer deathAudio;
+    int burningSpots;
 
     void Start()
     {
         playerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
         dollEyeMat.SetColor("_EmissionColor", initialColor);
         headInitRot = head.localEulerAngles;
-
-        deathAudio = GetComponent<AudioPlayer>();
     }
 
     private void Update()
@@ -88,6 +86,22 @@ public class Doll : GrabbableObject, IShootable
 
     public void OnShot(Revolver revolver)
     {
+        DestroyDoll();
+    }
+
+    public void BurningStart()
+    {
+        burningSpots++;
+
+        if (burningSpots == 2)
+        {
+            StartCoroutine(DollBurning());
+        }
+    }
+
+    private IEnumerator DollBurning()
+    {
+        yield return new WaitForSeconds(2f);
         DestroyDoll();
     }
 
