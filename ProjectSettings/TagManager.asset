@@ -30,6 +30,7 @@ TagManager:
   - SmallKey
   - DummyTrain
   - BowlingBall
+  - BaseballBat
   layers:
   - Default
   - TransparentFX
