@@ -19,13 +19,18 @@ public class Wallet : GrabbableObject
 
     PlayerViveController m_Controller;
 
-    private Collider[] m_Colliders;
+    private BoxCollider[] m_Colliders;
+
+    [SerializeField]
+    private BoxCollider[] m_OpeningColliders;
 
     private void Start()
     {
         m_TManager = FindObjectOfType<TutorialManager>();
         m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
-        m_Colliders = GetComponents<Collider>();
+        m_Colliders = GetComponents<BoxCollider>();
+
+        Physics.IgnoreCollision(m_OpeningColliders[0], m_OpeningColliders[1]);
     }
 
     public override void OnControllerEnter(PlayerViveController currentController)
@@ -38,8 +43,11 @@ public class Wallet : GrabbableObject
     {
         base.OnGrab();
 
-        transform.position = m_Controller.transform.position;
-        transform.rotation = m_Controller.transform.rotation;
+        if (m_Controller == null)
+            return;
+
+        //transform.position = m_Controller.transform.position;
+        //transform.rotation = m_Controller.transform.rotation;
 
         if (m_TutorialArrow != null && m_TutorialArrow.activeInHierarchy)
             m_TutorialArrow.SetActive(false);
@@ -62,11 +70,13 @@ public class Wallet : GrabbableObject
             m_TManager.SetPoster(TutorialManager.PosterState.None);
 
             GetComponent<Animator>().Play("Open");
-            
-            m_Colliders[0].bounds.SetMinMax(m_Colliders[1].bounds.min, m_Colliders[1].bounds.max);
 
-            GameObject obj = Instantiate(m_ICCardPrefab, transform.position + new Vector3(0f, 0f, 0.15f), Quaternion.identity);
-            Physics.IgnoreCollision(m_Colliders[0], obj.GetComponent<Collider>());
+            m_Colliders[0].center = m_Colliders[1].center;
+            m_Colliders[0].size = m_Colliders[1].size;
+
+            GameObject obj = Instantiate(m_ICCardPrefab, transform.position, Quaternion.identity);
+            Physics.IgnoreCollision(m_OpeningColliders[0], obj.GetComponent<Collider>());
+            Physics.IgnoreCollision(m_OpeningColliders[1], obj.GetComponent<Collider>());
 
             m_HasUsedOnce = true;
         }
