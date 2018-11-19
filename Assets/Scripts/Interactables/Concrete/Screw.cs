@@ -246,7 +246,9 @@ public class Screw : GrabbableObject
     {
         yield return new WaitForSeconds(2);
         
-        rayCastHits = Physics.SphereCastAll(transform.position, 0.01f, Vector3.down, 0.2f);
+        //rayCastHits = Physics.SphereCastAll(transform.position, 0.01f, Vector3.down, 0.2f);
+        rayCastHits = Physics.RaycastAll(transform.position, Vector3.down, 0.2f);
+        Debug.DrawRay(transform.position, Vector3.down, Color.red, 2.0f, true);
 
         for (int hits = 0; hits < rayCastHits.Length; hits++)
         {

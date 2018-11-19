@@ -70,6 +70,8 @@ public class AcceleratorLever : StationaryObject
 
             if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.60015f)) //If player is trying to drag the handle towards the direction the handle can move
             {
+                if (!Audio.IsPlaying())
+                    Audio.Play("lever");
 
                 if (VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z)
                 {
@@ -78,8 +80,7 @@ public class AcceleratorLever : StationaryObject
 
                 else if ((VectorEndPoint.transform.position.z + 0.025f) >= AcceleratorHandle.transform.position.z) //The accelerator has been put to 0, task complete
                 {
-                    if (!Audio.IsPlaying())
-                        Audio.Play("lever");
+                    
 
                     if (trainSpeedHandler.bCanAccelerate)
                         if (!bDisableLever)
@@ -91,12 +92,18 @@ public class AcceleratorLever : StationaryObject
                         if (BrakeLever.IsTaskCompleted())
                         {
                             trainSpeedHandler.AcceleratorStop();
+                            AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
+                            LastHandPosition = PlayerHand.transform.position;
+                            return;
                         }
 
 
                         else
                         {
                             trainSpeedHandler.ChangeSpeed(5);
+                            AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
+                            LastHandPosition = PlayerHand.transform.position;
+                            return;
                         }
 
                 }

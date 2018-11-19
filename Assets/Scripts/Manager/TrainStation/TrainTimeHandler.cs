@@ -43,7 +43,7 @@ public class TrainTimeHandler : MonoBehaviour
             }
             // TODO play announcement
         }
-        stationMover.OnShouldSpawnDummyTrain();
+       
         //GameObject.FindWithTag("Player").GetComponent<PlayerDeathHandler>().KillPlayer("death_timeup");
     }
 
