@@ -7,7 +7,7 @@ public class TrainEscapeHandler : MonoBehaviour
     public BoxCollider wallCollider;
 
     BoxCollider[] colliders;
-    
+
     StationMover stationMover;
 
     private void Start()
@@ -30,16 +30,7 @@ public class TrainEscapeHandler : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Player exited the train, train was moving at a speed of " + stationMover.currentSpeed);
-
-            if (stationMover.currentSpeed <= 2f)
-            {
-                FindObjectOfType<PlayerVictoryHandler>().PlayerVictory();
-            }
-            else
-            {
-                FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainjump");
-            }
+            FindObjectOfType<PlayerDeathHandler>().KillPlayer("death_trainjump");
         }
         else if (other.tag == "Bomb")
         {
@@ -62,5 +53,15 @@ public class TrainEscapeHandler : MonoBehaviour
         }
 
         wallCollider.enabled = true;
+    }
+
+    public void TrainMoveStop()
+    {
+        foreach (BoxCollider col in colliders)
+        {
+            col.enabled = false;
+        }
+
+        wallCollider.enabled = false;
     }
 }

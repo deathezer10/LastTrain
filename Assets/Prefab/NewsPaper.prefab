@@ -215,8 +215,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390701208715442}
-  m_LocalRotation: {x: -0, y: 0.50560826, z: -0, w: 0.8627632}
-  m_LocalPosition: {x: 0.918, y: 0.206, z: -3.978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71, y: 1, z: -3.606}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 4352825892680792}
@@ -227,7 +227,7 @@ Transform:
   - {fileID: 4027998794004880}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 60.743004, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4027998794004880
 Transform:
   m_ObjectHideFlags: 1
@@ -261,7 +261,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345385193237672}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.0020944, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4003620705657760}
@@ -377,7 +377,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 8749a74be4efde740a6fcdecce8de946, type: 2}
+  - {fileID: 2100000, guid: 5a28d6f9a6624264ebabaa776921be56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -430,7 +430,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.02, z: 0.29}
-  m_Center: {x: -0.004, y: 0.009, z: 0}
+  m_Center: {x: -0.004, y: 0.007, z: 0}
 --- !u!65 &65208333824135096
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -653,6 +653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smokeObject: {fileID: 1343377939832612}
+  burnoutParticle: {fileID: 1252692654788498, guid: 8fee046b4ead1aa419ddc1936b807c35,
+    type: 2}
 --- !u!114 &114498784708676178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,7 +677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c55740830c19004dae3ea955400fb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outlines: []
 --- !u!136 &136960392651908382
 CapsuleCollider:
   m_ObjectHideFlags: 1
