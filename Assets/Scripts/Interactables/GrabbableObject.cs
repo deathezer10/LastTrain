@@ -109,4 +109,12 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
             m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
     }
 
+    bool IsTagBanned(string tag)
+    {
+        if (tag == "Player" || tag ==  "HeadDisplay" || tag == "GameController")
+            return true;
+
+        return false;
+    }
+
 }

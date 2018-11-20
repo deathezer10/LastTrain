@@ -41,8 +41,10 @@ public class Screw : GrabbableObject
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
+        base.OnTriggerEnter(other);
+
         if (!bIsLoose)
             if (other.name == "Tip")
             {

@@ -27,14 +27,17 @@ public class PlayerViveController : MonoBehaviour
 
     private void Awake()
     {
-        _ownPlayer = this.transform.parent;
+        m_CurrentLeftObject = null;
+        m_CurrentRightObject = null;
+        _ownPlayer = transform.parent;
     }
 
     virtual protected void Update()
     {
         var currentObject = GetCurrentHandObject();
 
-        if (currentObject == null) return;
+        if (currentObject == null)
+            return;
 
         if (PlayerOriginHandler.IsOutsideOrigin)
         {
@@ -44,13 +47,15 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = currentObject.GetComponent<IInteractable>();
 
-        if (iObject == null) return;
+        if (iObject == null)
+            return;
 
         iObject.OnControllerStay();
 
         var grabbableObject = currentObject.GetComponent<IGrabbable>();
 
-        if (grabbableObject == null) return;
+        if (grabbableObject == null)
+            return;
 
         // On Grab (Trigger Down)
         if (_grabAction.GetStateDown(CurrentHand))
@@ -58,8 +63,8 @@ public class PlayerViveController : MonoBehaviour
             // If other hand is holding this object, unassign it
             if (GetCurrentHandObject(true) != null && GetCurrentHandObject(true) == currentObject.gameObject)
             {
-                Destroy(currentObject.GetComponent<FixedJoint>());
-                AssignObjectToHand(GetOtherHand(), null);
+                GetOtherController().DetachCurrentObject(false);
+                Debug.Log("gg");
             }
 
             if (grabbableObject.hideControllerOnGrab)
@@ -73,9 +78,10 @@ public class PlayerViveController : MonoBehaviour
             {
                 currentObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+                Rigidbody rb = GetComponent<Rigidbody>();
                 FixedJoint joint = currentObject.AddComponent<FixedJoint>();
-                joint.connectedBody = GetComponent<Rigidbody>();
-                joint.breakForce = 1000;
+                joint.connectedBody = rb;
+                joint.breakForce = 7500;
                 joint.breakTorque = Mathf.Infinity;
                 joint.enablePreprocessing = false;
             }
@@ -118,7 +124,7 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = other.GetComponent<IInteractable>();
 
-        if (GetCurrentHandObject() == null && iObject != null && other.GetComponent<FixedJoint>() == null)
+        if (GetCurrentHandObject() == null && iObject != null && GetCurrentHandObject(true) != other.gameObject)
         {
             AssignObjectToHand(GetCurrentHand(), other.gameObject);
             iObject.OnControllerEnter(this);
@@ -133,7 +139,7 @@ public class PlayerViveController : MonoBehaviour
 
         var iObject = other.GetComponent<IInteractable>();
 
-        if (GetCurrentHandObject() == null && iObject != null && GetCurrentHandObject(true) != other.gameObject && GetCurrentHandObject() != other.gameObject)
+        if (GetCurrentHandObject() == null && iObject != null && GetCurrentHandObject() != other.gameObject && GetCurrentHandObject(true) != other.gameObject)
         {
             AssignObjectToHand(GetCurrentHand(), other.gameObject);
             Debug.Log("Stay");
@@ -146,14 +152,12 @@ public class PlayerViveController : MonoBehaviour
 
         if (iObject != null)
         {
-
             if (other.gameObject == GetCurrentHandObject())
             {
                 iObject.OnControllerExit();
                 DetachCurrentObject(false);
+                Debug.Log("Exit");
             }
-
-            Debug.Log("Exit");
         }
     }
 
@@ -255,7 +259,9 @@ public class PlayerViveController : MonoBehaviour
         var diff = _ownPlayer.SetPositionGetDiff(targetPos);
 
         var obj = GetCurrentHandObject();
-        if (obj && obj.GetComponent<IStationaryGrabbable>() == null) obj.transform.AddPosition(diff);
+
+        if (obj && obj.GetComponent<IStationaryGrabbable>() == null)
+            obj.transform.AddPosition(diff);
     }
 
     virtual public void Vibration(

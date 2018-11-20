@@ -56,13 +56,17 @@ public class EmergencyDoorHandle : GrabbableObject
     public override void OnGrab()
     {
         base.OnGrab();
-        
+
+        GetComponent<Rigidbody>().useGravity = true;
+
         m_Grabbing = true;
     }
 
     public override void OnGrabReleased()
     {
         base.OnGrabReleased();
+
+        GetComponent<Rigidbody>().useGravity = true;
 
         m_Grabbing = false;
     }
@@ -87,6 +91,7 @@ public class EmergencyDoorHandle : GrabbableObject
                 if (m_TotalRotation >= 90 || m_TotalRotation <= -90)
                 {
                     transform.eulerAngles = new Vector3((m_TotalRotation >= 90) ? 90 : -90, 0, 0);
+                    m_HandleHolder.transform.eulerAngles = transform.eulerAngles;
 
                     m_Locked = true;
                     GetComponent<AudioPlayer>().Play("leverlocked");

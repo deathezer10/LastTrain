@@ -12,8 +12,10 @@ public class SmallLock : GrabbableObject, IShootable
         m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Metal });
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
+        base.OnTriggerEnter(other);
+
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
             BreakLock();

@@ -36,7 +36,7 @@ public class UmbrCompartment : MonoBehaviour, IShootable
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
             OpenCompartment();
-            //lockBreakAudio.Play();
+            GetComponent<AudioPlayer>().Play("openlock");
             GetComponent<CapsuleCollider>().enabled = false;
         }
         else if (other.tag == "SmallKey")
@@ -44,17 +44,13 @@ public class UmbrCompartment : MonoBehaviour, IShootable
             GameObject key = other.gameObject;
 
             // Play lock key sound.
+            GetComponent<AudioPlayer>().Play("openlock");
 
             OpenCompartment();
 
-            key.GetComponent<Ball>().OnGrabReleased();
-            key.GetComponent<Ball>().enabled = false;
-            key.GetComponent<BoxCollider>().enabled = false;
+            PlayerViveController.GetControllerThatHolds(other.gameObject).DetachCurrentObject(false);
 
-            key.transform.parent = physicsLockBottom.transform;
-            key.transform.localPosition = new Vector3(-0.015f, 0, 0);
-            key.transform.eulerAngles = new Vector3(0, 180f, 0);
-            key.transform.localScale = new Vector3(0.4f, 0.5f, 0.5f);
+            Destroy(other.gameObject);
 
             GetComponent<CapsuleCollider>().enabled = false;
         }
