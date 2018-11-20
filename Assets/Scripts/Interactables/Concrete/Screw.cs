@@ -28,6 +28,7 @@ public class Screw : GrabbableObject
         m_ScrewDriver = FindObjectOfType<ScrewDriver>();
         OriginalPosition = transform.localPosition;
         audioPlayer = GetComponent<AudioPlayer>();
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Metal });
     }
 
 

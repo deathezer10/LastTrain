@@ -14,6 +14,7 @@ public class PartyGrenade : GrabbableObject, IShootable
     private void Start()
     {
         grenadeSounds = GetComponents<AudioPlayer>();
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Metal });
     }
 
     private void Explode()

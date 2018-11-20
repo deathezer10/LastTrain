@@ -28,6 +28,11 @@ public class EmergencyDoorHandle : GrabbableObject
 
     private EmergencyDoorHandleHolder m_HandleHolder;
 
+    private void Start()
+    {
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Metal });
+    }
+
     public void SetHolder(EmergencyDoorHandleHolder holder)
     {
         m_HandleHolder = holder;

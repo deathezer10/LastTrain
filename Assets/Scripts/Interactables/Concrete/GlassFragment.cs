@@ -5,6 +5,11 @@ using UnityEngine;
 public class GlassFragment : GrabbableObject
 {
 
+    private void Start()
+    {
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Glass });
+    }
+
     public override void OnGrab()
     {
         base.OnGrab();

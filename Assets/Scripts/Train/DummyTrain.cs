@@ -6,7 +6,12 @@ public class DummyTrain : MonoBehaviour {
 
     public void HonkHorn()
     {
-        GetComponent<AudioPlayer>().Play();
+        GetComponent<AudioPlayer>().Play("horn");
     }
    
+    public void CrashSound()
+    {
+        GetComponent<AudioPlayer>().Play("crash");
+    }
+
 }

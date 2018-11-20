@@ -56,7 +56,7 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     protected Collider m_Collider;
     #endregion
 
-    private void Awake()
+    protected virtual void Awake()
     {
         m_DropSoundHandler = new DropSoundHandler(gameObject);
         SetOutline();
@@ -97,13 +97,13 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     public virtual void OnUse() { }
     public virtual void OnUseUp() { }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (m_DropSoundHandler != null)
             m_DropSoundHandler.PlayDropSound(collision.relativeVelocity);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (m_DropSoundHandler != null)
             m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);

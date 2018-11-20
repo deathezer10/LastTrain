@@ -15,6 +15,11 @@ public class KeyCard : GrabbableObject {
 
     public override bool hideControllerOnGrab { get { return true; } }
 
+    private void Start()
+    {
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic});
+    }
+
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         base.OnControllerEnter(currentController);

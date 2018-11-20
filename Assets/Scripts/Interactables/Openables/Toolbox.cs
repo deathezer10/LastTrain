@@ -16,6 +16,7 @@ public class Toolbox : GrabbableObject
     {
         toolboxAnimator = GetComponent<Animator>();
         openAudio = GetComponent<AudioPlayer>();
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
     }
 
     // Re-arrange colliders on the main object body for Grab rigidbody to reflect the new model state.

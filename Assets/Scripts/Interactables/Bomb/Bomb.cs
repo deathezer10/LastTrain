@@ -25,7 +25,6 @@ public class Bomb : GrabbableObject, IShootable
         timerTextMesh = GetComponentInChildren<TextMeshPro>();
         StartCoroutine(BombCountdown());
         audioPlayers = GetComponents<AudioPlayer>();
-
         foreach (AudioPlayer player in audioPlayers)
         {
             if (player.clip.name == "bomb_timer_1")
@@ -64,7 +63,7 @@ public class Bomb : GrabbableObject, IShootable
             TimerTimeOut();
         }
     }
-    
+
     public override bool hideControllerOnGrab { get { return true; } }
 
     public override void OnControllerEnter(PlayerViveController currentController)
@@ -168,5 +167,5 @@ public class Bomb : GrabbableObject, IShootable
     {
         TimerTimeOut();
     }
-
+    
 }

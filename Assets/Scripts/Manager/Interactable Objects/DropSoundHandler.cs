@@ -11,6 +11,7 @@ public class DropSoundHandler
         Metal,
         Wood,
         Plastic,
+        Glass,
         None
     }
 
@@ -68,10 +69,9 @@ public class DropSoundHandler
 
         if (m_IsSetup == false)
         {
-            GameObject obj = new GameObject();
+            GameObject obj = new GameObject("[DropSoundAudioSource]");
             obj.transform.parent = m_Source.transform;
-            obj.transform.position = Vector3.zero;
-            obj.name = "[DropSoundAudioSource]";
+            obj.transform.localPosition = Vector3.zero;
             m_AudioSource = obj.AddComponent<AudioSource>();
             SetupAudioSource();
             m_IsSetup = true;
@@ -86,7 +86,10 @@ public class DropSoundHandler
 
             // Higher velocity = louder
             float volumeScale = (Mathf.Clamp(relativeVelocity.magnitude, minMagnitude, maxMagnitude) / maxMagnitude);
-            
+
+            // Uncomment to see which object is making noise
+            // Debug.LogFormat("Sound: {0}", m_Source.name);
+
             m_AudioSource.PlayOneShot(m_AudioSource.clip, volumeScale);
         }
     }
@@ -99,5 +102,5 @@ public class DropSoundHandler
         m_AudioSource.minDistance = m_ImpactNoiseData.minDistance;
         m_AudioSource.maxDistance = m_ImpactNoiseData.maxDistance;
     }
-
+    
 }
