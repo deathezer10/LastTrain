@@ -8,14 +8,14 @@ public class Extinguisher : GrabbableObject
 
     PlayerViveController m_CurrentController;
 
-    ParticleSystem foamParticles;
+    public ParticleSystem foamVisualParticles, foamTriggerParticles;
 
     bool held;
 
     private void Start()
     {
-        foamParticles = GetComponentInChildren<ParticleSystem>();
-        foamParticles.Stop();
+        foamVisualParticles.Stop();
+        foamTriggerParticles.Stop();
     }
 
     public override bool hideControllerOnGrab { get { return true; } }
@@ -30,7 +30,7 @@ public class Extinguisher : GrabbableObject
     {
         base.OnControllerExit();
         held = false;
-        foamParticles.Stop();
+        foamVisualParticles.Stop();
     }
 
     public override void OnGrab()
@@ -43,20 +43,20 @@ public class Extinguisher : GrabbableObject
     {
         base.OnGrabReleased();
         held = false;
-        foamParticles.Stop();
+        foamVisualParticles.Stop();
     }
 
     public override void OnUse()
     {
         if (held)
         {
-            if (foamParticles.isPlaying)
+            if (foamVisualParticles.isPlaying)
             {
-                foamParticles.Stop();
+                foamVisualParticles.Stop();
             }
             else
             {
-                foamParticles.Play();
+                foamVisualParticles.Play();
             }
         }
     }

@@ -19,12 +19,4 @@ public class PlayerVictoryHandler : MonoBehaviour
         });
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.K))
-        {
-            PlayerVictory();
-        }
-    }
-
 }
