@@ -89,6 +89,17 @@ public class Doll : GrabbableObject, IShootable
         DestroyDoll();
     }
 
+    public void OnThrownOut()
+    {
+        StartCoroutine(DollThrownOut());
+    }
+
+    private IEnumerator DollThrownOut()
+    {
+        yield return new WaitForSeconds(2f);
+        DestroyDoll();
+    }
+
     public void BurningStart()
     {
         burningSpots++;
@@ -110,7 +121,7 @@ public class Doll : GrabbableObject, IShootable
         if (!death)
         {
             death = true;
-            // Doll death Announcement?
+            // Call doll death Announcement?
             Instantiate(dollDeathParticle, transform.position, transform.rotation, null);
             Destroy(gameObject);
         }
