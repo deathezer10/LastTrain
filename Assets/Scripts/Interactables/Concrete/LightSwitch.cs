@@ -35,6 +35,7 @@ public class LightSwitch : GrabbableObject, IShootable
                 ownedLights = toggleTrainLights[i];
             }
         }
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
     }
 
     void Update()

@@ -7,7 +7,10 @@ public class SmallLock : GrabbableObject, IShootable
 {
     public GameObject uncutTopPart, cutTopPart, umbrella;
 
-    public override bool hideControllerOnGrab { get { return false; } }
+    private void Start()
+    {
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Metal });
+    }
 
     private void OnTriggerEnter(Collider other)
     {

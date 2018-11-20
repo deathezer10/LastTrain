@@ -45,6 +45,7 @@ public class Revolver : GrabbableObject
         m_OriginalLocalPosition = m_LaserPointer.transform.localPosition;
         m_OriginalScale = m_LaserPointer.transform.localScale;
         m_PointerDistance = m_LaserPointer.transform.localScale.z;
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Metal });
     }
 
     public override bool hideControllerOnGrab { get { return true; } }

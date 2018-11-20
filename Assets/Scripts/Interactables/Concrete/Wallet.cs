@@ -29,6 +29,7 @@ public class Wallet : GrabbableObject
         m_TManager = FindObjectOfType<TutorialManager>();
         m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
         m_Colliders = GetComponents<BoxCollider>();
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
 
         Physics.IgnoreCollision(m_OpeningColliders[0], m_OpeningColliders[1]);
     }

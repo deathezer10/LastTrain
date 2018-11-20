@@ -20,6 +20,7 @@ public class Lighter : GrabbableObject
         litCollider.enabled = false;
         useAudio = GetComponent<AudioPlayer>();
         m_particle.Stop();
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
     }
 
     public override void OnControllerEnter(PlayerViveController currentController)
