@@ -16,6 +16,7 @@ public class TrainCrashChecker : MonoBehaviour
     {
        if (other.tag == "DummyTrain")
         {
+           FindObjectOfType<DummyTrain>().CrashSound();
           deathHandler.FadeTime = 1;
           deathHandler.KillPlayer("death_timeup");
         }

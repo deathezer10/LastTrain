@@ -8,6 +8,7 @@ public class StationMover : MonoBehaviour
     #region Tiling variables
     GameObject m_LastRightTunnel;
     public GameObject m_DummyTrain;
+    
 
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
@@ -23,6 +24,7 @@ public class StationMover : MonoBehaviour
     private bool bSpawnDummyTrain = false;
     private bool bTrackDummyTrain = false;
     private bool bPlayOnce = true;
+   
     private BoxCollider CrashChecker;
     [SerializeField]
     private GameObject m_TunnelPrefab;
@@ -80,6 +82,7 @@ public class StationMover : MonoBehaviour
 
         m_StationDisplayLight.OnStationChanged.AddListener(OnStationChanged);
         CrashChecker = FindObjectOfType<TrainCrashChecker>().GetComponent<BoxCollider>();
+       
     }
 
     private void Update()
@@ -91,14 +94,16 @@ public class StationMover : MonoBehaviour
 
         if(bTrackDummyTrain)
         {
-            if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 60 )
+            if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 85 )
             {               
                 if (bPlayOnce)
                 {
-                    FindObjectOfType<DummyTrain>().GetComponent<AudioPlayer>().Play();
+                    print("horn");
+                    FindObjectOfType<DummyTrain>().HonkHorn();
                     bPlayOnce = false;
                 }
             }
+
         }
 
         if (Mathf.Abs(m_CurrentDistanceTraveled) >= m_TunnelGapOffset)
@@ -151,7 +156,7 @@ public class StationMover : MonoBehaviour
 
     private void OnStationChanged(int stationNumber, string stationNameEN, string stationNameJP)
     {
-        if(stationNumber == 5)
+        if(stationNumber == 4)
         {
             bSpawnDummyTrain = true;
         }
