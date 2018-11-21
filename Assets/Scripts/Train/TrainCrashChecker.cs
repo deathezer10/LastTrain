@@ -16,6 +16,7 @@ public class TrainCrashChecker : MonoBehaviour
     {
        if (other.tag == "DummyTrain")
         {
+          deathHandler.m_DeathFader.SetFadeColor(Color.black);
           deathHandler.FadeTime = 1;
           deathHandler.KillPlayer("death_timeup");
         }

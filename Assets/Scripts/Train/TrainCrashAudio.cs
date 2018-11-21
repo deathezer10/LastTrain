@@ -11,15 +11,16 @@ public class TrainCrashAudio : MonoBehaviour {
 
 	void Start()
     {
-        HighestSpeedPosition = transform.position;
-        SlowestSpeedPosition = transform.Find("slowest").transform.position;
+        
+        HighestSpeedPosition = transform.localPosition;
+        SlowestSpeedPosition = transform.Find("slowest").transform.localPosition;
         stationMover = FindObjectOfType<StationMover>();
     }
 
     void Update()
     {
       float newZ =  Mathf.Lerp(SlowestSpeedPosition.z, HighestSpeedPosition.z, normalize01(stationMover.currentSpeed, 0, 20));
-        transform.position = new Vector3(transform.position.x, transform.position.y, newZ);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, newZ);
     }
 
     private void OnTriggerEnter(Collider other)

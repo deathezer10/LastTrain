@@ -12,6 +12,11 @@ public class ImageFader : MonoBehaviour
     [SerializeField]
     private Color m_fadeColor;
 
+    public void SetFadeColor(Color _Color)
+    {
+        m_fadeColor = _Color;
+    }
+
     private void Start()
     {
 
