@@ -23,12 +23,14 @@ public class Doll : GrabbableObject, IShootable
 
     int burningSpots;
 
-    void Start()
+    private void Start()
     {
         playerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
         dollEyeMat.SetColor("_EmissionColor", initialColor);
         headInitRot = head.localEulerAngles;
         useAudio = GetComponent<AudioPlayer>();
+
+        SetCollisionIgnore();
     }
 
     private void Update()
@@ -42,6 +44,20 @@ public class Doll : GrabbableObject, IShootable
         if (Input.GetKeyDown(KeyCode.H))
         {
             StartEyeFlash(3f);
+        }
+    }
+
+    private void SetCollisionIgnore()
+    {
+        Collider[] childrenColliders = GetComponentsInChildren<Collider>();
+        CapsuleCollider headCollider = head.gameObject.GetComponent<CapsuleCollider>();
+
+        foreach (Collider col in childrenColliders)
+        {
+            if (col != headCollider)
+            {
+                Physics.IgnoreCollision(headCollider, col);
+            }
         }
     }
 
