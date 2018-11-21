@@ -130,16 +130,17 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
     /// <summary>
     /// Plays a 3D sound at the given position
-    /// A GameObject is spawn at the given position and is removed once the audio finishes
+    /// A GameObject with an AudioSource is spawn at the given position and is removed once the audio finishes
     /// </summary>
-    public void PlayAnnouncement3D(string clipAlias, Vector3 position, AnnounceType announceType, float delayInSeconds = 0)
+    /// <returns>Reference to the AudioSource that was spawned</returns>
+    public GameObject PlayAnnouncement3D(string clipAlias, Vector3 position, AnnounceType announceType, float delayInSeconds = 0)
     {
         AudioClip clip = GetAudioClip(clipAlias);
 
         if (clip == null)
         {
             Debug.LogError("Error trying to retrieve an announcement's clipAlias");
-            return;
+            return null;
         }
 
         GameObject obj = new GameObject("[3D_AnnouncementSound]");
@@ -182,6 +183,8 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
                 Debug.LogError("Unhandled announcement type");
                 break;
         }
+
+        return obj;
     }
 
     /// <summary>
