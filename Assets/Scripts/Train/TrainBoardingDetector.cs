@@ -45,20 +45,23 @@ public class TrainBoardingDetector : MonoBehaviour
                 {
                     m_StationMover.ToggleMovement(true);
 
-                    m_BombContainer.SetActive(true);
+                    FindObjectOfType<Bomb>().StartBomb();
 
-                    foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
-                    {
-                        collider.enabled = false;
-                    }
 
-                    m_BombContainer.transform.DOLocalMoveY(0.5f, 2).OnComplete(() =>
-                    {
-                        foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
-                        {
-                            collider.enabled = true;
-                        }
-                    });
+                    //m_BombContainer.SetActive(true);
+
+                    //foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
+                    //{
+                    //    collider.enabled = false;
+                    //}
+
+                    //m_BombContainer.transform.DOLocalMoveY(0.5f, 2).OnComplete(() =>
+                    //{
+                    //    foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
+                    //    {
+                    //        collider.enabled = true;
+                    //    }
+                    //});
 
                     m_TrainTimeHandler.StartTrainTime();
                     FindObjectOfType<TrainEscapeHandler>().TrainMoveStart();
