@@ -8,6 +8,7 @@ public class NewsPaperSmoke : MonoBehaviour
     public GameObject smokeObject, burnoutParticle;
 
     Color paperTextureColor;
+    Material paperMaterial;
 
     AudioPlayer burningAudio;
     bool smoking;
@@ -17,10 +18,11 @@ public class NewsPaperSmoke : MonoBehaviour
     void Start()
     {
         smokeObject.GetComponent<CapsuleCollider>().enabled = false;
-        paperTextureColor = GetComponentInChildren<MeshRenderer>().material.color;
+        paperTextureColor = new Color(1f, 1f, 1f);
+        paperMaterial= GetComponentInChildren<MeshRenderer>().material;
         burningAudio = GetComponent<AudioPlayer>();
     }
-    
+
     void Update()
     {
         if (smoking)
@@ -53,10 +55,14 @@ public class NewsPaperSmoke : MonoBehaviour
 
     public void SmokingStart()
     {
+        if (!smoking)
+        {
+            burnOutTime = Time.time + 25f;  // Time until the newspaper is destroyed by the fire
+            StartCoroutine(NewspaperBurnEffect());
+            burningAudio.Play();
+        }
+
         smoking = true;
-        burnOutTime = Time.time + 30f;  // Time until the newspaper is destroyed by the fire
-        StartCoroutine(NewspaperBurnEffect());
-        burningAudio.Play();
         smokeObject.GetComponent<CapsuleCollider>().enabled = true;
     }
 
@@ -67,7 +73,8 @@ public class NewsPaperSmoke : MonoBehaviour
             paperTextureColor.r -= 0.004f;
             paperTextureColor.b -= 0.004f;
             paperTextureColor.g -= 0.004f;
-            yield return new WaitForSeconds(0.2f);
+            paperMaterial.color = paperTextureColor;
+            yield return new WaitForSeconds(0.1f);
         }
 
         burningAudio.Stop();

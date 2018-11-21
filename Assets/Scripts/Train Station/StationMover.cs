@@ -8,7 +8,7 @@ public class StationMover : MonoBehaviour
     #region Tiling variables
     GameObject m_LastRightTunnel;
     public GameObject m_DummyTrain;
-    
+
 
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
@@ -24,7 +24,7 @@ public class StationMover : MonoBehaviour
     private bool bSpawnDummyTrain = false;
     private bool bTrackDummyTrain = false;
     private bool bPlayOnce = true;
-   
+
     private BoxCollider CrashChecker;
     [SerializeField]
     private GameObject m_TunnelPrefab;
@@ -82,7 +82,7 @@ public class StationMover : MonoBehaviour
 
         m_StationDisplayLight.OnStationChanged.AddListener(OnStationChanged);
         CrashChecker = FindObjectOfType<TrainCrashChecker>().GetComponent<BoxCollider>();
-       
+
     }
 
     private void Update()
@@ -92,10 +92,10 @@ public class StationMover : MonoBehaviour
         trainSounds.SetAudioLevelSpeed(m_CurrentStationSpeed);
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
-        if(bTrackDummyTrain)
+        if (bTrackDummyTrain)
         {
-            if(Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 85 )
-            {               
+            if (Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 85)
+            {
                 if (bPlayOnce)
                 {
                     print("horn");
@@ -116,7 +116,10 @@ public class StationMover : MonoBehaviour
             {
                 while (m_InitialRemovableObjects.Count > 0)
                 {
-                    Destroy(m_InitialRemovableObjects.Dequeue().gameObject);
+                    var removable = m_InitialRemovableObjects.Dequeue();
+
+                    if (removable != null)
+                        Destroy(removable.gameObject);
                 }
 
                 m_IsFirstTimeDestroy = false;
@@ -142,9 +145,9 @@ public class StationMover : MonoBehaviour
             else
             {
                 m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
-                
+
                 m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
-               
+
             }
         }
     }
@@ -156,7 +159,7 @@ public class StationMover : MonoBehaviour
 
     private void OnStationChanged(int stationNumber, string stationNameEN, string stationNameJP)
     {
-        if(stationNumber == 4)
+        if (stationNumber == 4)
         {
             bSpawnDummyTrain = true;
         }
