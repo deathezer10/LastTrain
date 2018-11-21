@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 114516901101669236}
   - component: {fileID: 82598427108129752}
   - component: {fileID: 114837628970786666}
+  - component: {fileID: 114706294197474924}
   m_Layer: 0
   m_Name: DummyTrain
   m_TagString: DummyTrain
@@ -670,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d463728dd717bd429d36f2f73611d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114837628970786666
+--- !u!114 &114706294197474924
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -684,5 +685,21 @@ MonoBehaviour:
   randomizePitch: 1
   pitchRandomRange: 0.2
   playDelay: 0
+  _clip: {fileID: 8300000, guid: 9196487026233b0499e8c3020f00ce5f, type: 3}
+  clipAlias: crash
+--- !u!114 &114837628970786666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851704605410794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2782a74d37cb4974c9ac2bee8d406729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizePitch: 0
+  pitchRandomRange: 0.2
+  playDelay: 0
   _clip: {fileID: 8300000, guid: 1656eb085162dd545af3520dc0566961, type: 3}
-  clipAlias: 
+  clipAlias: horn

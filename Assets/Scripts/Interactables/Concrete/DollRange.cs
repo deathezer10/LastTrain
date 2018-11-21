@@ -13,7 +13,7 @@ public class DollRange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "PlayerHead")
         {
             dollScript.PlayerWithinRange(true);
         }
@@ -21,7 +21,7 @@ public class DollRange : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "PlayerHead")
         {
             dollScript.PlayerWithinRange(false);
         }

@@ -8,10 +8,5 @@ public class DummyTrain : MonoBehaviour {
     {
         GetComponent<AudioPlayer>().Play("horn");
     }
-   
-    public void CrashSound()
-    {
-        GetComponent<AudioPlayer>().Play("crash");
-    }
 
 }
