@@ -11,6 +11,8 @@ public class Doll : GrabbableObject, IShootable
     public Color initialColor, flashColor;
     public ParticleSystem dollDeathParticle;
 
+    AudioPlayer useAudio;
+
     Transform playerHeadTrans;
 
     Vector3 headInitRot;
@@ -26,6 +28,7 @@ public class Doll : GrabbableObject, IShootable
         playerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
         dollEyeMat.SetColor("_EmissionColor", initialColor);
         headInitRot = head.localEulerAngles;
+        useAudio = GetComponent<AudioPlayer>();
     }
 
     private void Update()
@@ -87,6 +90,16 @@ public class Doll : GrabbableObject, IShootable
     public void OnShot(Revolver revolver)
     {
         DestroyDoll();
+    }
+
+    public override void OnUse()
+    {
+        base.OnUse();
+
+        if (!useAudio.IsPlaying())
+        {
+            useAudio.Play();
+        }
     }
 
     public void OnThrownOut()
