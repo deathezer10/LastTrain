@@ -180,10 +180,17 @@ public class Bomb : GrabbableObject, IShootable
 
     public void UnlockRigidbody()
     {
+        GetComponent<BoxCollider>().enabled = true;
+
+        foreach (var collider in transform.GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = true;
+        }
+
         Rigidbody rb = GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.None;
-       
+
     }
 
     public void OnShot(Revolver revolver)
