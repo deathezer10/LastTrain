@@ -151,7 +151,7 @@ public class Doll : GrabbableObject, IShootable
         {
             death = true;
             // Call doll death Announcement?
-            Instantiate(dollDeathParticle, transform.position, transform.rotation, null);
+            Instantiate(dollDeathParticle, transform.position + new Vector3(0f, 0.2f, 0), transform.rotation, null);
             Destroy(gameObject);
         }
     }
