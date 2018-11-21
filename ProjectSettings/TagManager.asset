@@ -33,6 +33,7 @@ TagManager:
   - BaseballBat
   - DollBurnArea
   - Doll
+  - PlayerHead
   layers:
   - Default
   - TransparentFX
@@ -51,7 +52,7 @@ TagManager:
   - ScrewDriver
   - SawBlade
   - CheckPoint
-  - 
+  - Doll
   - 
   - 
   - 
