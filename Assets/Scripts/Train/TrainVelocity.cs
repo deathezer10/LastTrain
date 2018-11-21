@@ -10,7 +10,6 @@ public class TrainVelocity : MonoBehaviour
 
     void Update()
     {
-
         GetVelocity = ((transform.position - previous).magnitude) / Time.deltaTime;
         previous = transform.position;
     }
