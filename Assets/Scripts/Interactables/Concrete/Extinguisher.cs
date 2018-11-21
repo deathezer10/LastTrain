@@ -6,11 +6,12 @@ public class Extinguisher : GrabbableObject
 {
     // TODO Particle collision event handling for extinguishing fires?
 
-    PlayerViveController m_CurrentController;
+    //PlayerViveController m_CurrentController;
 
     public ParticleSystem foamVisualParticles, foamTriggerParticles;
 
     bool held;
+    bool spraying;
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class Extinguisher : GrabbableObject
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         base.OnControllerEnter(currentController);
-        m_CurrentController = currentController;
+        //m_CurrentController = currentController;
     }
 
     public override void OnControllerExit()
@@ -31,6 +32,7 @@ public class Extinguisher : GrabbableObject
         base.OnControllerExit();
         held = false;
         foamVisualParticles.Stop();
+        spraying = false;
     }
 
     public override void OnGrab()
@@ -44,20 +46,25 @@ public class Extinguisher : GrabbableObject
         base.OnGrabReleased();
         held = false;
         foamVisualParticles.Stop();
+        spraying = false;
     }
 
     public override void OnUse()
     {
+        /*
         if (held)
         {
-            if (foamVisualParticles.isPlaying)
+            if (spraying)
             {
                 foamVisualParticles.Stop();
+                spraying = false;
             }
             else
             {
                 foamVisualParticles.Play();
+                spraying = true;
             }
         }
+        */
     }
 }

@@ -89,8 +89,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1373656837388926}
-  m_LocalRotation: {x: 0.779241, y: -0, z: -0, w: 0.62672436}
-  m_LocalPosition: {x: 0.5692422, y: 1.3400856, z: -6.8021693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.005605, y: 0.816, z: -14.816}
   m_LocalScale: {x: 0.87, y: 0.87, z: 0.87}
   m_Children:
   - {fileID: 4602731787887034}
@@ -98,7 +98,7 @@ Transform:
   - {fileID: 4571724662457388}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 102.38199, y: -0.000015258789, z: -0.000015258789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4370348533144216
 Transform:
   m_ObjectHideFlags: 1
@@ -106,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1002967625497130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.030000152, z: -0.08500011}
+  m_LocalPosition: {x: 0, y: 0.022, z: -0.08500011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4192703468651138}
@@ -230,8 +230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c21d93c897b8a4aaceffb70676c9b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foamVisualParticles: {fileID: 0}
-  foamTriggerParticles: {fileID: 0}
+  foamVisualParticles: {fileID: 198480312699366414}
+  foamTriggerParticles: {fileID: 198736482461108126}
 --- !u!136 &136603253649809652
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -337,7 +337,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.6
+      scalar: 1.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -390,7 +390,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.9
+      scalar: 1.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
