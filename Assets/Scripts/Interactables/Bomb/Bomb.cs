@@ -21,6 +21,28 @@ public class Bomb : GrabbableObject, IShootable
 
     private void Start()
     {
+        //timerRunning = true;
+        //timerTextMesh = GetComponentInChildren<TextMeshPro>();
+        //StartCoroutine(BombCountdown());
+        //audioPlayers = GetComponents<AudioPlayer>();
+        //foreach (AudioPlayer player in audioPlayers)
+        //{
+        //    if (player.clip.name == "bomb_timer_1")
+        //    {
+        //        player.Play();
+        //        break;
+        //    }
+        //}
+    }
+
+    public void StartBomb()
+    {
+        transform.GetComponent<Collider>().enabled = false;
+        foreach (var collider in transform.GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = false;
+        }
+
         timerRunning = true;
         timerTextMesh = GetComponentInChildren<TextMeshPro>();
         StartCoroutine(BombCountdown());
@@ -158,14 +180,22 @@ public class Bomb : GrabbableObject, IShootable
 
     public void UnlockRigidbody()
     {
+        GetComponent<BoxCollider>().enabled = true;
+
+        foreach (var collider in transform.GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = true;
+        }
+
         Rigidbody rb = GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.None;
+
     }
 
     public void OnShot(Revolver revolver)
     {
         TimerTimeOut();
     }
-    
+
 }
