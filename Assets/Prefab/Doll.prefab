@@ -548,7 +548,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7d33a182d28267845945572a5b1e1541, type: 2}
+  - {fileID: 2100000, guid: 9fdfc175b69d7ab4c8ddf150deab450d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -583,7 +583,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7d33a182d28267845945572a5b1e1541, type: 2}
+  - {fileID: 2100000, guid: 9fdfc175b69d7ab4c8ddf150deab450d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -914,8 +914,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 4484797503897066}
   dollEyeMat: {fileID: 2100000, guid: 7d33a182d28267845945572a5b1e1541, type: 2}
-  initialColor: {r: 1, g: 1, b: 1, a: 1}
-  flashColor: {r: 0.9811321, g: 0.14346743, b: 0.14346743, a: 1}
+  initialColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
   dollDeathParticle: {fileID: 198777413455702576, guid: b5857785983f0cd43ba2bb031cb2f6f0,
     type: 2}
 --- !u!114 &114750878422362566
