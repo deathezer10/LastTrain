@@ -55,23 +55,37 @@ public class AudioPlayer : MonoBehaviour
         InternalPlayClip(onPlayFinished);
     }
 
-    public void Play(string clipAlias, Action onPlayFinished = null, float delaySeconds = 0)
+    public AudioPlayer Play(string clipAlias, Action onPlayFinished = null, float delaySeconds = 0)
+    {
+        var audioPlayer = GetLocalAudioPlayer(clipAlias);
+
+        if (audioPlayer != null)
+        {
+            audioPlayer.InternalPlayClip(onPlayFinished, delaySeconds);
+            return audioPlayer;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public AudioPlayer GetLocalAudioPlayer(string clipAlias)
     {
         foreach (AudioPlayer player in transform.GetComponents<AudioPlayer>())
         {
             if (player.clipAlias == clipAlias)
-            {
-                player.InternalPlayClip(onPlayFinished, delaySeconds);
-                return;
-            }
+                return player;
         }
+        return null;
     }
-    
+
     AudioClip InternalPlayClip(Action onPlayFinished = null, float delaySeconds = 0)
     {
         if (_clip == null) return null;
 
-        m_Audiosource.pitch = randomizePitch ? UnityEngine.Random.Range(1.0f - pitchRandomRange, 1.0f + pitchRandomRange) : 1.0f;
+        m_Audiosource.pitch = randomizePitch ? UnityEngine.Random.Range(1.0f - pitchRandomRange, 1.0f + pitchRandomRange) : m_Audiosource.pitch;
         m_Audiosource.clip = clip;
         m_Audiosource.PlayDelayed(playDelay);
 
