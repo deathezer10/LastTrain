@@ -79,7 +79,7 @@ public class NewsPaperSmoke : MonoBehaviour
 
         burningAudio.Stop();
         Instantiate(burnoutParticle, transform.position, transform.rotation, null);
-        PlayerViveController.GetControllerThatHolds(gameObject).DetachCurrentObject(false);
+        PlayerViveController.GetControllerThatHolds(gameObject)?.DetachCurrentObject(false);
         Destroy(gameObject);
     }
 }

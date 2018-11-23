@@ -95,7 +95,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
     public void CabinDoorsStopPlay()
     {
         bIsCabinPlaying = false;
-        for (int i = 1; i < audioPlayers.Capacity; i++)
+        for (int i = 1; i < audioPlayers.Count; i++)
         {
             audioPlayers[i].Stop();
         }
