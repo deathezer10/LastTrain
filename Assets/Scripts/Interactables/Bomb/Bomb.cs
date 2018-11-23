@@ -15,6 +15,7 @@ public class Bomb : GrabbableObject, IShootable
 
     float timeRemaining = 180;
     bool timerRunning;
+    public bool isGlassBroken = false;
     TextMeshPro timerTextMesh;
 
     private AudioPlayer[] m_AudioPlayers;

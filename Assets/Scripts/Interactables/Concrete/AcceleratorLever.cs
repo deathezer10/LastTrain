@@ -30,8 +30,9 @@ public class AcceleratorLever : StationaryObject
         return instance.bDisableLever;
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         instance = this;
     }
 
@@ -69,7 +70,7 @@ public class AcceleratorLever : StationaryObject
             Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition; //We get the small movement vector of player's hand
             HandMovementDirection.Normalize();
 
-            if(!bOnce)
+            if (!bOnce)
             {
                 if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.60015f))
                 {
@@ -114,7 +115,7 @@ public class AcceleratorLever : StationaryObject
 
                 else if ((VectorEndPoint.transform.position.z + 0.025f) >= AcceleratorHandle.transform.position.z) //The accelerator has been put to 0, task complete
                 {
-                    
+
 
                     if (trainSpeedHandler.bCanAccelerate)
                         if (!bDisableLever)
@@ -212,7 +213,7 @@ public class AcceleratorLever : StationaryObject
     public override void OnGrab()
     {
         base.OnGrab();
-        
+
         if (bCanGrab)
         {
             bIsGrabbing = true;

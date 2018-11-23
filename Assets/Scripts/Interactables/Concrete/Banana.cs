@@ -46,7 +46,9 @@ public class Banana : GrabbableObject
         halfRenderers[0].enabled = false;
         halfColliders[0].enabled = false;
 
-        m_CurrentController.ToggleControllerModel(true);
+        if (m_CurrentController != null)
+            m_CurrentController.ToggleControllerModel(true);
+
         StartCoroutine(BananaDestroy());
     }
 
