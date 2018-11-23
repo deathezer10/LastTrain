@@ -63210,6 +63210,8 @@ MonoBehaviour:
   m_AnnouncementClips:
   - clipAlias: wallet_pickup
     audioClip: {fileID: 8300000, guid: 7347628d4241828408ded2b1ebe51e6f, type: 3}
+  - clipAlias: platform_entry
+    audioClip: {fileID: 8300000, guid: e4273e8ec21e43e45b51eb321e78e060, type: 3}
 --- !u!82 &2019854301
 AudioSource:
   m_ObjectHideFlags: 0
