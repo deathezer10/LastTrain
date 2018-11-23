@@ -16,9 +16,12 @@ public class ScrewDriver : GrabbableObject
     private float RotationValue;
     // Use this for initialization
 
+    private Screw[] m_Screws;
+
     void Start()
     {
         m_ScrewDriver = transform.gameObject;
+        m_Screws = FindObjectsOfType<Screw>();
     }
 
     // Update is called once per frame
@@ -39,8 +42,6 @@ public class ScrewDriver : GrabbableObject
 
     }
 
-    public override bool hideControllerOnGrab { get { return true; } }
-
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         base.OnControllerEnter(currentController);
@@ -51,7 +52,7 @@ public class ScrewDriver : GrabbableObject
     public override void OnControllerExit()
     {
         base.OnControllerExit();
-        
+
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = true;
         Destroy(ScrewDriverClone);
         bIsGrabbing = false;
@@ -71,6 +72,16 @@ public class ScrewDriver : GrabbableObject
         ScrewDriverClone.GetComponent<Rigidbody>().useGravity = false;
         bIsGrabbing = true;
         RotationValue = ScrewDriverClone.transform.rotation.eulerAngles.z;
+
+        foreach (Screw screw in m_Screws)
+        {
+            Negi.Outline outline = screw.GetComponent<Negi.Outline>();
+
+            if (outline == null && Vector3.Distance(transform.position, screw.transform.position) < 4)
+                screw.gameObject.AddComponent<Negi.Outline>();
+            else
+                outline.enabled = true;
+        }
     }
 
     public override void OnGrabReleased()
@@ -80,6 +91,14 @@ public class ScrewDriver : GrabbableObject
         m_ScrewDriver.GetComponent<MeshRenderer>().enabled = true;
         Destroy(ScrewDriverClone);
         bIsGrabbing = false;
+
+        foreach (Screw screw in m_Screws)
+        {
+            Negi.Outline outline = screw.GetComponent<Negi.Outline>();
+
+            if (outline != null)
+                outline.enabled = false;
+        }
     }
 
 }
