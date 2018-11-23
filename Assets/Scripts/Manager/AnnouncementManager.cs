@@ -36,6 +36,8 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     AudioSource m_LocalAudioSource;
     AudioSource m_3DAudioSource;
 
+    public Doll[] dolls;
+
     public enum AnnounceType
     {
         Queue,
@@ -137,6 +139,8 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     {
         AudioClip clip = GetAudioClip(clipAlias);
 
+        ActivatePlushieEyes(clip.length);
+
         if (clip == null)
         {
             Debug.LogError("Error trying to retrieve an announcement's clipAlias");
@@ -187,6 +191,17 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
         return obj;
     }
 
+    private void ActivatePlushieEyes(float clipLength)
+    {
+        foreach (Doll doll in dolls)
+        {
+            if (doll != null)
+            {
+               doll.StartEyeFlash(clipLength);
+            }
+        }
+    }
+
     /// <summary>
     /// Stops the current announcement and plays the next one if any
     /// </summary>
@@ -208,6 +223,8 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
             source.clip = announceInfo.audioClip;
             source.PlayDelayed(announceInfo.delayInSeconds);
             StartCoroutine(PlayNextRoutine(source.clip.length + announceInfo.delayInSeconds, announceInfo.is3D));
+
+
         }
     }
 

@@ -49,7 +49,7 @@ public class EmergencyDoorHandle : GrabbableObject
     {
         base.OnControllerStay();
 
-        if (m_Grabbing == false)
+        if (m_Grabbing == false && m_Controller != null)
             m_LastZRot = m_Controller.transform.eulerAngles.z;
     }
 

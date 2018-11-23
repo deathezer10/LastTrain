@@ -149,6 +149,7 @@ public class TrainSpeedHandler : MonoBehaviour
                 bCanAccelerate = false;
                 stationMover.currentMaxSpeed = 0;
                 StopBlinkBlink();
+                
             }
         }
 
@@ -181,7 +182,7 @@ public class TrainSpeedHandler : MonoBehaviour
 
     void StopBlinkBlink()
     {
-       for(int lights = 0; lights < displayLights.Length; i++)
+       for(int lights = 0; lights < displayLights.Length; lights++)
         {
             displayLights[lights].ToggleLights(false, false);
         }

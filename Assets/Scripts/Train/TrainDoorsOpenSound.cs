@@ -15,7 +15,13 @@ public class TrainDoorsOpenSound : MonoBehaviour
     public void SetAudioLevel(float val)
     {
        val = Mathf.Clamp(val, 0, 10);
-        val = val / 10;
+
+        if (val != 0)
+            val = val / 10;
+        else
+            val = 0;
+
+
         foreach (AudioPlayer audioplayer in audioPlayers)
         {
             if (val > 0.8f) val = 0.8f;
