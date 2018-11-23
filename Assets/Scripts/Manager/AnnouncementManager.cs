@@ -150,7 +150,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
         AudioSource spawnedAudioSource = obj.AddComponent<AudioSource>();
         spawnedAudioSource.clip = GetAudioClip(clipAlias);
         spawnedAudioSource.volume = 1;
-        spawnedAudioSource.spatialBlend = 0.8f;
+        spawnedAudioSource.spatialBlend = 1f;
         spawnedAudioSource.minDistance = 1;
         spawnedAudioSource.maxDistance = 50;
 
