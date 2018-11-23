@@ -13,7 +13,7 @@ public class Bomb : GrabbableObject, IShootable
     Vector3 explosionOffset1 = new Vector3(0f, -0.2f, 0.4f);
     Vector3 explosionOffset2 = new Vector3(0f, 0.3f, -0.5f);
 
-    float timeRemaining = 30;
+    float timeRemaining = 180;
     bool timerRunning;
     TextMeshPro timerTextMesh;
 
@@ -55,7 +55,7 @@ public class Bomb : GrabbableObject, IShootable
 
             if (prevSeconds != Mathf.FloorToInt(timeRemaining) && timeRemaining > 0)
             {
-                m_TickingAudioPlayer.audioSource.pitch = 1 + ((20 - timeRemaining) / 20);
+                m_TickingAudioPlayer.audioSource.pitch = Mathf.Clamp(1 + ((20 - timeRemaining) / 20), 1, 2);
                 m_TickingAudioPlayer.Play();
             }
 
