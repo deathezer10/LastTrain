@@ -7,6 +7,7 @@ public class TrainSpeedHandler : MonoBehaviour
 {
     private StationMover stationMover;
     private TrainDoorsOpenSound trainDoorsOpenSound;
+    private StationDisplayLight[] displayLights;
     public bool bIsBrakeEngaged = false;
     public bool bIsAccelerator0 = false;
 
@@ -31,7 +32,7 @@ public class TrainSpeedHandler : MonoBehaviour
         trainDoorsOpenSound = FindObjectOfType<TrainDoorsOpenSound>();
         audioscreech = GetComponent<AudioPlayer>();
         Part1Complete += PlayPart2;
-
+        displayLights = FindObjectsOfType<StationDisplayLight>();
     }
 
     public void BrakeStop()
@@ -180,7 +181,10 @@ public class TrainSpeedHandler : MonoBehaviour
 
     void StopBlinkBlink()
     {
-        FindObjectOfType<StationDisplayLight>().ToggleLights(false, false);
+       for(int lights = 0; lights < displayLights.Length; i++)
+        {
+            displayLights[lights].ToggleLights(false, false);
+        }
     }
 
 }

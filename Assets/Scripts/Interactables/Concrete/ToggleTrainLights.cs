@@ -9,6 +9,9 @@ public class ToggleTrainLights : MonoBehaviour
     public string SwitchCabinsName;
 
     public bool bIsOn = true;
+    private float DefaultIntensity = 0.8f;
+    private float RandomIntensity;
+    private float RandomTime;
 
     // Use this for initialization
     void Start()
@@ -26,27 +29,34 @@ public class ToggleTrainLights : MonoBehaviour
 
     private IEnumerator flicker()
     {
+        RandomIntensity = Random.Range(0.2f, 0.4f);
+        RandomTime = Random.Range(0.4f, 0.6f);
         foreach (Light light in m_TrainLights)
         {
-            light.DOIntensity(0.25f, 0.5f);
+            light.DOIntensity(RandomIntensity,RandomTime);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(RandomTime);
 
+        
+        RandomTime = Random.Range(0.5f, 0.7f);
         foreach (Light light in m_TrainLights)
         {
-            light.DOIntensity(0.8f, 0.6f);
+            light.DOIntensity(DefaultIntensity, RandomTime);
         }
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(RandomTime);
 
+        RandomIntensity = Random.Range(0.4f, 0.55f);
+        RandomTime = Random.Range(0.6f, 0.78f);
         foreach (Light light in m_TrainLights)
         {
-            light.DOIntensity(0.5f, 0.7f);
+            light.DOIntensity(RandomIntensity, RandomTime);
         }
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(RandomTime);
 
+        RandomTime = Random.Range(0.7f, 0.8f);
         foreach (Light light in m_TrainLights)
         {
-            light.DOIntensity(0.8f, 0.7f);
+            light.DOIntensity(DefaultIntensity, RandomTime);
         }
         yield return true;
     }

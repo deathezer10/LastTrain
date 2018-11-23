@@ -10,6 +10,7 @@ public class Lighter : GrabbableObject
     AudioPlayer useAudio;
     CapsuleCollider litCollider;
     bool lit;
+    bool bombed = false;
     private int count = 0;
 
     PlayerViveController m_CurrentController;
@@ -66,13 +67,18 @@ public class Lighter : GrabbableObject
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.name == "Bomb")
-        {
-            StartCoroutine(Counter());
-        }
-
         if (lit)
         {
+            if (other.name == "Bomb" && !bombed)
+            {
+                Bomb bomb = other.GetComponent<Bomb>();
+                if (bomb.isGlassBroken)
+                {
+                    bomb.TimerTimeOut();
+                    bombed = true;
+                }
+            }
+
             if (other.tag == "PaperBurnArea")
             {
                 other.GetComponent<NPBurnArea>().IncreaseHeat();

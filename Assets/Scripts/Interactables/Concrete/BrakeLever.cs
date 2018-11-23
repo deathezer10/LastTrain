@@ -25,8 +25,10 @@ public class BrakeLever : StationaryObject
         return instance.bDisableLever;
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         instance = this;
         Audio = GetComponent<AudioPlayer>();
     }
