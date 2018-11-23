@@ -57,7 +57,9 @@ public class Wallet : GrabbableObject
         {
             m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
 
-            m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
+            FindObjectOfType<AnnouncementManager>().PlayAnnouncement3D("wallet_pickup", transform.position + new Vector3(0f, 5f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+
+            //m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
             m_HasAnnounced = true;
         }
     }
