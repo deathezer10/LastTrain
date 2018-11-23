@@ -57,7 +57,10 @@ public class EmergencyDoorHandle : GrabbableObject
     {
         base.OnGrab();
 
-        GetComponent<Rigidbody>().useGravity = true;
+        var rb = GetComponent<Rigidbody>();
+
+        rb.useGravity = true;
+        rb.isKinematic = false;
 
         m_Grabbing = true;
     }
@@ -66,7 +69,10 @@ public class EmergencyDoorHandle : GrabbableObject
     {
         base.OnGrabReleased();
 
-        GetComponent<Rigidbody>().useGravity = true;
+        var rb = GetComponent<Rigidbody>();
+
+        rb.useGravity = true;
+        rb.isKinematic = false;
 
         m_Grabbing = false;
     }
