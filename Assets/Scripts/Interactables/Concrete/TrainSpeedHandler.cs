@@ -108,6 +108,7 @@ public class TrainSpeedHandler : MonoBehaviour
                 audioscreech.Stop();
                 i = 0;
                 stationMover.currentMaxSpeed = 0;
+                StopBlinkBlink();
             }
         }
 
@@ -146,6 +147,7 @@ public class TrainSpeedHandler : MonoBehaviour
                 audioscreech.Stop();
                 bCanAccelerate = false;
                 stationMover.currentMaxSpeed = 0;
+                StopBlinkBlink();
             }
         }
 
@@ -175,5 +177,10 @@ public class TrainSpeedHandler : MonoBehaviour
         audioscreech.Play("screech2");
     }
 
+
+    void StopBlinkBlink()
+    {
+        FindObjectOfType<StationDisplayLight>().ToggleLights(false, false);
+    }
 
 }
