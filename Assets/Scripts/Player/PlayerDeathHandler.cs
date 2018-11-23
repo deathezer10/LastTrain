@@ -14,12 +14,19 @@ public class PlayerDeathHandler : MonoBehaviour
 
     private static string m_GameOverTextKey = "death_timeup";
 
+    private bool isDead = false;
+
     public static string GameOverTextKey {
         get { return m_GameOverTextKey; }
     }
 
     public void KillPlayer(string gameOverTextKey)
     {
+        if (isDead == true)
+            return;
+
+        isDead = true;
+
         m_DeathFader.FadeIn(FadeTime, () =>
          {
              m_GameOverTextKey = gameOverTextKey;

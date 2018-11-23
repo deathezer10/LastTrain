@@ -40,6 +40,8 @@ public class GlassBox : MonoBehaviour, IShootable
         Destroy(initialBox);
         GetComponent<AudioPlayer>().Play();
 
+        transform.parent.Find("Bomb").GetComponent<Bomb>().isGlassBroken = true;
+
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
