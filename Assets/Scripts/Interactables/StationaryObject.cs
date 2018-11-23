@@ -9,13 +9,76 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public abstract class StationaryObject : MonoBehaviour, IInteractable, IStationaryGrabbable
 {
+
+    #region Outline
+    protected List<Negi.Outline> _outlines = null;
+
+    private void SetOutline()
+    {
+        _outlines = new List<Negi.Outline>();
+        var objects = this.gameObject.transform.GetAllChild();
+        objects.Add(this.gameObject);
+
+        foreach (var obj in objects)
+        {
+            var renderer = obj.GetComponent<Renderer>();
+            if (renderer == null) continue;
+
+            // particle ignore
+            var pRenderer = renderer as ParticleSystemRenderer;
+            if (pRenderer) continue;
+
+            var outline = renderer.gameObject.SafeAddComponent<Negi.Outline>();
+            outline.enabled = false;
+            _outlines.Add(outline);
+        }
+    }
+
+    /// <summary>
+    /// アウトラインの有無設定
+    /// </summary>
+    /// <param name="active"></param>
+    private void SetEnableOutline(bool active)
+    {
+        if (_outlines != null)
+            foreach (var outline in _outlines)
+            {
+                if (outline.Renderer != null && outline.Renderer.enabled)
+                    outline.enabled = active;
+            }
+    }
+    #endregion
+
+    protected virtual void Awake()
+    {
+        SetOutline();
+    }
+
     public virtual bool hideControllerOnGrab { get { return true; } }
     public virtual void OnControllerEnter(PlayerViveController currentController) { }
-    public virtual void OnControllerExit() { }
-    public virtual void OnControllerStay() { }
+
+    public virtual void OnControllerExit()
+    {
+        SetEnableOutline(false);
+    }
+
+    public virtual void OnControllerStay()
+    {
+        SetEnableOutline(true);
+    }
+
     public virtual void OnGrab() { }
-    public virtual void OnGrabStay() { }
-    public virtual void OnGrabReleased() { }
+
+    public virtual void OnGrabStay()
+    {
+        SetEnableOutline(false);
+    }
+
+    public virtual void OnGrabReleased()
+    {
+        SetEnableOutline(false);
+    }
+
     public virtual void OnUse() { }
     public virtual void OnUseDown() { }
     public virtual void OnUseUp() { }
