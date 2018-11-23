@@ -13,26 +13,21 @@ public class Bomb : GrabbableObject, IShootable
     Vector3 explosionOffset1 = new Vector3(0f, -0.2f, 0.4f);
     Vector3 explosionOffset2 = new Vector3(0f, 0.3f, -0.5f);
 
-    float timeRemaining = 180f;
+    float timeRemaining = 180;
     bool timerRunning;
     TextMeshPro timerTextMesh;
 
-    private AudioPlayer[] audioPlayers;
+    private AudioPlayer[] m_AudioPlayers;
+
+    private AudioPlayer m_TickingAudioPlayer;
 
     private void Start()
     {
         timerRunning = true;
         timerTextMesh = GetComponentInChildren<TextMeshPro>();
+        m_AudioPlayers = GetComponents<AudioPlayer>();
+        m_TickingAudioPlayer = GetComponent<AudioPlayer>().GetLocalAudioPlayer("bomb_timer_1");
         StartCoroutine(BombCountdown());
-        audioPlayers = GetComponents<AudioPlayer>();
-        foreach (AudioPlayer player in audioPlayers)
-        {
-            if (player.clip.name == "bomb_timer_1")
-            {
-                player.Play();
-                break;
-            }
-        }
     }
 
     public void StartBomb()
@@ -46,36 +41,25 @@ public class Bomb : GrabbableObject, IShootable
         timerRunning = true;
         timerTextMesh = GetComponentInChildren<TextMeshPro>();
         StartCoroutine(BombCountdown());
-        audioPlayers = GetComponents<AudioPlayer>();
-        foreach (AudioPlayer player in audioPlayers)
-        {
-            if (player.clip.name == "bomb_timer_1")
-            {
-                player.Play();
-                break;
-            }
-        }
     }
 
     private IEnumerator BombCountdown()
     {
+        int prevSeconds = Mathf.FloorToInt(timeRemaining);
+
         while (timeRemaining >= 0 && timerRunning)
         {
             timeRemaining -= Time.deltaTime;
 
             timerTextMesh.text = string.Format("{0:0}:{1:00}", ((int)timeRemaining / 60), (int)timeRemaining % 60);
 
-            if (timeRemaining <= 20 && timeRemaining > 0)
+            if (prevSeconds != Mathf.FloorToInt(timeRemaining) && timeRemaining > 0)
             {
-                foreach (AudioPlayer player in audioPlayers)
-                {
-                    if (player.clip.name == "bomb_timer_1")
-                    {
-                        player.audioSource.pitch = 1 + ((20 - timeRemaining) / 20);
-                        break;
-                    }
-                }
+                m_TickingAudioPlayer.audioSource.pitch = Mathf.Clamp(1 + ((20 - timeRemaining) / 20), 1, 2);
+                m_TickingAudioPlayer.Play();
             }
+
+            prevSeconds = Mathf.FloorToInt(timeRemaining);
 
             yield return null;
         }
@@ -85,8 +69,6 @@ public class Bomb : GrabbableObject, IShootable
             TimerTimeOut();
         }
     }
-
-    public override bool hideControllerOnGrab { get { return true; } }
 
     public override void OnControllerEnter(PlayerViveController currentController)
     {
@@ -116,7 +98,7 @@ public class Bomb : GrabbableObject, IShootable
 
     private void PlayExplosionSound()
     {
-        foreach (AudioPlayer player in audioPlayers)
+        foreach (AudioPlayer player in m_AudioPlayers)
         {
             if (player.clip.name == "bomb_explosion_1")
             {
@@ -138,14 +120,15 @@ public class Bomb : GrabbableObject, IShootable
     public void CutRightWire()
     {
         phLightRenderer.material.color = green;
+        timerTextMesh.color = green;
         timerRunning = false;
 
-        foreach (AudioPlayer player in audioPlayers)
+        foreach (AudioPlayer player in m_AudioPlayers)
             player.audioSource.Stop();
 
         StopCoroutine(BombCountdown());
 
-        foreach (AudioPlayer player in audioPlayers)
+        foreach (AudioPlayer player in m_AudioPlayers)
         {
             if (player.clip.name == "bomb_defused")
             {

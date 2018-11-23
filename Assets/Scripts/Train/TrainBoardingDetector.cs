@@ -52,7 +52,7 @@ public class TrainBoardingDetector : MonoBehaviour
                         collider.enabled = false;
                     }
 
-                    m_BombContainer.transform.DOLocalMoveY(0.5f, 2).OnComplete(() =>
+                    m_BombContainer.transform.DOLocalMoveY(0.5f, 1).OnComplete(() =>
                     {
                         foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
                         {
