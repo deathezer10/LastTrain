@@ -24,7 +24,7 @@ public class TrainBoardingDetector : MonoBehaviour
     {
         toggleTrainLights = FindObjectsOfType<ToggleTrainLights>();
     }
-    
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
@@ -34,8 +34,8 @@ public class TrainBoardingDetector : MonoBehaviour
             // After player stands in the train for X seconds, close the doors and move the train
             if (m_HasMoved == false && m_PlayerTimeOnBoard >= m_PlatformMoveDelay)
             {
-                
-                for(int lightsFound = 0; lightsFound < toggleTrainLights.Length; lightsFound++)
+
+                for (int lightsFound = 0; lightsFound < toggleTrainLights.Length; lightsFound++)
                 {
                     toggleTrainLights[lightsFound].FlickerLights();
                 }
@@ -44,24 +44,22 @@ public class TrainBoardingDetector : MonoBehaviour
                 m_TrainDoorHandler.ToggleDoors(false, () =>
                 {
                     m_StationMover.ToggleMovement(true);
+                    
+                    m_BombContainer.SetActive(true);
 
-                    FindObjectOfType<Bomb>().StartBomb();
+                    foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
+                    {
+                        collider.enabled = false;
+                    }
 
-
-                    //m_BombContainer.SetActive(true);
-
-                    //foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
-                    //{
-                    //    collider.enabled = false;
-                    //}
-
-                    //m_BombContainer.transform.DOLocalMoveY(0.5f, 2).OnComplete(() =>
-                    //{
-                    //    foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
-                    //    {
-                    //        collider.enabled = true;
-                    //    }
-                    //});
+                    m_BombContainer.transform.DOLocalMoveY(0.5f, 2).OnComplete(() =>
+                    {
+                        foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
+                        {
+                            collider.enabled = true;
+                            // FindObjectOfType<Bomb>().StartBomb();
+                        }
+                    });
 
                     m_TrainTimeHandler.StartTrainTime();
                     FindObjectOfType<TrainEscapeHandler>().TrainMoveStart();

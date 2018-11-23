@@ -77,7 +77,7 @@ public class ScrewDriver : GrabbableObject
         {
             Negi.Outline outline = screw.GetComponent<Negi.Outline>();
 
-            if (outline == null && Vector3.Distance(transform.position, screw.transform.position) < 4)
+            if (outline == null && Vector3.Distance(transform.position, screw.transform.position) < 2)
                 screw.gameObject.AddComponent<Negi.Outline>();
             else
                 outline.enabled = true;

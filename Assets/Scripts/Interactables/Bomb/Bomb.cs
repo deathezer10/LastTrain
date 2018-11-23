@@ -21,18 +21,18 @@ public class Bomb : GrabbableObject, IShootable
 
     private void Start()
     {
-        //timerRunning = true;
-        //timerTextMesh = GetComponentInChildren<TextMeshPro>();
-        //StartCoroutine(BombCountdown());
-        //audioPlayers = GetComponents<AudioPlayer>();
-        //foreach (AudioPlayer player in audioPlayers)
-        //{
-        //    if (player.clip.name == "bomb_timer_1")
-        //    {
-        //        player.Play();
-        //        break;
-        //    }
-        //}
+        timerRunning = true;
+        timerTextMesh = GetComponentInChildren<TextMeshPro>();
+        StartCoroutine(BombCountdown());
+        audioPlayers = GetComponents<AudioPlayer>();
+        foreach (AudioPlayer player in audioPlayers)
+        {
+            if (player.clip.name == "bomb_timer_1")
+            {
+                player.Play();
+                break;
+            }
+        }
     }
 
     public void StartBomb()

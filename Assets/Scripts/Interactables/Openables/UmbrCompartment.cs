@@ -56,13 +56,16 @@ public class UmbrCompartment : MonoBehaviour, IShootable
         }
     }
 
-    public void OpenCompartment()
+    public void OpenCompartment(bool withKey = true)
     {
         visualLockBottom.SetActive(false);
         visualLockTop.SetActive(false);
 
         physicsLockBottom.SetActive(true);
         physicsLockBottom.transform.parent = null;
+
+        if (!withKey)
+            physicsLockBottom.transform.GetChild(0).gameObject.SetActive(false);
 
         physicsLockTop.SetActive(true);
         physicsLockTop.transform.parent = null;
@@ -72,7 +75,7 @@ public class UmbrCompartment : MonoBehaviour, IShootable
 
     public void OnShot(Revolver revolver)
     {
-        OpenCompartment();
+        OpenCompartment(false);
     }
 
 }
