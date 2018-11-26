@@ -104,7 +104,7 @@ public class EmergencyDoorHandle : GrabbableObject
                     var doorSound = FindObjectOfType<TrainDoorsOpenSound>();
 
                     if (doorSound != null)
-                        doorSound.CabinDoorsPlay("cabin1");
+                        doorSound.CabinDoorsPlay("Cabin1");
                 }
 
             }
