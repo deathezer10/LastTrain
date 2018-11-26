@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class DCWindow : MonoBehaviour, IShootable
 {
-    public float thrownBreakForce, heldBreakForce;
     public GameObject initialWindow;
     public GameObject[] brokenWindowPieces;
+
+    private float thrownBreakForce = 1.8f, heldBreakForce = 2.3f;
 
     private void OnTriggerEnter(Collider other)
     {

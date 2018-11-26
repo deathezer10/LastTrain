@@ -7,7 +7,7 @@ public class GlassBox : MonoBehaviour, IShootable
 {
     public GameObject brokenGlassPrefab, initialBox;
 
-    private float thrownBreakForce = 2.25f, heldBreakForce = 2.75f;
+    private float thrownBreakForce = 1.8f, heldBreakForce = 2.3f;
 
     private void OnTriggerEnter(Collider other)
     {
