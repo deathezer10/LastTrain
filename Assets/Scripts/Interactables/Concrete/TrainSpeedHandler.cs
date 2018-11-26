@@ -44,11 +44,6 @@ public class TrainSpeedHandler : MonoBehaviour
     {
         if (bBr_StopTrain) return;
 
-        if (val > stationMover.currentMaxSpeed)
-        {
-            val = stationMover.currentMaxSpeed;
-        }
-
         PreviousTrainSpeed = stationMover.currentSpeed;
         NewTrainSpeed = val;
         i = 0.0f;

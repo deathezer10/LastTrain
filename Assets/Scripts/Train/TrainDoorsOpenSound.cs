@@ -43,7 +43,7 @@ public class TrainDoorsOpenSound : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if(transform.GetChild(i).tag == "cabin1" || transform.GetChild(i).tag == "cabin2" || transform.GetChild(i).tag == "drivercabin")
+            if(transform.GetChild(i).tag == "Cabin1" || transform.GetChild(i).tag == "Cabin2" || transform.GetChild(i).tag == "drivercabin")
             audioPlayers.Add(transform.GetChild(i).GetComponent<AudioPlayer>());
         }
         trainEngine = transform.Find("TrainEngine").GetComponent<AudioPlayer>();
