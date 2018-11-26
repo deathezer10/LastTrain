@@ -44,6 +44,10 @@ public class TrainSpeedHandler : MonoBehaviour
     {
         if (bBr_StopTrain) return;
 
+        if(val > stationMover.currentMaxSpeed) stationMover.currentMaxSpeed = val;
+
+
+
         PreviousTrainSpeed = stationMover.currentSpeed;
         NewTrainSpeed = val;
         i = 0.0f;
@@ -89,6 +93,8 @@ public class TrainSpeedHandler : MonoBehaviour
 
 
             i += Time.deltaTime * acceleratorRate;
+            print(i);
+            print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
             trainDoorsOpenSound.SetWindAudioLevel(stationMover.currentSpeed);
 
