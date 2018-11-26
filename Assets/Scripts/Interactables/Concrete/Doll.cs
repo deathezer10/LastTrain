@@ -9,7 +9,7 @@ public class Doll : GrabbableObject, IShootable
     public Transform head;
     public Material dollEyeMat;
     public Color initialColor, flashColor;
-    public ParticleSystem dollDeathParticle
+    public ParticleSystem dollDeathParticle;
 
     AudioPlayer useAudio;
 
