@@ -20,17 +20,17 @@ public class DropSoundHandler
         public DropSoundType soundType = DropSoundType.Generic;
 
         // 0-1
-        public float volume = 1;
+        public float volume = 0.75f;
 
         // 0-1
         public float randomPitchRange = 0.2f;
 
         // 0-1
-        public float spatialBlend = 0.8f;
+        public float spatialBlend = 1f;
 
         public float minDistance = 0.5f;
 
-        public float maxDistance = 5;
+        public float maxDistance = 6f;
     }
 
     private ImpactNoiseData m_ImpactNoiseData = new ImpactNoiseData();
@@ -78,7 +78,7 @@ public class DropSoundHandler
         }
 
         const float minMagnitude = 1;
-        const float maxMagnitude = 5;
+        const float maxMagnitude = 4;
 
         if (relativeVelocity.magnitude > minMagnitude)
         {
@@ -88,7 +88,7 @@ public class DropSoundHandler
             float volumeScale = (Mathf.Clamp(relativeVelocity.magnitude, minMagnitude, maxMagnitude) / maxMagnitude);
 
             // Uncomment to see which object is making noise
-            // Debug.LogFormat("Sound: {0}", m_Source.name);
+             Debug.LogFormat("Sound: {0}", m_Source.name);
 
             m_AudioSource.PlayOneShot(m_AudioSource.clip, volumeScale);
         }
@@ -101,6 +101,7 @@ public class DropSoundHandler
         m_AudioSource.spatialBlend = m_ImpactNoiseData.spatialBlend;
         m_AudioSource.minDistance = m_ImpactNoiseData.minDistance;
         m_AudioSource.maxDistance = m_ImpactNoiseData.maxDistance;
+        m_AudioSource.rolloffMode = AudioRolloffMode.Linear;
     }
     
 }

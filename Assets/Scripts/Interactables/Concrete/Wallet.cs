@@ -15,7 +15,7 @@ public class Wallet : GrabbableObject
     private bool m_HasUsedOnce = false;
 
     TutorialManager m_TManager;
-    AudioPlayer m_TManagerAudioPlayer;
+    //AudioPlayer m_TManagerAudioPlayer;
 
     PlayerViveController m_Controller;
 
@@ -27,7 +27,7 @@ public class Wallet : GrabbableObject
     private void Start()
     {
         m_TManager = FindObjectOfType<TutorialManager>();
-        m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
+        //m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
         m_Colliders = GetComponents<BoxCollider>();
         m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
 
@@ -56,10 +56,9 @@ public class Wallet : GrabbableObject
         if (!m_HasAnnounced)
         {
             m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
-
-            // Hacky, fix later
-            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", transform.position + new Vector3(0f, 4f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
-            AnnouncementManager.Instance.PlayAnnouncement3D("wallet_pickup", transform.position + new Vector3(0f, 4f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+            
+            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
+            AnnouncementManager.Instance.PlayAnnouncement3D("wallet_pickup", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
 
             //m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
             m_HasAnnounced = true;

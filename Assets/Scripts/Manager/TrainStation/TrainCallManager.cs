@@ -15,8 +15,8 @@ public class TrainCallManager : MonoBehaviour
 
             FindObjectOfType<TrainArriver>().CallTheTrain();
 
-            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", transform.position + new Vector3(0f, 4f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
-            AnnouncementManager.Instance.PlayAnnouncement3D("platform_entry", transform.position + new Vector3(0f, 4f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+            AnnouncementManager.Instance.PlayAnnouncement3D("platform_entry", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
         }
     }
 }
