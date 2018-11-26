@@ -35,9 +35,12 @@ public class Lighter : GrabbableObject
     {
         base.OnGrab();
 
-        transform.position = m_CurrentController.transform.position;
-        transform.rotation = m_CurrentController.transform.rotation;
-        transform.Rotate(new Vector3(90, 0, 0), Space.Self);
+        if (m_CurrentController != null)
+        {
+            transform.position = m_CurrentController.transform.position;
+            transform.rotation = m_CurrentController.transform.rotation;
+            transform.Rotate(new Vector3(90, 0, 0), Space.Self);
+        }
     }
 
     public override void OnUse()

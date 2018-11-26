@@ -98,7 +98,7 @@ public class StationMover : MonoBehaviour
             {
                 if (bPlayOnce)
                 {
-                    FindObjectOfType<DummyTrain>().HonkHorn();
+                    FindObjectOfType<DummyTrain>()?.HonkHorn();
                     bPlayOnce = false;
                 }
             }
