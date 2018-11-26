@@ -139,13 +139,13 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     {
         AudioClip clip = GetAudioClip(clipAlias);
 
-        ActivatePlushieEyes(clip.length);
-
         if (clip == null)
         {
             Debug.LogError("Error trying to retrieve an announcement's clipAlias");
             return null;
         }
+
+        ActivatePlushieEyes(clip.length);
 
         GameObject obj = new GameObject("[3D_AnnouncementSound]");
         obj.transform.parent = transform;
