@@ -24,12 +24,16 @@ public class Doll : GrabbableObject, IShootable
 
     int burningSpots;
 
+    DollDeathAnnouncements ddAnnouncements;
+
     private void Start()
     {
         playerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
         dollEyeMat.SetColor("_EmissionColor", initialColor);
         headInitRot = head.localEulerAngles;
         useAudio = GetComponent<AudioPlayer>();
+
+        ddAnnouncements = FindObjectOfType<DollDeathAnnouncements>();
 
         SetCollisionIgnore();
     }
@@ -39,12 +43,6 @@ public class Doll : GrabbableObject, IShootable
         if (playerWithinRange)
         {
             head.LookAt(playerHeadTrans);
-        }
-
-        // Debug
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            StartEyeFlash(3f);
         }
     }
 
@@ -162,7 +160,9 @@ public class Doll : GrabbableObject, IShootable
         if (!death)
         {
             death = true;
-            // Call doll death Announcement?
+
+            AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
+
             Instantiate(dollDeathParticle, transform.position + new Vector3(0f, 0.2f, 0), transform.rotation, null);
             Destroy(gameObject);
         }
