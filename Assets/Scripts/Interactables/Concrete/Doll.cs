@@ -54,7 +54,7 @@ public class Doll : GrabbableObject, IShootable
 
         if (grabbedOnce == false)
         {
-            useAudio.Play("awkward");
+            transform.Find("Awkward").GetComponent<AudioPlayer>().Play();
             grabbedOnce = true;
         }
     }
@@ -167,4 +167,15 @@ public class Doll : GrabbableObject, IShootable
             Destroy(gameObject);
         }
     }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        // Prevent invisible collider from making noise
+        if (m_DropSoundHandler != null && other.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        {
+            m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
+            Debug.Log("dog: " + other.name);
+        }
+    }
+
 }

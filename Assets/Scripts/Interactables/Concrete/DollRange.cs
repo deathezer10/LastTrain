@@ -10,8 +10,8 @@ public class DollRange : MonoBehaviour
     {
         dollScript = GetComponentInParent<Doll>();
     }
-
-    private void OnTriggerEnter(Collider other)
+    
+    private void OnTriggerStay(Collider other)
     {
         if (other.tag == "PlayerHead")
         {

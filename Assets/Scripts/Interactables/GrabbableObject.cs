@@ -99,13 +99,13 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (m_DropSoundHandler != null)
+        if (m_DropSoundHandler != null && !collision.transform.IsChildOf(transform) && !transform.IsChildOf(collision.transform))
             m_DropSoundHandler.PlayDropSound(collision.relativeVelocity);
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (m_DropSoundHandler != null)
+        if (m_DropSoundHandler != null && !other.transform.IsChildOf(transform) && !transform.IsChildOf(other.transform))
             m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
     }
 
