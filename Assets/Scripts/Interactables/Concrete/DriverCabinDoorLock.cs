@@ -147,7 +147,7 @@ public class DriverCabinDoorLock : StationaryObject
         }
     }
 
-    void Awake()
+    protected override void Awake()
     {
         instance = this;
     }

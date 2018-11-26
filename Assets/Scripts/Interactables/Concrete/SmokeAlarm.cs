@@ -17,7 +17,7 @@ public class SmokeAlarm : MonoBehaviour
         doorSound = FindObjectOfType<TrainDoorsOpenSound>();
     }
     
-    public void StartSmokeAlarm()
+    public void StartSmokeAlarm(string _tag)
     {
         if (!alarmStarted)
         {
@@ -29,12 +29,12 @@ public class SmokeAlarm : MonoBehaviour
                 trainDoorHandler.ToggleDoors(true);
 
                 if (doorSound != null)
-                    doorSound.CabinDoorsPlay();
+                    doorSound.CabinDoorsPlay(_tag);
             }
         }
     }
 
-    public void StopSmokeAlarm()
+    public void StopSmokeAlarm(string _tag)
     {
         if (alarmStarted)
         {
@@ -44,9 +44,9 @@ public class SmokeAlarm : MonoBehaviour
             {
                 trainDoorHandler.ToggleDoors(false);
                 if (doorSound != null)
-                    doorSound.CabinDoorsStopPlay();
+                    doorSound.CabinDoorsStopPlay(_tag);
             }
-
+            
             alarmStarted = false;
         }
     }

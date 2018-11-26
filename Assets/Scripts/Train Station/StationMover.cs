@@ -89,7 +89,7 @@ public class StationMover : MonoBehaviour
     {
         m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * ((m_IsMoving) ? 1 : -1) * Time.deltaTime), 0, m_CurrentStationMaxSpeed);
         m_CurrentDistanceTraveled += m_CurrentStationSpeed * Time.deltaTime;
-        trainSounds.SetAudioLevelSpeed(m_CurrentStationSpeed);
+        trainSounds.SetAudioLevelPitch(m_CurrentStationSpeed);
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
         if (bTrackDummyTrain)
@@ -98,7 +98,6 @@ public class StationMover : MonoBehaviour
             {
                 if (bPlayOnce)
                 {
-                    print("horn");
                     FindObjectOfType<DummyTrain>().HonkHorn();
                     bPlayOnce = false;
                 }

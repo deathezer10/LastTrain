@@ -34,6 +34,9 @@ TagManager:
   - DollBurnArea
   - Doll
   - PlayerHead
+  - Cabin1
+  - Cabin2
+  - drivercabin
   layers:
   - Default
   - TransparentFX
@@ -53,8 +56,8 @@ TagManager:
   - SawBlade
   - CheckPoint
   - Doll
-  - 
-  - 
+  - BalanceHandleCollider
+  - BalanceHandle
   - 
   - 
   - 

@@ -7,12 +7,13 @@ public class TrainDoorsOpenSound : MonoBehaviour
     public List<AudioPlayer> audioPlayers;
     public bool bIsCabinPlaying { get; private set; } = false;
     public bool bIsDriverPlaying { get; private set; } = false;
-
+    private StationMover stationMover;
     public AudioPlayer dingdongPlayer;
     public AudioPlayer trainEngine;
+    private float windMaxVolume = 0.8f;
     
 
-    public void SetAudioLevel(float val)
+    public void SetWindAudioLevel(float val) //wind volume
     {
        val = Mathf.Clamp(val, 0, 10);
 
@@ -21,25 +22,14 @@ public class TrainDoorsOpenSound : MonoBehaviour
         else
             val = 0;
 
-
-        foreach (AudioPlayer audioplayer in audioPlayers)
+       foreach(AudioPlayer audioplayer in audioPlayers )
         {
-            if (val > 0.8f) val = 0.8f;
-
-            else
             audioplayer.audioSource.volume = val;
-
-            
         }
+       
     }
 
-    public void SetAudioLevelEngine(float val)
-    {
-        val = val / 10;
-        trainEngine.audioSource.volume = val;
-    }
-
-    public void SetAudioLevelSpeed(float val)
+    public void SetAudioLevelPitch(float val) //pitch of engine sound
     {
         if(val <= 10)
         trainEngine.audioSource.pitch = Mathf.Lerp(1, 1.8f, normalize01(val, 0, 10));
@@ -51,11 +41,13 @@ public class TrainDoorsOpenSound : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        for (int i = 0; i < transform.childCount - 1; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
+            if(transform.GetChild(i).tag == "cabin1" || transform.GetChild(i).tag == "cabin2" || transform.GetChild(i).tag == "drivercabin")
             audioPlayers.Add(transform.GetChild(i).GetComponent<AudioPlayer>());
         }
         trainEngine = transform.Find("TrainEngine").GetComponent<AudioPlayer>();
+        stationMover = FindObjectOfType<StationMover>();
         trainEngine.Play();
     }
 
@@ -69,40 +61,53 @@ public class TrainDoorsOpenSound : MonoBehaviour
         bIsDriverPlaying = true;
         foreach (AudioPlayer audioplayer in audioPlayers)
         {
-            audioplayer.audioSource.volume = (FindObjectOfType<StationMover>().currentSpeed / 10);
-            if (audioplayer.audioSource.volume > 0.8f)
-                audioplayer.audioSource.volume = 0.8f;
-        }
-        audioPlayers[0].Play();
+
+            if (audioplayer.tag == "drivercabin")
+            {
+                audioplayer.Play();
+                if (stationMover.currentSpeed != 0)
+                    audioplayer.audioSource.volume = stationMover.currentSpeed / 10;
+                else
+                    audioplayer.audioSource.volume = 0;
+
+                if (audioplayer.audioSource.volume > 0.8f)
+                    audioplayer.audioSource.volume = 0.8f;
+
+                break;
+            }
+        } 
     }
 
-    public void CabinDoorsPlay()
+    public void CabinDoorsPlay(string _tag)
     {
-        bIsCabinPlaying = true;
         foreach (AudioPlayer audioplayer in audioPlayers)
         {
-            audioplayer.audioSource.volume = (FindObjectOfType<StationMover>().currentSpeed / 10);
-            if (audioplayer.audioSource.volume > 0.8f)
-                audioplayer.audioSource.volume = 0.8f;
+            if(audioplayer.tag == _tag)
+            {
+                audioplayer.audioSource.volume = stationMover.currentSpeed / 10;
+                if (audioplayer.audioSource.volume > 0.8f)
+                    audioplayer.audioSource.volume = 0.8f;
+
+                audioplayer.Play();
+            }           
         }
 
-        for (int i = 0; i < audioPlayers.Count; i++)
-        {
-            audioPlayers[i].Play();
-        }
     }
 
     public void DriverDoorStopPlay()
     {
-        bIsDriverPlaying = false;
-        audioPlayers[0].Stop();
+        for(int i = 1; i < audioPlayers.Count; i++)
+        {
+            if (audioPlayers[i].tag == "drivercabin")
+                audioPlayers[i].Stop();
+        }
     }
 
-    public void CabinDoorsStopPlay()
+    public void CabinDoorsStopPlay(string _tag)
     {
-        bIsCabinPlaying = false;
         for (int i = 1; i < audioPlayers.Count; i++)
         {
+            if(audioPlayers[i].tag == _tag)
             audioPlayers[i].Stop();
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BrakeLever : StationaryObject
 {
-    public static BrakeLever instance;
+
     private GameObject PlayerHand;
     private BoxCollider DisablePoint;
     private AudioPlayer Audio;
@@ -19,19 +19,7 @@ public class BrakeLever : StationaryObject
     private float minXRotation = -0.45f;       //Setting lowest reachable rotation for the lever
     private float maxXRotation;               //Setting the max reachable rotation for the lever
     private float currentXRotation;
-
-    public static bool IsTaskCompleted()
-    {
-        return instance.bDisableLever;
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        instance = this;
-        Audio = GetComponent<AudioPlayer>();
-    }
+    public bool bBrakeIsStuck = true;
 
     // Use this for initialization
     void Start()
@@ -40,13 +28,14 @@ public class BrakeLever : StationaryObject
         currentXRotation = transform.rotation.x;
         maxXRotation = currentXRotation;
         trainSpeedHandler = FindObjectOfType<TrainSpeedHandler>();
+        Audio = GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!bDisableLever)
-        {
+        if(bDisableLever) return;
+        
             if (bIsGrabbing)
             {
                 Vector3 targetDir = HandOffsetStart - transform.position;
@@ -62,18 +51,9 @@ public class BrakeLever : StationaryObject
                         bIsGrabbing = false;
                         bDisableLever = true;
                         Audio.Play("lever");
+                        trainSpeedHandler.BrakeStop();
+                        return;
 
-                        if (AcceleratorLever.IsTaskCompleted())
-                        {
-                            trainSpeedHandler.BrakeStop();
-                            return;
-                        }
-
-                        else
-                        {
-                            trainSpeedHandler.BrakeSlowDown();
-                            return;
-                        }
                     }
 
 
@@ -87,7 +67,7 @@ public class BrakeLever : StationaryObject
                 HandOffsetStart = currentHandPosition;
                 currentXRotation = transform.rotation.x;
             }
-        }
+        
     }
 
     public override bool hideControllerOnGrab { get { return false; } }
@@ -96,7 +76,7 @@ public class BrakeLever : StationaryObject
     {
         base.OnControllerEnter(currentController);
 
-        if (DriverCabinDoorLock.bIsUnlocked)
+        if (DriverCabinDoorLock.bIsUnlocked && !bBrakeIsStuck)
         {
             bCanGrab = true;
             PlayerHand = currentController.gameObject;

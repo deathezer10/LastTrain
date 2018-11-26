@@ -52,7 +52,7 @@ public class SmokeDetector : MonoBehaviour , IShootable
     private void TriggerAlarm()
     {
         alarmTriggered = true;
-        FindObjectOfType<SmokeAlarm>().StartSmokeAlarm();
+        FindObjectOfType<SmokeAlarm>().StartSmokeAlarm(transform.GetChild(0).tag);
     }
 
     public void OnShot(Revolver revolver)
