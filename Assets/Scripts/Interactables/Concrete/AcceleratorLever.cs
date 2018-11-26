@@ -18,6 +18,7 @@ public class AcceleratorLever : StationaryObject
     private bool bCanGrab = false;
     private bool bIsGrabbing = false;
     private float NewTrainSpeed;
+    private bool bDisableLever = false;
 
     private AudioPlayer Audio;
 
@@ -45,7 +46,7 @@ public class AcceleratorLever : StationaryObject
 
     void Update()
     {
-
+        if (bDisableLever) return;
         if (bIsGrabbing) //Player is grabbing the acceleratorhandle
         {
             if (Vector3.Distance(PlayerHand.transform.position, AcceleratorHandle.transform.position) > 0.2) //Hand goes too far from lever
@@ -66,9 +67,17 @@ public class AcceleratorLever : StationaryObject
 
                 if (VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z) //Lever at it's min position 
                 {
-                    return;
-                }
+                    bDisableLever = true;
+                    AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
+                    NewTrainSpeed = Mathf.Lerp(0, 20, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f, VectorBeginPoint.transform.position.z));
+                    trainSpeedHandler.ChangeSpeed(NewTrainSpeed);
 
+
+                    LastHandPosition = PlayerHand.transform.position;
+                    return;
+
+
+                }
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
                 NewTrainSpeed = Mathf.Lerp(0, 20, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f, VectorBeginPoint.transform.position.z));
                 trainSpeedHandler.ChangeSpeed(NewTrainSpeed);

@@ -40,7 +40,7 @@ public class TrainSpeedHandler : MonoBehaviour
     }
 
 
-    public void ChangeSpeed(float val) //Calleld when the accelerator is moved
+    public void ChangeSpeed(float val) //Called from accelerator is moved
     {
         if (bBr_StopTrain) return;
 
@@ -86,8 +86,8 @@ public class TrainSpeedHandler : MonoBehaviour
                 bAc_SpeedChange = false;
                 return;
             }
-
-
+            
+            
             i += Time.deltaTime * acceleratorRate;
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
             trainDoorsOpenSound.SetWindAudioLevel(stationMover.currentSpeed);
