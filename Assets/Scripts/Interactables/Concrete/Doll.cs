@@ -20,6 +20,7 @@ public class Doll : GrabbableObject, IShootable
     float flashEndTime;
     bool playerWithinRange;
     bool death;
+    bool grabbedOnce = false;
 
     int burningSpots;
 
@@ -44,6 +45,17 @@ public class Doll : GrabbableObject, IShootable
         if (Input.GetKeyDown(KeyCode.H))
         {
             StartEyeFlash(3f);
+        }
+    }
+
+    public override void OnGrab()
+    {
+        base.OnGrab();
+
+        if (grabbedOnce == false)
+        {
+            useAudio.Play("awkward");
+            grabbedOnce = true;
         }
     }
 
