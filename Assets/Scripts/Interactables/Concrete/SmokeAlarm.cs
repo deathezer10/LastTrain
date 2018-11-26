@@ -23,6 +23,7 @@ public class SmokeAlarm : MonoBehaviour
         {
             alarmStarted = true;
             fireAlarmSound.Play();
+            FindObjectOfType<EmergencyDoorsManager>().EmergencyDoorsTriggered();
 
             if (!trainDoorHandler.bAreDoorsOpen)
             {

@@ -101,6 +101,8 @@ public class EmergencyDoorHandle : GrabbableObject
                     GetComponent<AudioPlayer>().Play("leverlocked");
                     FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
 
+                    FindObjectOfType<EmergencyDoorsManager>().EmergencyDoorsTriggered();
+
                     var doorSound = FindObjectOfType<TrainDoorsOpenSound>();
 
                     if (doorSound != null)

@@ -33,17 +33,16 @@ public class DriverCabinDoorLock : StationaryObject
     private float TimefromGrab;
     private float ReleasedTime;
 
-   
 
     void Start()
     {
-        if(transform.parent.name == "DCabinDr")
+        if (transform.parent.name == "DCabinDr")
         {
             doorBody = transform.parent.Find("DoorPhysics").GetComponent<Rigidbody>();
             DoorMesh = transform.parent.GetComponent<BoxCollider>();
         }
 
-        else if(transform.parent.name == "DoorPhysics")
+        else if (transform.parent.name == "DoorPhysics")
         {
             doorBody = transform.parent.GetComponent<Rigidbody>();
             DoorMesh = transform.parent.GetChild(0).GetComponent<BoxCollider>();
@@ -51,19 +50,17 @@ public class DriverCabinDoorLock : StationaryObject
 
         RightDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
         LeftDoorCorner = DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(-DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.5f);
-       
+
     }
 
 
-        void FixedUpdate()
+    void FixedUpdate()
     {
-       
         if (!bDisableLever)
         {
-            
             if (Awaked)
             {
-                
+
                 timer = Time.time;
 
                 if (DoorMesh.transform.TransformPoint(DoorMesh.center + new Vector3(DoorMesh.size.x, -DoorMesh.size.y, DoorMesh.size.z) * 0.27f).x <= LeftDoorCorner.x)
@@ -86,7 +83,7 @@ public class DriverCabinDoorLock : StationaryObject
                 {
                     if (FastApproximately(0, velocity, 0.2f))
                     {
-                      
+
                         TimefromGrab = Time.time;
                         Velocitystart = PlayerHand.transform.position;
                     }
@@ -158,6 +155,8 @@ public class DriverCabinDoorLock : StationaryObject
 
         bIsUnlocked = true;
         instance.transform.GetComponent<AudioPlayer>().Play();
+
+        AnnouncementManager.Instance.PlayAnnouncement3D("driversCabin_door", instance.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
     }
 
     public override bool hideControllerOnGrab { get { return false; } }
@@ -165,7 +164,7 @@ public class DriverCabinDoorLock : StationaryObject
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         base.OnControllerEnter(currentController);
-        
+
         Awaked = true;
         if (bIsUnlocked)
         {
@@ -177,7 +176,7 @@ public class DriverCabinDoorLock : StationaryObject
     public override void OnControllerExit()
     {
         base.OnControllerExit();
-        
+
         if (bIsGrabbing)
         {
             VelocityEnd = PlayerHand.transform.position;
@@ -201,7 +200,7 @@ public class DriverCabinDoorLock : StationaryObject
     public override void OnGrab()
     {
         base.OnGrab();
-        
+
         if (bCanGrab)
         {
             bIsGrabbing = true;

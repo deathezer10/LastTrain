@@ -64,9 +64,9 @@ public class TrainBoardingDetector : MonoBehaviour
                     m_TrainTimeHandler.StartTrainTime();
                     FindObjectOfType<TrainEscapeHandler>().TrainMoveStart();
 
-                    AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
-                    AnnouncementManager.Instance.PlayAnnouncement3D("thank_you", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
-                    AnnouncementManager.Instance.PlayAnnouncement3D("bomb_intro", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
+                    AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", other.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+                    AnnouncementManager.Instance.PlayAnnouncement3D("thank_you", other.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+                    AnnouncementManager.Instance.PlayAnnouncement3D("bomb_intro", other.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
                 });
             }
         }

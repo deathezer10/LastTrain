@@ -9,9 +9,7 @@ public class ElectricalBoxButton : MonoBehaviour
     private const float m_ToggleOffset = 0.02f;
     private AudioPlayer Audio;
     private bool bDisable = false;
-    
 
-    // Use this for initialization
     void Start()
     {
         Audio = transform.GetComponent<AudioPlayer>();
@@ -27,9 +25,10 @@ public class ElectricalBoxButton : MonoBehaviour
                 transform.DOLocalMoveX(m_ToggleOffset, 0.09f).SetRelative();
                 FindObjectOfType<TrainDoorHandler>().ToggleDriverDoor();
                 FindObjectOfType<TrainDoorsOpenSound>().DriverDoorPlay();
+
+                FindObjectOfType<EmergencyDoorsManager>().EmergencyDoorsTriggered();
             }
     }
-
 
 }
 
