@@ -5,7 +5,8 @@ using UnityEngine;
 public class TrainTimeHandler : MonoBehaviour
 {
 
-    const float m_TimeBetweenEachStation = 90;
+    [SerializeField]
+    private float m_TimeBetweenEachStation = 90;
 
     int m_CurrentAnnouncementCount = 0;
 

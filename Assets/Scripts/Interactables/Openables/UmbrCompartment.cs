@@ -35,7 +35,7 @@ public class UmbrCompartment : MonoBehaviour, IShootable
     {
         if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
         {
-            OpenCompartment();
+            OpenCompartment(false);
             GetComponent<AudioPlayer>().Play("openlock");
             GetComponent<CapsuleCollider>().enabled = false;
         }
