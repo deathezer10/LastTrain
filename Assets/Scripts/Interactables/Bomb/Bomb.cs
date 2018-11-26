@@ -141,6 +141,8 @@ public class Bomb : GrabbableObject, IShootable
         }
 
         FindObjectOfType<TrainBetweenCabinDoors>().OpenBetweenDoors();
+        AnnouncementManager.Instance.PlayAnnouncement3D("bomb_defused", transform.position + new Vector3(0f, 4f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+        AnnouncementManager.Instance.PlayAnnouncement3D("increase_speed", transform.position + new Vector3(0f, 4f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
     }
 
     public void ThrownOut()
@@ -154,6 +156,9 @@ public class Bomb : GrabbableObject, IShootable
     IEnumerator ThrownOutDelay()
     {
         yield return new WaitForSeconds(2f);
+
+        AnnouncementManager.Instance.PlayAnnouncement3D("bomb_defused", transform.position + new Vector3(0f, 4f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+        AnnouncementManager.Instance.PlayAnnouncement3D("increase_speed", transform.position + new Vector3(0f, 4f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
 
         FindObjectOfType<TrainBetweenCabinDoors>().OpenBetweenDoors();
 

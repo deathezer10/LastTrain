@@ -95,7 +95,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
         if (clip == null)
         {
-            Debug.LogError("Error trying to retrieve an announcement's clipAlias");
+            Debug.LogError("Error trying to retrieve announcement with alias: " + clipAlias);
             return;
         }
 
@@ -156,7 +156,8 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
         spawnedAudioSource.volume = 1;
         spawnedAudioSource.spatialBlend = 1f;
         spawnedAudioSource.minDistance = 1;
-        spawnedAudioSource.maxDistance = 50;
+        spawnedAudioSource.maxDistance = 75;
+        spawnedAudioSource.rolloffMode = AudioRolloffMode.Linear;
 
         switch (announceType)
         {
