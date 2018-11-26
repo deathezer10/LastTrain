@@ -5,12 +5,11 @@ using UnityEngine;
 public class TrainCrashChecker : MonoBehaviour
 {
     public PlayerDeathHandler deathHandler;
-    // Use this for initialization
+
     void Start()
     {
        deathHandler = FindObjectOfType<PlayerDeathHandler>();
     }
-
 
     private void OnTriggerEnter(Collider other)
     {

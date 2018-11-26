@@ -40,11 +40,12 @@ public class TrainTimeHandler : MonoBehaviour
             {
                 displayLight.CycleNodes();
             }
-            // TODO play announcement
         }
-       
-        //GameObject.FindWithTag("Player").GetComponent<PlayerDeathHandler>().KillPlayer("death_timeup");
     }
 
-
+    public float GetTimeBetween()
+    {
+        return m_TimeBetweenEachStation;
+    }
+    
 }

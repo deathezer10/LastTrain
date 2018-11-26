@@ -163,8 +163,5 @@ public class StationMover : MonoBehaviour
             bSpawnDummyTrain = true;
         }
         m_SpawnStationNext = true;
-        // Debug.LogFormat("Station Index: {0}, EN Name: {1}, JP Name: {2}", stationNumber, stationNameEN, stationNameJP);
     }
-
-
 }
