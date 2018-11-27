@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AcceleratorLever : StationaryObject
 {
+    private StationMover stationMover;
     private TrainSpeedHandler trainSpeedHandler;
     private GameObject Accelerator;
     private GameObject AcceleratorHandle;
@@ -40,6 +41,7 @@ public class AcceleratorLever : StationaryObject
         HandleMovementDirection = VectorEndPoint.transform.position - VectorBeginPoint.transform.position;
         HandleMovementDirection.Normalize(); //The direction where Acceleratorhandle can be moved forth and back.
 
+        stationMover = FindObjectOfType<StationMover>();
         trainSpeedHandler = FindObjectOfType<TrainSpeedHandler>();
         Audio = GetComponent<AudioPlayer>();
     }
@@ -70,12 +72,12 @@ public class AcceleratorLever : StationaryObject
                     trainSpeedHandler.ChangeSpeed(5);
 
                     Audio.Play("leverlocked");
+                    stationMover.PrepareToStop();
 
                     LastHandPosition = PlayerHand.transform.position;
                     return;
-
-
                 }
+
                 AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
                 NewTrainSpeed = Mathf.Lerp(0, 20, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f, VectorBeginPoint.transform.position.z));
                 trainSpeedHandler.ChangeSpeed(NewTrainSpeed);

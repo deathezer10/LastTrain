@@ -14,6 +14,7 @@ public class StationMover : MonoBehaviour
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
 
     const int m_InitialTunnelSpawnAmount = 7;
+
     const float m_TunnelGapOffset = 20.23f;
     const float m_TunnelXOffset = -5.05f;
 
@@ -47,6 +48,8 @@ public class StationMover : MonoBehaviour
     #endregion
 
     #region Movement Variables
+    bool m_IsStopping = false;
+
     bool m_IsMoving = false;
     public bool isMoving {
         get { return m_IsMoving; }
@@ -91,6 +94,12 @@ public class StationMover : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyUp(KeyCode.T))
+        {
+            FindObjectOfType<TrainSpeedHandler>().ChangeSpeed(5);
+            PrepareToStop();
+        }
+
         m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * ((m_IsMoving) ? 1 : -1) * Time.deltaTime), 0, m_CurrentStationMaxSpeed);
         m_CurrentDistanceTraveled += m_CurrentStationSpeed * Time.deltaTime;
         trainSounds.SetAudioLevelPitch(m_CurrentStationSpeed);
@@ -109,12 +118,14 @@ public class StationMover : MonoBehaviour
 
         }
 
-        if (Mathf.Abs(m_CurrentDistanceTraveled) >= m_TunnelGapOffset)
+
+        // Spawn a tunnel if train traveled more than a certain distance
+        if (m_CurrentDistanceTraveled >= m_TunnelGapOffset)
         {
             m_CurrentDistanceTraveled = 0;
             m_CurrentTunnelIndex++;
 
-            // For the first time after spawning X tunnels, destroy all the initial objects
+            // For the first time after spawning X tunnels, destroy all the initially spawned objects
             if (m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= m_InitialTunnelSpawnAmount * 2)
             {
                 while (m_InitialRemovableObjects.Count > 0)
@@ -133,31 +144,48 @@ public class StationMover : MonoBehaviour
                 Destroy(m_RemovableObjects.Dequeue().gameObject);
             }
 
-            if (m_SpawnStationNext)
+            if (m_IsStopping)
             {
-                m_SpawnStationNext = false;
-                m_LastRightTunnel = Instantiate(m_FakeStationPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
-                if (bSpawnDummyTrain)
-                {
-                    m_DummyTrain = m_LastRightTunnel.transform.Find("DummyTrain").gameObject;
-                    m_DummyTrain.gameObject.SetActive(true);
-                    bTrackDummyTrain = true;
-                }
+                m_LastRightTunnel = Instantiate(m_EmergencyExitPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
                 m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+                m_IsStopping = false;
             }
             else
             {
-                m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+                // Spawn a fake train station for the upcoming tunnel
+                if (m_SpawnStationNext)
+                {
+                    m_SpawnStationNext = false;
+                    m_LastRightTunnel = Instantiate(m_FakeStationPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + (m_TunnelGapOffset * 3)), Quaternion.identity, transform);
+                    if (bSpawnDummyTrain)
+                    {
+                        m_DummyTrain = m_LastRightTunnel.transform.Find("DummyTrain").gameObject;
+                        m_DummyTrain.gameObject.SetActive(true);
+                        bTrackDummyTrain = true;
+                    }
+                    m_CurrentDistanceTraveled -= m_TunnelGapOffset * 5; // Prevent spawning of tunnels for a while
+                    m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+                }
+                else
+                {
+                    m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
 
-                m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+                    m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
 
+                }
             }
+
         }
     }
 
     public void ToggleMovement(bool moving)
     {
         m_IsMoving = moving;
+    }
+
+    public void PrepareToStop()
+    {
+        m_IsStopping = true;
     }
 
     private void OnStationChanged(int stationNumber, string stationNameEN, string stationNameJP)
