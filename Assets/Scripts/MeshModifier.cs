@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
 
 public class MeshModifier : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class MeshModifier : MonoBehaviour
     private static MeshSide Right_side = new MeshSide();
     private static List<Vector3> capVertTracker = new List<Vector3>();
     private static List<Vector3> capVertpolygon = new List<Vector3>();
-    private List<GameObject> newGameObjects = new List<GameObject>();
- 
+    private List<GameObject> newHandleObjects = new List<GameObject>();
+    private GameObject originalHandleParent;
+    private GameObject originalHand;
+    private bool bFirstIsHigher = false;
     // Use this for initialization
     void Start()
     {
@@ -27,20 +30,59 @@ public class MeshModifier : MonoBehaviour
         if (collision.gameObject.tag == "Band")
         {
             collision.gameObject.tag = "Untagged";
+            originalHand = collision.gameObject;
+            originalHandleParent = collision.gameObject.transform.parent.gameObject;
             ContactPoint contact = collision.contacts[0];
-             newGameObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<MeshRenderer>().sharedMaterial));
-          
-           foreach(GameObject objects in newGameObjects)
+            newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
+
+            if (newHandleObjects.Count >= 2)
             {
-                objects.AddComponent<Rigidbody>();
-                objects.GetComponent<Rigidbody>().useGravity = true;
-                objects.AddComponent<BoxCollider>();
-                objects.gameObject.tag = "Untagged";
-                var joint = objects.GetComponent<ConfigurableJoint>();
-                if (joint != null)
-                    Destroy(joint);
+                if (newHandleObjects[0].transform.position.y > newHandleObjects[1].transform.position.y)
+                {
+                    bFirstIsHigher = true;
+                }
+
+                else
+                    bFirstIsHigher = false;
+
             }
-            
+
+            foreach(GameObject objects in newHandleObjects)
+            {
+                objects.gameObject.tag = "Untagged";
+                if (bFirstIsHigher)
+                {
+                    for(int i = 0; i < originalHand.GetComponents(typeof(Component)).Length; i++)
+                    {
+                        var components = originalHand.GetComponents(typeof(Component));
+
+                        objects.AddComponent(components[i].GetType());
+                        foreach (FieldInfo f in components[i].GetType().GetFields())
+                        {
+                            f.SetValue(objects.GetComponents(typeof(Component))[i], f.GetValue(components[i]));
+                        }
+
+                        
+                    }
+                    bFirstIsHigher = false;
+                }
+
+                else
+                {
+                   
+                    objects.AddComponent<Rigidbody>();
+                    objects.GetComponent<Rigidbody>().useGravity = true;
+                    objects.AddComponent<BoxCollider>();
+                    var joint = objects.GetComponent<ConfigurableJoint>();
+                    if (joint != null)
+                        Destroy(joint);
+
+                }
+                  
+            }
+
+
+
         }
     }
 
@@ -135,7 +177,7 @@ public class MeshModifier : MonoBehaviour
             Left_side.insertTriangle(new Vector3[] { vertices[i], vertices[(i + 1) % vertices.Count], center },
                 new Vector3[] { -plane.normal, -plane.normal, -plane.normal }, new Vector2[] { newUV1, newUV2, new Vector2(0.5f, 0.5f) }, -plane.normal, Left_side.subIndices.Count - 1);
 
-            Right_side.insertTriangle(new Vector3[] { vertices[i], vertices[(i + 1) % vertices.Count], center }, new Vector3[] { plane.normal, plane.normal, plane.normal }, new Vector2[]{ newUV1, newUV2, new Vector2(0.5f, 0.5f) }, plane.normal, Right_side.subIndices.Count - 1);
+            Right_side.insertTriangle(new Vector3[] { vertices[i], vertices[(i + 1) % vertices.Count], center }, new Vector3[] { plane.normal, plane.normal, plane.normal }, new Vector2[] { newUV1, newUV2, new Vector2(0.5f, 0.5f) }, plane.normal, Right_side.subIndices.Count - 1);
         }
     }
 
