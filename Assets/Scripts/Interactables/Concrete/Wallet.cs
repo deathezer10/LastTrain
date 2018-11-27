@@ -24,6 +24,8 @@ public class Wallet : GrabbableObject
     [SerializeField]
     private BoxCollider[] m_OpeningColliders;
 
+    private Animator m_animator;
+
     private void Start()
     {
         m_TManager = FindObjectOfType<TutorialManager>();
@@ -32,6 +34,8 @@ public class Wallet : GrabbableObject
         m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
 
         Physics.IgnoreCollision(m_OpeningColliders[0], m_OpeningColliders[1]);
+
+        m_animator = this.GetComponent<Animator>();
     }
 
     public override void OnControllerEnter(PlayerViveController currentController)
@@ -73,14 +77,15 @@ public class Wallet : GrabbableObject
         {
             m_TManager.SetPoster(TutorialManager.PosterState.None);
 
-            GetComponent<Animator>().Play("Open");
+            m_animator.Play("Open");
 
             m_Colliders[0].center = m_Colliders[1].center;
             m_Colliders[0].size = m_Colliders[1].size;
 
             GameObject obj = Instantiate(m_ICCardPrefab, transform.position, Quaternion.identity);
-            Physics.IgnoreCollision(m_OpeningColliders[0], obj.GetComponent<Collider>());
-            Physics.IgnoreCollision(m_OpeningColliders[1], obj.GetComponent<Collider>());
+            var collider = obj.GetComponent<Collider>();
+            Physics.IgnoreCollision(m_OpeningColliders[0], collider);
+            Physics.IgnoreCollision(m_OpeningColliders[1], collider);
 
             m_HasUsedOnce = true;
         }
