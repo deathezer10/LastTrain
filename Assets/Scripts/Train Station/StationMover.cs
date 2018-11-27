@@ -26,11 +26,15 @@ public class StationMover : MonoBehaviour
     private bool bPlayOnce = true;
 
     private BoxCollider CrashChecker;
+
     [SerializeField]
     private GameObject m_TunnelPrefab;
 
     [SerializeField]
     private GameObject m_FakeStationPrefab;
+
+    [SerializeField]
+    private GameObject m_EmergencyExitPrefab;
 
     [SerializeField]
     private GameObject m_DummyTrainPrefab;
