@@ -20,11 +20,12 @@ public class AcceleratorLever : StationaryObject
     private bool bIsGrabbing = false;
     private float NewTrainSpeed;
     private bool bDisableLever = false;
+    private bool isLeverLocked = false;
 
     private AudioPlayer Audio;
 
-   
-   
+
+
     // Use this for initialization
     void Start()
     {
@@ -59,7 +60,7 @@ public class AcceleratorLever : StationaryObject
 
             Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition; //We get the small movement vector of player's hand
             HandMovementDirection.Normalize();
-            
+
             if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.60015f)) //If player is trying to drag the handle downwards the direction the handle can move
             {
                 if (!Audio.IsPlaying())
@@ -72,6 +73,7 @@ public class AcceleratorLever : StationaryObject
                     trainSpeedHandler.ChangeSpeed(5);
 
                     Audio.Play("leverlocked");
+                    isLeverLocked = true;
                     stationMover.PrepareToStop();
 
                     LastHandPosition = PlayerHand.transform.position;
@@ -132,7 +134,9 @@ public class AcceleratorLever : StationaryObject
         base.OnControllerExit();
 
         bCanGrab = false;
-        Audio.Stop();
+
+        if (!isLeverLocked)
+            Audio.Stop();
     }
 
     public override void OnGrab()
@@ -151,7 +155,9 @@ public class AcceleratorLever : StationaryObject
         base.OnGrabReleased();
 
         bIsGrabbing = false;
-        Audio.Stop();
+        
+        if (!isLeverLocked)
+            Audio.Stop();
     }
 
     private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)
