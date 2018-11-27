@@ -37,7 +37,7 @@ public class MeshModifier : MonoBehaviour
 
             if (newHandleObjects.Count >= 2)
             {
-                if (newHandleObjects[0].transform.position.y > newHandleObjects[1].transform.position.y)
+                if (newHandleObjects[0].transform.localPosition.y > newHandleObjects[1].transform.localPosition.y)
                 {
                     bFirstIsHigher = true;
                 }
@@ -47,36 +47,38 @@ public class MeshModifier : MonoBehaviour
 
             }
 
-            foreach(GameObject objects in newHandleObjects)
+            for(int index = 0; index < newHandleObjects.Count; ++index)
             {
-                objects.gameObject.tag = "Untagged";
+                newHandleObjects[index].gameObject.tag = "Untagged";
+
                 if (bFirstIsHigher)
                 {
                     for(int i = 0; i < originalHand.GetComponents(typeof(Component)).Length; i++)
                     {
                         var components = originalHand.GetComponents(typeof(Component));
 
-                        objects.AddComponent(components[i].GetType());
+                        if(components[i].GetType() != typeof(Rigidbody)) newHandleObjects[index].AddComponent(components[i].GetType());
                         foreach (FieldInfo f in components[i].GetType().GetFields())
                         {
-                            f.SetValue(objects.GetComponents(typeof(Component))[i], f.GetValue(components[i]));
-                        }
-
-                        
+                            f.SetValue(newHandleObjects[index].GetComponents(typeof(Component))[i], f.GetValue(components[i]));
+                        } 
                     }
+                    if (newHandleObjects[index].GetComponent<MeshCollider>() != null) newHandleObjects[index].GetComponent<MeshCollider>().convex = true;
+                    if (newHandleObjects[index].GetComponents<ConfigurableJoint>() != null) newHandleObjects[index].GetComponent<ConfigurableJoint>().connectedBody = originalHandleParent.GetComponent<Rigidbody>();
+                    print("this only once");
                     bFirstIsHigher = false;
                 }
 
                 else
                 {
-                   
-                    objects.AddComponent<Rigidbody>();
-                    objects.GetComponent<Rigidbody>().useGravity = true;
-                    objects.AddComponent<BoxCollider>();
-                    var joint = objects.GetComponent<ConfigurableJoint>();
+                    newHandleObjects[index].AddComponent<Rigidbody>();
+                    newHandleObjects[index].GetComponent<Rigidbody>().useGravity = true;
+                    newHandleObjects[index].AddComponent<BoxCollider>();
+                    var joint = newHandleObjects[index].GetComponent<ConfigurableJoint>();
                     if (joint != null)
                         Destroy(joint);
-
+                    print("this also only once");
+                    bFirstIsHigher = true;
                 }
                   
             }
