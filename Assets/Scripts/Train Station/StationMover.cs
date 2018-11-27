@@ -14,6 +14,10 @@ public class StationMover : MonoBehaviour
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
 
     const int m_InitialTunnelSpawnAmount = 7;
+    int m_DestroySkipCounter = 3;
+
+    float m_TunnelExtraGapOffset = 0;
+    bool m_ExtraGapPending = false;
 
     const float m_TunnelGapOffset = 20.23f;
     const float m_TunnelXOffset = -5.05f;
@@ -53,6 +57,7 @@ public class StationMover : MonoBehaviour
     bool m_IsMoving = false;
     public bool isMoving {
         get { return m_IsMoving; }
+        set { m_IsMoving = value; }
     }
 
     float m_CurrentStationMaxSpeed = 20;
@@ -61,7 +66,8 @@ public class StationMover : MonoBehaviour
         set { m_CurrentStationMaxSpeed = value; }
     }
 
-    const float m_StationAcceleration = 2.0f;
+    public float m_StationAcceleration = 2.0f;
+
     float m_CurrentStationSpeed = 0;
     public float currentSpeed {
         get { return m_CurrentStationSpeed; }
@@ -141,14 +147,27 @@ public class StationMover : MonoBehaviour
             }
             else if (!m_IsFirstTimeDestroy && m_CurrentTunnelIndex >= 3)
             {
-                Destroy(m_RemovableObjects.Dequeue().gameObject);
+                if (m_DestroySkipCounter > 0)
+                {
+                    m_DestroySkipCounter--;
+                }
+                else
+                {
+                    Destroy(m_RemovableObjects.Dequeue().gameObject);
+                }
             }
 
             if (m_IsStopping)
             {
-                m_LastRightTunnel = Instantiate(m_EmergencyExitPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
+                m_LastRightTunnel = Instantiate(m_EmergencyExitPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset + m_TunnelExtraGapOffset), Quaternion.identity, transform);
                 m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
                 m_IsStopping = false;
+
+                if (m_ExtraGapPending)
+                {
+                    m_TunnelExtraGapOffset = 0;
+                    m_ExtraGapPending = false;
+                }
             }
             else
             {
@@ -156,22 +175,29 @@ public class StationMover : MonoBehaviour
                 if (m_SpawnStationNext)
                 {
                     m_SpawnStationNext = false;
-                    m_LastRightTunnel = Instantiate(m_FakeStationPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + (m_TunnelGapOffset * 3)), Quaternion.identity, transform);
+                    m_LastRightTunnel = Instantiate(m_FakeStationPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + (m_TunnelGapOffset * 3) + m_TunnelExtraGapOffset), Quaternion.identity, transform);
                     if (bSpawnDummyTrain)
                     {
                         m_DummyTrain = m_LastRightTunnel.transform.Find("DummyTrain").gameObject;
                         m_DummyTrain.gameObject.SetActive(true);
                         bTrackDummyTrain = true;
                     }
-                    m_CurrentDistanceTraveled -= m_TunnelGapOffset * 5; // Prevent spawning of tunnels for a while
+                    m_TunnelExtraGapOffset += m_TunnelGapOffset * 2; // Offset the next tunnel to account for the length of the train station
+                    m_DestroySkipCounter += 2;
+                    m_ExtraGapPending = true;
+
                     m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
                 }
                 else
                 {
-                    m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset), Quaternion.identity, transform);
-
+                    m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset + m_TunnelExtraGapOffset), Quaternion.identity, transform);
                     m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
 
+                    if (m_ExtraGapPending)
+                    {
+                        m_TunnelExtraGapOffset = 0;
+                        m_ExtraGapPending = false;
+                    }
                 }
             }
 

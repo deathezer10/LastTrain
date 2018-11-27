@@ -54,6 +54,11 @@ public class TrainSpeedHandler : MonoBehaviour
         bAc_SpeedChange = true;
     }
 
+    public void SetSpeedChanged(bool value)
+    {
+        bAc_SpeedChange = value;
+    }
+
     void Update()
     {
 
