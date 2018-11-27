@@ -6,10 +6,11 @@ using DG.Tweening;
 
 public class Doll : GrabbableObject, IShootable
 {
-    public Transform head;
+    public Transform head, headTarget;
     public Material dollEyeMat;
-    public Color initialColor, flashColor;
+    public Color initialColor, flashColor, bombHintColor;
     public ParticleSystem dollDeathParticle;
+    public int dollIndex;
 
     AudioPlayer useAudio;
 
@@ -21,10 +22,13 @@ public class Doll : GrabbableObject, IShootable
     bool playerWithinRange;
     bool death;
     bool grabbedOnce = false;
+    bool showingHint;
 
     int burningSpots;
 
     DollDeathAnnouncements ddAnnouncements;
+
+    Vector3 targetRot = new Vector3();
 
     private void Start()
     {
@@ -42,7 +46,24 @@ public class Doll : GrabbableObject, IShootable
     {
         if (playerWithinRange)
         {
-            head.LookAt(playerHeadTrans);
+            headTarget.eulerAngles = Vector3.zero;
+            headTarget.LookAt(playerHeadTrans);
+
+            if (!(headTarget.localEulerAngles.x > 20f && headTarget.localEulerAngles.x < 325f))
+            {
+                targetRot.x = headTarget.localEulerAngles.x;
+            }
+
+            if (!(headTarget.localEulerAngles.y > 45f && headTarget.localEulerAngles.y < 315f))
+            {
+                targetRot.y = headTarget.localEulerAngles.y;
+            }
+            targetRot.z = 0;
+
+            if (head.eulerAngles != targetRot)
+            {
+                head.DOLocalRotate(targetRot, Time.deltaTime * 3, RotateMode.Fast);
+            }
         }
     }
 
@@ -77,8 +98,29 @@ public class Doll : GrabbableObject, IShootable
     /// <param name="_duration"></param>
     public void StartEyeFlash(float _duration)
     {
+        dollEyeMat.SetColor("_EmissionColor", initialColor);
+
         flashEndTime = Time.time + _duration;
+        StopAllCoroutines();
         StartCoroutine(EyeFlash());
+    }
+
+    private void StartBlueFlash()
+    {
+        showingHint = true;
+
+        dollEyeMat.SetColor("_EmissionColor", initialColor);
+
+        StopAllCoroutines();
+        StartCoroutine(BlueFlash());
+    }
+
+    private IEnumerator BlueFlash()
+    {
+        dollEyeMat.SetColor("_EmissionColor", bombHintColor);
+        yield return new WaitForSeconds(1.5f);
+        dollEyeMat.SetColor("_EmissionColor", initialColor);
+        showingHint = false;
     }
 
     private IEnumerator EyeFlash()
@@ -122,9 +164,14 @@ public class Doll : GrabbableObject, IShootable
     {
         base.OnUse();
 
-        if (!useAudio.IsPlaying())
+        if (!showingHint)
         {
             useAudio.Play();
+
+            if (dollIndex == 1)
+            {
+                StartBlueFlash();
+            }
         }
     }
 
@@ -151,7 +198,7 @@ public class Doll : GrabbableObject, IShootable
 
     private IEnumerator DollBurning()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         DestroyDoll();
     }
 
@@ -161,7 +208,7 @@ public class Doll : GrabbableObject, IShootable
         {
             death = true;
 
-            AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
+            AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), playerHeadTrans.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
 
             Instantiate(dollDeathParticle, transform.position + new Vector3(0f, 0.2f, 0), transform.rotation, null);
             Destroy(gameObject);
