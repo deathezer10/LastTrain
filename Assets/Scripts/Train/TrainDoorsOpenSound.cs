@@ -10,8 +10,6 @@ public class TrainDoorsOpenSound : MonoBehaviour
     private StationMover stationMover;
     public AudioPlayer dingdongPlayer;
     public AudioPlayer trainEngine;
-    private float windMaxVolume = 0.8f;
-    
 
     public void SetWindAudioLevel(float val) //wind volume
     {

@@ -39,12 +39,13 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
     /// <param name="active"></param>
     private void SetEnableOutline(bool active)
     {
-        if (_outlines != null)
-            foreach (var outline in _outlines)
-            {
-                if (outline.Renderer != null && outline.Renderer.enabled)
-                    outline.enabled = active;
-            }
+        if (_outlines == null) return;
+
+        foreach (var outline in _outlines)
+        {
+            if (outline.Renderer != null && outline.Renderer.enabled)
+                outline.enabled = active;
+        }
     }
     #endregion
 
