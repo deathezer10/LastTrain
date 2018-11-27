@@ -47,6 +47,7 @@ public class AcceleratorLever : StationaryObject
     void Update()
     {
         if (bDisableLever) return;
+
         if (bIsGrabbing) //Player is grabbing the acceleratorhandle
         {
             if (Vector3.Distance(PlayerHand.transform.position, AcceleratorHandle.transform.position) > 0.2) //Hand goes too far from lever
@@ -56,10 +57,7 @@ public class AcceleratorLever : StationaryObject
 
             Vector3 HandMovementDirection = PlayerHand.transform.position - LastHandPosition; //We get the small movement vector of player's hand
             HandMovementDirection.Normalize();
-
-
-
-
+            
             if (AlmostEqual(HandMovementDirection, HandleMovementDirection, 0.60015f)) //If player is trying to drag the handle downwards the direction the handle can move
             {
                 if (!Audio.IsPlaying())
@@ -69,9 +67,9 @@ public class AcceleratorLever : StationaryObject
                 {
                     bDisableLever = true;
                     AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle
-                    NewTrainSpeed = Mathf.Lerp(0, 20, normalize01(AcceleratorHandle.transform.position.z, VectorEndPoint.transform.position.z + 0.025f, VectorBeginPoint.transform.position.z));
-                    trainSpeedHandler.ChangeSpeed(NewTrainSpeed);
+                    trainSpeedHandler.ChangeSpeed(5);
 
+                    Audio.Play("leverlocked");
 
                     LastHandPosition = PlayerHand.transform.position;
                     return;
