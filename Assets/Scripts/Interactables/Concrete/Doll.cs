@@ -8,8 +8,9 @@ public class Doll : GrabbableObject, IShootable
 {
     public Transform head, headTarget;
     public Material dollEyeMat;
-    public Color initialColor, flashColor;
+    public Color initialColor, flashColor, bombHintColor;
     public ParticleSystem dollDeathParticle;
+    public int dollIndex;
 
     AudioPlayer useAudio;
 
@@ -21,6 +22,7 @@ public class Doll : GrabbableObject, IShootable
     bool playerWithinRange;
     bool death;
     bool grabbedOnce = false;
+    bool showingHint;
 
     int burningSpots;
 
@@ -44,15 +46,23 @@ public class Doll : GrabbableObject, IShootable
     {
         if (playerWithinRange)
         {
+            headTarget.eulerAngles = Vector3.zero;
             headTarget.LookAt(playerHeadTrans);
-            
-            targetRot.x = Mathf.Clamp(headTarget.eulerAngles.x, -55f, 25f);
-            targetRot.y = Mathf.Clamp(headTarget.eulerAngles.y, -70f, 70f);
+
+            if (!(headTarget.localEulerAngles.x > 20f && headTarget.localEulerAngles.x < 325f))
+            {
+                targetRot.x = headTarget.localEulerAngles.x;
+            }
+
+            if (!(headTarget.localEulerAngles.y > 45f && headTarget.localEulerAngles.y < 315f))
+            {
+                targetRot.y = headTarget.localEulerAngles.y;
+            }
             targetRot.z = 0;
 
             if (head.eulerAngles != targetRot)
             {
-                head.DOLocalRotate(targetRot * 0.2f, Time.deltaTime, RotateMode.Fast);
+                head.DOLocalRotate(targetRot, Time.deltaTime * 3, RotateMode.Fast);
             }
         }
     }
@@ -88,8 +98,29 @@ public class Doll : GrabbableObject, IShootable
     /// <param name="_duration"></param>
     public void StartEyeFlash(float _duration)
     {
+        dollEyeMat.SetColor("_EmissionColor", initialColor);
+
         flashEndTime = Time.time + _duration;
+        StopAllCoroutines();
         StartCoroutine(EyeFlash());
+    }
+
+    private void StartBlueFlash()
+    {
+        showingHint = true;
+
+        dollEyeMat.SetColor("_EmissionColor", initialColor);
+
+        StopAllCoroutines();
+        StartCoroutine(BlueFlash());
+    }
+
+    private IEnumerator BlueFlash()
+    {
+        dollEyeMat.SetColor("_EmissionColor", bombHintColor);
+        yield return new WaitForSeconds(1.5f);
+        dollEyeMat.SetColor("_EmissionColor", initialColor);
+        showingHint = false;
     }
 
     private IEnumerator EyeFlash()
@@ -133,9 +164,14 @@ public class Doll : GrabbableObject, IShootable
     {
         base.OnUse();
 
-        if (!useAudio.IsPlaying())
+        if (!showingHint)
         {
             useAudio.Play();
+
+            if (dollIndex == 1)
+            {
+                StartBlueFlash();
+            }
         }
     }
 
@@ -162,7 +198,7 @@ public class Doll : GrabbableObject, IShootable
 
     private IEnumerator DollBurning()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         DestroyDoll();
     }
 

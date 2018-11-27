@@ -380,7 +380,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541374623924020}
   m_LocalRotation: {x: -0, y: 0.8941917, z: -0, w: 0.44768447}
-  m_LocalPosition: {x: -1.019, y: 0.5886356, z: -1.3119965}
+  m_LocalPosition: {x: 8.0227165, y: 1.9085096, z: -14.532774}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4534154533735870}
@@ -775,8 +775,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 32, y: 25.271584, z: 31.999998}
-  m_Center: {x: -15.800003, y: 12.635808, z: 15.800115}
+  m_Size: {x: 33, y: 26, z: 33}
+  m_Center: {x: -17, y: 9, z: 17}
 --- !u!65 &65324815390224106
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1087,11 +1087,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 4484797503897066}
   headTarget: {fileID: 4074248989046650}
-  dollEyeMat: {fileID: 2100000, guid: 7d33a182d28267845945572a5b1e1541, type: 2}
-  initialColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
-  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  dollEyeMat: {fileID: 2100000, guid: 9fdfc175b69d7ab4c8ddf150deab450d, type: 2}
+  initialColor: {r: 1, g: 0.748662, b: 0.13679245, a: 1}
+  flashColor: {r: 1, g: 0.22960974, b: 0.16509432, a: 1}
+  bombHintColor: {r: 0.21226418, g: 0.3548761, b: 1, a: 1}
   dollDeathParticle: {fileID: 198777413455702576, guid: b5857785983f0cd43ba2bb031cb2f6f0,
     type: 2}
+  dollIndex: 0
 --- !u!114 &114750878422362566
 MonoBehaviour:
   m_ObjectHideFlags: 1
