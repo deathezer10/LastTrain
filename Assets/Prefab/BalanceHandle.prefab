@@ -22,11 +22,11 @@ GameObject:
   - component: {fileID: 33779599275261048}
   - component: {fileID: 23563379693672804}
   - component: {fileID: 54630624268425554}
-  - component: {fileID: 65149384444796218}
   - component: {fileID: 153295811890917016}
-  m_Layer: 0
+  - component: {fileID: 64281976828084668}
+  m_Layer: 19
   m_Name: Handle_Tri_Mid (1)
-  m_TagString: Untagged
+  m_TagString: Band
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 54533660120956966}
   - component: {fileID: 65536532127533290}
   - component: {fileID: 153917257269353450}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Handle_Tri_Btm (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 33727782217932262}
   - component: {fileID: 23901155634878046}
   - component: {fileID: 54667296057392318}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: BalanceHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1756815226203610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.2605205, y: 2.7555, z: -134.86118}
+  m_LocalPosition: {x: -0.6892001, y: 2.793, z: 1.7899761}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4358539313034082}
@@ -281,8 +281,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65149384444796218
-BoxCollider:
+--- !u!64 &64281976828084668
+MeshCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -290,9 +290,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.023305664, y: 0.15167525, z: 0.017999267}
-  m_Center: {x: 0, y: 0, z: 0.00000028684735}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300044, guid: 785b34aece9f80d4c9cc30bf11adb134, type: 3}
 --- !u!65 &65536532127533290
 BoxCollider:
   m_ObjectHideFlags: 1

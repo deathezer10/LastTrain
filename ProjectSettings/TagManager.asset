@@ -37,6 +37,8 @@ TagManager:
   - Cabin1
   - Cabin2
   - drivercabin
+  - Train
+  - Band
   layers:
   - Default
   - TransparentFX
