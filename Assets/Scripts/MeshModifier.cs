@@ -14,7 +14,8 @@ public class MeshModifier : MonoBehaviour
     private static MeshSide Right_side = new MeshSide();
     private static List<Vector3> capVertTracker = new List<Vector3>();
     private static List<Vector3> capVertpolygon = new List<Vector3>();
-
+    private List<GameObject> newGameObjects = new List<GameObject>();
+ 
     // Use this for initialization
     void Start()
     {
@@ -23,10 +24,23 @@ public class MeshModifier : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Wire" || collision.gameObject.tag == "Band")
+        if (collision.gameObject.tag == "Band")
         {
+            collision.gameObject.tag = "Untagged";
             ContactPoint contact = collision.contacts[0];
-            CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<MeshRenderer>().sharedMaterial);
+             newGameObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<MeshRenderer>().sharedMaterial));
+          
+           foreach(GameObject objects in newGameObjects)
+            {
+                objects.AddComponent<Rigidbody>();
+                objects.GetComponent<Rigidbody>().useGravity = true;
+                objects.AddComponent<BoxCollider>();
+                objects.gameObject.tag = "Untagged";
+                var joint = objects.GetComponent<ConfigurableJoint>();
+                if (joint != null)
+                    Destroy(joint);
+            }
+            
         }
     }
 
