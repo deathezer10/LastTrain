@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class Doll : GrabbableObject, IShootable
 {
-    public Transform head;
+    public Transform head, headTarget;
     public Material dollEyeMat;
     public Color initialColor, flashColor;
     public ParticleSystem dollDeathParticle;
@@ -26,6 +26,8 @@ public class Doll : GrabbableObject, IShootable
 
     DollDeathAnnouncements ddAnnouncements;
 
+    Vector3 targetRot = new Vector3();
+
     private void Start()
     {
         playerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
@@ -42,7 +44,16 @@ public class Doll : GrabbableObject, IShootable
     {
         if (playerWithinRange)
         {
-            head.LookAt(playerHeadTrans);
+            headTarget.LookAt(playerHeadTrans);
+            
+            targetRot.x = Mathf.Clamp(headTarget.eulerAngles.x, -55f, 25f);
+            targetRot.y = Mathf.Clamp(headTarget.eulerAngles.y, -70f, 70f);
+            targetRot.z = 0;
+
+            if (head.eulerAngles != targetRot)
+            {
+                head.DOLocalRotate(targetRot * 0.2f, Time.deltaTime, RotateMode.Fast);
+            }
         }
     }
 
@@ -161,7 +172,7 @@ public class Doll : GrabbableObject, IShootable
         {
             death = true;
 
-            AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
+            AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), playerHeadTrans.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
 
             Instantiate(dollDeathParticle, transform.position + new Vector3(0f, 0.2f, 0), transform.rotation, null);
             Destroy(gameObject);
