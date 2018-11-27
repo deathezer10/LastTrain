@@ -18,6 +18,7 @@ public class MeshModifier : MonoBehaviour
     private List<GameObject> newHandleObjects = new List<GameObject>();
     private GameObject originalHandleParent;
     private GameObject originalHand;
+    private GameObject grabHandle;
     private bool bFirstIsHigher = false;
     // Use this for initialization
     void Start()
@@ -32,55 +33,77 @@ public class MeshModifier : MonoBehaviour
             collision.gameObject.tag = "Untagged";
             originalHand = collision.gameObject;
             originalHandleParent = collision.gameObject.transform.parent.gameObject;
+            grabHandle = collision.transform.GetChild(0).gameObject;
             ContactPoint contact = collision.contacts[0];
             newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
 
-            if (newHandleObjects.Count >= 2)
-            {
-                if (newHandleObjects[0].transform.localPosition.y > newHandleObjects[1].transform.localPosition.y)
-                {
-                    bFirstIsHigher = true;
-                }
+            //if (newHandleObjects.Count >= 2)
+            //{
+            //    if (newHandleObjects[0].transform.localPosition.y > newHandleObjects[1].transform.localPosition.y)
+            //    {
+            //        bFirstIsHigher = true;
+            //    }
 
-                else
-                    bFirstIsHigher = false;
+            //    else
+            //        bFirstIsHigher = false;
 
-            }
+            //}
 
             for(int index = 0; index < newHandleObjects.Count; ++index)
             {
                 newHandleObjects[index].gameObject.tag = "Untagged";
-
-                if (bFirstIsHigher)
+                newHandleObjects[index].transform.parent = originalHandleParent.transform.root;
+                if(newHandleObjects[index].name == "left side")
                 {
-                    for(int i = 0; i < originalHand.GetComponents(typeof(Component)).Length; i++)
-                    {
-                        var components = originalHand.GetComponents(typeof(Component));
-
-                        if(components[i].GetType() != typeof(Rigidbody)) newHandleObjects[index].AddComponent(components[i].GetType());
-                        foreach (FieldInfo f in components[i].GetType().GetFields())
-                        {
-                            f.SetValue(newHandleObjects[index].GetComponents(typeof(Component))[i], f.GetValue(components[i]));
-                        } 
-                    }
-                    if (newHandleObjects[index].GetComponent<MeshCollider>() != null) newHandleObjects[index].GetComponent<MeshCollider>().convex = true;
-                    if (newHandleObjects[index].GetComponents<ConfigurableJoint>() != null) newHandleObjects[index].GetComponent<ConfigurableJoint>().connectedBody = originalHandleParent.GetComponent<Rigidbody>();
-                    print("this only once");
-                    bFirstIsHigher = false;
-                }
-
-                else
-                {
-                    newHandleObjects[index].AddComponent<Rigidbody>();
-                    newHandleObjects[index].GetComponent<Rigidbody>().useGravity = true;
+                    Destroy(newHandleObjects[index].GetComponent<MeshCollider>());
                     newHandleObjects[index].AddComponent<BoxCollider>();
-                    var joint = newHandleObjects[index].GetComponent<ConfigurableJoint>();
-                    if (joint != null)
-                        Destroy(joint);
-                    print("this also only once");
-                    bFirstIsHigher = true;
+                    newHandleObjects[index].transform.parent = originalHandleParent.transform;
                 }
-                  
+
+                if(newHandleObjects[index].name == "right side")
+                {
+                    newHandleObjects[index].AddComponent<BoxCollider>();
+                    newHandleObjects[index].AddComponent<Rigidbody>();
+                    grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[index].GetComponent<Rigidbody>();
+                    grabHandle.transform.parent = newHandleObjects[index].transform;
+                    grabHandle.AddComponent<Ball>();
+                }
+
+
+
+
+
+                //if (bFirstIsHigher)
+                //{
+                //    for (int i = 0; i < originalHand.GetComponents(typeof(Component)).Length; i++)
+                //    {
+                //        var components = originalHand.GetComponents(typeof(Component));
+
+                //        if (components[i].GetType() != typeof(Rigidbody)) newHandleObjects[index].AddComponent(components[i].GetType());
+                //        foreach (FieldInfo f in components[i].GetType().GetFields())
+                //        {
+                //            f.SetValue(newHandleObjects[index].GetComponents(typeof(Component))[i], f.GetValue(components[i]));
+                //        }
+                //    }
+
+                //    if (newHandleObjects[index].GetComponent<MeshCollider>() != null) newHandleObjects[index].GetComponent<MeshCollider>().convex = true;
+                //    if (newHandleObjects[index].GetComponents<ConfigurableJoint>() != null) newHandleObjects[index].GetComponent<ConfigurableJoint>().connectedBody = originalHandleParent.GetComponent<Rigidbody>();
+                //    print("this only once");
+                //    bFirstIsHigher = false;
+                //}
+
+                //else
+                //{
+                //    newHandleObjects[index].AddComponent<Rigidbody>();
+                //    newHandleObjects[index].GetComponent<Rigidbody>().useGravity = true;
+                //    newHandleObjects[index].AddComponent<BoxCollider>();
+                //    var joint = newHandleObjects[index].GetComponent<ConfigurableJoint>();
+                //    if (joint != null)
+                //        Destroy(joint);
+                //    print("this also only once");
+                //    bFirstIsHigher = true;
+                //}
+
             }
 
 
