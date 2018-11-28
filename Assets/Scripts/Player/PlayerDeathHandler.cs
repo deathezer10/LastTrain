@@ -20,14 +20,14 @@ public class PlayerDeathHandler : MonoBehaviour
         get { return m_GameOverTextKey; }
     }
 
-    public void KillPlayer(string gameOverTextKey)
+    public void KillPlayer(string gameOverTextKey, bool fadeInstantly = false)
     {
         if (isDead == true)
             return;
 
         isDead = true;
 
-        m_DeathFader.FadeIn(FadeTime, () =>
+        m_DeathFader.FadeIn((fadeInstantly) ? 0.1f : FadeTime, () =>
          {
              m_GameOverTextKey = gameOverTextKey;
              SceneManager.LoadScene("GameOver");
