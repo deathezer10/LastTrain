@@ -11,6 +11,23 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1212481995971860}
   m_IsPrefabAsset: 1
+--- !u!1 &1047515380211808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4083988005310472}
+  - component: {fileID: 33162759298087732}
+  - component: {fileID: 23886333940695662}
+  m_Layer: 0
+  m_Name: RightEyeVisual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1212481995971860
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,23 +43,6 @@ GameObject:
   - component: {fileID: 198806738687800670}
   m_Layer: 0
   m_Name: DollDeathParticle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1294152332370402
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4867488111549808}
-  - component: {fileID: 33390102417410272}
-  - component: {fileID: 23388630009201690}
-  m_Layer: 0
-  m_Name: LeftEyeVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,18 +133,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1944378457750582
+--- !u!1 &1935983048191692
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4088664561248848}
-  - component: {fileID: 33393485428354248}
-  - component: {fileID: 23742774393737490}
+  - component: {fileID: 4840212062470788}
+  - component: {fileID: 33761412188241048}
+  - component: {fileID: 23409368567133390}
   m_Layer: 0
-  m_Name: RightEyeVisual
+  m_Name: LeftEyeVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,14 +167,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4088664561248848
+--- !u!4 &4083988005310472
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944378457750582}
-  m_LocalRotation: {x: -0, y: 0.8941917, z: -0, w: 0.44768447}
-  m_LocalPosition: {x: 0.014528155, y: 0.17105222, z: -0.090275764}
+  m_GameObject: {fileID: 1047515380211808}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.06357288, y: 0.17105222, z: 0.065721035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4266292208784992}
@@ -187,7 +187,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212481995971860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2797779, y: 0.8311032, z: 2.959}
+  m_LocalPosition: {x: -1.1470349, y: 0.8311032, z: -1.6380916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4708283572963502}
@@ -196,8 +196,8 @@ Transform:
   - {fileID: 4360414453501312}
   - {fileID: 4983329280669154}
   - {fileID: 4904252384156520}
-  - {fileID: 4867488111549808}
-  - {fileID: 4088664561248848}
+  - {fileID: 4840212062470788}
+  - {fileID: 4083988005310472}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -253,14 +253,14 @@ Transform:
   m_Father: {fileID: 4266292208784992}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4867488111549808
+--- !u!4 &4840212062470788
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1294152332370402}
-  m_LocalRotation: {x: -0, y: 0.8941917, z: -0, w: 0.44768447}
-  m_LocalPosition: {x: 0.09210017, y: 0.1737274, z: 0.015021563}
+  m_GameObject: {fileID: 1935983048191692}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.067209244, y: 0.1737274, z: 0.064737916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4266292208784992}
@@ -292,12 +292,12 @@ Transform:
   m_Father: {fileID: 4266292208784992}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23388630009201690
+--- !u!23 &23409368567133390
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1294152332370402}
+  m_GameObject: {fileID: 1935983048191692}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -327,12 +327,12 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!23 &23742774393737490
+--- !u!23 &23886333940695662
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944378457750582}
+  m_GameObject: {fileID: 1047515380211808}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -362,20 +362,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33390102417410272
+--- !u!33 &33162759298087732
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1294152332370402}
-  m_Mesh: {fileID: 4300002, guid: 3f7512f4d20e35746acfb266b616752a, type: 3}
---- !u!33 &33393485428354248
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944378457750582}
+  m_GameObject: {fileID: 1047515380211808}
   m_Mesh: {fileID: 4300000, guid: 3f7512f4d20e35746acfb266b616752a, type: 3}
+--- !u!33 &33761412188241048
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1935983048191692}
+  m_Mesh: {fileID: 4300002, guid: 3f7512f4d20e35746acfb266b616752a, type: 3}
 --- !u!82 &82368571673916544
 AudioSource:
   m_ObjectHideFlags: 1
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dollEye: {fileID: 1872600719364242, guid: a8e4379cfb529574ca6a4fa933ffb899, type: 2}
-  leftEyeTrans: {fileID: 4867488111549808}
+  leftEyeTrans: {fileID: 0}
 --- !u!198 &198231350782410640
 ParticleSystem:
   m_ObjectHideFlags: 1
