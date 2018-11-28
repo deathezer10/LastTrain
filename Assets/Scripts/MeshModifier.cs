@@ -257,8 +257,10 @@ public class MeshModifier : MonoBehaviour
             newUV2.y = 0.5f + Vector3.Dot(displacement, upward);
             newUV2.z = 0.5f + Vector3.Dot(displacement, plane.normal);
 
-            if (-plane.normal == Vector3.up)
+            if (AlmostEqual(-plane.normal, Vector3.up, 0.5f))
                 bLeftSideHigher = true;
+
+            print(AlmostEqual(-plane.normal, Vector3.up, 0.5f));
 
             Left_side.insertTriangle(new Vector3[] { vertices[i], vertices[(i + 1) % vertices.Count], center },
                 new Vector3[] { -plane.normal, -plane.normal, -plane.normal }, new Vector2[] { newUV1, newUV2, new Vector2(0.5f, 0.5f) }, -plane.normal, Left_side.subIndices.Count - 1);
@@ -589,6 +591,15 @@ public class MeshModifier : MonoBehaviour
     }
 
 
+   static private bool AlmostEqual(Vector3 v1, Vector3 v2, float precision)
+    {
+        bool equal = true;
 
+        if (Mathf.Abs(v1.x - v2.x) > precision) equal = false;
+        if (Mathf.Abs(v1.y - v2.y) > precision) equal = false;
+        if (Mathf.Abs(v1.z - v2.z) > precision) equal = false;
+
+        return equal;
+    }
 
 }
