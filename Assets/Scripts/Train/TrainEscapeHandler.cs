@@ -34,16 +34,21 @@ public class TrainEscapeHandler : MonoBehaviour
         }
         else if (other.tag == "Bomb")
         {
+            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(true);
+
             other.gameObject.GetComponent<Bomb>().ThrownOut();
             PushObjectAway(other.gameObject);
         }
         else if (other.tag == "Doll")
         {
+            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(true);
+
             other.gameObject.GetComponent<Doll>().OnThrownOut();
             PushObjectAway(other.gameObject);
         }
         else if (other.gameObject.GetComponent<Rigidbody>() != null && other.gameObject.GetComponent<IInteractable>() != null)
         {
+            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(true);
             PushObjectAway(other.gameObject);
         }
 
