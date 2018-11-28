@@ -30,7 +30,7 @@ public class MeshModifier : MonoBehaviour
     {
 
 
-        if (transform.gameObject.name == "Blade")
+        if (transform.gameObject.name == "polySurface3157")
         {
             if (collision.gameObject.tag == "Band")
             {
@@ -69,9 +69,26 @@ public class MeshModifier : MonoBehaviour
 
 
             }
+
+
+            else if (collision.gameObject.tag == "Wire")
+            {
+                collision.gameObject.tag = "Untagged";
+                ContactPoint contact = collision.contacts[0];
+                newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
+
+            }
         }
-        else if (transform.gameObject.name == "GlassPiece")
+        else if (transform.gameObject.name.Contains("polySurface"))
         {
+            if(collision.gameObject.tag == "Wire")
+            {
+                collision.gameObject.tag = "Untagged";
+                ContactPoint contact = collision.contacts[0];
+                newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
+
+            }
+
 
         }
 
