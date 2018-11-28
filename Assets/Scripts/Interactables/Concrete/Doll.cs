@@ -11,6 +11,7 @@ public class Doll : GrabbableObject, IShootable
     public Color initialColor, flashColor, bombHintColor;
     public ParticleSystem dollDeathParticle;
     public int dollIndex;
+    public GameObject dollSmoke;
 
     AudioPlayer useAudio;
 
@@ -190,15 +191,16 @@ public class Doll : GrabbableObject, IShootable
     {
         burningSpots++;
 
-        if (burningSpots == 2)
+        if (burningSpots == 1)
         {
+            dollSmoke.SetActive(true);
             StartCoroutine(DollBurning());
         }
     }
 
     private IEnumerator DollBurning()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(10f);
         DestroyDoll();
     }
 
@@ -210,7 +212,7 @@ public class Doll : GrabbableObject, IShootable
 
             AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), playerHeadTrans.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
 
-            Instantiate(dollDeathParticle, transform.position + new Vector3(0f, 0.2f, 0), transform.rotation, null);
+            Instantiate(dollDeathParticle, transform.position, transform.localRotation, null);
             Destroy(gameObject);
         }
     }
@@ -221,7 +223,6 @@ public class Doll : GrabbableObject, IShootable
         if (m_DropSoundHandler != null && other.gameObject.layer == LayerMask.NameToLayer("Environment"))
         {
             m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
-            Debug.Log("dog: " + other.name);
         }
     }
 
