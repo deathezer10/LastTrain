@@ -176,15 +176,19 @@ public class StationMover : MonoBehaviour
                 {
                     m_SpawnStationNext = false;
                     m_LastRightTunnel = Instantiate(m_FakeStationPrefab, new Vector3(0, 0, m_LastRightTunnel.transform.position.z + (m_TunnelGapOffset * 3) + m_TunnelExtraGapOffset), Quaternion.identity, transform);
+
                     if (bSpawnDummyTrain)
                     {
                         m_DummyTrain = m_LastRightTunnel.transform.Find("DummyTrain").gameObject;
                         m_DummyTrain.gameObject.SetActive(true);
                         bTrackDummyTrain = true;
                     }
-                    m_TunnelExtraGapOffset += m_TunnelGapOffset * 2; // Offset the next tunnel to account for the length of the train station
-                    m_DestroySkipCounter += 2;
-                    m_ExtraGapPending = true;
+                    else
+                    {
+                        m_TunnelExtraGapOffset += m_TunnelGapOffset * 2; // Offset the next tunnel to account for the length of the train station
+                        m_DestroySkipCounter += 2;
+                        m_ExtraGapPending = true;
+                    }
 
                     m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
                 }

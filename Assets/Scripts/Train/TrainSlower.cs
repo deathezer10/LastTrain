@@ -36,6 +36,7 @@ public class TrainSlower : MonoBehaviour
         {
             m_SpeedHandler.enabled = false;
             m_StationMover.isMoving = false;
+            m_StationMover.currentMaxSpeed = 10;
             m_StationMover.currentSpeed = 10;
             m_StationMover.m_StationAcceleration = 1.1f;
             m_StartSlowing = true;
