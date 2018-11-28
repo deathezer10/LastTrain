@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4636508369204174}
   - component: {fileID: 65268092204641196}
   - component: {fileID: 114750878422362566}
-  m_Layer: 11
+  m_Layer: 17
   m_Name: PlayerDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,8 +379,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541374623924020}
-  m_LocalRotation: {x: -0, y: 0.8941917, z: -0, w: 0.44768447}
-  m_LocalPosition: {x: 8.0227165, y: 1.9085096, z: -14.532774}
+  m_LocalRotation: {x: -0, y: -0.40681288, z: -0, w: -0.9135115}
+  m_LocalPosition: {x: -1.026, y: 0.614, z: -22.895}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4534154533735870}
@@ -394,7 +394,7 @@ Transform:
   - {fileID: 4183633899172592}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 126.810005, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 48.010002, z: 0}
 --- !u!4 &4636508369204174
 Transform:
   m_ObjectHideFlags: 1
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   bombHintColor: {r: 0.21226418, g: 0.3548761, b: 1, a: 1}
   dollDeathParticle: {fileID: 198777413455702576, guid: b5857785983f0cd43ba2bb031cb2f6f0,
     type: 2}
-  dollIndex: 0
+  dollIndex: 1
 --- !u!114 &114750878422362566
 MonoBehaviour:
   m_ObjectHideFlags: 1

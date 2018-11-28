@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading.Tasks;
 
 public class Wallet : GrabbableObject
 {
@@ -76,15 +75,6 @@ public class Wallet : GrabbableObject
 
         if (!m_HasUsedOnce)
         {
-            this.Use();
-        }
-    }
-
-    private async void Use()
-    {
-        m_HasUsedOnce = true;
-
-        await Task.Run(()=>{
             m_TManager.SetPoster(TutorialManager.PosterState.None);
 
             m_animator.Play("Open");
@@ -98,6 +88,11 @@ public class Wallet : GrabbableObject
             Physics.IgnoreCollision(m_OpeningColliders[1], collider);
 
             m_HasUsedOnce = true;
-        });
+        }
     }
+
+    public void OnWalletOpened()
+    {
+    }
+
 }
