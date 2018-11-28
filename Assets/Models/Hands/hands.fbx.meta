@@ -98,13 +98,26 @@ ModelImporter:
     400090: R_wrist
     400092: righthand
     2100000: lambert1
+    2100002: StingrayPBS1
     4300000: righthand
     4300002: lefthand
+    7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
     13700000: lefthand
     13700002: righthand
-  externalObjects: {}
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StingrayPBS1
+    second: {fileID: 2100000, guid: 7b4fb66c7219233409bdd87923a743dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 0e50fb0053ba41644b076b9636dcee81, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
