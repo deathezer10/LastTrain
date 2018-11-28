@@ -35,9 +35,9 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 2.5
+    value: 1
   color:
-    overrideState: 1
+    overrideState: 0
     value: {r: 0.23717064, g: 0.2030527, b: 0.254717, a: 1}
   ambientOnly:
     overrideState: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   preset:
-    overrideState: 1
+    overrideState: 0
     value: 2
   maximumIterationCount:
     overrideState: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
     overrideState: 0
     value: 0.5
   vignette:
-    overrideState: 1
+    overrideState: 0
     value: 0.5
 --- !u!114 &114920453466142888
 MonoBehaviour:
@@ -116,7 +116,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 15
+    value: 7
   threshold:
     overrideState: 0
     value: 1
