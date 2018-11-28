@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerLaserPointerController : MonoBehaviour
 {
 
+    [SerializeField]
+    private Valve.VR.SteamVR_Input_Sources m_CurrentHand;
+
     private float m_PointerDistance;
 
     Vector3 m_OriginalLocalPosition;
@@ -12,15 +15,37 @@ public class PlayerLaserPointerController : MonoBehaviour
 
     VRGUIBase m_SelectedGUI;
 
+    PlayerViveController[] m_ViveControllers;
+
     private void Start()
     {
         m_OriginalLocalPosition = transform.localPosition;
         m_OriginalScale = transform.localScale;
         m_PointerDistance = transform.localScale.z;
+        m_ViveControllers = FindObjectsOfType<PlayerViveController>();
     }
 
     private void Update()
     {
+        if (m_ViveControllers.Length > 0)
+        {
+            foreach (var controller in m_ViveControllers)
+            {
+                if (controller.GetCurrentHand() == m_CurrentHand)
+                {
+                    if (controller.GetCurrentHandObject() != null)
+                    {
+                        transform.Find("LaserPointer").gameObject.SetActive(false);
+                        return;
+                    }
+                    else
+                    {
+                        transform.Find("LaserPointer").gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+
         RaycastHit hitInfo;
 
         Debug.DrawRay(transform.parent.position, transform.forward, Color.yellow);
