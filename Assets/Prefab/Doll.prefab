@@ -1091,9 +1091,9 @@ MonoBehaviour:
   initialColor: {r: 1, g: 0.748662, b: 0.13679245, a: 1}
   flashColor: {r: 1, g: 0.22960974, b: 0.16509432, a: 1}
   bombHintColor: {r: 0.21226418, g: 0.3548761, b: 1, a: 1}
-  dollDeathParticle: {fileID: 198777413455702576, guid: b5857785983f0cd43ba2bb031cb2f6f0,
+  dollDeathParticle: {fileID: 198806738687800670, guid: b5857785983f0cd43ba2bb031cb2f6f0,
     type: 2}
-  dollIndex: 1
+  dollIndex: 0
 --- !u!114 &114750878422362566
 MonoBehaviour:
   m_ObjectHideFlags: 1

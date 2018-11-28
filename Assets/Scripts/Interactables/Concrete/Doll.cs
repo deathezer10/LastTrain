@@ -210,7 +210,7 @@ public class Doll : GrabbableObject, IShootable
 
             AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), playerHeadTrans.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
 
-            Instantiate(dollDeathParticle, transform.position + new Vector3(0f, 0.2f, 0), transform.rotation, null);
+            Instantiate(dollDeathParticle, transform.position, transform.rotation, null);
             Destroy(gameObject);
         }
     }
@@ -221,7 +221,6 @@ public class Doll : GrabbableObject, IShootable
         if (m_DropSoundHandler != null && other.gameObject.layer == LayerMask.NameToLayer("Environment"))
         {
             m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
-            Debug.Log("dog: " + other.name);
         }
     }
 
