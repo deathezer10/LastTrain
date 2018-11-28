@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
+using Valve.VR;
 
 public class MeshModifier : MonoBehaviour
 {
@@ -20,10 +21,13 @@ public class MeshModifier : MonoBehaviour
     private GameObject originalHand;
     private GameObject grabHandle;
     private bool bFirstIsHigher = false;
+    private SawBlade sawBlade;
+    private float heldCutForce;
     // Use this for initialization
     void Start()
     {
-
+        sawBlade = FindObjectOfType<SawBlade>();
+        heldCutForce = 0.8f;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -32,9 +36,9 @@ public class MeshModifier : MonoBehaviour
 
         if (transform.gameObject.name == "polySurface3157")
         {
+            if (!sawBlade.IsSpinning()) return;
             if (collision.gameObject.tag == "Band")
-            {
-
+            {              
                 collision.gameObject.tag = "Untagged";
                 originalHand = collision.gameObject;
                 originalHandleParent = collision.gameObject.transform.parent.gameObject;
@@ -79,17 +83,58 @@ public class MeshModifier : MonoBehaviour
 
             }
         }
-        else if (transform.gameObject.name.Contains("polySurface"))
+
+        else if (transform.gameObject.tag == "GlassFragment")
         {
-            if(collision.gameObject.tag == "Wire")
+            var controller = PlayerViveController.GetControllerThatHolds(transform.gameObject);
+
+            // Check if player is holding the glass and a piece hasn't just randomly landed on the wire collider
+            if (controller != null && controller.gameObject.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity().magnitude >= heldCutForce)
             {
-                collision.gameObject.tag = "Untagged";
-                ContactPoint contact = collision.contacts[0];
-                newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
+
+                if (collision.gameObject.tag == "Wire")
+                {
+                    collision.gameObject.tag = "Untagged";
+                    ContactPoint contact = collision.contacts[0];
+                    newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
+
+                }
+
+                else if (collision.gameObject.tag == "Band")
+                {
+                    collision.gameObject.tag = "Untagged";
+                    originalHand = collision.gameObject;
+                    originalHandleParent = collision.gameObject.transform.parent.gameObject;
+                    grabHandle = collision.transform.GetChild(0).gameObject;
+                    ContactPoint contact = collision.contacts[0];
+                    newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
+
+
+                    for (int index = 0; index < newHandleObjects.Count; ++index)
+                    {
+                        newHandleObjects[index].gameObject.tag = "Untagged";
+                        newHandleObjects[index].transform.parent = originalHandleParent.transform.root;
+                        if (newHandleObjects[index].name == "left side")
+                        {
+                            Destroy(newHandleObjects[index].GetComponent<MeshCollider>());
+                            newHandleObjects[index].AddComponent<BoxCollider>();
+                            newHandleObjects[index].AddComponent<Ball>();
+                            newHandleObjects[index].transform.parent = originalHandleParent.transform;
+                        }
+
+                        if (newHandleObjects[index].name == "right side")
+                        {
+                            newHandleObjects[index].AddComponent<BoxCollider>();
+                            newHandleObjects[index].AddComponent<Rigidbody>();
+                            grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[index].GetComponent<Rigidbody>();
+                            grabHandle.transform.parent = newHandleObjects[index].transform;
+                            grabHandle.AddComponent<Ball>();
+                        }
+                    }
+
+                }
 
             }
-
-
         }
 
 
