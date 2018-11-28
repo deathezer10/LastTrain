@@ -210,7 +210,7 @@ public class Doll : GrabbableObject, IShootable
 
             AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), playerHeadTrans.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
 
-            Instantiate(dollDeathParticle, transform.position, transform.rotation, null);
+            Instantiate(dollDeathParticle, transform.position, transform.localRotation, null);
             Destroy(gameObject);
         }
     }

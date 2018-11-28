@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4945822044929906}
   - component: {fileID: 64416051075743110}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 136832726932090662}
   - component: {fileID: 54437921193748558}
   - component: {fileID: 114462872288464228}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
