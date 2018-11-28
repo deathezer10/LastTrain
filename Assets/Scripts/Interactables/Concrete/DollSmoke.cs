@@ -6,9 +6,14 @@ public class DollSmoke : MonoBehaviour
 {
     AudioPlayer burnAudio;
 
+    private void Start()
+    {
+        burnAudio = GetComponent<AudioPlayer>();
+    }
+
     private void OnEnable()
     {
-        burnAudio.Play();
+        //burnAudio.Play();
     }
 
     void Update()

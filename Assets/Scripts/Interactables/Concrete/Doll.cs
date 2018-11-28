@@ -24,8 +24,7 @@ public class Doll : GrabbableObject, IShootable
     bool death;
     bool grabbedOnce = false;
     bool showingHint;
-
-    int burningSpots;
+    bool burnStarted;
 
     DollDeathAnnouncements ddAnnouncements;
 
@@ -189,13 +188,15 @@ public class Doll : GrabbableObject, IShootable
 
     public void BurningStart()
     {
-        burningSpots++;
-
-        if (burningSpots == 1)
+        if (burnStarted)
         {
-            dollSmoke.SetActive(true);
-            StartCoroutine(DollBurning());
+            return;
         }
+
+        burnStarted = true;
+
+        dollSmoke.SetActive(true);
+        StartCoroutine(DollBurning());
     }
 
     private IEnumerator DollBurning()
@@ -212,7 +213,7 @@ public class Doll : GrabbableObject, IShootable
 
             AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), playerHeadTrans.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
 
-            Instantiate(dollDeathParticle, transform.position, transform.localRotation, null);
+            Instantiate(dollDeathParticle, transform.position, transform.rotation, null);
             Destroy(gameObject);
         }
     }

@@ -20,7 +20,7 @@ public class DollDeathParticle : MonoBehaviour
 
     private IEnumerator ParticleTimer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         Instantiate(dollEye, leftEyeTrans.position, leftEyeTrans.rotation, null);
         Destroy(gameObject);
     }
