@@ -28,87 +28,54 @@ public class MeshModifier : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Band")
+
+
+        if (transform.gameObject.name == "Blade")
         {
-            collision.gameObject.tag = "Untagged";
-            originalHand = collision.gameObject;
-            originalHandleParent = collision.gameObject.transform.parent.gameObject;
-            grabHandle = collision.transform.GetChild(0).gameObject;
-            ContactPoint contact = collision.contacts[0];
-            newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
-
-            //if (newHandleObjects.Count >= 2)
-            //{
-            //    if (newHandleObjects[0].transform.localPosition.y > newHandleObjects[1].transform.localPosition.y)
-            //    {
-            //        bFirstIsHigher = true;
-            //    }
-
-            //    else
-            //        bFirstIsHigher = false;
-
-            //}
-
-            for(int index = 0; index < newHandleObjects.Count; ++index)
+            if (collision.gameObject.tag == "Band")
             {
-                newHandleObjects[index].gameObject.tag = "Untagged";
-                newHandleObjects[index].transform.parent = originalHandleParent.transform.root;
-                if(newHandleObjects[index].name == "left side")
+
+                collision.gameObject.tag = "Untagged";
+                originalHand = collision.gameObject;
+                originalHandleParent = collision.gameObject.transform.parent.gameObject;
+                grabHandle = collision.transform.GetChild(0).gameObject;
+                ContactPoint contact = collision.contacts[0];
+                newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material));
+
+
+                for (int index = 0; index < newHandleObjects.Count; ++index)
                 {
-                    Destroy(newHandleObjects[index].GetComponent<MeshCollider>());
-                    newHandleObjects[index].AddComponent<BoxCollider>();
-                    newHandleObjects[index].transform.parent = originalHandleParent.transform;
+                    newHandleObjects[index].gameObject.tag = "Untagged";
+                    newHandleObjects[index].transform.parent = originalHandleParent.transform.root;
+                    if (newHandleObjects[index].name == "left side")
+                    {
+                        Destroy(newHandleObjects[index].GetComponent<MeshCollider>());
+                        newHandleObjects[index].AddComponent<BoxCollider>();
+                        newHandleObjects[index].AddComponent<Ball>();
+                        newHandleObjects[index].transform.parent = originalHandleParent.transform;
+                    }
+
+                    if (newHandleObjects[index].name == "right side")
+                    {
+                        newHandleObjects[index].AddComponent<BoxCollider>();
+                        newHandleObjects[index].AddComponent<Rigidbody>();
+                        grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[index].GetComponent<Rigidbody>();
+                        grabHandle.transform.parent = newHandleObjects[index].transform;
+                        grabHandle.AddComponent<Ball>();
+                    }
+
                 }
 
-                if(newHandleObjects[index].name == "right side")
-                {
-                    newHandleObjects[index].AddComponent<BoxCollider>();
-                    newHandleObjects[index].AddComponent<Rigidbody>();
-                    grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[index].GetComponent<Rigidbody>();
-                    grabHandle.transform.parent = newHandleObjects[index].transform;
-                    grabHandle.AddComponent<Ball>();
-                }
 
-
-
-
-
-                //if (bFirstIsHigher)
-                //{
-                //    for (int i = 0; i < originalHand.GetComponents(typeof(Component)).Length; i++)
-                //    {
-                //        var components = originalHand.GetComponents(typeof(Component));
-
-                //        if (components[i].GetType() != typeof(Rigidbody)) newHandleObjects[index].AddComponent(components[i].GetType());
-                //        foreach (FieldInfo f in components[i].GetType().GetFields())
-                //        {
-                //            f.SetValue(newHandleObjects[index].GetComponents(typeof(Component))[i], f.GetValue(components[i]));
-                //        }
-                //    }
-
-                //    if (newHandleObjects[index].GetComponent<MeshCollider>() != null) newHandleObjects[index].GetComponent<MeshCollider>().convex = true;
-                //    if (newHandleObjects[index].GetComponents<ConfigurableJoint>() != null) newHandleObjects[index].GetComponent<ConfigurableJoint>().connectedBody = originalHandleParent.GetComponent<Rigidbody>();
-                //    print("this only once");
-                //    bFirstIsHigher = false;
-                //}
-
-                //else
-                //{
-                //    newHandleObjects[index].AddComponent<Rigidbody>();
-                //    newHandleObjects[index].GetComponent<Rigidbody>().useGravity = true;
-                //    newHandleObjects[index].AddComponent<BoxCollider>();
-                //    var joint = newHandleObjects[index].GetComponent<ConfigurableJoint>();
-                //    if (joint != null)
-                //        Destroy(joint);
-                //    print("this also only once");
-                //    bFirstIsHigher = true;
-                //}
 
             }
-
-
+        }
+        else if (transform.gameObject.name == "GlassPiece")
+        {
 
         }
+
+
     }
 
 
