@@ -138,6 +138,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1539224229924188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4230031987176010}
+  - component: {fileID: 136670431798603774}
+  - component: {fileID: 114448316891697048}
+  - component: {fileID: 82646607036319474}
+  - component: {fileID: 114347309486674092}
+  m_Layer: 0
+  m_Name: DollSmoke
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1541374623924020
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +325,19 @@ Transform:
   m_Father: {fileID: 4610869121937448}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 26.055, y: 35.492, z: -24.152}
+--- !u!4 &4230031987176010
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539224229924188}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4610869121937448}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4303981965856358
 Transform:
   m_ObjectHideFlags: 1
@@ -380,7 +412,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541374623924020}
   m_LocalRotation: {x: -0, y: -0.40681288, z: -0, w: -0.9135115}
-  m_LocalPosition: {x: -1.026, y: 0.614, z: -22.895}
+  m_LocalPosition: {x: 1.0682241, y: 0.8311032, z: 0.54304457}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4534154533735870}
@@ -392,6 +424,7 @@ Transform:
   - {fileID: 4859296472462584}
   - {fileID: 4833612213989808}
   - {fileID: 4183633899172592}
+  - {fileID: 4230031987176010}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 48.010002, z: 0}
@@ -1020,6 +1053,101 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &82646607036319474
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539224229924188}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.5
+  MaxDistance: 4.5
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114042419663301284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1036,6 +1164,33 @@ MonoBehaviour:
   playDelay: 0
   _clip: {fileID: 8300000, guid: 328deee1f8788704099686357e1bda69, type: 3}
   clipAlias: 
+--- !u!114 &114347309486674092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539224229924188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2782a74d37cb4974c9ac2bee8d406729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizePitch: 0
+  pitchRandomRange: 0.05
+  playDelay: 0
+  _clip: {fileID: 8300000, guid: d411eb3a22c17474082855d2b93a60de, type: 3}
+  clipAlias: 
+--- !u!114 &114448316891697048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539224229924188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5edbddef21ae29468bb56c23cf77afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114560179385107176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1094,6 +1249,7 @@ MonoBehaviour:
   dollDeathParticle: {fileID: 198806738687800670, guid: b5857785983f0cd43ba2bb031cb2f6f0,
     type: 2}
   dollIndex: 0
+  dollSmoke: {fileID: 1539224229924188}
 --- !u!114 &114750878422362566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1142,6 +1298,19 @@ CapsuleCollider:
   m_Height: 0.25
   m_Direction: 0
   m_Center: {x: 0, y: 0.09, z: 0}
+--- !u!136 &136670431798603774
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539224229924188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.28
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!136 &136682413743978382
 CapsuleCollider:
   m_ObjectHideFlags: 1

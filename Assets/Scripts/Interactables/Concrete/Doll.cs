@@ -11,6 +11,7 @@ public class Doll : GrabbableObject, IShootable
     public Color initialColor, flashColor, bombHintColor;
     public ParticleSystem dollDeathParticle;
     public int dollIndex;
+    public GameObject dollSmoke;
 
     AudioPlayer useAudio;
 
@@ -190,15 +191,16 @@ public class Doll : GrabbableObject, IShootable
     {
         burningSpots++;
 
-        if (burningSpots == 2)
+        if (burningSpots == 1)
         {
+            dollSmoke.SetActive(true);
             StartCoroutine(DollBurning());
         }
     }
 
     private IEnumerator DollBurning()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(10f);
         DestroyDoll();
     }
 
