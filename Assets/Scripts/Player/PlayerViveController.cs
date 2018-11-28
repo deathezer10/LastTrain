@@ -119,9 +119,6 @@ public class PlayerViveController : MonoBehaviour
 
     virtual protected void OnTriggerEnter(Collider other)
     {
-        if (PlayerOriginHandler.IsOutsideOrigin)
-            return;
-
         var iObject = other.GetComponent<IInteractable>();
 
         if (GetCurrentHandObject() == null && iObject != null && GetCurrentHandObject(true) != other.gameObject)
