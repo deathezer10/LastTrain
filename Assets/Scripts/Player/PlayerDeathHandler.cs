@@ -27,7 +27,7 @@ public class PlayerDeathHandler : MonoBehaviour
 
         isDead = true;
 
-        m_DeathFader.FadeIn((fadeInstantly) ? 0.1f : FadeTime, () =>
+        m_DeathFader.FadeIn((fadeInstantly) ? 0 : FadeTime, () =>
          {
              m_GameOverTextKey = gameOverTextKey;
              SceneManager.LoadScene("GameOver");

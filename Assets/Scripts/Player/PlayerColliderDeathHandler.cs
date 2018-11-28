@@ -37,7 +37,8 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
         if (other.gameObject.name == "Shell")
         {
             if (FindObjectOfType<TrainVelocity>().GetVelocity > 2 && !FindObjectOfType<TrainArriver>().HasArrived)
-               playerDeathHandler.KillPlayer("death_trainhit");
+               playerDeathHandler.KillPlayer("death_trainhit", true);
+
         }
 
     }

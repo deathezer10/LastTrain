@@ -77,7 +77,7 @@ public class Revolver : GrabbableObject
         var origin = m_LaserPointer.transform.parent.position;
         var dir = m_LaserPointer.transform.TransformDirection(-Vector3.forward);
 
-        if (Physics.Raycast(origin, dir, out hitInfo, m_PointerDistance))
+        if (Physics.Raycast(origin, dir, out hitInfo, m_PointerDistance, ~(1 << LayerMask.NameToLayer("Doll")), QueryTriggerInteraction.UseGlobal))
         {
             m_LaserPointer.transform.position = Vector3.Lerp(hitInfo.point, m_LaserPointer.transform.parent.position, 0.5f);
 
