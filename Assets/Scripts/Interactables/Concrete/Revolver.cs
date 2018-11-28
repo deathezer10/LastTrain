@@ -38,7 +38,8 @@ public class Revolver : GrabbableObject
     public RaycastHit? hitInfo { get; private set; }
 
     // How many bullets to start with?
-    int m_CurrentBulletCount = 2;
+    [SerializeField]
+    private int m_CurrentBulletCount = 2;
 
     private void Start()
     {
