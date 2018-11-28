@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
-public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
+public class PlayerColliderDeathHandler : MonoBehaviour, IShootable
 {
     PlayerDeathHandler playerDeathHandler;
 
-    void Start () {
+    void Start()
+    {
         playerDeathHandler = FindObjectOfType<PlayerDeathHandler>();
     }
-	
+
     private void OnTriggerEnter(Collider other)
     {
         // This block handled in TrainEscapeHandler, for now.
@@ -37,7 +38,7 @@ public class PlayerColliderDeathHandler : MonoBehaviour , IShootable
         if (other.gameObject.name == "Shell")
         {
             if (FindObjectOfType<TrainVelocity>().GetVelocity > 2 && !FindObjectOfType<TrainArriver>().HasArrived)
-               playerDeathHandler.KillPlayer("death_trainhit", true);
+                playerDeathHandler.KillPlayer("death_trainhit", true);
 
         }
 
