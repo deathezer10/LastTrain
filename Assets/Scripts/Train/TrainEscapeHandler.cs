@@ -35,20 +35,46 @@ public class TrainEscapeHandler : MonoBehaviour
         else if (other.tag == "Bomb")
         {
             other.gameObject.GetComponent<Bomb>().ThrownOut();
-
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, -2f * stationMover.currentSpeed), ForceMode.Impulse);
+            PushObjectAway(other.gameObject);
         }
         else if (other.tag == "Doll")
         {
             other.gameObject.GetComponent<Doll>().OnThrownOut();
-
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, -2f * stationMover.currentSpeed), ForceMode.Impulse);
+            PushObjectAway(other.gameObject);
         }
         else if (other.gameObject.GetComponent<Rigidbody>() != null && other.gameObject.GetComponent<IInteractable>() != null)
         {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 3f, -2f * stationMover.currentSpeed), ForceMode.Impulse);
+            PushObjectAway(other.gameObject);
         }
 
+    }
+
+    private void PushObjectAway(GameObject obj)
+    {
+
+        // Disable all colliders for self
+        foreach (Collider col in obj.GetComponents<Collider>())
+        {
+            col.enabled = false;
+        }
+
+        var childrens = obj.transform.GetAllChild();
+
+        // Disable all colliders for childrens
+        foreach (var child in childrens)
+        {
+            foreach (Collider col in child.GetComponents<Collider>())
+            {
+                col.enabled = false;
+            }
+        }
+
+        var rb = obj.GetComponent<Rigidbody>();
+
+        rb.velocity = Vector3.zero;
+        rb.useGravity = false;
+        rb.detectCollisions = false;
+        rb.AddForce(new Vector3(0, 0, -2f * stationMover.currentSpeed), ForceMode.Impulse);
 
     }
 
