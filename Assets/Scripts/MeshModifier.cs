@@ -30,7 +30,7 @@ public class MeshModifier : MonoBehaviour
     {
         sawBlade = FindObjectOfType<SawBlade>();
         heldCutForce = 0.8f;
-        layer_mask = LayerMask.GetMask("Floor");
+        layer_mask = LayerMask.GetMask("Environment");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,7 +67,7 @@ public class MeshModifier : MonoBehaviour
 
                     if(index == 0)
                     {
-                        if(rangeToFloor[0] > rangeToFloor[1])
+                        if((rangeToFloor[0] - rangeToFloor[1] > 0))
                             if (newHandleObjects[index].name == "left side")
                             {
                                 Destroy(newHandleObjects[index].GetComponent<MeshCollider>());
@@ -89,7 +89,7 @@ public class MeshModifier : MonoBehaviour
 
                     if (index == 1)
                     {
-                        if (rangeToFloor[1] > rangeToFloor[0])
+                        if ((rangeToFloor[1] - rangeToFloor[0]) > 0)
                             if (newHandleObjects[index].name == "left side")
                             {
                                 Destroy(newHandleObjects[index].GetComponent<MeshCollider>());
