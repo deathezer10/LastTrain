@@ -50,6 +50,7 @@ public class MeshModifier : MonoBehaviour
 
                 for (int index = 0; index < newHandleObjects.Count; ++index)
                 {
+                    print(bLeftSideHigher);
                     newHandleObjects[index].gameObject.tag = "Untagged";
                     newHandleObjects[index].transform.parent = originalHandleParent.transform.root;
 
@@ -60,8 +61,8 @@ public class MeshModifier : MonoBehaviour
 
                             Destroy(newHandleObjects[index].GetComponent<MeshCollider>());
                             newHandleObjects[index].AddComponent<BoxCollider>();
-                            newHandleObjects[index].AddComponent<Ball>();
                             newHandleObjects[index].transform.parent = originalHandleParent.transform;
+                            return;
                         }
 
 
@@ -73,6 +74,7 @@ public class MeshModifier : MonoBehaviour
                             grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[index].GetComponent<Rigidbody>();
                             grabHandle.transform.parent = newHandleObjects[index].transform;
                             grabHandle.AddComponent<Ball>();
+                            return;
                         }
                        
                     }
