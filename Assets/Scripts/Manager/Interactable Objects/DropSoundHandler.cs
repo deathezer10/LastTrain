@@ -88,7 +88,7 @@ public class DropSoundHandler
             float volumeScale = (Mathf.Clamp(relativeVelocity.magnitude, minMagnitude, maxMagnitude) / maxMagnitude);
 
             // Uncomment to see which object is making noise
-             Debug.LogFormat("Sound: {0}", m_Source.name);
+             //Debug.LogFormat("Sound: {0}", m_Source.name);
 
             m_AudioSource.PlayOneShot(m_AudioSource.clip, volumeScale);
         }

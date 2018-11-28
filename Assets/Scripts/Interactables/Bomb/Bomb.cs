@@ -157,8 +157,8 @@ public class Bomb : GrabbableObject, IShootable
     {
         yield return new WaitForSeconds(2f);
 
-        AnnouncementManager.Instance.PlayAnnouncement3D("bomb_defused", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
-        AnnouncementManager.Instance.PlayAnnouncement3D("increase_speed", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
+        AnnouncementManager.Instance.PlayAnnouncement2D("bomb_defused", AnnouncementManager.AnnounceType.Queue, 0f);
+        AnnouncementManager.Instance.PlayAnnouncement2D("increase_speed", AnnouncementManager.AnnounceType.Queue, 1f);
 
         FindObjectOfType<TrainBetweenCabinDoors>().OpenBetweenDoors();
 

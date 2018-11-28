@@ -72,6 +72,7 @@ public class MeshModifier : MonoBehaviour
                         grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[0].GetComponent<Rigidbody>();
                         grabHandle.transform.parent = newHandleObjects[0].transform;
                         grabHandle.AddComponent<Ball>();
+                        Destroy(newHandleObjects[0].GetComponent<ConfigurableJoint>());
                     }
 
                 
@@ -87,6 +88,7 @@ public class MeshModifier : MonoBehaviour
                     grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[1].GetComponent<Rigidbody>();
                     grabHandle.transform.parent = newHandleObjects[1].transform;
                     grabHandle.AddComponent<Ball>();
+                    Destroy(newHandleObjects[1].GetComponent<ConfigurableJoint>());
                 }
 
                 
@@ -233,7 +235,6 @@ public class MeshModifier : MonoBehaviour
     {
 
         Vector3 center = Vector3.zero;
-        bLeftSideHigher = false;
 
         foreach (Vector3 point in vertices)
         {
@@ -269,10 +270,7 @@ public class MeshModifier : MonoBehaviour
             newUV2.x = 0.5f + Vector3.Dot(displacement, left);
             newUV2.y = 0.5f + Vector3.Dot(displacement, upward);
             newUV2.z = 0.5f + Vector3.Dot(displacement, plane.normal);
-
-            if (AlmostEqual(-plane.normal, Vector3.up, 1.0f))
-                bLeftSideHigher = true;
-
+            
             print(AlmostEqual(-plane.normal, Vector3.up, 0.5f));
 
             Left_side.insertTriangle(new Vector3[] { vertices[i], vertices[(i + 1) % vertices.Count], center },

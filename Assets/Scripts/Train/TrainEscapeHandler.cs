@@ -21,7 +21,7 @@ public class TrainEscapeHandler : MonoBehaviour
             col.enabled = false;
         }
 
-        colliders[0].size = new Vector3(0.9f, 0.7f, 36f);
+        // colliders[0].size = new Vector3(0.9f, 0.7f, 36f);
 
         wallCollider.enabled = false;
     }
@@ -34,21 +34,21 @@ public class TrainEscapeHandler : MonoBehaviour
         }
         else if (other.tag == "Bomb")
         {
-            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(true);
+            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(false);
 
             other.gameObject.GetComponent<Bomb>().ThrownOut();
             PushObjectAway(other.gameObject);
         }
         else if (other.tag == "Doll")
         {
-            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(true);
+            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(false);
 
             other.gameObject.GetComponent<Doll>().OnThrownOut();
             PushObjectAway(other.gameObject);
         }
         else if (other.gameObject.GetComponent<Rigidbody>() != null && other.gameObject.GetComponent<IInteractable>() != null)
         {
-            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(true);
+            PlayerViveController.GetControllerThatHolds(other.gameObject)?.DetachCurrentObject(false);
             PushObjectAway(other.gameObject);
         }
 
@@ -76,10 +76,7 @@ public class TrainEscapeHandler : MonoBehaviour
 
         var rb = obj.GetComponent<Rigidbody>();
 
-        rb.velocity = Vector3.zero;
-        rb.useGravity = false;
-        rb.detectCollisions = false;
-        rb.AddForce(new Vector3(0, 0, -2f * stationMover.currentSpeed), ForceMode.Impulse);
+        rb.AddForce(new Vector3(0, 0, -stationMover.currentSpeed), ForceMode.Impulse);
 
     }
 

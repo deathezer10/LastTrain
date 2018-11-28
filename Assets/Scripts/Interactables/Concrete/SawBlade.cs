@@ -8,11 +8,11 @@ public class SawBlade : GrabbableObject
     PlayerViveController playerController;
     SteamVR_Input_Sources playerHand;
     AudioPlayer spinAudio;
-    
+
     bool spinning, held;
     float vibrationTimer;
     Animator sawBladeAnimator;
-    
+
     private void Start()
     {
         sawBladeAnimator = GetComponent<Animator>();
@@ -28,6 +28,9 @@ public class SawBlade : GrabbableObject
                 var source = playerHand;
                 playerController.Vibration(0, 0.2f, 0.2f, 0.7f, source);
                 vibrationTimer = Time.time + 0.2f;
+            } else
+            {
+                playerController.Vibration(0, 0, 0, 0, playerHand);
             }
         }
     }
@@ -45,7 +48,7 @@ public class SawBlade : GrabbableObject
     public override void OnControllerExit()
     {
         base.OnControllerExit();
-        
+
         spinning = false;
         held = false;
 
@@ -66,10 +69,13 @@ public class SawBlade : GrabbableObject
 
     public override void OnGrabReleased()
     {
+        base.OnGrabReleased();
+
         spinning = false;
         held = false;
 
         sawBladeAnimator.Play("SawBladeStop");
+
         spinAudio.Stop();
     }
 

@@ -39,6 +39,7 @@ TagManager:
   - drivercabin
   - Train
   - Band
+  - Wire
   layers:
   - Default
   - TransparentFX
@@ -61,7 +62,7 @@ TagManager:
   - BalanceHandleCollider
   - BalanceHandle
   - TrainSlower
-  - 
+  - Bomb
   - 
   - 
   - 

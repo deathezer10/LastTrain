@@ -35,12 +35,12 @@ public class PlayerLaserPointerController : MonoBehaviour
                 {
                     if (controller.GetCurrentHandObject() != null)
                     {
-                        transform.Find("LaserPointer").gameObject.SetActive(false);
+                        GetComponent<MeshRenderer>().enabled = false;
                         return;
                     }
                     else
                     {
-                        transform.Find("LaserPointer").gameObject.SetActive(true);
+                        GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
