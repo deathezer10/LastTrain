@@ -13,7 +13,7 @@ public class PlayerVictoryHandler : MonoBehaviour
 
     public void PlayerVictory()
     {
-        victoryFader.FadeIn(2, () =>
+        victoryFader.FadeIn(4f, () =>
         {
             SceneManager.LoadScene("Victory");
         });
