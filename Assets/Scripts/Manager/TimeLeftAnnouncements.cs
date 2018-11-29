@@ -16,7 +16,10 @@ public class TimeLeftAnnouncements : MonoBehaviour
         timeBetweenEachStation = FindObjectOfType<TrainTimeHandler>().GetTimeBetween();
 
         totalTrainTime = timeBetweenEachStation * 5;
+    }
 
+    public void TrainMoveStart()
+    {
         StartCoroutine(TimeLeftRoutine());
     }
 

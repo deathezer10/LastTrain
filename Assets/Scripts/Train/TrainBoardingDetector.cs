@@ -62,6 +62,7 @@ public class TrainBoardingDetector : MonoBehaviour
                     });
 
                     m_TrainTimeHandler.StartTrainTime();
+                    FindObjectOfType<TimeLeftAnnouncements>().TrainMoveStart();
                     FindObjectOfType<TrainEscapeHandler>().TrainMoveStart();
 
                     AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", other.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
