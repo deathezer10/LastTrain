@@ -26,7 +26,7 @@ public class PlayerDeathHandler : MonoBehaviour
             return;
 
         isDead = true;
-
+        DriverCabinDoorLock.bIsUnlocked = false;
         m_DeathFader.FadeIn((fadeInstantly) ? 0 : FadeTime, () =>
          {
              m_GameOverTextKey = gameOverTextKey;

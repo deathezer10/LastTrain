@@ -445,7 +445,7 @@ public class MeshModifier : MonoBehaviour
                 else
                 {
                     LeftPoints[1] = mesh.vertices[p];
-                    LeftUvs[1] = mesh.vertices[p];
+                    LeftUvs[1] = mesh.uv[p];
                     LeftNormals[1] = mesh.normals[p];
 
                 }
@@ -470,7 +470,7 @@ public class MeshModifier : MonoBehaviour
                 else
                 {
                     RightPoints[1] = mesh.vertices[p];
-                    RightUvs[1] = mesh.vertices[p];
+                    RightUvs[1] = mesh.uv[p];
                     RightNormals[1] = mesh.normals[p];
                 }
             }
