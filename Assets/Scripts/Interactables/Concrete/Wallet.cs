@@ -11,11 +11,13 @@ public class Wallet : GrabbableObject
     [SerializeField]
     private GameObject m_TutorialArrow;
 
+    [SerializeField]
+    private Transform m_ICSpawnSpot;
+
     private bool m_HasAnnounced = false;
     private bool m_HasUsedOnce = false;
 
     TutorialManager m_TManager;
-    //AudioPlayer m_TManagerAudioPlayer;
 
     PlayerViveController m_Controller;
 
@@ -29,7 +31,6 @@ public class Wallet : GrabbableObject
     private void Start()
     {
         m_TManager = FindObjectOfType<TutorialManager>();
-        //m_TManagerAudioPlayer = m_TManager.GetComponent<AudioPlayer>();
         m_Colliders = GetComponents<BoxCollider>();
         m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
 
@@ -50,9 +51,7 @@ public class Wallet : GrabbableObject
 
         if (m_Controller == null)
             return;
-
-        //transform.position = m_Controller.transform.position;
-        //transform.rotation = m_Controller.transform.rotation;
+        
 
         if (m_TutorialArrow != null && m_TutorialArrow.activeInHierarchy)
             m_TutorialArrow.SetActive(false);
@@ -63,8 +62,7 @@ public class Wallet : GrabbableObject
             
             AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
             AnnouncementManager.Instance.PlayAnnouncement3D("wallet_pickup", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
-
-            //m_TManagerAudioPlayer.Play("newtutorial_trainarriving", () => { m_TManagerAudioPlayer.Play("newtutorial_trainarriving"); }, 2);
+            
             m_HasAnnounced = true;
         }
     }
@@ -82,7 +80,7 @@ public class Wallet : GrabbableObject
             m_Colliders[0].center = m_Colliders[1].center;
             m_Colliders[0].size = m_Colliders[1].size;
 
-            GameObject obj = Instantiate(m_ICCardPrefab, transform.position, Quaternion.identity);
+            GameObject obj = Instantiate(m_ICCardPrefab, m_ICSpawnSpot.position, Quaternion.identity);
             var collider = obj.GetComponent<Collider>();
             Physics.IgnoreCollision(m_OpeningColliders[0], collider);
             Physics.IgnoreCollision(m_OpeningColliders[1], collider);

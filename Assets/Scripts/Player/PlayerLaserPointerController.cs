@@ -48,7 +48,7 @@ public class PlayerLaserPointerController : MonoBehaviour
 
         RaycastHit hitInfo;
 
-        Debug.DrawRay(transform.parent.position, transform.forward, Color.yellow);
+        //Debug.DrawRay(transform.parent.position, transform.forward, Color.yellow);
 
         if (Physics.Raycast(transform.parent.position, transform.forward, out hitInfo, m_PointerDistance))
         {
