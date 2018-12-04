@@ -16,8 +16,10 @@ public class Scissors : GrabbableObject
     Vector3[] turnToRots = { new Vector3(-15f, 0, 0), new Vector3(-15f, 180, 0) };
 
     float lastCutTimer;
-    float cutTime = 0.4f;
-    bool held, open;
+    float cutTime = 0.25f;
+    bool held, open = false;
+    
+    PlayerViveController controller;
 
     AudioPlayer cutAudio;
 
@@ -26,11 +28,25 @@ public class Scissors : GrabbableObject
     {
         cutObject.SetActive(false);
         cutAudio = GetComponent<AudioPlayer>();
+        lastCutTimer = Time.time;
+    }
+
+    public override void OnControllerEnter(PlayerViveController currentController)
+    {
+        base.OnControllerEnter(currentController);
+        controller = currentController;
     }
 
     public override void OnGrab()
     {
         base.OnGrab();
+
+        if (controller == null)
+            return;
+
+        transform.position = controller.transform.position;
+        transform.rotation = controller.transform.rotation;
+        transform.Rotate(new Vector3(-90f, 0, 0));
 
         held = true;
     }
@@ -46,21 +62,21 @@ public class Scissors : GrabbableObject
     {
         base.OnUse();
 
-        if (held && lastCutTimer >= Time.time && open)
+        if (held && lastCutTimer <= Time.time && open)
         {
             open = false;
 
-            lastCutTimer = Time.time + cutTime + 0.1f;
+            lastCutTimer = Time.time + cutTime + 0.05f;
 
             cutAudio.Play();
 
             StartCoroutine(ScissorsCut());
         }
-        else if (held && lastCutTimer >= Time.time && !open)
+        else if (held && lastCutTimer <= Time.time && !open)
         {
             open = true;
 
-            lastCutTimer = Time.time + cutTime + 0.1f;
+            lastCutTimer = Time.time + cutTime + 0.05f;
 
             ScissorsOpen();
         }
@@ -69,15 +85,15 @@ public class Scissors : GrabbableObject
     private IEnumerator ScissorsCut()
     {
         int index = 0;
-        scissorSides[index].DOLocalRotate(turnToRots[index], cutTime, RotateMode.Fast);
+        scissorSides[index].DOLocalRotate(originalRots[index], cutTime, RotateMode.Fast);
         index++;
-        scissorSides[index].DOLocalRotate(turnToRots[index], cutTime, RotateMode.Fast);
+        scissorSides[index].DOLocalRotate(originalRots[index], cutTime, RotateMode.Fast);
 
         yield return new WaitForSeconds(cutTime / 5);
 
         cutObject.SetActive(true);
 
-        yield return new WaitForSeconds(cutTime / 2);
+        yield return new WaitForSeconds(cutTime / 1.5f);
 
         cutObject.SetActive(false);
     }
@@ -85,9 +101,9 @@ public class Scissors : GrabbableObject
     private void ScissorsOpen()
     {
         int index = 0;
-        scissorSides[index].DOLocalRotate(originalRots[index], cutTime, RotateMode.Fast);
+        scissorSides[index].DOLocalRotate(turnToRots[index], cutTime, RotateMode.Fast);
         index++;
-        scissorSides[index].DOLocalRotate(originalRots[index], cutTime, RotateMode.Fast);
+        scissorSides[index].DOLocalRotate(turnToRots[index], cutTime, RotateMode.Fast);
     }
 
 }
