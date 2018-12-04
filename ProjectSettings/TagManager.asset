@@ -40,6 +40,7 @@ TagManager:
   - Train
   - Band
   - Wire
+  - Scissors
   layers:
   - Default
   - TransparentFX

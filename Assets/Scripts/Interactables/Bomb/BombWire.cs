@@ -10,7 +10,7 @@ public class BombWire : MonoBehaviour
 
     private void Start()
     {
-        heldCutForce = 0.8f;
+        heldCutForce = 0.7f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +26,10 @@ public class BombWire : MonoBehaviour
             }
         }
         else if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
+        {
+            WireCut();
+        }
+        else if (other.tag == "Scissors")
         {
             WireCut();
         }
