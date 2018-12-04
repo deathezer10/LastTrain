@@ -36,7 +36,7 @@ public class MeshModifier : MonoBehaviour
 
         if (transform.gameObject.name == "polySurface3157")
         {
-           // if (!sawBlade.IsSpinning()) return;
+           if(!sawBlade.IsSpinning()) return;
             if (collision.gameObject.tag == "Band")
             {
                 newHandleObjects = new List<GameObject>();
@@ -90,41 +90,7 @@ public class MeshModifier : MonoBehaviour
                     grabHandle.AddComponent<Ball>();
                     Destroy(newHandleObjects[1].GetComponent<ConfigurableJoint>());
                 }
-
-                
-
-                //if (newHandleObjects[1].name == "right side")
-                //{
-                  
-                //        newHandleObjects[1].layer = LayerMask.NameToLayer("BalanceHandleCollider");
-                //        newHandleObjects[1].AddComponent<BoxCollider>();
-                //        newHandleObjects[1].AddComponent<Rigidbody>();
-                //        grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[0].GetComponent<Rigidbody>();
-                //        grabHandle.transform.parent = newHandleObjects[1].transform;
-                //        grabHandle.AddComponent<Ball>();
-
-                   
-
-
-                //    else
-                //    {
-                //        Destroy(newHandleObjects[0].GetComponent<MeshCollider>());
-                //        newHandleObjects[0].AddComponent<BoxCollider>();
-                //        newHandleObjects[0].AddComponent<Ball>();
-                //        newHandleObjects[0].transform.parent = originalHandleParent.transform;
-
-                //    }
-                //}
-
-
-
-                //else if (collision.gameObject.tag == "Wire")
-                //{
-                //    collision.gameObject.tag = "Untagged";
-                //    ContactPoint contacts = collision.contacts[0];
-                //    newHandleObjects.AddRange(CutMesh(collision.gameObject, contacts.point, transform.right, collision.gameObject.GetComponent<Renderer>().material, false));
-
-                //}
+  
             }
         }
 
@@ -141,42 +107,66 @@ public class MeshModifier : MonoBehaviour
                     collision.gameObject.tag = "Untagged";
                     ContactPoint contact = collision.contacts[0];
                     newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material, false));
-
+                    newHandleObjects[0].tag = "Untagged";
+                    newHandleObjects[1].tag = "Untagged";
                 }
 
                 else if (collision.gameObject.tag == "Band")
                 {
+                    newHandleObjects = new List<GameObject>();
                     collision.gameObject.tag = "Untagged";
                     originalHand = collision.gameObject;
                     originalHandleParent = collision.gameObject.transform.parent.gameObject;
                     grabHandle = collision.transform.GetChild(0).gameObject;
                     ContactPoint contact = collision.contacts[0];
                     newHandleObjects.AddRange(CutMesh(collision.gameObject, contact.point, transform.right, collision.gameObject.GetComponent<Renderer>().material, true));
-
-
-                    for (int index = 0; index < newHandleObjects.Count; ++index)
+                    for (int i = 0; i < newHandleObjects.Count; ++i)
                     {
-                        newHandleObjects[index].gameObject.tag = "Untagged";
-                        newHandleObjects[index].transform.parent = originalHandleParent.transform.root;
-                        if (newHandleObjects[index].name == "left side")
-                        {
-                            Destroy(newHandleObjects[index].GetComponent<MeshCollider>());
-                            newHandleObjects[index].AddComponent<BoxCollider>();
-                            newHandleObjects[index].AddComponent<Ball>();
-                            newHandleObjects[index].transform.parent = originalHandleParent.transform;
-                        }
-
-                        if (newHandleObjects[index].name == "right side")
-                        {
-                            newHandleObjects[index].AddComponent<BoxCollider>();
-                            newHandleObjects[index].AddComponent<Rigidbody>();
-                            grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[index].GetComponent<Rigidbody>();
-                            grabHandle.transform.parent = newHandleObjects[index].transform;
-                            grabHandle.AddComponent<Ball>();
-                        }
+                        newHandleObjects[i].gameObject.tag = "Untagged";
+                        newHandleObjects[i].transform.parent = originalHandleParent.transform.root;
+                        Destroy(newHandleObjects[i].GetComponent<MeshCollider>());
+                        newHandleObjects[i].AddComponent<BoxCollider>();
                     }
 
+                    RaycastHit hit;
+                    Physics.Raycast(originalHandleParent.transform.position, Vector3.down, out hit);
+                    UpperPart = hit.collider.gameObject.name;
+
+
+                    if (UpperPart == newHandleObjects[0].name)
+                    {
+                        newHandleObjects[0].transform.parent = originalHandleParent.transform;
+                    }
+
+
+                    else
+                    {
+                        newHandleObjects[0].layer = LayerMask.NameToLayer("BalanceHandleCollider");
+                        newHandleObjects[0].AddComponent<Rigidbody>();
+                        grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[0].GetComponent<Rigidbody>();
+                        grabHandle.transform.parent = newHandleObjects[0].transform;
+                        grabHandle.AddComponent<Ball>();
+                        Destroy(newHandleObjects[0].GetComponent<ConfigurableJoint>());
+                    }
+
+
+                    if (UpperPart == newHandleObjects[1].name)
+                    {
+                        newHandleObjects[1].transform.parent = originalHandleParent.transform;
+                    }
+
+                    else
+                    {
+                        newHandleObjects[1].layer = LayerMask.NameToLayer("BalanceHandleCollider");
+                        newHandleObjects[1].AddComponent<Rigidbody>();
+                        grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[1].GetComponent<Rigidbody>();
+                        grabHandle.transform.parent = newHandleObjects[1].transform;
+                        grabHandle.AddComponent<Ball>();
+                        Destroy(newHandleObjects[1].GetComponent<ConfigurableJoint>());
+                    }
                 }
+            
+                
 
             }
         }
