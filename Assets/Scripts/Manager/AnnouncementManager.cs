@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Spawn Gameobjects for playing train announcement Sound Sources,
-/// References for each announcement sound file set in Inspector with a string alias
+/// Spawn Gameobjects for playing "train announcement" Sound Sources,
+/// Reference for each announcement sound file set in Inspector with a string alias
 /// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 {
     #region References to be set in Inspector
+
+    // Pairing audio assets to strings for clearer references
     [Serializable]
     private struct AnnouncementKeyPair
     {
@@ -21,6 +23,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     [SerializeField]
     AnnouncementKeyPair[] m_AnnouncementClips;
 
+    // References to plushie dolls in the scene for triggering their visual effects when an announcement plays
     [SerializeField]
     Doll[] m_Dolls;
 
@@ -28,11 +31,12 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     Transform m_PlayerTrans;
 
     Dictionary<string, AudioClip> m_AnnouncementClipsDictonary = new Dictionary<string, AudioClip>();
+
     #endregion
 
     private struct AnnouncementQueueInfo
     {
-        public bool is3D;
+        public bool bIs3D;
         public AudioSource audioSource;
         public AudioClip audioClip;
         public float delayInSeconds;
@@ -64,7 +68,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
         m_LocalAudioSource = GetComponent<AudioSource>();
     }
-    
+
     /// <summary>
     /// Plays a 2D audio clip with the given alias
     /// </summary>
@@ -85,7 +89,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
             case AnnounceType.Queue:
                 m_AnnouncementQueue.Enqueue(new AnnouncementQueueInfo
                 {
-                    is3D = false,
+                    bIs3D = false,
                     audioSource = m_LocalAudioSource,
                     audioClip = clip,
                     clipAlias = clipAlias,
@@ -117,7 +121,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     /// <returns>Reference to the AudioSource that was spawned</returns>
     public GameObject PlayAnnouncement3D(string clipAlias, AnnounceType announceType, float delayInSeconds = 0)
     {
-        // Only add the new announcement chime to queue if it is empty
+        // Only add the new announcement chime to queue if the queue is empty
         if (m_AnnouncementQueue.Count != 0 && clipAlias == "announcement_chime")
         {
             return null;
@@ -131,25 +135,24 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
             return null;
         }
 
-        ActivatePlushieEyes(clip.length);
-
         m_3DGameObject = new GameObject("[3D_AnnouncementSound]");
         m_3DGameObject.transform.parent = transform;
 
         AudioSource spawnedAudioSource = m_3DGameObject.AddComponent<AudioSource>();
         spawnedAudioSource.clip = GetAudioClip(clipAlias);
-        spawnedAudioSource.volume = 1;
+        spawnedAudioSource.volume = 1f;
         spawnedAudioSource.spatialBlend = 1f;
-        spawnedAudioSource.minDistance = 1;
-        spawnedAudioSource.maxDistance = 70;
+        spawnedAudioSource.minDistance = 1f;
+        spawnedAudioSource.maxDistance = 70f;
         spawnedAudioSource.rolloffMode = AudioRolloffMode.Linear;
 
+        // Check if the announcement should skip the queue or be added to it
         switch (announceType)
         {
             case AnnounceType.Queue:
                 m_AnnouncementQueue.Enqueue(new AnnouncementQueueInfo
                 {
-                    is3D = true,
+                    bIs3D = true,
                     audioSource = spawnedAudioSource,
                     audioClip = clip,
                     clipAlias = clipAlias,
@@ -186,7 +189,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
         {
             if (doll != null)
             {
-               doll.StartEyeFlash(clipLength);
+                doll.StartEyeFlash(clipLength);
             }
         }
     }
@@ -207,7 +210,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
             var announceInfo = m_AnnouncementQueue.Dequeue();
 
-            if (announceInfo.is3D)
+            if (announceInfo.bIs3D)
             {
                 m_3DAudioSource = announceInfo.audioSource;
             }
@@ -216,8 +219,11 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
             AudioSource source = announceInfo.audioSource;
             source.clip = announceInfo.audioClip;
+
+            ActivatePlushieEyes(source.clip.length);
+
             source.PlayDelayed(announceInfo.delayInSeconds);
-            StartCoroutine(PlayNextRoutine(source.clip.length + announceInfo.delayInSeconds, announceInfo.is3D));
+            StartCoroutine(PlayNextRoutine(source.clip.length + announceInfo.delayInSeconds, announceInfo.bIs3D));
         }
     }
 
@@ -230,7 +236,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
         {
             var announceInfo = m_AnnouncementQueue.Dequeue();
 
-            if (announceInfo.is3D)
+            if (announceInfo.bIs3D)
             {
                 Destroy(announceInfo.audioSource.gameObject);
             }
