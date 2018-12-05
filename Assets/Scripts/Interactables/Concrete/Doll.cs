@@ -99,7 +99,7 @@ public class Doll : GrabbableObject, IShootable
     {
         base.OnGrab();
 
-        if (!bGrabbedOnce )
+        if (!bGrabbedOnce)
         {
             transform.Find("Awkward").GetComponent<AudioPlayer>().Play();
             bGrabbedOnce = true;
