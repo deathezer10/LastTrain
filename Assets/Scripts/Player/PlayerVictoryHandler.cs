@@ -13,6 +13,7 @@ public class PlayerVictoryHandler : MonoBehaviour
 
     public void PlayerVictory()
     {
+        DriverCabinDoorLock.bIsUnlocked = false;
         victoryFader.FadeIn(4f, () =>
         {
             SceneManager.LoadScene("Victory");

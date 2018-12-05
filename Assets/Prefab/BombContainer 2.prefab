@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114538616566584100}
   - component: {fileID: 114833884666120706}
   - component: {fileID: 114900712009949076}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Bomb
   m_TagString: Bomb
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4112347386656260}
   - component: {fileID: 33989500475291352}
   - component: {fileID: 23055424685210442}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: wire4_cut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,9 +64,9 @@ GameObject:
   - component: {fileID: 82638098237216874}
   - component: {fileID: 114291342152034736}
   - component: {fileID: 64248481182690416}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: wire4
-  m_TagString: Untagged
+  m_TagString: Wire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4683047718152660}
   - component: {fileID: 33863012964707412}
   - component: {fileID: 23076439795893424}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: wire3_cut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4441979486697038}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Wire1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4277228030005398}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Wire3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 4914456329034570}
   - component: {fileID: 33515782676884044}
   - component: {fileID: 23099992409862058}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: wire1_cut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,9 +164,9 @@ GameObject:
   - component: {fileID: 82872736964271080}
   - component: {fileID: 114675399674637378}
   - component: {fileID: 64550866702665052}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: wire1
-  m_TagString: Untagged
+  m_TagString: Wire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 4565929691211474}
   - component: {fileID: 33832563308799144}
   - component: {fileID: 23362954830209786}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: bomb_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,9 +202,9 @@ GameObject:
   - component: {fileID: 82270031156643002}
   - component: {fileID: 114733965967861766}
   - component: {fileID: 64962993785083706}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: wire3
-  m_TagString: Untagged
+  m_TagString: Wire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 4844952269008680}
   - component: {fileID: 33965367215842848}
   - component: {fileID: 23643684113314656}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: wire2_cut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 4868429208106320}
   - component: {fileID: 33719605414388644}
   - component: {fileID: 23626495081950206}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: IndicatorLightPH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 23211063064381150}
   - component: {fileID: 222211930264173100}
   - component: {fileID: 114684154202693144}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: BombTimerTextMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4661187683445672}
   - component: {fileID: 65637620582341212}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: TimerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,9 +360,9 @@ GameObject:
   - component: {fileID: 82500462321531176}
   - component: {fileID: 114492958797302976}
   - component: {fileID: 64162206247833074}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: wire2
-  m_TagString: Untagged
+  m_TagString: Wire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,7 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4505365110490872}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Wire4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4877083509655078}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Wire2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1420,9 +1420,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1455,7 +1455,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1516,9 +1516,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1551,7 +1551,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1612,9 +1612,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1647,7 +1647,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1708,9 +1708,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1743,7 +1743,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1806,7 +1806,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1839,7 +1839,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.9
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1900,9 +1900,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1935,7 +1935,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2206,11 +2206,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23211063064381150}
