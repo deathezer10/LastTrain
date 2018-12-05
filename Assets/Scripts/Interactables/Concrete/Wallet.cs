@@ -81,7 +81,7 @@ public class Wallet : GrabbableObject
             m_Colliders[0].center = m_Colliders[1].center;
             m_Colliders[0].size = m_Colliders[1].size;
 
-            
+            // GameObject obj = 
             //var collider = obj.GetComponent<Collider>();
             //Physics.IgnoreCollision(m_OpeningColliders[0], collider);
             //Physics.IgnoreCollision(m_OpeningColliders[1], collider);
@@ -92,6 +92,6 @@ public class Wallet : GrabbableObject
 
     public void OnWalletOpened()
     {
-        GameObject obj = Instantiate(m_ICCardPrefab, m_ICSpawnSpot.position, Quaternion.identity);
+        Instantiate(m_ICCardPrefab, m_ICSpawnSpot.position, Quaternion.identity);
     }
 }
