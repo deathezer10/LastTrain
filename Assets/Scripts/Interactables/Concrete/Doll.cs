@@ -211,7 +211,7 @@ public class Doll : GrabbableObject, IShootable
         {
             death = true;
 
-            AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), playerHeadTrans.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
+            AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), AnnouncementManager.AnnounceType.Queue, 0.5f);
 
             Instantiate(dollDeathParticle, transform.position, transform.rotation, null);
             Destroy(gameObject);

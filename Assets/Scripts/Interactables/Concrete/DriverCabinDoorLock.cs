@@ -156,7 +156,7 @@ public class DriverCabinDoorLock : StationaryObject
         bIsUnlocked = true;
         instance.transform.GetComponent<AudioPlayer>().Play();
 
-        AnnouncementManager.Instance.PlayAnnouncement3D("driversCabin_door", instance.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0.5f);
+        AnnouncementManager.Instance.PlayAnnouncement3D("driversCabin_door", AnnouncementManager.AnnounceType.Queue, 0.5f);
     }
 
     public override bool hideControllerOnGrab { get { return false; } }

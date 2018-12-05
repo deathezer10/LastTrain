@@ -2,13 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
-
+/// <summary>
+/// Spawn Gameobjects for playing train announcement Sound Sources,
+/// References for each announcement sound file set in Inspector with a string alias
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 {
-    #region Inspector Stuff
+    #region References to be set in Inspector
     [Serializable]
     private struct AnnouncementKeyPair
     {
@@ -18,6 +20,12 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
     [SerializeField]
     AnnouncementKeyPair[] m_AnnouncementClips;
+
+    [SerializeField]
+    Doll[] m_Dolls;
+
+    [SerializeField]
+    Transform m_PlayerTrans;
 
     Dictionary<string, AudioClip> m_AnnouncementClipsDictonary = new Dictionary<string, AudioClip>();
     #endregion
@@ -36,7 +44,9 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     AudioSource m_LocalAudioSource;
     AudioSource m_3DAudioSource;
 
-    public Doll[] dolls;
+    GameObject m_3DGameObject;
+
+    Vector3 m_3DClipPosOffset = new Vector3(0, 10f, 0);
 
     public enum AnnounceType
     {
@@ -54,37 +64,6 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
         m_LocalAudioSource = GetComponent<AudioSource>();
     }
-
-    private void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            PlayAnnouncement("cat", AnnounceType.Queue);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            PlayAnnouncement("dog", AnnounceType.Override);
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Vector3 pos = GameObject.FindWithTag("Player").transform.position;
-            pos.z -= 5;
-            PlayAnnouncementAt("duck", pos, AnnounceType.Override);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Vector3 pos = GameObject.FindWithTag("Player").transform.position;
-            pos.z += 5;
-            PlayAnnouncementAt("rabbit", pos, AnnounceType.Override);
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Vector3 pos = GameObject.FindWithTag("Player").transform.position;
-            PlayAnnouncementAt("cow", pos, AnnounceType.Queue);
-        }
-        */
-    }
     
     /// <summary>
     /// Plays a 2D audio clip with the given alias
@@ -98,6 +77,8 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
             Debug.LogError("Error trying to retrieve announcement with alias: " + clipAlias);
             return;
         }
+
+        ActivatePlushieEyes(clip.length);
 
         switch (announceType)
         {
@@ -131,32 +112,37 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     }
 
     /// <summary>
-    /// Plays a 3D sound at the given position
-    /// A GameObject with an AudioSource is spawn at the given position and is removed once the audio finishes
+    /// Plays a 3D sound above the players position with the given alias
     /// </summary>
     /// <returns>Reference to the AudioSource that was spawned</returns>
-    public GameObject PlayAnnouncement3D(string clipAlias, Vector3 position, AnnounceType announceType, float delayInSeconds = 0)
+    public GameObject PlayAnnouncement3D(string clipAlias, AnnounceType announceType, float delayInSeconds = 0)
     {
+        // If the queue is empty, play the new announcement start chime
+        if (m_AnnouncementQueue.Count == 0)
+        {
+            PlayAnnouncement3D("announcement_chime", AnnounceType.Queue, 0f);
+            return null;
+        }
+
         AudioClip clip = GetAudioClip(clipAlias);
 
         if (clip == null)
         {
-            Debug.LogError("Error trying to retrieve an announcement's clipAlias");
+            Debug.LogError("Error trying to retrieve announcement with alias: " + clipAlias);
             return null;
         }
 
         ActivatePlushieEyes(clip.length);
 
-        GameObject obj = new GameObject("[3D_AnnouncementSound]");
-        obj.transform.parent = transform;
-        obj.transform.position = position;
+        m_3DGameObject = new GameObject("[3D_AnnouncementSound]");
+        m_3DGameObject.transform.parent = transform;
 
-        AudioSource spawnedAudioSource = obj.AddComponent<AudioSource>();
+        AudioSource spawnedAudioSource = m_3DGameObject.AddComponent<AudioSource>();
         spawnedAudioSource.clip = GetAudioClip(clipAlias);
         spawnedAudioSource.volume = 1;
         spawnedAudioSource.spatialBlend = 1f;
         spawnedAudioSource.minDistance = 1;
-        spawnedAudioSource.maxDistance = 75;
+        spawnedAudioSource.maxDistance = 70;
         spawnedAudioSource.rolloffMode = AudioRolloffMode.Linear;
 
         switch (announceType)
@@ -189,12 +175,15 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
                 break;
         }
 
-        return obj;
+        return m_3DGameObject;
     }
 
+    /// <summary>
+    /// Activates the Eye Flash effect for each cat plushie still alive
+    /// </summary>
     private void ActivatePlushieEyes(float clipLength)
     {
-        foreach (Doll doll in dolls)
+        foreach (Doll doll in m_Dolls)
         {
             if (doll != null)
             {
@@ -209,7 +198,9 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     public void PlayNext()
     {
         if (m_AnnouncementQueue.Count == 0)
+        {
             return;
+        }
         else
         {
             m_LocalAudioSource.Stop();
@@ -218,14 +209,16 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
             var announceInfo = m_AnnouncementQueue.Dequeue();
 
             if (announceInfo.is3D)
+            {
                 m_3DAudioSource = announceInfo.audioSource;
+            }
+
+            m_3DGameObject.transform.position = m_PlayerTrans.position + m_3DClipPosOffset;
 
             AudioSource source = announceInfo.audioSource;
             source.clip = announceInfo.audioClip;
             source.PlayDelayed(announceInfo.delayInSeconds);
             StartCoroutine(PlayNextRoutine(source.clip.length + announceInfo.delayInSeconds, announceInfo.is3D));
-
-
         }
     }
 
@@ -239,7 +232,9 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
             var announceInfo = m_AnnouncementQueue.Dequeue();
 
             if (announceInfo.is3D)
+            {
                 Destroy(announceInfo.audioSource.gameObject);
+            }
         }
     }
 
@@ -257,6 +252,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     {
         m_LocalAudioSource.Stop();
         m_3DAudioSource?.Stop();
+
         ClearQueue();
         StopAllCoroutines();
 
@@ -267,6 +263,9 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
         }
     }
 
+    /// <summary>
+    /// Delay routine for the next clip if there is a queue
+    /// </summary>
     private IEnumerator PlayNextRoutine(float delayInSeconds, bool is3D)
     {
         yield return new WaitForSeconds(delayInSeconds);

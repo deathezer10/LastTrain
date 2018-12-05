@@ -13,7 +13,7 @@ public class DollSmoke : MonoBehaviour
 
     private void OnEnable()
     {
-        //burnAudio.Play();
+        burnAudio.Play();
     }
 
     void Update()

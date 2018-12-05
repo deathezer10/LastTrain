@@ -10,8 +10,8 @@ public class Extinguisher : GrabbableObject
 
     public ParticleSystem foamVisualParticles, foamTriggerParticles;
 
-    bool held;
-    bool spraying;
+    //bool held;
+    //bool spraying;
 
     private void Start()
     {
@@ -30,23 +30,23 @@ public class Extinguisher : GrabbableObject
     public override void OnControllerExit()
     {
         base.OnControllerExit();
-        held = false;
+        //held = false;
         foamVisualParticles.Stop();
-        spraying = false;
+        //spraying = false;
     }
 
     public override void OnGrab()
     {
         base.OnGrab();
-        held = true;
+        //held = true;
     }
 
     public override void OnGrabReleased()
     {
         base.OnGrabReleased();
-        held = false;
+        //held = false;
         foamVisualParticles.Stop();
-        spraying = false;
+        //spraying = false;
     }
 
     public override void OnUse()

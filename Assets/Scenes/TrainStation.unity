@@ -1120,6 +1120,11 @@ Prefab:
       propertyPath: m_Name
       value: Doll (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114731812147329306, guid: e8c90a1a125cd374180da3ce5933fb3d,
+        type: 2}
+      propertyPath: dollIndex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c90a1a125cd374180da3ce5933fb3d, type: 2}
   m_IsPrefabAsset: 0
@@ -1351,37 +1356,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!84 &83866223
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1265
-  m_Height: 712
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 7
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &84539073 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100042, guid: 15cc9b042c82e054dbfad573338fcd15,
@@ -9149,37 +9123,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 329559700}
   m_Mesh: {fileID: 4300000, guid: 0ff117e968520464dacdc43bde1cb1b7, type: 3}
---- !u!84 &331162857
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1265
-  m_Height: 712
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 7
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &334434996
 GameObject:
   m_ObjectHideFlags: 0
@@ -16192,6 +16135,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4659619033800568, guid: a38d050190424b946affcd62197a9258,
     type: 2}
   m_PrefabInternal: {fileID: 476230515}
+--- !u!84 &483138064
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1280
+  m_Height: 720
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 7
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &483145851
 Prefab:
   m_ObjectHideFlags: 0
@@ -17083,7 +17057,7 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 962811237}
+      objectReference: {fileID: 965641884}
     - target: {fileID: 33256893767373004, guid: e9acf5381f724c04ebf87853cc58efd1,
         type: 2}
       propertyPath: m_Mesh
@@ -17098,12 +17072,12 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1253486665}
+      objectReference: {fileID: 1593669959}
     - target: {fileID: 20296893853185276, guid: e9acf5381f724c04ebf87853cc58efd1,
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 83866223}
+      objectReference: {fileID: 483138064}
     - target: {fileID: 114882103252363328, guid: e9acf5381f724c04ebf87853cc58efd1,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -17147,6 +17121,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9acf5381f724c04ebf87853cc58efd1, type: 2}
   m_IsPrefabAsset: 0
+--- !u!4 &571945325 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4288316655885232, guid: e9acf5381f724c04ebf87853cc58efd1,
+    type: 2}
+  m_PrefabInternal: {fileID: 571945324}
 --- !u!1001 &572189044
 Prefab:
   m_ObjectHideFlags: 0
@@ -35625,7 +35604,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!43 &962811237
+--- !u!43 &965641884
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48750,39 +48729,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4827a1f12fe0c4041b254ae57dfa05e1, type: 2}
   m_IsPrefabAsset: 0
---- !u!21 &1253486665
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1267488864
 GameObject:
   m_ObjectHideFlags: 0
@@ -54263,6 +54209,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!21 &1593669959
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1609507939
 GameObject:
   m_ObjectHideFlags: 0
@@ -56374,6 +56353,37 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1779759877}
   m_Mesh: {fileID: 4300000, guid: 47feb91fde3379745a77cc45c51e1ebe, type: 3}
+--- !u!84 &1783524145
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1280
+  m_Height: 720
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 7
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1784581267
 GameObject:
   m_ObjectHideFlags: 0
@@ -64274,10 +64284,11 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: b0235cc110558f84bbb88a1976899926, type: 3}
   - clipAlias: driversCabin_door
     audioClip: {fileID: 8300000, guid: 82a25be355fb97249b829bdaad12f441, type: 3}
-  dolls:
+  m_Dolls:
   - {fileID: 130333792}
   - {fileID: 53418773}
   - {fileID: 1045913912}
+  m_PlayerTrans: {fileID: 571945325}
 --- !u!82 &2019854301
 AudioSource:
   m_ObjectHideFlags: 0

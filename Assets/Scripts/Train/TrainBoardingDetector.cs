@@ -57,17 +57,14 @@ public class TrainBoardingDetector : MonoBehaviour
                         foreach (var collider in m_BombContainer.transform.GetComponentsInChildren<Collider>())
                         {
                             collider.enabled = true;
-                            // FindObjectOfType<Bomb>().StartBomb();
                         }
                     });
 
                     m_TrainTimeHandler.StartTrainTime();
                     FindObjectOfType<TimeLeftAnnouncements>().TrainMoveStart();
                     FindObjectOfType<TrainEscapeHandler>().TrainMoveStart();
-
-                    AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", other.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
-                    AnnouncementManager.Instance.PlayAnnouncement3D("thank_you", other.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
-                    AnnouncementManager.Instance.PlayAnnouncement3D("bomb_intro", other.transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
+                    
+                    AnnouncementManager.Instance.PlayAnnouncement3D("thank_you", AnnouncementManager.AnnounceType.Queue, 0f);
                 });
             }
         }

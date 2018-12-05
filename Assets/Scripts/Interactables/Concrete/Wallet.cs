@@ -50,9 +50,10 @@ public class Wallet : GrabbableObject
         base.OnGrab();
 
         if (m_Controller == null)
+        {
             return;
-        
-
+        }
+            
         if (m_TutorialArrow != null && m_TutorialArrow.activeInHierarchy)
             m_TutorialArrow.SetActive(false);
 
@@ -60,8 +61,7 @@ public class Wallet : GrabbableObject
         {
             m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
             
-            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 1f);
-            AnnouncementManager.Instance.PlayAnnouncement3D("wallet_pickup", transform.position + new Vector3(0f, 10f, 0f), AnnouncementManager.AnnounceType.Queue, 0f);
+            AnnouncementManager.Instance.PlayAnnouncement3D("wallet_pickup", AnnouncementManager.AnnounceType.Queue, 0f);
             
             m_HasAnnounced = true;
         }
@@ -87,10 +87,6 @@ public class Wallet : GrabbableObject
 
             m_HasUsedOnce = true;
         }
-    }
-
-    public void OnWalletOpened()
-    {
     }
 
 }
