@@ -4,86 +4,115 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+/// <summary>
+/// Script for controlling a Plushie Doll Prefab object in the scene. Can be picked up, set on fire and shot.
+/// Dolls eyes flash when an announcement is being made, plays a sound effect when Used, 
+/// gives a slight hint to a puzzle if the doll is the correct one (index)
+/// </summary>
 public class Doll : GrabbableObject, IShootable
 {
-    public Transform head, headTarget;
-    public Material dollEyeMat;
-    public Color initialColor, flashColor, bombHintColor;
-    public ParticleSystem dollDeathParticle;
-    public int dollIndex;
-    public GameObject dollSmoke;
+    #region References to be set in Inspector
 
-    AudioPlayer useAudio;
+    [SerializeField]
+    Transform m_DollHead, m_DollHeadTarget;
 
-    Transform playerHeadTrans;
+    [SerializeField]
+    Material m_DollEyeMat;
 
-    Vector3 headInitRot;
+    [SerializeField]
+    Color m_InitialColor, m_FlashColor, m_BombHintColor;
 
-    float flashEndTime;
-    bool playerWithinRange;
-    bool death;
-    bool grabbedOnce = false;
-    bool showingHint;
-    bool burnStarted;
+    [SerializeField]
+    ParticleSystem m_DollDeathParticle;
 
-    DollDeathAnnouncements ddAnnouncements;
+    [SerializeField]
+    int m_DollIndex;
 
-    Vector3 targetRot = new Vector3();
+    [SerializeField]
+    GameObject m_DollSmoke;
+
+    #endregion
+
+    AudioPlayer m_UseAudio;
+
+    Transform m_PlayerHeadTrans;
+
+    Vector3 m_HeadInitRot;
+
+    Tweener m_DollHeadTweener;
+
+    float m_FlashEndTime;
+
+    bool bPlayerWithinRange, bDying, bGrabbedOnce, bShowingHint, bBurnStarted;
+
+    // Script listing the possible clip String aliases used for calling Announcement manager
+    DollDeathAnnouncements m_DDAnnouncements;
+
+    Vector3 m_TargetRot = new Vector3();
 
     private void Start()
     {
-        playerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        dollEyeMat.SetColor("_EmissionColor", initialColor);
-        headInitRot = head.localEulerAngles;
-        useAudio = GetComponent<AudioPlayer>();
+        m_PlayerHeadTrans = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        m_UseAudio = GetComponent<AudioPlayer>();
+        m_DDAnnouncements = FindObjectOfType<DollDeathAnnouncements>();
 
-        dollSmoke.SetActive(false);
-
-        ddAnnouncements = FindObjectOfType<DollDeathAnnouncements>();
+        m_DollSmoke.SetActive(false);
+        m_DollEyeMat.SetColor("_EmissionColor", m_InitialColor);
+        m_HeadInitRot = m_DollHead.localEulerAngles;
 
         SetCollisionIgnore();
     }
 
     private void Update()
     {
-        if (playerWithinRange)
+        // If the Doll can "See" the Player's head, it will turn to face and look at the Player
+        if (bPlayerWithinRange)
         {
-            headTarget.eulerAngles = Vector3.zero;
-            headTarget.LookAt(playerHeadTrans);
+            m_DollHeadTarget.eulerAngles = Vector3.zero;
+            m_DollHeadTarget.LookAt(m_PlayerHeadTrans);
 
-            if (!(headTarget.localEulerAngles.x > 20f && headTarget.localEulerAngles.x < 325f))
+            if (!(m_DollHeadTarget.localEulerAngles.x > 20f && m_DollHeadTarget.localEulerAngles.x < 325f))
             {
-                targetRot.x = headTarget.localEulerAngles.x;
+                m_TargetRot.x = m_DollHeadTarget.localEulerAngles.x;
             }
 
-            if (!(headTarget.localEulerAngles.y > 45f && headTarget.localEulerAngles.y < 315f))
+            if (!(m_DollHeadTarget.localEulerAngles.y > 45f && m_DollHeadTarget.localEulerAngles.y < 315f))
             {
-                targetRot.y = headTarget.localEulerAngles.y;
+                m_TargetRot.y = m_DollHeadTarget.localEulerAngles.y;
             }
-            targetRot.z = 0;
 
-            if (head.eulerAngles != targetRot)
+            m_TargetRot.z = 0;
+
+            if (m_DollHead.eulerAngles != m_TargetRot)
             {
-                head.DOLocalRotate(targetRot, Time.deltaTime * 3, RotateMode.Fast);
+                // Using Unity Tweener Extension to tween Doll's head rotation towards the player's head
+                if (!m_DollHeadTweener.IsPlaying())
+                {
+                    m_DollHeadTweener = m_DollHead.DOLocalRotate(m_TargetRot, Time.deltaTime * 6, RotateMode.Fast);
+                }
             }
         }
     }
 
+    // Implementation of the Inherited OnGrab from GrabbableObject, used for Vive Controller Grabbing actions
     public override void OnGrab()
     {
         base.OnGrab();
 
-        if (grabbedOnce == false)
+        if (!bGrabbedOnce )
         {
             transform.Find("Awkward").GetComponent<AudioPlayer>().Play();
-            grabbedOnce = true;
+            bGrabbedOnce = true;
         }
     }
 
+    /// <summary>
+    /// Stop the Dolls parts from colliding with each other
+    /// </summary>
     private void SetCollisionIgnore()
     {
         Collider[] childrenColliders = GetComponentsInChildren<Collider>();
-        CapsuleCollider headCollider = head.gameObject.GetComponent<CapsuleCollider>();
+        CapsuleCollider headCollider = m_DollHead.gameObject.GetComponent<CapsuleCollider>();
 
         foreach (Collider col in childrenColliders)
         {
@@ -97,21 +126,21 @@ public class Doll : GrabbableObject, IShootable
     /// <summary>
     /// Pass the duration of the announcement clip to the doll eye flasher
     /// </summary>
-    /// <param name="_duration"></param>
-    public void StartEyeFlash(float _duration)
+    public void StartEyeFlash(float duration)
     {
-        dollEyeMat.SetColor("_EmissionColor", initialColor);
+        m_DollEyeMat.SetColor("_EmissionColor", m_InitialColor);
 
-        flashEndTime = Time.time + _duration;
+        m_FlashEndTime = Time.time + duration;
         StopAllCoroutines();
         StartCoroutine(EyeFlash());
     }
 
+    // Flash the Doll's eyes blue, as a hint for a puzzle on the train
     private void StartBlueFlash()
     {
-        showingHint = true;
+        bShowingHint = true;
 
-        dollEyeMat.SetColor("_EmissionColor", initialColor);
+        m_DollEyeMat.SetColor("_EmissionColor", m_InitialColor);
 
         StopAllCoroutines();
         StartCoroutine(BlueFlash());
@@ -119,64 +148,74 @@ public class Doll : GrabbableObject, IShootable
 
     private IEnumerator BlueFlash()
     {
-        dollEyeMat.SetColor("_EmissionColor", bombHintColor);
+        m_DollEyeMat.SetColor("_EmissionColor", m_BombHintColor);
         yield return new WaitForSeconds(1.5f);
-        dollEyeMat.SetColor("_EmissionColor", initialColor);
-        showingHint = false;
+        m_DollEyeMat.SetColor("_EmissionColor", m_InitialColor);
+        bShowingHint = false;
     }
 
+    // Flash the dolls eyes while an announcement is playing, alternating between two colors
     private IEnumerator EyeFlash()
     {
         bool flash = false;
 
-        while (Time.time <= flashEndTime)
+        while (Time.time <= m_FlashEndTime)
         {
             if (!flash)
             {
-                dollEyeMat.SetColor("_EmissionColor", flashColor);
+                m_DollEyeMat.SetColor("_EmissionColor", m_FlashColor);
                 flash = true;
             }
             else
             {
-                dollEyeMat.SetColor("_EmissionColor", initialColor);
+                m_DollEyeMat.SetColor("_EmissionColor", m_InitialColor);
                 flash = false;
             }
             yield return new WaitForSeconds(0.2f);
         }
 
-        dollEyeMat.SetColor("_EmissionColor", initialColor);
+        m_DollEyeMat.SetColor("_EmissionColor", m_InitialColor);
     }
 
+    /// <summary>
+    /// Called from a child objects OnColliderEnter to set whether or not the Player is in range of the Doll
+    /// </summary>
     public void PlayerWithinRange(bool _inRange)
     {
-        playerWithinRange = _inRange;
+        bPlayerWithinRange = _inRange;
 
         if (!_inRange)
         {
-            head.DOLocalRotate(headInitRot, 0.4f, RotateMode.Fast);
+            // Rotate Doll's head back to original when Player leaves line of sight
+            m_DollHead.DOLocalRotate(m_HeadInitRot, 0.4f, RotateMode.Fast);
         }
     }
 
+    // Implementation of IShootable Interface
     public void OnShot(Revolver revolver)
     {
         DestroyDoll();
     }
 
+    // Implementation of the Inherited OnUse from GrabbableObject, used for Vive Controller Use actions
     public override void OnUse()
     {
         base.OnUse();
 
-        if (!showingHint)
+        if (!bShowingHint)
         {
-            useAudio.Play();
+            m_UseAudio.Play();
 
-            if (dollIndex == 1)
+            if (m_DollIndex == 1)
             {
                 StartBlueFlash();
             }
         }
     }
 
+    /// <summary>
+    /// Called when the Doll is thrown out of the Train and should be destroyed
+    /// </summary>
     public void OnThrownOut()
     {
         StartCoroutine(DollThrownOut());
@@ -188,16 +227,19 @@ public class Doll : GrabbableObject, IShootable
         DestroyDoll();
     }
 
+    /// <summary>
+    /// Called from a child objects script, through an interaction with other objects. Sets the doll on fire.
+    /// </summary>
     public void BurningStart()
     {
-        if (burnStarted)
+        if (bBurnStarted)
         {
             return;
         }
 
-        burnStarted = true;
+        bBurnStarted = true;
 
-        dollSmoke.SetActive(true);
+        m_DollSmoke.SetActive(true);
         StartCoroutine(DollBurning());
     }
 
@@ -209,20 +251,21 @@ public class Doll : GrabbableObject, IShootable
 
     private void DestroyDoll()
     {
-        if (!death)
+        if (!bDying)
         {
-            death = true;
+            bDying = true;
 
-            AnnouncementManager.Instance.PlayAnnouncement3D(ddAnnouncements.nextClip(), AnnouncementManager.AnnounceType.Queue, 0.5f);
+            // Call the Announcement Manager to play an announcement, based on a clip alias from DollDeathAnnouncements
+            AnnouncementManager.Instance.PlayAnnouncement3D(m_DDAnnouncements.nextClip(), AnnouncementManager.AnnounceType.Queue, 0.5f);
 
-            Instantiate(dollDeathParticle, transform.position, transform.rotation, null);
+            Instantiate(m_DollDeathParticle, transform.position, transform.rotation, null);
             Destroy(gameObject);
         }
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
-        // Prevent invisible collider from making noise
+        // Prevent invisible collider from making noise with DropSoundHandler
         if (m_DropSoundHandler != null && other.gameObject.layer == LayerMask.NameToLayer("Environment"))
         {
             m_DropSoundHandler.PlayDropSound(GetComponent<Rigidbody>().velocity);
