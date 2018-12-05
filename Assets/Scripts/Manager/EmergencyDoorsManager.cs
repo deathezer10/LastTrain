@@ -19,12 +19,14 @@ public class EmergencyDoorsManager : MonoBehaviour
         {
             movingTriggered = true;
 
+            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 0f);
             AnnouncementManager.Instance.PlayAnnouncement3D("emergencyDoors_moving", AnnouncementManager.AnnounceType.Queue, 0.5f);
         }
         else if (!stoppedTriggered && stationMover.currentSpeed <= 1f)
         {
             stoppedTriggered = true;
 
+            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 0f);
             AnnouncementManager.Instance.PlayAnnouncement3D("emergencyDoors_stopped", AnnouncementManager.AnnounceType.Queue, 0.5f);
         }
     }

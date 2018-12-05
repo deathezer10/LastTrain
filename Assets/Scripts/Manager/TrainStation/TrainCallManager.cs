@@ -14,7 +14,8 @@ public class TrainCallManager : MonoBehaviour
             FindObjectOfType<Checkpoint>().CheckpointActivated();
 
             FindObjectOfType<TrainArriver>().CallTheTrain();
-            
+
+            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 0f);
             AnnouncementManager.Instance.PlayAnnouncement3D("platform_entry", AnnouncementManager.AnnounceType.Queue, 0f);
         }
     }

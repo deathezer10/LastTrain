@@ -60,7 +60,8 @@ public class Wallet : GrabbableObject
         if (!m_HasAnnounced)
         {
             m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
-            
+
+            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 0f);
             AnnouncementManager.Instance.PlayAnnouncement3D("wallet_pickup", AnnouncementManager.AnnounceType.Queue, 0f);
             
             m_HasAnnounced = true;
@@ -80,13 +81,17 @@ public class Wallet : GrabbableObject
             m_Colliders[0].center = m_Colliders[1].center;
             m_Colliders[0].size = m_Colliders[1].size;
 
-            GameObject obj = Instantiate(m_ICCardPrefab, m_ICSpawnSpot.position, Quaternion.identity);
-            var collider = obj.GetComponent<Collider>();
-            Physics.IgnoreCollision(m_OpeningColliders[0], collider);
-            Physics.IgnoreCollision(m_OpeningColliders[1], collider);
+            
+            //var collider = obj.GetComponent<Collider>();
+            //Physics.IgnoreCollision(m_OpeningColliders[0], collider);
+            //Physics.IgnoreCollision(m_OpeningColliders[1], collider);
 
             m_HasUsedOnce = true;
         }
     }
 
+    public void OnWalletOpened()
+    {
+        GameObject obj = Instantiate(m_ICCardPrefab, m_ICSpawnSpot.position, Quaternion.identity);
+    }
 }

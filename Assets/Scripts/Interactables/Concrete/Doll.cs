@@ -37,6 +37,8 @@ public class Doll : GrabbableObject, IShootable
         headInitRot = head.localEulerAngles;
         useAudio = GetComponent<AudioPlayer>();
 
+        dollSmoke.SetActive(false);
+
         ddAnnouncements = FindObjectOfType<DollDeathAnnouncements>();
 
         SetCollisionIgnore();

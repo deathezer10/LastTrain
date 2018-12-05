@@ -15,6 +15,7 @@ public class TrainSecondCabinEntry : MonoBehaviour
 
             FindObjectOfType<SmokeAlarm>().StopSmokeAlarm("Cabin2");
 
+            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 0f);
             AnnouncementManager.Instance.PlayAnnouncement3D("secondCabin_entry", AnnouncementManager.AnnounceType.Queue, 0f);
 
             Destroy(gameObject);

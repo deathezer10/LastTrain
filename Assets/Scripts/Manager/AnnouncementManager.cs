@@ -46,7 +46,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
     GameObject m_3DGameObject;
 
-    Vector3 m_3DClipPosOffset = new Vector3(0, 10f, 0);
+    Vector3 m_3DClipPosOffset = new Vector3(0, 15f, 0);
 
     public enum AnnounceType
     {
@@ -117,10 +117,9 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     /// <returns>Reference to the AudioSource that was spawned</returns>
     public GameObject PlayAnnouncement3D(string clipAlias, AnnounceType announceType, float delayInSeconds = 0)
     {
-        // If the queue is empty, play the new announcement start chime
-        if (m_AnnouncementQueue.Count == 0)
+        // Only add the new announcement chime to queue if it is empty
+        if (m_AnnouncementQueue.Count != 0 && clipAlias == "announcement_chime")
         {
-            PlayAnnouncement3D("announcement_chime", AnnounceType.Queue, 0f);
             return null;
         }
 
