@@ -40,10 +40,10 @@ public class TutorialManager : MonoBehaviour
     private Vector3 m_playerCheckpointPos = new Vector3(1f, 0.83f, -5f);
     private Vector3 m_playerCheckpointRot = new Vector3(0, -90f, 0);
 
-    public GameObject m_RightDiscObject;
-    public List<GameObject> m_TriggerObjects = new List<GameObject>(), m_GripObjects = new List<GameObject>();
+    private GameObject m_RightDiscObject;
+    private List<GameObject> m_TriggerObjects = new List<GameObject>(), m_GripObjects = new List<GameObject>();
 
-    public Material m_InitialControllerMat;
+    private Material m_InitialControllerMat;
     public Material m_HighlightControllerMat;
 
 
@@ -79,7 +79,6 @@ public class TutorialManager : MonoBehaviour
 
     private void OnDisable()
     {
-        //Unsubscribe from the event if this object is disabled.
         SteamVR_Events.RenderModelLoaded.Remove(OnControllerLoaded);
     }
 
@@ -101,7 +100,6 @@ public class TutorialManager : MonoBehaviour
         m_InitialControllerMat = modelObject.transform.Find("trigger").GetComponent<MeshRenderer>().material;
 
         // Set up the new material with emission as a highlight
-        //m_HighlightControllerMat = new Material(m_InitialControllerMat);
         m_HighlightControllerMat.CopyPropertiesFromMaterial(m_InitialControllerMat);
         m_HighlightControllerMat.SetColor("_EmissionColor", m_EmissionHighlightColor);
         m_HighlightControllerMat.EnableKeyword("_EMISSION");
@@ -122,64 +120,7 @@ public class TutorialManager : MonoBehaviour
             m_GripObjects.Add(modelObject.transform.Find("rgrip").gameObject);
         }
 
-        //modelTransform.Find("body").GetComponent<MeshRenderer>().material;
-        //modelTransform.Find("button").GetComponent<MeshRenderer>().material;
-        //modelTransform.Find("led").GetComponent<MeshRenderer>().material;
-        //modelObject.Find("lgrip").GetComponent<MeshRenderer>().material;
-        //modelObject.Find("rgrip").GetComponent<MeshRenderer>().material;
-        //modelTransform.Find("scroll_wheel").GetComponent<MeshRenderer>().material;
-        //modelTransform.Find("sys_button").GetComponent<MeshRenderer>().material;
-        //modelObject.Find("trackpad").GetComponent<MeshRenderer>().material;
-        //modelTransform.Find("trackpad_scroll_cut").GetComponent<MeshRenderer>().material;
-        //modelTransform.Find("trackpad_touch").GetComponent<MeshRenderer>().material;
-        //modelObject.Find("trigger").GetComponent<MeshRenderer>().material;
     }
-
-    /*
-    private void StartTutorialOld()
-    {
-
-        var audioPlayer = GetComponent<AudioPlayer>();
-
-        audioPlayer.Play("tutorial_greeting", () =>
-        {
-            audioPlayer.Play("tutorial_trajectory_intro");
-
-            IDisposable padObserver = null;
-
-            m_ImageTeleport.gameObject.SetActive(true);
-
-            // Teleport intro
-            padObserver = this.UpdateAsObservable()
-           .Where(_ => _padAction.GetStateDown(SteamVR_Input_Sources.Any)) // Input.GetKeyDown(KeyCode.A))
-           .Subscribe(_ =>
-           {
-               padObserver.Dispose();
-               audioPlayer.Stop();
-               audioPlayer.Play("tutorial_trajectory_outro");
-
-               // Teleport outro
-               padObserver = this.UpdateAsObservable()
-               .Where(_1 => _padAction.GetStateUp(SteamVR_Input_Sources.Any)) // Input.GetKeyUp(KeyCode.A))
-               .Subscribe(_1 =>
-               {
-                   m_ImageTeleport.MoveToHolder();
-
-                   padObserver.Dispose();
-                   audioPlayer.Stop();
-                   audioPlayer.Play("tutorial_wallet_intro");
-
-                   m_ImageWallet.gameObject.SetActive(true);
-
-                   // Wallet Intro will be in the Wallet.cs script
-               });
-           }
-           );
-
-        }, 0.5f);
-
-    }
-    */
 
     void StartTutorial()
     {
