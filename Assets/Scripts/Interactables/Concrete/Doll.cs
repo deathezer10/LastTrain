@@ -86,7 +86,7 @@ public class Doll : GrabbableObject, IShootable
             if (m_DollHead.eulerAngles != m_TargetRot)
             {
                 // Using Unity Tweener Extension to tween Doll's head rotation towards the player's head
-                if (!m_DollHeadTweener.IsPlaying())
+                if (m_DollHeadTweener != null && !m_DollHeadTweener.IsPlaying())
                 {
                     m_DollHeadTweener = m_DollHead.DOLocalRotate(m_TargetRot, Time.deltaTime * 6, RotateMode.Fast);
                 }

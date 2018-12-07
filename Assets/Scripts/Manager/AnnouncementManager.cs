@@ -257,6 +257,8 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     {
         m_LocalAudioSource.Stop();
         m_3DAudioSource?.Stop();
+        if(m_3DGameObject != null)
+        m_3DGameObject.GetComponent<AudioSource>().Stop();
 
         ClearQueue();
         StopAllCoroutines();
@@ -266,6 +268,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
             Destroy(m_3DAudioSource.gameObject);
             m_3DAudioSource = null;
         }
+
     }
 
     /// <summary>

@@ -27,6 +27,10 @@ public class TrainSlower : MonoBehaviour
         {
             m_GameEnded = true;
             m_EscapeBlocker.SetActive(false);
+
+            AnnouncementManager.Instance.PlayAnnouncement2D("announcement_chime", AnnouncementManager.AnnounceType.Override, 0f);
+            AnnouncementManager.Instance.StopAll();
+            
         }
     }
 

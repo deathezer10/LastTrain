@@ -93,5 +93,6 @@ public class Wallet : GrabbableObject
     public void OnWalletOpened()
     {
         Instantiate(m_ICCardPrefab, m_ICSpawnSpot.position, Quaternion.identity);
+        m_TManager.SetOriginalControllerMaterials();
     }
 }

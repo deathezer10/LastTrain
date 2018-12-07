@@ -40,11 +40,11 @@ public class TutorialManager : MonoBehaviour
     private Vector3 m_playerCheckpointPos = new Vector3(1f, 0.83f, -5f);
     private Vector3 m_playerCheckpointRot = new Vector3(0, -90f, 0);
 
-    private GameObject m_RightDiscObject;
-    private List<GameObject> m_TriggerObjects = new List<GameObject>(), m_GripObjects = new List<GameObject>();
+    public GameObject m_RightDiscObject;
+    public List<GameObject> m_TriggerObjects = new List<GameObject>(), m_GripObjects = new List<GameObject>();
 
     public Material m_InitialControllerMat;
-    private Material m_HighlightControllerMat;
+    public Material m_HighlightControllerMat;
 
 
     void Start()
@@ -66,7 +66,8 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator TutorialDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
+
         StartTutorial();
     }
 
@@ -88,24 +89,27 @@ public class TutorialManager : MonoBehaviour
     /// <param name="args">SteamVR_RenderModel renderModel, bool success</param>
     void OnControllerLoaded(SteamVR_RenderModel renderModel, bool success)
     {
-        if (!success) return;
+        if (success)
         {
+            Debug.Log("Successfully loaded " + renderModel.transform.parent.name + " model");
             GetControllerParts(renderModel.gameObject);
         }
     }
 
     private void GetControllerParts(GameObject modelObject)
     {
-        m_InitialControllerMat = modelObject.transform.Find("lgrip").GetComponent<MeshRenderer>().material;
+        m_InitialControllerMat = modelObject.transform.Find("trigger").GetComponent<MeshRenderer>().material;
 
         // Set up the new material with emission as a highlight
-        m_HighlightControllerMat = new Material(m_InitialControllerMat);
+        //m_HighlightControllerMat = new Material(m_InitialControllerMat);
+        m_HighlightControllerMat.CopyPropertiesFromMaterial(m_InitialControllerMat);
         m_HighlightControllerMat.SetColor("_EmissionColor", m_EmissionHighlightColor);
+        m_HighlightControllerMat.EnableKeyword("_EMISSION");
 
         // Find and store the objects for each part to be highlighted
         if (modelObject.transform.parent.name == "Controller (right)")
         {
-            m_RightDiscObject = modelObject.transform.Find("trigger").gameObject;
+            m_RightDiscObject = modelObject.transform.Find("trackpad").gameObject;
 
             m_TriggerObjects.Add(modelObject.transform.Find("trigger").gameObject);
             m_GripObjects.Add(modelObject.transform.Find("lgrip").gameObject);
