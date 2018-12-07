@@ -84,7 +84,7 @@ ParticleSystem:
   stopAction: 2
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4674,7 +4674,7 @@ ParticleSystem:
   stopAction: 2
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4741,7 +4741,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.5
+      scalar: 2.8
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4927,11 +4927,11 @@ ParticleSystem:
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -1.0082737
-          outSlope: -1.0082737
+          inSlope: -1.6406251
+          outSlope: -1.6406251
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.18345326
+          inWeight: 0.19999999
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -5232,7 +5232,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.012
+      scalar: 0.015
       minScalar: 0
       maxCurve:
         serializedVersion: 2
