@@ -21,6 +21,7 @@ public class Screw : GrabbableObject
 
     public delegate void Unscrewed(string _object);
     public static event Unscrewed OnLoose;
+    private bool bComplete = false;
 
     // Use this for initialization
     void Start()
@@ -232,6 +233,7 @@ public class Screw : GrabbableObject
     public override void OnGrab()
     {
         base.OnGrab();
+        StopCoroutine(secret());
     }
 
     public override void OnGrabStay()
@@ -242,6 +244,7 @@ public class Screw : GrabbableObject
     public override void OnGrabReleased()
     {
         base.OnGrabReleased();
+        if(!bComplete)
         StartCoroutine(secret());
     }
 
@@ -251,7 +254,7 @@ public class Screw : GrabbableObject
         
         //rayCastHits = Physics.SphereCastAll(transform.position, 0.01f, Vector3.down, 0.2f);
         rayCastHits = Physics.RaycastAll(transform.position, Vector3.down, 0.2f);
-        Debug.DrawRay(transform.position, Vector3.down, Color.red, 5.0f, false);
+        
 
         for (int hits = 0; hits < rayCastHits.Length; hits++)
         {
@@ -266,6 +269,7 @@ public class Screw : GrabbableObject
         if (screwhits >= 3)
         {
             Instantiate(grenadeParticlePrefab, transform.position, grenadeParticlePrefab.transform.rotation, null);
+            bComplete = true;
         }
 
         else

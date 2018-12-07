@@ -28,6 +28,7 @@ public class StationMover : MonoBehaviour
     bool m_SpawnStationNext = false;
     private bool bSpawnDummyTrain = false;
     private bool bTrackDummyTrain = false;
+    private bool bMoveDummyTrain = false;
     private bool bPlayOnce = true;
 
     private BoxCollider CrashChecker;
@@ -111,6 +112,8 @@ public class StationMover : MonoBehaviour
         trainSounds.SetAudioLevelPitch(m_CurrentStationSpeed);
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
+    
+
         if (bTrackDummyTrain)
         {
             if (Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 85)
@@ -121,6 +124,12 @@ public class StationMover : MonoBehaviour
                     bPlayOnce = false;
                 }
             }
+
+            if(bMoveDummyTrain)
+            {
+                m_DummyTrain.transform.Translate(Vector3.back * Time.deltaTime * 10.0f);
+            }
+
 
         }
 
@@ -220,8 +229,18 @@ public class StationMover : MonoBehaviour
 
     private void OnStationChanged(int stationNumber, string stationNameEN, string stationNameJP)
     {
-        if (stationNumber == 4)
+        print(stationNumber);
+        if (stationNumber == 5)
         {
+            if(currentSpeed == 0)
+            {
+                m_DummyTrain = Instantiate(m_DummyTrainPrefab, m_DummyTrainPrefab.transform);
+                bTrackDummyTrain = true;
+                bMoveDummyTrain = true;
+
+            }
+
+            else
             bSpawnDummyTrain = true;
         }
         m_SpawnStationNext = true;
