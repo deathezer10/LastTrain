@@ -215,7 +215,10 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
                 m_3DAudioSource = announceInfo.audioSource;
             }
 
-            m_3DGameObject.transform.position = m_PlayerTrans.position + m_3DClipPosOffset;
+            if (m_3DGameObject != null)
+            {
+                m_3DGameObject.transform.position = m_PlayerTrans.position + m_3DClipPosOffset;
+            }
 
             AudioSource source = announceInfo.audioSource;
             source.clip = announceInfo.audioClip;

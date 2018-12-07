@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class StationMover : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class StationMover : MonoBehaviour
     private bool bTrackDummyTrain = false;
     private bool bMoveDummyTrain = false;
     private bool bPlayOnce = true;
+    private bool bSkip = true;
 
     private BoxCollider CrashChecker;
 
@@ -112,7 +114,7 @@ public class StationMover : MonoBehaviour
         trainSounds.SetAudioLevelPitch(m_CurrentStationSpeed);
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
-    
+
 
         if (bTrackDummyTrain)
         {
@@ -125,11 +127,7 @@ public class StationMover : MonoBehaviour
                 }
             }
 
-            if(bMoveDummyTrain)
-            {
-                m_DummyTrain.transform.Translate(Vector3.back * Time.deltaTime * 10.0f);
-            }
-
+           
 
         }
 
@@ -229,20 +227,31 @@ public class StationMover : MonoBehaviour
 
     private void OnStationChanged(int stationNumber, string stationNameEN, string stationNameJP)
     {
-        print(stationNumber);
-        if (stationNumber == 5)
-        {
-            if(currentSpeed == 0)
-            {
-                m_DummyTrain = Instantiate(m_DummyTrainPrefab, m_DummyTrainPrefab.transform);
-                bTrackDummyTrain = true;
-                bMoveDummyTrain = true;
 
+        if (!bSkip)
+            if (stationNumber == 4)
+            {
+                if (currentSpeed == 0)
+                {
+                    m_DummyTrain = Instantiate(m_DummyTrainPrefab, m_LastRightTunnel.transform.position, m_DummyTrainPrefab.transform.rotation);
+                    m_DummyTrain.transform.Rotate(new Vector3(0,180,0));
+                    m_DummyTrain.transform.DOMoveZ(CrashChecker.transform.position.z - 40, 10f, false);
+                    bTrackDummyTrain = true;
+                   
+
+                }
+
+                else
+                    bSpawnDummyTrain = true;
             }
 
-            else
-            bSpawnDummyTrain = true;
+        if (stationNumber == 4 && bSkip)
+        {
+            bSkip = false;
         }
+
+
+
         m_SpawnStationNext = true;
     }
 }

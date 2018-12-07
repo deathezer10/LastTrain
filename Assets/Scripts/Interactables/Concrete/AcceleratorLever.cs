@@ -66,7 +66,7 @@ public class AcceleratorLever : StationaryObject
                 if (!Audio.IsPlaying())
                     Audio.Play("lever");
 
-                if (VectorEndPoint.transform.position.z >= AcceleratorHandle.transform.position.z) //Lever at it's min position 
+                if (VectorEndPoint.transform.position.z + 0.025f >= AcceleratorHandle.transform.position.z) //Lever at it's min position 
                 {
                     bDisableLever = true;
                     AcceleratorHandle.transform.position += HandleMovementDirection * Vector3.Distance(LastHandPosition, PlayerHand.transform.position); //Move the handle

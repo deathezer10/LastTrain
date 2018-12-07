@@ -85,6 +85,8 @@ public class AudioPlayer : MonoBehaviour
     {
         if (_clip == null) return null;
 
+        if (m_Audiosource == null) return null;
+
         m_Audiosource.pitch = randomizePitch ? UnityEngine.Random.Range(1.0f - pitchRandomRange, 1.0f + pitchRandomRange) : m_Audiosource.pitch;
         m_Audiosource.clip = clip;
         m_Audiosource.PlayDelayed(playDelay);
