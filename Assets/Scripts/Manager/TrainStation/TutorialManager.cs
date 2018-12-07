@@ -32,10 +32,19 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private List<Material> m_TutorialPosterMaterials = new List<Material>();
 
+    [SerializeField]
+    Color m_EmissionHighlightColor;
+
     private int m_CurrentPosterMaterialIndex = 0;
 
     private Vector3 m_playerCheckpointPos = new Vector3(1f, 0.83f, -5f);
     private Vector3 m_playerCheckpointRot = new Vector3(0, -90f, 0);
+
+    private GameObject m_RightDiscObject;
+    private List<GameObject> m_TriggerObjects = new List<GameObject>(), m_GripObjects = new List<GameObject>();
+
+    public Material m_InitialControllerMat;
+    private Material m_HighlightControllerMat;
 
 
     void Start()
@@ -44,7 +53,7 @@ public class TutorialManager : MonoBehaviour
 
         if (tutorialEnabled)
         {
-            StartTutorial();
+            StartCoroutine(TutorialDelay());
         }
         else  // Skipping tutorial to checkpoint position * or just move this check to a seperate check script on the player object
         {
@@ -53,6 +62,73 @@ public class TutorialManager : MonoBehaviour
             player.transform.position = m_playerCheckpointPos;
             player.transform.eulerAngles = m_playerCheckpointRot;
         }
+    }
+
+    private IEnumerator TutorialDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartTutorial();
+    }
+
+    void OnEnable()
+    {
+        //Subscribe to the event that is called by SteamVR_RenderModel, when the controller mesh + texture has been loaded completely.
+        SteamVR_Events.RenderModelLoaded.Listen(OnControllerLoaded);
+    }
+
+    private void OnDisable()
+    {
+        //Unsubscribe from the event if this object is disabled.
+        SteamVR_Events.RenderModelLoaded.Remove(OnControllerLoaded);
+    }
+
+    /// <summary>
+    /// Call this method when the RenderModelLoaded event is triggered.
+    /// </summary>
+    /// <param name="args">SteamVR_RenderModel renderModel, bool success</param>
+    void OnControllerLoaded(SteamVR_RenderModel renderModel, bool success)
+    {
+        if (!success) return;
+        {
+            GetControllerParts(renderModel.gameObject);
+        }
+    }
+
+    private void GetControllerParts(GameObject modelObject)
+    {
+        m_InitialControllerMat = modelObject.transform.Find("lgrip").GetComponent<MeshRenderer>().material;
+
+        // Set up the new material with emission as a highlight
+        m_HighlightControllerMat = new Material(m_InitialControllerMat);
+        m_HighlightControllerMat.SetColor("_EmissionColor", m_EmissionHighlightColor);
+
+        // Find and store the objects for each part to be highlighted
+        if (modelObject.transform.parent.name == "Controller (right)")
+        {
+            m_RightDiscObject = modelObject.transform.Find("trigger").gameObject;
+
+            m_TriggerObjects.Add(modelObject.transform.Find("trigger").gameObject);
+            m_GripObjects.Add(modelObject.transform.Find("lgrip").gameObject);
+            m_GripObjects.Add(modelObject.transform.Find("rgrip").gameObject);
+        }
+        else if (modelObject.transform.parent.name == "Controller (left)")
+        {
+            m_TriggerObjects.Add(modelObject.transform.Find("trigger").gameObject);
+            m_GripObjects.Add(modelObject.transform.Find("lgrip").gameObject);
+            m_GripObjects.Add(modelObject.transform.Find("rgrip").gameObject);
+        }
+
+        //modelTransform.Find("body").GetComponent<MeshRenderer>().material;
+        //modelTransform.Find("button").GetComponent<MeshRenderer>().material;
+        //modelTransform.Find("led").GetComponent<MeshRenderer>().material;
+        //modelObject.Find("lgrip").GetComponent<MeshRenderer>().material;
+        //modelObject.Find("rgrip").GetComponent<MeshRenderer>().material;
+        //modelTransform.Find("scroll_wheel").GetComponent<MeshRenderer>().material;
+        //modelTransform.Find("sys_button").GetComponent<MeshRenderer>().material;
+        //modelObject.Find("trackpad").GetComponent<MeshRenderer>().material;
+        //modelTransform.Find("trackpad_scroll_cut").GetComponent<MeshRenderer>().material;
+        //modelTransform.Find("trackpad_touch").GetComponent<MeshRenderer>().material;
+        //modelObject.Find("trigger").GetComponent<MeshRenderer>().material;
     }
 
     /*
@@ -107,10 +183,9 @@ public class TutorialManager : MonoBehaviour
         SetPoster(PosterState.Poster1);
 
         IDisposable padObserver = null;
-
-        // Teleport intro
+        
         padObserver = this.UpdateAsObservable()
-           .Where(_ => _padAction.GetStateUp(SteamVR_Input_Sources.Any)) // Input.GetKeyUp(KeyCode.A)
+           .Where(_ => _padAction.GetStateUp(SteamVR_Input_Sources.Any))
            .Subscribe(_ =>
            {
                padObserver.Dispose();
@@ -138,17 +213,20 @@ public class TutorialManager : MonoBehaviour
             case PosterState.Poster1:
                 m_TutorialPoster1.enabled = true;
                 StartCoroutine(StartPosterAnimation(PosterState.Poster1));
+                HighlightControllerParts(1);
                 break;
             case PosterState.Poster2:
                 m_TutorialPoster2.enabled = true;
                 StartCoroutine(StartPosterAnimation(PosterState.Poster1));
                 StartCoroutine(StartPosterAnimation(PosterState.Poster2));
+                HighlightControllerParts(2);
                 break;
             case PosterState.Poster3:
                 m_TutorialPoster3.enabled = true;
                 StartCoroutine(StartPosterAnimation(PosterState.Poster1));
                 StartCoroutine(StartPosterAnimation(PosterState.Poster2));
                 StartCoroutine(StartPosterAnimation(PosterState.Poster3));
+                HighlightControllerParts(3);
                 break;
             default:
                 Debug.LogError("Invalid poster assigned");
@@ -192,6 +270,52 @@ public class TutorialManager : MonoBehaviour
                     Debug.LogError("Invalid poster assigned");
                     break;
             }
+        }
+    }
+
+    private void HighlightControllerParts(int currentPoster)
+    {
+        if (currentPoster == 1)
+        {
+            m_RightDiscObject.GetComponent<MeshRenderer>().material = m_HighlightControllerMat;
+        }
+        else if (currentPoster == 2)
+        {
+            m_RightDiscObject.GetComponent<MeshRenderer>().material = m_InitialControllerMat;
+
+            foreach (GameObject part in m_TriggerObjects)
+            {
+                part.GetComponent<MeshRenderer>().material = m_HighlightControllerMat;
+            }
+        }
+        else if (currentPoster == 3)
+        {
+            m_RightDiscObject.GetComponent<MeshRenderer>().material = m_InitialControllerMat;
+
+            foreach (GameObject part in m_TriggerObjects)
+            {
+                part.GetComponent<MeshRenderer>().material = m_InitialControllerMat;
+            }
+
+            foreach (GameObject part in m_GripObjects)
+            {
+                part.GetComponent<MeshRenderer>().material = m_HighlightControllerMat;
+            }
+        }
+    }
+
+    public void SetOriginalControllerMaterials()
+    {
+        m_RightDiscObject.GetComponent<MeshRenderer>().material = m_InitialControllerMat;
+
+        foreach (GameObject part in m_TriggerObjects)
+        {
+            part.GetComponent<MeshRenderer>().material = m_InitialControllerMat;
+        }
+
+        foreach (GameObject part in m_GripObjects)
+        {
+            part.GetComponent<MeshRenderer>().material = m_InitialControllerMat;
         }
     }
 
