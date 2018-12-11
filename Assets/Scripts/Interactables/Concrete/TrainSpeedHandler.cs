@@ -120,11 +120,11 @@ public class TrainSpeedHandler : MonoBehaviour
     }
 
 
-    void StopBlinkBlink()
+  public void StopBlinkBlink()
     {
        for(int lights = 0; lights < displayLights.Length; lights++)
         {
-            displayLights[lights].ToggleLights(false, false);
+            displayLights[lights].ToggleLights(false, false,true);
         }
     }
 

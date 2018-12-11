@@ -21,7 +21,7 @@ public class TrainTimeHandler : MonoBehaviour
     {
         foreach (var displayLight in m_DisplayLights)
         {
-            displayLight.ToggleLights(true, true);
+            displayLight.ToggleLights(true, true,false);
         }
 
         m_CurrentAnnouncementCount = 0;

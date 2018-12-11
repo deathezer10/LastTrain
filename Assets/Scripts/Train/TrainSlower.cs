@@ -12,8 +12,8 @@ public class TrainSlower : MonoBehaviour
     StationMover m_StationMover;
 
     bool m_StartSlowing = false;
-    bool m_GameEnded = false;
-
+    public bool m_GameEnded;
+  
     private void Start()
     {
         m_SpeedHandler = FindObjectOfType<TrainSpeedHandler>();
@@ -28,9 +28,7 @@ public class TrainSlower : MonoBehaviour
             m_GameEnded = true;
             m_EscapeBlocker.SetActive(false);
 
-            AnnouncementManager.Instance.PlayAnnouncement2D("announcement_chime", AnnouncementManager.AnnounceType.Override, 0f);
-            AnnouncementManager.Instance.StopAll();
-            
+            FindObjectOfType<TrainSpeedHandler>().StopBlinkBlink();
         }
     }
 

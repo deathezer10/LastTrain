@@ -8,19 +8,46 @@ public class TrainCrashAudio : MonoBehaviour {
     public StationMover stationMover;
     private Vector3 HighestSpeedPosition;
     private Vector3 SlowestSpeedPosition;
+    public bool bTrainStopped = false;
+    private Vector3 previous;
+    public float GetVelocity { get; private set; }
 
-	void Start()
+    void Start()
     {
-        
         HighestSpeedPosition = transform.localPosition;
         SlowestSpeedPosition = transform.Find("slowest").transform.localPosition;
         stationMover = FindObjectOfType<StationMover>();
+       
     }
+
+  
+
 
     void Update()
     {
-      float newZ =  Mathf.Lerp(SlowestSpeedPosition.z, HighestSpeedPosition.z, normalize01(stationMover.currentSpeed, 0, 20));
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, newZ);
+        if(stationMover.currentSpeed == 0)
+        {
+            bTrainStopped = true;
+        }
+
+
+        GetVelocity = ((transform.position - previous).magnitude) / Time.deltaTime;
+        previous = transform.position;
+        if (!bTrainStopped)
+        {
+            float newZ = Mathf.Lerp(SlowestSpeedPosition.z, HighestSpeedPosition.z, normalize01(stationMover.currentSpeed, 0, 20));
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, newZ);
+        }
+
+        else
+        {
+            print(GetVelocity);
+            float newZ = Mathf.Lerp(SlowestSpeedPosition.z, HighestSpeedPosition.z, normalize01(GetVelocity, 0, 20));
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, newZ);
+        }
+
+
+
     }
 
     private void OnTriggerEnter(Collider other)

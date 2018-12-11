@@ -22,6 +22,8 @@ public class StationDisplayLight : MonoBehaviour
 
     bool m_IsLightBlinking = false;
 
+    bool bTrainStopped = false;
+
     TextMeshPro StationNameEnTextMeshP, StationNameJpTextMeshP;
 
     string[] stationEnNameArray = { "Furuhashi", "Shin-Kita", "Maiyama", "Nakashino", "Murihari", "Death" };
@@ -62,7 +64,7 @@ public class StationDisplayLight : MonoBehaviour
         StationNameEnTextMeshP.text = stationEnNameArray[1];
         StationNameJpTextMeshP.text = stationJpNameArray[1];
 
-        ToggleLights(true, false);
+        ToggleLights(true, false,false);
     }
 
     public void CycleNodes()
@@ -82,6 +84,7 @@ public class StationDisplayLight : MonoBehaviour
         StationNameEnTextMeshP.text = stationEnNameArray[nextNode];
         StationNameJpTextMeshP.text = stationJpNameArray[nextNode];
 
+        if(!bTrainStopped)
         m_MeshRenderer.enabled = true;
 
         transform.parent.GetComponentInParent<StationDisplayUpdateSound>().PlayUpdateSound();
@@ -89,8 +92,9 @@ public class StationDisplayLight : MonoBehaviour
         OnStationChanged.Invoke(m_CurrentNodeIndex, StationNameEnTextMeshP.text, StationNameJpTextMeshP.text);
     }
 
-    public void ToggleLights(bool enabled, bool enableBlink)
+    public void ToggleLights(bool enabled, bool enableBlink,bool trainStopped)
     {
+        bTrainStopped = trainStopped;
         if (enabled)
         {
             m_MeshRenderer.enabled = true;
