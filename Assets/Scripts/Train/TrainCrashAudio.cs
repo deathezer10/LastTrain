@@ -10,6 +10,7 @@ public class TrainCrashAudio : MonoBehaviour {
     private Vector3 SlowestSpeedPosition;
     public bool bTrainStopped = false;
     private Vector3 previous;
+    private GameObject dummyTrain;
     public float GetVelocity { get; private set; }
 
     void Start()
@@ -17,6 +18,7 @@ public class TrainCrashAudio : MonoBehaviour {
         HighestSpeedPosition = transform.localPosition;
         SlowestSpeedPosition = transform.Find("slowest").transform.localPosition;
         stationMover = FindObjectOfType<StationMover>();
+        dummyTrain = FindObjectOfType<DummyTrain>().gameObject;
        
     }
 
@@ -31,8 +33,8 @@ public class TrainCrashAudio : MonoBehaviour {
         }
 
 
-        GetVelocity = ((transform.position - previous).magnitude) / Time.deltaTime;
-        previous = transform.position;
+        GetVelocity = ((dummyTrain.transform.position - previous).magnitude) / Time.deltaTime;
+        previous = dummyTrain.transform.position;
         if (!bTrainStopped)
         {
             float newZ = Mathf.Lerp(SlowestSpeedPosition.z, HighestSpeedPosition.z, normalize01(stationMover.currentSpeed, 0, 20));

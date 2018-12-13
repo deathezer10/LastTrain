@@ -98,8 +98,7 @@ public class TrainSpeedHandler : MonoBehaviour
             
             
             i += Time.deltaTime * acceleratorRate;
-            print(i);
-            print(Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i));
+          
             stationMover.currentSpeed = Mathf.Lerp(PreviousTrainSpeed, NewTrainSpeed, i);
             trainDoorsOpenSound.SetWindAudioLevel(stationMover.currentSpeed);
 
