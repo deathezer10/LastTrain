@@ -13,7 +13,9 @@ public class StationMover : MonoBehaviour
 
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
-
+    Queue<string> m_objectNames = new Queue<string>();
+    List<string> queueNames = new List<string>();
+    List<Transform> queueTransforms = new List<Transform>();
     const int m_InitialTunnelSpawnAmount = 7;
     int m_DestroySkipCounter = 3;
 
@@ -86,12 +88,19 @@ public class StationMover : MonoBehaviour
             GameObject leftTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, i * -m_TunnelGapOffset), Quaternion.identity, transform); // Left Side
             m_InitialRemovableObjects.Enqueue(m_LastRightTunnel.transform);
             m_InitialRemovableObjects.Enqueue(leftTunnel.transform);
+            m_objectNames.Enqueue(m_LastRightTunnel.name);
+            m_objectNames.Enqueue(leftTunnel.transform.name);
+            
         }
 
         for (int i = 0; i < transform.childCount; ++i)
         {
             if (transform.GetChild(i).tag != "TrainTunnel")
+            {
                 m_InitialRemovableObjects.Enqueue(transform.GetChild(i));
+                m_objectNames.Enqueue(transform.GetChild(i).name);
+            }
+               
         }
 
         trainSounds = FindObjectOfType<TrainDoorsOpenSound>();
@@ -144,7 +153,7 @@ public class StationMover : MonoBehaviour
                 while (m_InitialRemovableObjects.Count > 0)
                 {
                     var removable = m_InitialRemovableObjects.Dequeue();
-
+                    m_objectNames.Dequeue();
                     if (removable != null)
                         Destroy(removable.gameObject);
                 }
@@ -161,14 +170,44 @@ public class StationMover : MonoBehaviour
                 else
                 {
                     Destroy(m_RemovableObjects.Dequeue().gameObject);
+                    m_objectNames.Dequeue();   
                 }
             }
 
             if (m_IsStopping)
             {
-                m_LastRightTunnel = Instantiate(m_EmergencyExitPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset + m_TunnelExtraGapOffset), Quaternion.identity, transform);
-                m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
                 m_IsStopping = false;
+                float spawnLocation;
+                queueNames.AddRange(m_objectNames.ToArray());
+                queueTransforms.AddRange(m_RemovableObjects.ToArray());
+                print(queueNames.Count);
+                print(queueTransforms.Count);
+
+                if (queueNames[queueNames.Count - 3].Contains("Fake_Train_Station"))
+                {
+                    spawnLocation = queueTransforms[queueNames.Count - 2].gameObject.transform.position.z;
+                    queueTransforms[queueNames.Count - 2].gameObject.SetActive(false);
+                }
+                  
+                
+                else
+                {
+                   
+                    queueTransforms[queueNames.Count - 3].gameObject.SetActive(false);
+                    spawnLocation = queueTransforms[queueNames.Count - 3].gameObject.transform.position.z;
+                }
+                    
+                m_LastRightTunnel = Instantiate(m_EmergencyExitPrefab, new Vector3(m_TunnelXOffset, 0,spawnLocation), Quaternion.identity, transform);
+                m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+                m_objectNames.Enqueue(m_LastRightTunnel.name);
+               
+
+                m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset + m_TunnelExtraGapOffset), Quaternion.identity, transform);
+                m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+                m_objectNames.Enqueue(m_LastRightTunnel.name);
+                m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset + m_TunnelExtraGapOffset), Quaternion.identity, transform);
+                m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+                m_objectNames.Enqueue(m_LastRightTunnel.name);
 
                 if (m_ExtraGapPending)
                 {
@@ -193,16 +232,18 @@ public class StationMover : MonoBehaviour
                     else
                     {
                         m_TunnelExtraGapOffset += m_TunnelGapOffset * 2; // Offset the next tunnel to account for the length of the train station
-                        m_DestroySkipCounter += 2;
+                       // m_DestroySkipCounter += 2; //no need?
                         m_ExtraGapPending = true;
                     }
 
                     m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+                    m_objectNames.Enqueue(m_LastRightTunnel.name);
                 }
                 else
                 {
                     m_LastRightTunnel = Instantiate(m_TunnelPrefab, new Vector3(m_TunnelXOffset, 0, m_LastRightTunnel.transform.position.z + m_TunnelGapOffset + m_TunnelExtraGapOffset), Quaternion.identity, transform);
                     m_RemovableObjects.Enqueue(m_LastRightTunnel.transform);
+                    m_objectNames.Enqueue(m_LastRightTunnel.name);
 
                     if (m_ExtraGapPending)
                     {
@@ -231,18 +272,18 @@ public class StationMover : MonoBehaviour
         if (!bSkip)
             if (stationNumber == 4)
             {
-                if (currentSpeed == 0)
-                {
+                //if (currentSpeed == 0)
+                //{
                     m_DummyTrain = Instantiate(m_DummyTrainPrefab, m_LastRightTunnel.transform.position, m_DummyTrainPrefab.transform.rotation);
                     m_DummyTrain.transform.Rotate(new Vector3(0,180,0));
                     m_DummyTrain.transform.DOMoveZ(CrashChecker.transform.position.z - 40, 10f, false);
                     bTrackDummyTrain = true;
                    
 
-                }
+                //}
 
-                else
-                    bSpawnDummyTrain = true;
+                //else
+                //    bSpawnDummyTrain = true;
             }
 
         if (stationNumber == 4 && bSkip)
