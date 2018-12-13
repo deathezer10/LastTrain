@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class TrainCrashAudio : MonoBehaviour {
+public class TrainCrashAudio : MonoBehaviour
+{
 
     public StationMover stationMover;
     private Vector3 HighestSpeedPosition;
@@ -17,19 +17,15 @@ public class TrainCrashAudio : MonoBehaviour {
         HighestSpeedPosition = transform.localPosition;
         SlowestSpeedPosition = transform.Find("slowest").transform.localPosition;
         stationMover = FindObjectOfType<StationMover>();
-       
+
     }
-
-  
-
 
     void Update()
     {
-        if(stationMover.currentSpeed == 0)
+        if (stationMover.currentSpeed == 0)
         {
             bTrainStopped = true;
         }
-
 
         GetVelocity = ((transform.position - previous).magnitude) / Time.deltaTime;
         previous = transform.position;
@@ -46,8 +42,6 @@ public class TrainCrashAudio : MonoBehaviour {
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, newZ);
         }
 
-
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,7 +51,7 @@ public class TrainCrashAudio : MonoBehaviour {
         {
             GetComponent<AudioPlayer>().Play("crash");
         }
-        
+
     }
 
     private float normalize01(float value, float min, float max)

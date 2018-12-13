@@ -18,7 +18,7 @@ public class DoorLever : MonoBehaviour, IShootable
     private void OnTriggerEnter(Collider other)
     {
         if (!bDisable)
-            if (other.gameObject.name == "Umbrella" || other.tag == "BaseballBat" ||  ((other.gameObject.name == "Controller (left)" || other.gameObject.name == "Controller (right)") && !PlayerOriginHandler.IsOutsideOrigin))
+            if (other.gameObject.name == "Umbrella" || other.tag == "BaseballBat" || other.tag == "WalkingCane" ||  ((other.gameObject.name == "Controller (left)" || other.gameObject.name == "Controller (right)") && !PlayerOriginHandler.IsOutsideOrigin))
             {
                 UnlockDoor();
             }
