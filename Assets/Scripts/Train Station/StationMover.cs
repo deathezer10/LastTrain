@@ -183,18 +183,18 @@ public class StationMover : MonoBehaviour
                 print(queueNames.Count);
                 print(queueTransforms.Count);
 
-                if (queueNames[queueNames.Count - 3].Contains("Fake_Train_Station"))
+                if (queueNames[queueNames.Count - 2].Contains("Fake_Train_Station"))
                 {
-                    spawnLocation = queueTransforms[queueNames.Count - 2].gameObject.transform.position.z;
-                    queueTransforms[queueNames.Count - 2].gameObject.SetActive(false);
+                    spawnLocation = queueTransforms[queueNames.Count - 1].gameObject.transform.position.z;
+                    queueTransforms[queueNames.Count - 1].gameObject.SetActive(false);
                 }
                   
                 
                 else
                 {
                    
-                    queueTransforms[queueNames.Count - 3].gameObject.SetActive(false);
-                    spawnLocation = queueTransforms[queueNames.Count - 3].gameObject.transform.position.z;
+                    queueTransforms[queueNames.Count - 2].gameObject.SetActive(false);
+                    spawnLocation = queueTransforms[queueNames.Count - 2].gameObject.transform.position.z;
                 }
                     
                 m_LastRightTunnel = Instantiate(m_EmergencyExitPrefab, new Vector3(m_TunnelXOffset, 0,spawnLocation), Quaternion.identity, transform);
