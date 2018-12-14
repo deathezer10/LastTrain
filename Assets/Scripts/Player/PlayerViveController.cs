@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
@@ -260,13 +260,12 @@ public class PlayerViveController : MonoBehaviour
         if (obj && obj.GetComponent<IStationaryGrabbable>() == null)
             obj.transform.AddPosition(diff);
 
-        if(obj == null)
-        {
+        
             var newObj = GetCurrentHandObject(true);
 
             if (newObj && newObj.GetComponent<IStationaryGrabbable>() == null)
                 newObj.transform.AddPosition(diff);
-        }
+        
 
        
 
