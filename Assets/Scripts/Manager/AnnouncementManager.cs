@@ -52,6 +52,10 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
 
     Vector3 m_3DClipPosOffset = new Vector3(0, 15f, 0);
 
+    string nextClipAlias;
+
+    bool bJapaneseVO;
+
     public enum AnnounceType
     {
         Queue,
@@ -67,6 +71,17 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
         }
 
         m_LocalAudioSource = GetComponent<AudioSource>();
+
+        bJapaneseVO = true;
+    }
+
+    // Placeholder VO language change
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            bJapaneseVO = bJapaneseVO ? false : true;
+        }
     }
 
     /// <summary>
@@ -121,17 +136,24 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
     /// <returns>Reference to the AudioSource that was spawned</returns>
     public GameObject PlayAnnouncement3D(string clipAlias, AnnounceType announceType, float delayInSeconds = 0)
     {
+        nextClipAlias = clipAlias;
+
         // Only add the new announcement chime to queue if the queue is empty
-        if (m_AnnouncementQueue.Count != 0 && clipAlias == "announcement_chime")
+        if (m_AnnouncementQueue.Count != 0 && nextClipAlias == "announcement_chime")
         {
             return null;
         }
 
-        AudioClip clip = GetAudioClip(clipAlias);
+        if (bJapaneseVO)
+        {
+            nextClipAlias = nextClipAlias.Insert(0, "ja_");
+        }
+
+        AudioClip clip = GetAudioClip(nextClipAlias);
 
         if (clip == null)
         {
-            Debug.LogError("Error trying to retrieve announcement with alias: " + clipAlias);
+            Debug.LogError("Error trying to retrieve announcement with alias: " + nextClipAlias);
             return null;
         }
 
@@ -139,11 +161,11 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
         m_3DGameObject.transform.parent = transform;
 
         AudioSource spawnedAudioSource = m_3DGameObject.AddComponent<AudioSource>();
-        spawnedAudioSource.clip = GetAudioClip(clipAlias);
+        spawnedAudioSource.clip = GetAudioClip(nextClipAlias);
         spawnedAudioSource.volume = 1f;
-        spawnedAudioSource.spatialBlend = 1f;
+        spawnedAudioSource.spatialBlend = 0.9f;
         spawnedAudioSource.minDistance = 1f;
-        spawnedAudioSource.maxDistance = 70f;
+        spawnedAudioSource.maxDistance = 80f;
         spawnedAudioSource.rolloffMode = AudioRolloffMode.Linear;
 
         // Check if the announcement should skip the queue or be added to it
@@ -155,7 +177,7 @@ public class AnnouncementManager : SingletonMonoBehaviour<AnnouncementManager>
                     bIs3D = true,
                     audioSource = spawnedAudioSource,
                     audioClip = clip,
-                    clipAlias = clipAlias,
+                    clipAlias = nextClipAlias,
                     delayInSeconds = delayInSeconds
                 });
 

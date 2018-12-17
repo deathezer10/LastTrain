@@ -83,6 +83,8 @@ public class TrainSpeedHandler : MonoBehaviour
                 audioscreech.Stop();
                 i = 0;
                 stationMover.currentMaxSpeed = 0;
+                AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 0f);
+                AnnouncementManager.Instance.PlayAnnouncement3D("stopped_train", AnnouncementManager.AnnounceType.Queue, 0f);
                 StopBlinkBlink();
             }
         }
