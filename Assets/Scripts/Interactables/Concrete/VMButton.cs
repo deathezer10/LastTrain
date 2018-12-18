@@ -10,13 +10,14 @@ public class VMButton : MonoBehaviour
     [SerializeField]
     Color m_UseFlashColor;
 
+    [SerializeField]
     Color m_OriginalColor;
 
     float m_UseCooldown;
 
     void Start()
     {
-        m_OriginalColor = GetComponent<Material>().GetColor("_Emission");
+        //m_OriginalColor = GetComponent<MeshRenderer>().material.GetColor("_EMISSION");
 
         m_UseCooldown = Time.time + 1.2f;
     }
