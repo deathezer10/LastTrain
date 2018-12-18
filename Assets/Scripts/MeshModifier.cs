@@ -39,8 +39,7 @@ public class MeshModifier : MonoBehaviour
             if (collision.gameObject.tag == "Band")
             {
                 newHandleObjects = new List<GameObject>();
-                collision.gameObject.tag = "Untagged";
-                originalHand = collision.gameObject;
+                collision.gameObject.tag = "Untagged";             
                 originalHandleParent = collision.gameObject.transform.parent.gameObject;
                 grabHandle = collision.transform.GetChild(0).gameObject;
                 ContactPoint contact = collision.contacts[0];
@@ -114,7 +113,6 @@ public class MeshModifier : MonoBehaviour
                 {
                     newHandleObjects = new List<GameObject>();
                     collision.gameObject.tag = "Untagged";
-                    originalHand = collision.gameObject;
                     originalHandleParent = collision.gameObject.transform.parent.gameObject;
                     grabHandle = collision.transform.GetChild(0).gameObject;
                     ContactPoint contact = collision.contacts[0];
