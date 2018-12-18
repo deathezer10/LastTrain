@@ -31,7 +31,6 @@ public class StationMover : MonoBehaviour
     bool m_SpawnStationNext = false;
     private bool bSpawnDummyTrain = false;
     private bool bTrackDummyTrain = false;
-    private bool bMoveDummyTrain = false;
     private bool bPlayOnce = true;
     private bool bSkip = true;
 

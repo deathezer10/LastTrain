@@ -5,7 +5,7 @@ using UnityEngine;
 public class EmergencyDoorHandle : GrabbableObject
 {
     private PlayerViveController m_Controller;
-
+    private TrainDoorHandler trainDoorHandler; 
     private float m_LastZRot;
 
     private bool m_Inserted = false;
@@ -31,6 +31,7 @@ public class EmergencyDoorHandle : GrabbableObject
     private void Start()
     {
         m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Metal });
+        trainDoorHandler = FindObjectOfType<TrainDoorHandler>();
     }
 
     public void SetHolder(EmergencyDoorHandleHolder holder)
@@ -99,6 +100,7 @@ public class EmergencyDoorHandle : GrabbableObject
 
                     m_Locked = true;
                     GetComponent<AudioPlayer>().Play("leverlocked");
+                    if(!trainDoorHandler.bAreDoorsOpen)
                     FindObjectOfType<TrainDoorHandler>().ToggleDoors(true);
 
                     FindObjectOfType<EmergencyDoorsManager>().EmergencyDoorsTriggered();

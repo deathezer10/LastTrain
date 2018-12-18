@@ -18,7 +18,6 @@ public class MeshModifier : MonoBehaviour
     private static List<Vector3> capVertpolygon = new List<Vector3>();
     private List<GameObject> newHandleObjects = new List<GameObject>();
     private GameObject originalHandleParent;
-    private GameObject originalHand;
     private GameObject grabHandle;
     private string UpperPart;
     private SawBlade sawBlade;
