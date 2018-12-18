@@ -11,7 +11,7 @@ public class EscapePlatform : MonoBehaviour
         {
             GetComponent<BoxCollider>().enabled = false;
             GetComponentInChildren<EscapeTunnelDoor>().OpenEscapeDoor();
-            Destroy(FindObjectOfType<DummyTrain>().gameObject);
+            Destroy(FindObjectOfType<DummyTrain>()?.gameObject);
             FindObjectOfType<PlayerVictoryHandler>().PlayerVictory();
         }
     }

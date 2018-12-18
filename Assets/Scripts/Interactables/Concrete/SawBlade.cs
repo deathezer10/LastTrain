@@ -62,6 +62,7 @@ public class SawBlade : GrabbableObject
 
         held = true;
 
+        if (playerController == null) return;
         transform.rotation = playerController.transform.rotation;
         transform.Rotate(new Vector3(0, 180, 0));
         transform.position = playerController.transform.position;

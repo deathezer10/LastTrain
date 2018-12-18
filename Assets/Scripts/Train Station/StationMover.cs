@@ -9,7 +9,7 @@ public class StationMover : MonoBehaviour
     #region Tiling variables
     GameObject m_LastRightTunnel;
     public GameObject m_DummyTrain;
-
+    TrainDoorsOpenSound m_trainDoorsOpenSound;
 
     Queue<Transform> m_InitialRemovableObjects = new Queue<Transform>();
     Queue<Transform> m_RemovableObjects = new Queue<Transform>();
@@ -106,6 +106,7 @@ public class StationMover : MonoBehaviour
 
         m_StationDisplayLight.OnStationChanged.AddListener(OnStationChanged);
         CrashChecker = FindObjectOfType<TrainCrashChecker>().GetComponent<BoxCollider>();
+        m_trainDoorsOpenSound = FindObjectOfType<TrainDoorsOpenSound>();
 
     }
 
@@ -120,12 +121,14 @@ public class StationMover : MonoBehaviour
         m_CurrentStationSpeed = Mathf.Clamp(m_CurrentStationSpeed + (m_StationAcceleration * ((m_IsMoving) ? 1 : -1) * Time.deltaTime), 0, m_CurrentStationMaxSpeed);
         m_CurrentDistanceTraveled += m_CurrentStationSpeed * Time.deltaTime;
         trainSounds.SetAudioLevelPitch(m_CurrentStationSpeed);
+        m_trainDoorsOpenSound.SetWindAudioLevel(currentSpeed);
         transform.Translate(Vector3.back * m_CurrentStationSpeed * Time.deltaTime);
 
 
 
         if (bTrackDummyTrain)
         {
+            if(m_DummyTrain != null)
             if (Vector3.Distance(CrashChecker.transform.position, m_DummyTrain.transform.position) < 85)
             {
                 if (bPlayOnce)
@@ -191,9 +194,14 @@ public class StationMover : MonoBehaviour
                 
                 else
                 {
-                   
-                    queueTransforms[queueNames.Count - 2].gameObject.SetActive(false);
-                    spawnLocation = queueTransforms[queueNames.Count - 2].gameObject.transform.position.z;
+                   if(queueNames.Count > 2)
+                    {
+                        queueTransforms[queueNames.Count - 2].gameObject.SetActive(false);
+                        spawnLocation = queueTransforms[queueNames.Count - 2].gameObject.transform.position.z;
+                    }
+                   else
+                        spawnLocation = queueTransforms[queueNames.Count-1].gameObject.transform.position.z;
+
                 }
                     
                 m_LastRightTunnel = Instantiate(m_EmergencyExitPrefab, new Vector3(m_TunnelXOffset, 0,spawnLocation), Quaternion.identity, transform);
@@ -273,6 +281,7 @@ public class StationMover : MonoBehaviour
             {
                 //if (currentSpeed == 0)
                 //{
+                    
                     m_DummyTrain = Instantiate(m_DummyTrainPrefab, m_LastRightTunnel.transform.position, m_DummyTrainPrefab.transform.rotation);
                     m_DummyTrain.transform.Rotate(new Vector3(0,180,0));
                     m_DummyTrain.transform.DOMoveZ(CrashChecker.transform.position.z - 40, 10f, false);
