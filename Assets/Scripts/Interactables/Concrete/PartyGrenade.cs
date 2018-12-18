@@ -11,6 +11,8 @@ public class PartyGrenade : GrabbableObject, IShootable
 
     PlayerViveController m_CurrentController;
 
+    bool bUsedOnce;
+
     private void Start()
     {
         grenadeSounds = GetComponents<AudioPlayer>();
@@ -81,7 +83,11 @@ public class PartyGrenade : GrabbableObject, IShootable
 
     public override void OnUse()
     {
-        PullPin();
+        if (!bUsedOnce)
+        {
+            bUsedOnce = true;
+            PullPin();
+        }
     }
 
     public void OnShot(Revolver revolver)
