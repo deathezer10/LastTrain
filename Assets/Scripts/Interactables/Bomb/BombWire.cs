@@ -10,7 +10,7 @@ public class BombWire : MonoBehaviour
 
     private void Start()
     {
-        heldCutForce = 0.7f;
+        heldCutForce = 0.8f;
     }
 
     private void OnTriggerEnter(Collider other)
