@@ -43,7 +43,7 @@ public class Doll : GrabbableObject, IShootable
 
     float m_FlashEndTime;
 
-    bool bPlayerWithinRange, bDying, bGrabbedOnce, bShowingHint, bBurnStarted;
+    bool bPlayerWithinRange, bDying, m_bUsedOnce, bShowingHint, bBurnStarted;
 
     // Script listing the possible clip String aliases used for calling Announcement manager
     DollDeathAnnouncements m_DDAnnouncements;
@@ -98,12 +98,6 @@ public class Doll : GrabbableObject, IShootable
     public override void OnGrab()
     {
         base.OnGrab();
-
-        if (!bGrabbedOnce)
-        {
-            transform.Find("Awkward").GetComponent<AudioPlayer>().Play();
-            bGrabbedOnce = true;
-        }
     }
 
     /// <summary>
@@ -149,7 +143,7 @@ public class Doll : GrabbableObject, IShootable
     private IEnumerator BlueFlash()
     {
         m_DollEyeMat.SetColor("_EmissionColor", m_BombHintColor);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.5f);
         m_DollEyeMat.SetColor("_EmissionColor", m_InitialColor);
         bShowingHint = false;
     }
@@ -201,6 +195,12 @@ public class Doll : GrabbableObject, IShootable
     public override void OnUse()
     {
         base.OnUse();
+
+        if (!m_bUsedOnce && m_DollIndex == 1)
+        {
+            transform.Find("Awkward").GetComponent<AudioPlayer>().Play();
+            m_bUsedOnce = true;
+        }
 
         if (!bShowingHint)
         {
