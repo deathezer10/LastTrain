@@ -65,7 +65,7 @@ public class MeshModifier : MonoBehaviour
 
                     else
                     {
-                        newHandleObjects[0].layer = LayerMask.NameToLayer("BalanceHandleCollider");
+                        newHandleObjects[0].layer = LayerMask.NameToLayer("Default");
                         newHandleObjects[0].AddComponent<Rigidbody>();
                         grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[0].GetComponent<Rigidbody>();
                         grabHandle.transform.parent = newHandleObjects[0].transform;
@@ -81,7 +81,7 @@ public class MeshModifier : MonoBehaviour
 
                 else
                 {
-                    newHandleObjects[1].layer = LayerMask.NameToLayer("BalanceHandleCollider");
+                    newHandleObjects[1].layer = LayerMask.NameToLayer("Default");
                     newHandleObjects[1].AddComponent<Rigidbody>();
                     grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[1].GetComponent<Rigidbody>();
                     grabHandle.transform.parent = newHandleObjects[1].transform;
@@ -138,7 +138,7 @@ public class MeshModifier : MonoBehaviour
 
                     else
                     {
-                        newHandleObjects[0].layer = LayerMask.NameToLayer("BalanceHandleCollider");
+                        newHandleObjects[0].layer = LayerMask.NameToLayer("Default");
                         newHandleObjects[0].AddComponent<Rigidbody>();
                         grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[0].GetComponent<Rigidbody>();
                         grabHandle.transform.parent = newHandleObjects[0].transform;
@@ -154,7 +154,7 @@ public class MeshModifier : MonoBehaviour
 
                     else
                     {
-                        newHandleObjects[1].layer = LayerMask.NameToLayer("BalanceHandleCollider");
+                        newHandleObjects[1].layer = LayerMask.NameToLayer("Default");
                         newHandleObjects[1].AddComponent<Rigidbody>();
                         grabHandle.GetComponent<ConfigurableJoint>().connectedBody = newHandleObjects[1].GetComponent<Rigidbody>();
                         grabHandle.transform.parent = newHandleObjects[1].transform;
