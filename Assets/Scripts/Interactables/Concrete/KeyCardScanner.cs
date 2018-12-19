@@ -16,6 +16,7 @@ public class KeyCardScanner : StationaryObject, IShootable
     private void OnTriggerEnter(Collider other)
     {
         if (isDone) return;
+        if (DriverCabinDoorLock.bIsUnlocked) return;
 
         if (successAudio.IsPlaying()) return;
         if (FailedAudio.IsPlaying()) return;
