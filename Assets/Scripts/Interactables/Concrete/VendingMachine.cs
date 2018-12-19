@@ -49,6 +49,9 @@ public class VendingMachine : MonoBehaviour
 
         m_FlapStartRot = m_FlapTransform.localEulerAngles;
         m_FlapStartPos = m_FlapTransform.localPosition;
+
+        m_VMRedMaterial.EnableKeyword("_EMISSION");
+        m_VMBlueMaterial.EnableKeyword("_EMISSION");
     }
 
     private void Update()
@@ -100,7 +103,8 @@ public class VendingMachine : MonoBehaviour
 
         if (can.GetComponent<Rigidbody>() != null)
         {
-            can.GetComponent<Rigidbody>().AddForce(m_CanLaunchForce);
+            //can.GetComponent<Rigidbody>().AddForce(m_CanLaunchForce);
+            can.GetComponent<Rigidbody>().AddRelativeForce(m_CanLaunchForce, ForceMode.Impulse);
         }
 
         yield return new WaitForSeconds(0.2f);

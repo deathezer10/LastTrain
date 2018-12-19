@@ -27,10 +27,10 @@ public class VMButton : MonoBehaviour
     {
         if (other.tag == "GameController")
         {
-            if (m_UseCooldown >= Time.time)
+            if (m_UseCooldown <= Time.time)
             {
                 StartCoroutine(ButtonPressRoutine());
-                GetComponent<VendingMachine>().VMButtonPress();
+                GetComponentInParent<VendingMachine>().VMButtonPress();
             }
         }
     }
@@ -41,10 +41,10 @@ public class VMButton : MonoBehaviour
 
         m_ButtonUseAudio.Play();
 
-        GetComponent<Material>().SetColor("_Emission", m_UseFlashColor);
+        GetComponent<MeshRenderer>().material.SetColor("_Emission", m_UseFlashColor);
 
         yield return new WaitForSeconds(0.2f);
 
-        GetComponent<Material>().SetColor("_Emission", m_OriginalColor);
+        GetComponent<MeshRenderer>().material.SetColor("_Emission", m_OriginalColor);
     }
 }
