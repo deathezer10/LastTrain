@@ -61,7 +61,7 @@ public class Wallet : GrabbableObject
         {
             m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
 
-            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 0f);
+            AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 2f);
             AnnouncementManager.Instance.PlayAnnouncement3D("wallet_pickup", AnnouncementManager.AnnounceType.Queue, 0f);
             
             m_HasAnnounced = true;
