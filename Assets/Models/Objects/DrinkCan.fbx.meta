@@ -6,16 +6,26 @@ ModelImporter:
     100000: drink_can_can
     100002: drink_can_opener
     100004: //RootNode
+    100006: drink_can_can.001
+    100008: drink_can_Cylinder005
     400000: drink_can_can
     400002: drink_can_opener
     400004: //RootNode
+    400006: drink_can_can.001
+    400008: drink_can_Cylinder005
     2100000: CanMat
     2300000: drink_can_can
     2300002: drink_can_opener
+    2300004: drink_can_can.001
+    2300006: drink_can_Cylinder005
     3300000: drink_can_can
     3300002: drink_can_opener
+    3300004: drink_can_can.001
+    3300006: drink_can_Cylinder005
     4300000: drink_can_opener
     4300002: drink_can_can
+    4300004: drink_can_can.001
+    4300006: drink_can_Cylinder005
   externalObjects: {}
   materials:
     importMaterials: 1
