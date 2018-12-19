@@ -92,6 +92,8 @@ public class VendingMachine : MonoBehaviour
 
         m_FlapTransform.DOLocalRotate(m_FlapEndRot, 0.15f, RotateMode.Fast);
         m_FlapTransform.DOLocalMove(m_FlapEndPos, 0.15f, false);
+        m_FlapTransform.GetComponent<BoxCollider>().enabled = false;
+
         yield return new WaitForSeconds(0.20f);
 
         GameObject can = Instantiate(m_DrinkCanPrefab, m_CanSpawnTrans.position, m_CanSpawnTrans.rotation, null);
@@ -101,9 +103,9 @@ public class VendingMachine : MonoBehaviour
             can.GetComponent<Rigidbody>().AddForce(m_CanLaunchForce);
         }
 
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.2f);
         m_FlapTransform.DOLocalRotate(m_FlapStartRot, 0.15f, RotateMode.Fast);
         m_FlapTransform.DOLocalMove(m_FlapStartPos, 0.15f, false);
-
+        m_FlapTransform.GetComponent<BoxCollider>().enabled = true;
     }
 }

@@ -1265,6 +1265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UseFlashColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
   m_OriginalColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
+  m_ButtonUseAudio: {fileID: 0}
 --- !u!222 &222611184523134654
 CanvasRenderer:
   m_ObjectHideFlags: 1

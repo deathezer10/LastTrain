@@ -13,12 +13,13 @@ public class VMButton : MonoBehaviour
     [SerializeField]
     Color m_OriginalColor;
 
+    [SerializeField]
+    AudioPlayer m_ButtonUseAudio;
+
     float m_UseCooldown;
 
     void Start()
     {
-        //m_OriginalColor = GetComponent<MeshRenderer>().material.GetColor("_EMISSION");
-
         m_UseCooldown = Time.time + 1.2f;
     }
 
@@ -37,7 +38,9 @@ public class VMButton : MonoBehaviour
     private IEnumerator ButtonPressRoutine()
     {
         m_UseCooldown = Time.time + 1.2f;
-        
+
+        m_ButtonUseAudio.Play();
+
         GetComponent<Material>().SetColor("_Emission", m_UseFlashColor);
 
         yield return new WaitForSeconds(0.2f);
