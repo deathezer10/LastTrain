@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class DollSmoke : MonoBehaviour
 {
-    AudioPlayer burnAudio;
+    AudioPlayer m_BurnAudio;
+
+    SmokeDetector m_CurrentSmokeDetector;
+
 
     private void OnEnable()
     {
-        burnAudio = GetComponent<AudioPlayer>();
-        burnAudio.Play();
+        m_BurnAudio = GetComponent<AudioPlayer>();
+        m_BurnAudio.Play();
     }
 
     void Update()
@@ -17,11 +20,21 @@ public class DollSmoke : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
+    private void OnDestroy()
+    {
+        if (m_CurrentSmokeDetector != null)
+        {
+            m_CurrentSmokeDetector.DetectingSmoke(false);
+            m_CurrentSmokeDetector = null;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "SmokeDetector")
         {
-            other.GetComponent<SmokeDetector>().DetectingSmoke(true);
+            m_CurrentSmokeDetector = other.GetComponent<SmokeDetector>();
+            m_CurrentSmokeDetector.DetectingSmoke(true);
         }
     }
 
@@ -29,7 +42,11 @@ public class DollSmoke : MonoBehaviour
     {
         if (other.tag == "SmokeDetector")
         {
-            other.GetComponent<SmokeDetector>().DetectingSmoke(false);
+            if (m_CurrentSmokeDetector != null)
+            {
+                m_CurrentSmokeDetector.DetectingSmoke(false);
+                m_CurrentSmokeDetector = null;
+            }
         }
     }
 

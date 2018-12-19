@@ -15,6 +15,8 @@ public class NewsPaperSmoke : MonoBehaviour
 
     float burnOutTime;
 
+    SmokeDetector m_CurrentSmokeDetector;
+
     void Start()
     {
         smokeObject.GetComponent<CapsuleCollider>().enabled = false;
@@ -31,13 +33,23 @@ public class NewsPaperSmoke : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (m_CurrentSmokeDetector != null)
+        {
+            m_CurrentSmokeDetector.DetectingSmoke(false);
+            m_CurrentSmokeDetector = null;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (smoking)
         {
             if (other.tag == "SmokeDetector")
             {
-                other.GetComponent<SmokeDetector>().DetectingSmoke(true);
+                m_CurrentSmokeDetector = other.GetComponent<SmokeDetector>();
+                m_CurrentSmokeDetector.DetectingSmoke(true);
             }
         }
     }
@@ -48,7 +60,11 @@ public class NewsPaperSmoke : MonoBehaviour
         {
             if (other.tag == "SmokeDetector")
             {
-                other.GetComponent<SmokeDetector>().DetectingSmoke(false);
+                if (m_CurrentSmokeDetector != null)
+                {
+                    m_CurrentSmokeDetector.DetectingSmoke(false);
+                    m_CurrentSmokeDetector = null;
+                }
             }
         }
     }
