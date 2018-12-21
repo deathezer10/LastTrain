@@ -60,6 +60,8 @@ public class Doll : GrabbableObject, IShootable
         m_DollEyeMat.SetColor("_EmissionColor", m_InitialColor);
         m_HeadInitRot = m_DollHead.localEulerAngles;
 
+        m_FlashEndTime = Time.time + 1f;
+
         SetCollisionIgnore();
     }
 

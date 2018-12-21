@@ -112,9 +112,13 @@ public class Revolver : GrabbableObject
 
         m_IsGrabbing = true;
         m_LaserPointer.SetActive(true);
-        transform.rotation = m_CurrentController.transform.rotation;
-        transform.Rotate(new Vector3(0, -90, -15));
-        transform.position = m_CurrentController.transform.position;
+
+        if (m_CurrentController != null)
+        {
+            transform.rotation = m_CurrentController.transform.rotation;
+            transform.Rotate(new Vector3(0, -90, -15));
+            transform.position = m_CurrentController.transform.position;
+        }
     }
 
     public override void OnGrabReleased()
