@@ -303,7 +303,6 @@ GameObject:
   - component: {fileID: 65386326522250894}
   - component: {fileID: 54128118536958806}
   - component: {fileID: 114721115948166198}
-  - component: {fileID: 114949315022780696}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: GameController
@@ -323,6 +322,7 @@ GameObject:
   - component: {fileID: 65192630311452806}
   - component: {fileID: 54220034373576296}
   - component: {fileID: 114061107646726352}
+  - component: {fileID: 114182460138389692}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: GameController
@@ -416,7 +416,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000708315405500}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 18.2, y: 0.861, z: -13.96}
+  m_LocalPosition: {x: 17.936, y: 0.861, z: -14.079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396594326088306}
@@ -466,6 +466,7 @@ Transform:
   - {fileID: 4878007606512424}
   - {fileID: 224222484918166252}
   - {fileID: 4281987451518588}
+  - {fileID: 4462540441264506}
   m_Father: {fileID: 4288316655885232}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -493,7 +494,7 @@ Transform:
   m_LocalScale: {x: 0.11729012, y: 0.08495, z: 0.07029006}
   m_Children: []
   m_Father: {fileID: 4642561740245398}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4462540441264506
 Transform:
@@ -503,10 +504,10 @@ Transform:
   m_GameObject: {fileID: 1437289432082806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.20000012, y: 0.2, z: 0.20000012}
+  m_LocalScale: {x: 0.20000024, y: 0.2, z: 0.20000024}
   m_Children: []
-  m_Father: {fileID: 4642561740245398}
-  m_RootOrder: 2
+  m_Father: {fileID: 4396594326088306}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4589586938494938
 Transform:
@@ -546,7 +547,6 @@ Transform:
   m_Children:
   - {fileID: 4624301260330244}
   - {fileID: 224952728733087766}
-  - {fileID: 4462540441264506}
   - {fileID: 4446835615328040}
   m_Father: {fileID: 4288316655885232}
   m_RootOrder: 1
@@ -574,7 +574,7 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
-  m_projectionMatrixMode: 0
+  m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 50
@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1667628240253908}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52edebbace8f0c74b91d72af1d243a7e, type: 3}
   m_Name: 
@@ -1067,6 +1067,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DeathFader: {fileID: 114824332408806070}
   FadeTime: 2
+--- !u!114 &114182460138389692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667628240253908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16380b475422ae74c9e24ee25629a74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _getOnTags:
+  - Floor
+  _targetMarker: {fileID: 0}
+  _lineRenderer: {fileID: 120723315778644962}
+  _vertexCount: 25
+  _initialVelocity: 10
+  _fadeTime: 0.1
+  _fadeColor: {r: 0.06510325, g: 0.103773594, b: 0.08202152, a: 0}
+  _camera: {fileID: 20335114981071620}
+  _padAction: {fileID: 11400000, guid: fb591c47e111f9f4ca9775e57aa4be1e, type: 2}
+  _possibleColor: {r: 0.42815408, g: 1, b: 0.3820755, a: 0.7058824}
+  _impossibleColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 0.7058824}
 --- !u!114 &114223815672633936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1294,7 +1317,7 @@ MonoBehaviour:
     m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
-  antialiasingMode: 3
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -1383,7 +1406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _handType: 2
   _grabAction: {fileID: 11400000, guid: 4fff6e154ffab884a93f405a11d53201, type: 2}
-  _useAction: {fileID: 11400000, guid: 34e99b7f11216d44b93886814b2d22d3, type: 2}
+  _useAction: {fileID: 11400000, guid: fb591c47e111f9f4ca9775e57aa4be1e, type: 2}
 --- !u!114 &114795154303804116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1604,29 +1627,6 @@ MonoBehaviour:
   _outlineShaderMaterial: {fileID: 0}
   _renderTexture: {fileID: 0}
   _extraRenderTexture: {fileID: 0}
---- !u!114 &114949315022780696
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1638970996972856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16380b475422ae74c9e24ee25629a74a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _getOnTags:
-  - Floor
-  _targetMarker: {fileID: 0}
-  _lineRenderer: {fileID: 120723315778644962}
-  _vertexCount: 25
-  _initialVelocity: 10
-  _fadeTime: 0.1
-  _fadeColor: {r: 0.06510325, g: 0.103773594, b: 0.08202152, a: 0}
-  _camera: {fileID: 20335114981071620}
-  _padAction: {fileID: 11400000, guid: fb591c47e111f9f4ca9775e57aa4be1e, type: 2}
-  _possibleColor: {r: 0.42815408, g: 1, b: 0.3820755, a: 0.7058824}
-  _impossibleColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 0.7058824}
 --- !u!120 &120723315778644962
 LineRenderer:
   m_ObjectHideFlags: 1
