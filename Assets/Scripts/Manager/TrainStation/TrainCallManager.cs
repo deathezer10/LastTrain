@@ -11,7 +11,7 @@ public class TrainCallManager : MonoBehaviour
         {
             GetComponent<BoxCollider>().enabled = false;
 
-            FindObjectOfType<Checkpoint>().CheckpointActivated();
+            CheckpointManager.Instance.CheckpointUpdate(0);
 
             FindObjectOfType<TrainArriver>().CallTheTrain();
 

@@ -53,17 +53,15 @@ public class Wallet : GrabbableObject
         {
             return;
         }
-            
+
         if (m_TutorialArrow != null && m_TutorialArrow.activeInHierarchy)
             m_TutorialArrow.SetActive(false);
 
         if (!m_HasAnnounced)
         {
-            m_TManager.SetPoster(TutorialManager.PosterState.Poster3);
-
             AnnouncementManager.Instance.PlayAnnouncement3D("announcement_chime", AnnouncementManager.AnnounceType.Queue, 2f);
             AnnouncementManager.Instance.PlayAnnouncement3D("wallet_pickup", AnnouncementManager.AnnounceType.Queue, 0f);
-            
+
             m_HasAnnounced = true;
         }
     }
@@ -74,8 +72,6 @@ public class Wallet : GrabbableObject
 
         if (!m_HasUsedOnce)
         {
-            m_TManager.SetPoster(TutorialManager.PosterState.None);
-
             m_animator.Play("Open");
 
             m_Colliders[0].center = m_Colliders[1].center;
@@ -93,6 +89,5 @@ public class Wallet : GrabbableObject
     public void OnWalletOpened()
     {
         Instantiate(m_ICCardPrefab, m_ICSpawnSpot.position, Quaternion.identity);
-        m_TManager.SetOriginalControllerMaterials();
     }
 }
