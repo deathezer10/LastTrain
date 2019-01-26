@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerPopHandler : MonoBehaviour
 {
-
     [SerializeField]
     private Transform _initPopPos = null;
 
+    [SerializeField]
+    private CheckpointManager _checkpointManager = null;
+
     void Start()
     {
-        var currentPopPos = CheckpointManager.Instance.GetCurrentPoint();
+        var currentPopPos = _checkpointManager.GetCurrentPoint();
         currentPopPos = currentPopPos ?? _initPopPos;
 
         this.transform.position = currentPopPos.position;
