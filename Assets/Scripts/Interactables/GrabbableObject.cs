@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UniRx;
+
 /// <summary>
 /// Useful for dynamic objects such as balls, fire extinguisher, keycard
 /// </summary>
@@ -66,37 +68,28 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 
     public virtual bool hideControllerOnGrab { get { return true; } }
 
-    public virtual void OnControllerEnter(PlayerViveController currentController)
-    {
-    }
+    public virtual void OnControllerEnter(PlayerViveController currentController) { }
 
-    public virtual void OnControllerExit()
-    {
-        SetEnableOutline(false);
-    }
+    public virtual void OnControllerExit() => SetEnableOutline(false);
 
-    public virtual void OnControllerStay()
-    {
-        SetEnableOutline(true);
-    }
+    public virtual void OnControllerStay() => SetEnableOutline(true);
 
-    public virtual void OnGrab()
-    {
-    }
+    public BoolReactiveProperty IsGrabeRP { get; private set; } = new BoolReactiveProperty(false);
+    public virtual void OnGrab() => IsGrabeRP.Value = true;
 
-    public virtual void OnGrabStay()
-    {
-        SetEnableOutline(false);
-    }
+    public virtual void OnGrabStay() => SetEnableOutline(false);
 
     public virtual void OnGrabReleased()
     {
         SetEnableOutline(false);
+        IsGrabeRP.Value = false;
     }
 
-    public virtual void OnUseDown() { }
+    public BoolReactiveProperty IsUseRP { get; private set; } = new BoolReactiveProperty(false);
+
+    public virtual void OnUseDown() => IsUseRP.Value = true;
     public virtual void OnUse() { }
-    public virtual void OnUseUp() { }
+    public virtual void OnUseUp() => IsUseRP.Value = false;
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
@@ -112,7 +105,7 @@ public class GrabbableObject : MonoBehaviour, IGrabbable, IInteractable
 
     bool IsTagBanned(string tag)
     {
-        if (tag == "Player" || tag ==  "HeadDisplay" || tag == "GameController")
+        if (tag == "Player" || tag == "HeadDisplay" || tag == "GameController")
             return true;
 
         return false;

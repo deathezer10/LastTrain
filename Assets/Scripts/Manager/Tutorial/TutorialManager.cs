@@ -19,17 +19,45 @@ public class TutorialManager : MonoBehaviour
     private TutorialObject _tereportPoint;
 
     [SerializeField]
-    private TutorialObject _wallet;
+    private TutorialGrabbableObject _wallet;
 
     [SerializeField]
-    private TutorialObject _card;
+    private TutorialGrabbableObject _card;
 
     [SerializeField]
     private TutorialObject _examination;
 
     public void Start()
     {
+        // テレポートポイント
+        _tereportPoint.IsEnterRP
+            .Where(_ => _)
+            .Select(_ => _tereportPoint)
+            .Subscribe(_ => _.MarkerObject.SetActive(false));
 
+        // 財布開けるまで
+        _wallet.IsUseRP
+            .Where(_ => _)
+            .Select(_ => _wallet)
+            .Subscribe(_ => _.MarkerObject.SetActive(false));
+
+        // カード持っている間
+        _card.IsGrabeRP
+            .Where(_ => _)
+            .Select(_ => _card)
+            .Subscribe(_ => _.MarkerObject.SetActive(false));
+
+        // カード持っていない間
+        _card.IsGrabeRP
+            .Where(_ => !_)
+            .Select(_ => _card)
+            .Subscribe(_ => _.MarkerObject.SetActive(true));
+
+        // 改札当たったとき
+        _examination.IsEnterRP
+            .Where(_ => _)
+            .Select(_ => _examination)
+            .Subscribe(_ => _.MarkerObject.SetActive(false));
     }
 
 }

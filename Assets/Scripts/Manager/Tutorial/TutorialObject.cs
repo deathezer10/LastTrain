@@ -6,17 +6,12 @@ using UniRx;
 
 public class TutorialObject : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _object;
+    public GameObject MarkerObject { get; set; }
 
-    [SerializeField]
-    private Subject<bool> _tutorialSubject = new Subject<bool>();
+    public BoolReactiveProperty IsEnterRP { get; private set; } = new BoolReactiveProperty(false);
 
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        _tutorialSubject.Subscribe(_ =>
-        {
-            _object.SetActive(_);
-        });
+        IsEnterRP.Value = true;
     }
 }
