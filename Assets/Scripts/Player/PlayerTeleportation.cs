@@ -37,6 +37,9 @@ public class PlayerTeleportation : MonoBehaviour
     [Tag, SerializeField]
     private List<string> _getOnTags;
 
+    [Layer, SerializeField]
+    private int _ignoreLayer;
+
     [SerializeField]
     private GameObject _targetMarker;
 
@@ -106,6 +109,45 @@ public class PlayerTeleportation : MonoBehaviour
     }
 
     /// <summary>
+    /// 床の上座標を取得    
+    /// </summary>
+    /// <param name="indicationPos"></param>
+    /// <returns></returns>
+    private float? GetOnTheFloorPos(Vector3 indicationPos)
+    {
+        var vec = (indicationPos - _camera.transform.position).normalized;
+
+        var hit = IsVisible(_camera.transform.position, vec);
+        var end = hit.HasValue ? hit.Value.point : Vector3.zero;
+        Debug.DrawLine(_camera.transform.position, end, Color.green);
+
+        if (hit != null)
+        {
+            return hit.Value.transform.position.y + hit.Value.collider.bounds.extents.y;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// ラインの色など設定
+    /// </summary>
+    /// <param name="possible"></param>
+    private void SetLineRendererIsPossible(bool possible)
+    {
+        if (possible)
+        {
+            _lineRenderer.material.SetColor("_EmissionColor", _possibleColor);
+            _targetMarker.SetActive(true);
+        }
+        else
+        {
+            _targetMarker.SetActive(false);
+            _lineRenderer.material.SetColor("_EmissionColor", _impossibleColor);
+        }
+    }
+
+    /// <summary>
     /// 放物線を表示する関数
     /// </summary>
     private void ShowOrbit()
@@ -115,25 +157,36 @@ public class PlayerTeleportation : MonoBehaviour
 
         // 目標地点の取得
         var indicationPos = GetIndicationPos(data);
-        var vec = (indicationPos - this.transform.position).normalized;
+        var floorPos = GetOnTheFloorPos(indicationPos);
 
-        var hit = IsVisible(_camera.transform.position, vec);
-
-        if (hit != null)
+        if (floorPos != null)
         {
             // 床の上の高さにする
-            data.height = hit.Value.transform.position.y + hit.Value.collider.bounds.extents.y;
-            _lineRenderer.startColor = _possibleColor;
-            _lineRenderer.endColor = _possibleColor;
-            _targetMarker.SetActive(true);
+            data.height = floorPos.Value;
+        }
+
+        // マーカーの予想地点取得
+        var x = data.v0 * data.cos * data.arrivalTime;
+        var y = data.v0 * data.sin * data.arrivalTime - 0.5f * Gravity * Square(data.arrivalTime);
+        var forward = new Vector3(transform.forward.x, 0, transform.forward.z);
+        var nextIndicationPos = transform.position + forward * x + Vector3.up * y;
+        nextIndicationPos.y += data.height;
+
+        var isNan = nextIndicationPos.IsAnyNan();
+
+        if (isNan) SetLineRendererIsPossible(false);
+
+        var nextFloorPos = isNan ? null : GetOnTheFloorPos(nextIndicationPos);
+
+        if (nextFloorPos != null)
+        {
+            // 床の上の高さにする
+            data.height = nextFloorPos.Value;
+            SetLineRendererIsPossible(true);
         }
         else
         {
-            _targetMarker.SetActive(false);
-            _lineRenderer.startColor = _impossibleColor;
-            var end = _impossibleColor;
-            end.a = 0.0f;
-            _lineRenderer.endColor = end;
+            SetLineRendererIsPossible(false);
         }
 
         // 設定
@@ -150,11 +203,11 @@ public class PlayerTeleportation : MonoBehaviour
     {
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;
-        Debug.DrawLine(ray.origin, ray.direction * _initialVelocity, Color.green);
 
-        if (Physics.Raycast(ray, out hit, 20.0f, -1, QueryTriggerInteraction.Ignore) == false) return null;
+        // ignoreレイヤーとだけ衝突しない
+        int layerMask = ~(1 << _ignoreLayer);
 
-        //Debug.Log($"{hit.transform.gameObject}");
+        if (Physics.Raycast(ray, out hit, 20.0f, layerMask, QueryTriggerInteraction.Ignore) == false) return null;
 
         var colliderTag = hit.collider.tag;
         foreach (var tag in _getOnTags)
@@ -194,6 +247,7 @@ public class PlayerTeleportation : MonoBehaviour
 
         //ターゲットマーカーを頂点の最終地点へ
         var last = vertexes.Last();
+        Debug.Log($"last:{last}");
         _targetMarker.transform.position = last;
 
         //LineRendererの頂点の設置
