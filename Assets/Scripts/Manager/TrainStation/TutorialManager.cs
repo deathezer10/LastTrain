@@ -18,6 +18,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private SteamVR_Action_Boolean _padAction;
 
+
     [SerializeField]
     Color m_EmissionHighlightColor;
 
@@ -33,7 +34,11 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
+        var checkpoint = CheckpointManager.Instance.CurrentPointNum;
+
         if (!_tutorialEnabled) CheckPointStart();
+
+
     }
 
     private void CheckPointStart()

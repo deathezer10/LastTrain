@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TrainCallManager : MonoBehaviour
 {
-    [SerializeField]
-    private CheckpointManager _checkpointManager = null;
 
     private void OnTriggerStay(Collider other)
     {
@@ -13,7 +11,7 @@ public class TrainCallManager : MonoBehaviour
         {
             GetComponent<BoxCollider>().enabled = false;
 
-            _checkpointManager.CheckpointUpdate(0);
+            CheckpointManager.Instance.CheckpointUpdate(0);
 
             FindObjectOfType<TrainArriver>().CallTheTrain();
 
