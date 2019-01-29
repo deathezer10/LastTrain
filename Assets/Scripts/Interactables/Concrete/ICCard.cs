@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ICCard : GrabbableObject
+public class ICCard : TutorialGrabbableObject
 {
-    private Negi.Outline _outline;
-
-    protected override void Awake() {
-        base.Awake();
-        _outline = GetComponent<Negi.Outline>();
-        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
-    }
-
-    private void LateUpdate()
+    protected override void Awake()
     {
-        _outline.enabled = true;
+        base.Awake();
+        m_DropSoundHandler.SetImpactNoiseData(new DropSoundHandler.ImpactNoiseData { soundType = DropSoundHandler.DropSoundType.Plastic });
     }
 }

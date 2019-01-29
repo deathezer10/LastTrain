@@ -39,6 +39,8 @@ public class PlayerTeleportation : MonoBehaviour
 
     [Layer, SerializeField]
     private int _ignoreLayer;
+    [Layer, SerializeField]
+    private int _playerLayer;
 
     [SerializeField]
     private GameObject _targetMarker;
@@ -205,7 +207,7 @@ public class PlayerTeleportation : MonoBehaviour
         RaycastHit hit;
 
         // ignoreレイヤーとだけ衝突しない
-        int layerMask = ~(1 << _ignoreLayer);
+        int layerMask = ~(1 << _ignoreLayer | 1 << _playerLayer);
 
         if (Physics.Raycast(ray, out hit, 20.0f, layerMask, QueryTriggerInteraction.Ignore) == false) return null;
 

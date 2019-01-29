@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TutorialGrabbableObject : GrabbableObject
 {
-    public GameObject MarkerObject { get; set; }
-
+    [SerializeField]
+    private GameObject _markerObj;
+    public GameObject MarkerObject { get { return _markerObj; } set { _markerObj = value; } }
 }

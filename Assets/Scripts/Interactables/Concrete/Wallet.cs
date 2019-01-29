@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wallet : GrabbableObject
+public class Wallet : TutorialGrabbableObject
 {
 
     [SerializeField]
-    private GameObject m_ICCardPrefab;
+    private GameObject _ICCard;
 
     [SerializeField]
     private GameObject m_TutorialArrow;
@@ -88,6 +88,7 @@ public class Wallet : GrabbableObject
 
     public void OnWalletOpened()
     {
-        Instantiate(m_ICCardPrefab, m_ICSpawnSpot.position, Quaternion.identity);
+        _ICCard.transform.localPosition = this.transform.localPosition;
+        _ICCard?.SetActive(true);
     }
 }

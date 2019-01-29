@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class ICCardScanner : MonoBehaviour
+public class ICCardScanner : TutorialObject
 {
 
     [SerializeField]
@@ -23,7 +23,8 @@ public class ICCardScanner : MonoBehaviour
 
     readonly private string colliderTag = "ICCard";
 
-    private void Awake() {
+    private void Awake()
+    {
         _audioPlayer = this.GetComponent<AudioPlayer>();
     }
 
@@ -32,6 +33,7 @@ public class ICCardScanner : MonoBehaviour
         if (other.tag == colliderTag)
         {
             OpenGates();
+            base.OnTriggerEnter(other);
         }
     }
 

@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TeleportationPoint : MonoBehaviour
+public class TeleportationPoint : TutorialObject
 {
 
     [Tag, SerializeField]
     List<string> m_TriggerWhitelist;
-
-    [SerializeField]
-    UnityEvent m_OnTriggerEnter;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,10 +15,10 @@ public class TeleportationPoint : MonoBehaviour
         {
             if (tag == other.tag)
             {
-                m_OnTriggerEnter?.Invoke();
+                base.OnTriggerEnter(other);
+
                 return;
             }
         }
     }
-
 }

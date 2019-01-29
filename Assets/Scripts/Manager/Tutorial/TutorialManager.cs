@@ -12,7 +12,6 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject _player = null;
 
-    [SerializeField]
     public bool _tutorialEnabled { get; set; } = true;
 
     [SerializeField]
@@ -25,39 +24,98 @@ public class TutorialManager : MonoBehaviour
     private TutorialGrabbableObject _card;
 
     [SerializeField]
-    private TutorialObject _examination;
+    private TutorialObject[] _examinations;
 
     public void Start()
     {
         // テレポートポイント
-        _tereportPoint.IsEnterRP
+        _tereportPoint?.IsEnterRP
             .Where(_ => _)
             .Select(_ => _tereportPoint)
-            .Subscribe(_ => _.MarkerObject.SetActive(false));
+            .Subscribe(_ =>
+            {
+                _.MarkerObject.SetActive(false);
+                _wallet?.MarkerObject.SetActive(true);
+            });
+
 
         // 財布開けるまで
-        _wallet.IsUseRP
+        _wallet?.IsGrabeRP
+          .Where(_ => _)
+          .Select(_ => _wallet)
+          .Subscribe(_ =>
+          {
+              _.MarkerObject.SetActive(false);
+          });
+
+        _wallet?.IsGrabeRP
+           .Where(_ => !_)
+           .Where(_ => !_card.gameObject.activeInHierarchy)
+           .Select(_ => _wallet)
+           .Where(_ => !_.IsUseRP.Value)
+           .Subscribe(_ =>
+           {
+               _.MarkerObject.SetActive(true);
+           });
+
+        _wallet?.IsUseRP
             .Where(_ => _)
             .Select(_ => _wallet)
-            .Subscribe(_ => _.MarkerObject.SetActive(false));
+            .Subscribe(_ =>
+            {
+                _.MarkerObject.SetActive(false);
+                _card?.MarkerObject.SetActive(true);
+            });
 
-        // カード持っている間
-        _card.IsGrabeRP
-            .Where(_ => _)
-            .Select(_ => _card)
-            .Subscribe(_ => _.MarkerObject.SetActive(false));
+        // カード
+        _card?.IsGrabeRP
+          .Where(_ => _)
+          .Where(_ => !ExaminationIsEnter())
+          .Select(_ => _card)
+          .Subscribe(_ =>
+          {
+              _.MarkerObject.SetActive(false);
+              ExaminationAction(obj => obj.MarkerObject.SetActive(true));
+          });
 
-        // カード持っていない間
-        _card.IsGrabeRP
-            .Where(_ => !_)
-            .Select(_ => _card)
-            .Subscribe(_ => _.MarkerObject.SetActive(true));
+        _card?.IsGrabeRP
+           .Where(_ => !_)
+           .Where(_ => !ExaminationIsEnter())
+           .Select(_ => _card)
+           .Where(_ => !_.IsUseRP.Value)
+           .Subscribe(_ =>
+           {
+               _.MarkerObject.SetActive(true);
+               ExaminationAction(obj => obj.MarkerObject.SetActive(false));
+           });
 
         // 改札当たったとき
-        _examination.IsEnterRP
+        ExaminationAction(obj => obj.IsEnterRP
             .Where(_ => _)
-            .Select(_ => _examination)
-            .Subscribe(_ => _.MarkerObject.SetActive(false));
+            .Select(_ => obj)
+            .Subscribe(_ => _.MarkerObject.SetActive(false)));
     }
 
+    // 持てるチュートリアルオブジェクトの共通処理
+    private void GrabableSetting(TutorialGrabbableObject obj, Action grabeAction = null, Action releaseAction = null)
+    {
+
+    }
+
+    private void ExaminationAction(Action<TutorialObject> action)
+    {
+        foreach (var obj in _examinations)
+        {
+            action?.Invoke(obj);
+        }
+    }
+
+    private bool ExaminationIsEnter()
+    {
+        foreach (var obj in _examinations)
+        {
+            if (obj.IsEnterRP.Value) return true;
+        }
+        return false;
+    }
 }
