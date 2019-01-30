@@ -12,7 +12,7 @@ public class TutorialObject : MonoBehaviour
 
     public BoolReactiveProperty IsEnterRP { get; private set; } = new BoolReactiveProperty(false);
 
-    protected void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         IsEnterRP.Value = true;
     }

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Wallet : TutorialGrabbableObject
 {
-
-    [SerializeField]
-    private GameObject _ICCard;
-
     [SerializeField]
     private GameObject m_TutorialArrow;
 
     [SerializeField]
-    private Transform m_ICSpawnSpot;
+    private GameObject _ICRoot;
+
+    [SerializeField]
+    private Transform _ICSpawnPos;
 
     private bool m_HasAnnounced = false;
     private bool m_HasUsedOnce = false;
@@ -88,7 +87,7 @@ public class Wallet : TutorialGrabbableObject
 
     public void OnWalletOpened()
     {
-        _ICCard.transform.localPosition = this.transform.localPosition;
-        _ICCard?.SetActive(true);
+        _ICRoot.transform.position = _ICSpawnPos.transform.position;
+        _ICRoot?.SetActive(true);
     }
 }

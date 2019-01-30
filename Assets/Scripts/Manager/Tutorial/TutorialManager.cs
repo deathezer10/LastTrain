@@ -53,6 +53,7 @@ public class TutorialManager : MonoBehaviour
            .Where(_ => !_card.gameObject.activeInHierarchy)
            .Select(_ => _wallet)
            .Where(_ => !_.IsUseRP.Value)
+           .Where(_ => !_tereportPoint.gameObject.activeSelf)
            .Subscribe(_ =>
            {
                _.MarkerObject.SetActive(true);
@@ -94,12 +95,6 @@ public class TutorialManager : MonoBehaviour
             .Where(_ => _)
             .Select(_ => obj)
             .Subscribe(_ => _.MarkerObject.SetActive(false)));
-    }
-
-    // 持てるチュートリアルオブジェクトの共通処理
-    private void GrabableSetting(TutorialGrabbableObject obj, Action grabeAction = null, Action releaseAction = null)
-    {
-
     }
 
     private void ExaminationAction(Action<TutorialObject> action)

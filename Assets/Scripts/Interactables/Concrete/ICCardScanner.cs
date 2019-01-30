@@ -28,8 +28,9 @@ public class ICCardScanner : TutorialObject
         _audioPlayer = this.GetComponent<AudioPlayer>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
+        if (!base.MarkerObject.activeInHierarchy) return;
         if (other.tag == colliderTag)
         {
             OpenGates();

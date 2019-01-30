@@ -9,7 +9,7 @@ public class TeleportationPoint : TutorialObject
     [Tag, SerializeField]
     List<string> m_TriggerWhitelist;
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         foreach (string tag in m_TriggerWhitelist)
         {
