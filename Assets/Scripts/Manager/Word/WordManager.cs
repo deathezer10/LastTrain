@@ -9,14 +9,17 @@ using Trident;
 using UnityEditor;
 #endif
 
-public class WordManager : SingletonMonoBehaviour<WordManager> {
-	// application url
+public class WordManager : SingletonMonoBehaviour<WordManager>
+{
+    // application url
     const string URL = "https://script.google.com/macros/s/AKfycbzRSrUhjvQSuQBPbpXfV0kAukbZi5l7QFyxOklgMz_Htro5A6E/exec";
     private string _sheetName = "word";
-    private Dictionary<string,Dictionary<string, string>> _wordObjects = new Dictionary<string,Dictionary<string, string>>();
-    private Dictionary<string,string> _currentWord;
+    private Dictionary<string, Dictionary<string, string>> _wordObjects = new Dictionary<string, Dictionary<string, string>>();
+    private Dictionary<string, string> _currentWord;
 
-	[SerializeField]
+    public bool isLoad = false;
+
+    [SerializeField]
     private Language _currentLanguage = Language.En;
     public Language CurrentLanguage
     {
@@ -26,10 +29,12 @@ public class WordManager : SingletonMonoBehaviour<WordManager> {
 
     public bool IsSetup { get; set; }
 
-    private void Awake() {
+    private void Awake()
+    {
         this.IsSetup = false;
         StartCoroutine(Setup());
-	}
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     public IEnumerator Setup()
     {
@@ -48,18 +53,23 @@ public class WordManager : SingletonMonoBehaviour<WordManager> {
         {
             var jsonString = string.Empty;
 
-            SerializeDictionary<string,string> json = null;
+            SerializeDictionary<string, string> json = null;
 
-            // TODO: Make Loading at the same time
-            yield return StartCoroutine(LoadWebJson(language, (_) =>
+
+            if (isLoad)
             {
-                jsonString = _;
-                if(!string.IsNullOrEmpty(jsonString)){
-                    json = JsonToDic(jsonString);
-                    // 保存
-                    SaveJson(language, jsonString);
-                }
-            }));
+                // TODO: Make Loading at the same time
+                yield return StartCoroutine(LoadWebJson(language, (_) =>
+                {
+                    jsonString = _;
+                    if (!string.IsNullOrEmpty(jsonString))
+                    {
+                        json = JsonToDic(jsonString);
+                        // 保存
+                        SaveJson(language, jsonString);
+                    }
+                }));
+            }
 
             if (string.IsNullOrEmpty(jsonString))
             {
@@ -108,9 +118,9 @@ public class WordManager : SingletonMonoBehaviour<WordManager> {
         return json;
     }
 
-    private void SaveJson(Language language,string text)
+    private void SaveJson(Language language, string text)
     {
-        string path = "Resources/WordJson/" + language.ToStringQuickly()+".txt";
+        string path = "Resources/WordJson/" + language.ToStringQuickly() + ".txt";
 
         var fullPath = Application.dataPath + "/" + path;
 
@@ -120,12 +130,14 @@ public class WordManager : SingletonMonoBehaviour<WordManager> {
         {
 #if UNITY_EDITOR
             // 存在しない場合作成
-            writer = File.CreateText(fullPath); 
+            writer = File.CreateText(fullPath);
 #else
             Debug.LogError("text don't exist");
             return;
 #endif
-        }else{
+        }
+        else
+        {
             writer = new StreamWriter(fullPath, false); // 上書き
         }
         writer.WriteLine(text);
@@ -136,13 +148,13 @@ public class WordManager : SingletonMonoBehaviour<WordManager> {
 #endif
     }
 
-    private IEnumerator LoadLocalJson(Language language ,Action<string> callback)
+    private IEnumerator LoadLocalJson(Language language, Action<string> callback)
     {
         string path = "WordJson/" + language.ToStringQuickly();
 
         // Assetsフォルダからロード
-        var request = Resources.LoadAsync(path);  
-        yield return new WaitUntil(()=>!request.isDone);
+        var request = Resources.LoadAsync(path);
+        yield return new WaitUntil(() => !request.isDone);
 
         var text = request.asset as TextAsset;
 
@@ -150,8 +162,8 @@ public class WordManager : SingletonMonoBehaviour<WordManager> {
     }
 
     public string GetWord(string key)
-	{
-		string word = _currentWord[key];
+    {
+        string word = _currentWord[key];
 
         if (string.IsNullOrEmpty(word))
         {
@@ -159,6 +171,6 @@ public class WordManager : SingletonMonoBehaviour<WordManager> {
             word = "not setting word";
         }
 
-		return word;
-	}
+        return word;
+    }
 }
