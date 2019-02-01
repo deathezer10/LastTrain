@@ -33,11 +33,17 @@ public class UmbrCompartment : MonoBehaviour, IShootable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "SawBlade" && other.GetComponentInParent<SawBlade>().IsSpinning())
+        if (other.tag == "SawBlade")
         {
+            var saw = other.GetComponentInParent<SawBlade>();
+            var isSpinning = saw?.IsSpinning();
+            if (!isSpinning.Value) return;
+
             OpenCompartment(false);
             GetComponent<AudioPlayer>().Play("openlock");
             GetComponent<CapsuleCollider>().enabled = false;
+
+            saw.SawUnLock();
         }
         else if (other.tag == "SmallKey")
         {

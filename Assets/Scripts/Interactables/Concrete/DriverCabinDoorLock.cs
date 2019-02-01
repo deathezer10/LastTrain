@@ -33,6 +33,8 @@ public class DriverCabinDoorLock : StationaryObject
     private float TimefromGrab;
     private float ReleasedTime;
 
+    [SerializeField]
+    private Negi.Outline _outline;
 
     void Start()
     {
@@ -171,6 +173,8 @@ public class DriverCabinDoorLock : StationaryObject
             bCanGrab = true;
             PlayerHand = currentController.gameObject;
         }
+
+        _outline.enabled = true;
     }
 
     public override void OnControllerExit()
@@ -195,6 +199,9 @@ public class DriverCabinDoorLock : StationaryObject
 
         bCanGrab = false;
         bIsGrabbing = false;
+
+        _outline.enabled = false;
+
     }
 
     public override void OnGrab()

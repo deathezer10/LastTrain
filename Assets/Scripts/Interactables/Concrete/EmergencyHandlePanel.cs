@@ -22,7 +22,7 @@ public class EmergencyHandlePanel : StationaryObject
         DefaultYRotation = transform.parent.rotation.eulerAngles.y;
         maxYRotation = transform.parent.rotation.eulerAngles.y + 140;
     }
-    
+
     void Update()
     {
 
@@ -35,14 +35,14 @@ public class EmergencyHandlePanel : StationaryObject
             Vector3 cross = Vector3.Cross(targetDir, NewtargetDir);
 
             if (cross.y < 0) angle = -angle;
-            
-            if (transform.parent.rotation.eulerAngles.y >= maxYRotation - 85 && transform.parent.rotation.eulerAngles.y <= maxYRotation +10 )
+
+            if (transform.parent.rotation.eulerAngles.y >= maxYRotation - 85 && transform.parent.rotation.eulerAngles.y <= maxYRotation + 10)
             {
                 bIsOpened = true;
             }
 
             else bIsOpened = false;
-            
+
             if (angle < 0 && !bIsLocked)
                 if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 151)))
                 {
@@ -54,7 +54,7 @@ public class EmergencyHandlePanel : StationaryObject
                 {
                     return;
                 }
-            
+
             if (angle < 0 && bIsLocked)
                 if (transform.parent.rotation.eulerAngles.y <= DefaultYRotation + 40 || (transform.parent.rotation.eulerAngles.y <= 360 && transform.parent.rotation.eulerAngles.y >= (DefaultYRotation + 151)))
                 {
@@ -66,7 +66,7 @@ public class EmergencyHandlePanel : StationaryObject
                 {
                     return;
                 }
-            
+
             transform.parent.Rotate(0, angle, 0);
             PreviousHandPosition = CurrentHandPosition;
         }
@@ -77,7 +77,7 @@ public class EmergencyHandlePanel : StationaryObject
     public override void OnControllerEnter(PlayerViveController currentController)
     {
         base.OnControllerEnter(currentController);
-        
+
         bCanGrab = true;
         PlayerHand = currentController.gameObject;
     }
@@ -92,6 +92,8 @@ public class EmergencyHandlePanel : StationaryObject
 
     public override void OnControllerStay()
     {
+        base.OnControllerStay();
+
         if (bIsGrabbing)
         {
             CurrentHandPosition = PlayerHand.transform.position;
@@ -101,7 +103,7 @@ public class EmergencyHandlePanel : StationaryObject
     public override void OnGrab()
     {
         base.OnGrab();
-        
+
         if (bCanGrab)
         {
             bIsGrabbing = true;
@@ -112,6 +114,7 @@ public class EmergencyHandlePanel : StationaryObject
 
     public override void OnGrabReleased()
     {
+        base.OnGrabReleased();
         bIsGrabbing = false;
     }
 }

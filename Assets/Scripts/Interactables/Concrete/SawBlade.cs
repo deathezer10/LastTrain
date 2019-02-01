@@ -13,6 +13,9 @@ public class SawBlade : GrabbableObject
     float vibrationTimer;
     Animator sawBladeAnimator;
 
+    [SerializeField]
+    private Negi.Outline[] _grabeOutlineObject;
+
     private void Start()
     {
         sawBladeAnimator = GetComponent<Animator>();
@@ -28,7 +31,8 @@ public class SawBlade : GrabbableObject
                 var source = playerHand;
                 playerController.Vibration(0, 0.2f, 0.2f, 0.7f, source);
                 vibrationTimer = Time.time + 0.2f;
-            } else
+            }
+            else
             {
                 playerController.Vibration(0, 0, 0, 0, playerHand);
             }
@@ -66,6 +70,8 @@ public class SawBlade : GrabbableObject
         transform.rotation = playerController.transform.rotation;
         transform.Rotate(new Vector3(0, 180, 0));
         transform.position = playerController.transform.position;
+
+        if (!_unLock) GrabeOutlineActive(true);
     }
 
     public override void OnGrabReleased()
@@ -78,6 +84,8 @@ public class SawBlade : GrabbableObject
         sawBladeAnimator.Play("SawBladeStop");
 
         spinAudio.Stop();
+
+        GrabeOutlineActive(false);
     }
 
     public override void OnUse()
@@ -103,5 +111,21 @@ public class SawBlade : GrabbableObject
     public bool IsSpinning()
     {
         return spinning;
+    }
+
+    private void GrabeOutlineActive(bool active)
+    {
+        foreach (var obj in _grabeOutlineObject)
+        {
+            obj.enabled = active;
+        }
+    }
+
+    private bool _unLock = false;
+    public void SawUnLock()
+    {
+        _unLock = true;
+
+        GrabeOutlineActive(false);
     }
 }
