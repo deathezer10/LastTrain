@@ -11,4 +11,9 @@ public class TakeOverDataManager : SingletonMonoBehaviour<TakeOverDataManager>
     {
         DontDestroyOnLoad(this.gameObject);
     }
+
+    public void CheckPointReset()
+    {
+        CurrentPointNum = CheckpointManager.UnSetIndex;
+    }
 }

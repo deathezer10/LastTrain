@@ -17,6 +17,9 @@ public class EmergencyHandlePanel : StationaryObject
     private float maxYRotation;
     private float DefaultYRotation;
 
+    [SerializeField]
+    private Negi.Outline _outline;
+
     void Start()
     {
         DefaultYRotation = transform.parent.rotation.eulerAngles.y;
@@ -80,6 +83,8 @@ public class EmergencyHandlePanel : StationaryObject
 
         bCanGrab = true;
         PlayerHand = currentController.gameObject;
+
+        _outline.enabled = true;
     }
 
     public override void OnControllerExit()
@@ -88,6 +93,8 @@ public class EmergencyHandlePanel : StationaryObject
 
         bCanGrab = false;
         bIsGrabbing = false;
+
+        _outline.enabled = false;
     }
 
     public override void OnControllerStay()

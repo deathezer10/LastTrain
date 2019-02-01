@@ -8,6 +8,7 @@ public class VictoryScene : MonoBehaviour
 
     public void LoadTrainStationScene()
     {
+        TakeOverDataManager.Instance.CheckPointReset();
         SceneManager.LoadScene("TrainStation");
     }
 }
