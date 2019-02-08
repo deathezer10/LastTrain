@@ -25,6 +25,9 @@ public class PlayerViveController : MonoBehaviour
     private static GameObject m_CurrentLeftObject = null;
     private static GameObject m_CurrentRightObject = null;
 
+    [SerializeField]
+    private bool isGrabbable = true;
+
     private void Awake()
     {
         m_CurrentLeftObject = null;
@@ -34,6 +37,8 @@ public class PlayerViveController : MonoBehaviour
 
     virtual protected void Update()
     {
+        if (!isGrabbable) return;
+
         var currentObject = GetCurrentHandObject();
 
         if (currentObject == null)
@@ -260,14 +265,14 @@ public class PlayerViveController : MonoBehaviour
         if (obj && obj.GetComponent<IStationaryGrabbable>() == null)
             obj.transform.AddPosition(diff);
 
-        
-            var newObj = GetCurrentHandObject(true);
 
-            if (newObj && newObj.GetComponent<IStationaryGrabbable>() == null)
-                newObj.transform.AddPosition(diff);
-        
+        var newObj = GetCurrentHandObject(true);
 
-       
+        if (newObj && newObj.GetComponent<IStationaryGrabbable>() == null)
+            newObj.transform.AddPosition(diff);
+
+
+
 
 
     }
